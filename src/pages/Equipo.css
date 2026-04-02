@@ -1,11 +1,11 @@
-.reservas {
+.equipo {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
   background-color: #000;
 }
 
-.reservas__content {
+.equipo__content {
   flex: 1;
   display: flex;
   align-items: center;
@@ -13,7 +13,7 @@
   padding: 2rem;
 }
 
-.reservas__title {
+.equipo__title {
   color: #fff;
   font-size: clamp(2rem, 5vw, 4rem);
   font-weight: 300;
