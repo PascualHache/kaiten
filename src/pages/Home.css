@@ -1,6 +1,16 @@
 .home {
+  background-color: #000;
+}
+
+.home__hero-section {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
-  background-color: #000;
+  height: calc(100vh - var(--navbar-height));
+}
+
+@media (max-width: 768px) {
+  .home__hero-section {
+    height: auto;
+    min-height: calc(100vh - var(--navbar-height));
+  }
 }

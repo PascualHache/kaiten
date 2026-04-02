@@ -1,8 +1,13 @@
+/* Wrapper */
+.booking-bar-wrapper {
+  flex-shrink: 0;
+}
+
+/* Bar */
 .booking-bar {
   display: flex;
   align-items: center;
   background-color: #fff;
-  flex-shrink: 0;
 }
 
 .booking-bar__field {
@@ -30,11 +35,26 @@
   color: #000;
 }
 
+.booking-bar__select--active {
+  color: #000;
+  font-weight: 600;
+}
+
 .booking-bar__select-text {
   flex: 1;
   text-align: left;
 }
 
+/* Chevron rotation */
+.booking-bar__chevron {
+  transition: transform 0.3s ease;
+}
+
+.booking-bar__chevron--rotated {
+  transform: rotate(180deg);
+}
+
+/* People counter */
 .booking-bar__people {
   display: flex;
   align-items: center;
@@ -81,6 +101,7 @@
   color: #333;
 }
 
+/* Action buttons */
 .booking-bar__action {
   padding: 1rem 2rem;
   font-size: 0.75rem;
@@ -113,6 +134,21 @@
 .booking-bar__action--secondary:hover {
   background-color: var(--color-lavender);
   color: #fff;
+}
+
+/* Slide panel (grid-rows trick for height animation) */
+.booking-bar__panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.booking-bar__panel--open {
+  grid-template-rows: 1fr;
+}
+
+.booking-bar__panel-inner {
+  overflow: hidden;
 }
 
 /* Responsive */

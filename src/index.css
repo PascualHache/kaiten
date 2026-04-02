@@ -1,4 +1,6 @@
 :root {
+  --navbar-height: 3.25rem;
+
   /* Brand palette */
   --color-cream: #DCD6D0;
   --color-lavender: #8B82A8;
@@ -29,6 +31,7 @@
 body {
   margin: 0;
   min-width: 320px;
+  overflow-x: hidden;
 }
 
 a {
