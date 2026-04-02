@@ -4,9 +4,16 @@ import Historia from './pages/Historia'
 import Valores from './pages/Valores'
 import Equipo from './pages/Equipo'
 import Reservas from './pages/Reservas'
+import WorkInProgress from './pages/WorkInProgress'
 import './App.css'
 
+const isDev = localStorage.getItem('dev') === 'true'
+
 function App() {
+  if (!isDev) {
+    return <WorkInProgress />
+  }
+
   return (
     <Router>
       <Routes>
