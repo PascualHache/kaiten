@@ -79,13 +79,6 @@
   z-index: 3;
 }
 
-.hero__side-text--left {
-  left: 0.75rem;
-  bottom: 1.5rem;
-  color: rgba(255, 255, 255, 0.5);
-  transform: rotate(180deg);
-}
-
 .hero__side-text--right {
   right: 0.75rem;
   bottom: 1.5rem;
