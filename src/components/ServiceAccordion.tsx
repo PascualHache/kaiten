@@ -8,6 +8,7 @@ interface Service {
   description: string
   backgroundColor: string
   textColor: string
+  reservasPath: string
 }
 
 const SERVICES: Service[] = [
@@ -18,6 +19,7 @@ const SERVICES: Service[] = [
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.',
     backgroundColor: 'var(--color-cream)',
     textColor: '#333',
+    reservasPath: '/reservas/full-day-half-day-en-baqueira',
   },
   {
     id: 'colectivas',
@@ -26,6 +28,7 @@ const SERVICES: Service[] = [
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.',
     backgroundColor: 'var(--color-lavender)',
     textColor: 'var(--color-lime)',
+    reservasPath: '/reservas',
   },
   {
     id: 'particulares',
@@ -34,6 +37,7 @@ const SERVICES: Service[] = [
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.',
     backgroundColor: 'var(--color-lavender)',
     textColor: 'var(--color-lime)',
+    reservasPath: '/reservas/clases-particulares-en-baqueira',
   },
   {
     id: 'safari',
@@ -42,6 +46,7 @@ const SERVICES: Service[] = [
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.',
     backgroundColor: 'var(--color-cream)',
     textColor: '#333',
+    reservasPath: '/reservas/safari-en-baqueira',
   },
   {
     id: 'kaiten-2-5',
@@ -50,6 +55,7 @@ const SERVICES: Service[] = [
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.',
     backgroundColor: 'var(--color-forest)',
     textColor: 'var(--color-vermillion)',
+    reservasPath: '/reservas/experiencia-kaiten-2.5',
   },
   {
     id: 'freeride',
@@ -58,6 +64,7 @@ const SERVICES: Service[] = [
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.',
     backgroundColor: 'var(--color-cream)',
     textColor: '#333',
+    reservasPath: '/reservas/freeride-en-baqueira',
   },
 ]
 
@@ -91,7 +98,7 @@ function ServiceAccordion() {
             <div className="service-accordion__content">
               <p className="service-accordion__description">{service.description}</p>
               <Link
-                to="/reservas"
+                to={service.reservasPath}
                 className="service-accordion__cta"
                 tabIndex={isExpanded ? 0 : -1}
               >
