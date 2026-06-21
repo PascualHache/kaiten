@@ -4,6 +4,7 @@ import Historia from './pages/Historia'
 import Valores from './pages/Valores'
 import Equipo from './pages/Equipo'
 import Reservas from './pages/Reservas'
+import ReservaDetalle from './pages/ReservaDetalle'
 import WorkInProgress from './pages/WorkInProgress'
 import './App.css'
 
@@ -22,6 +23,7 @@ function App() {
         <Route path="/valores" element={<Valores />} />
         <Route path="/equipo" element={<Equipo />} />
         <Route path="/reservas" element={<Reservas />} />
+        <Route path="/reservas/:slug" element={<ReservaDetalle />} />
       </Routes>
     </Router>
   )
