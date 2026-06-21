@@ -16,25 +16,16 @@ const SERVICES: Service[] = [
     id: 'full-half-day',
     title: 'Full o half day',
     description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.',
+      'Una jornada completa o media jornada de esquí intensivo en Baqueira Beret. Técnica, práctica y recorrido de estación, siempre acompañado por un profesional adaptado a tu ritmo.',
     backgroundColor: 'var(--color-cream)',
     textColor: '#333',
     reservasPath: '/reservas/full-day-half-day-en-baqueira',
   },
   {
-    id: 'colectivas',
-    title: 'Colectivas',
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.',
-    backgroundColor: 'var(--color-lavender)',
-    textColor: 'var(--color-lime)',
-    reservasPath: '/reservas',
-  },
-  {
     id: 'particulares',
     title: 'Particulares',
     description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.',
+      'Atención total y corrección constante. Trabajamos contigo en cada bajada para que progreses rápido, ganes confianza y mejores tu técnica desde el primer momento.',
     backgroundColor: 'var(--color-lavender)',
     textColor: 'var(--color-lime)',
     reservasPath: '/reservas/clases-particulares-en-baqueira',
@@ -43,7 +34,7 @@ const SERVICES: Service[] = [
     id: 'safari',
     title: 'Safari',
     description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.',
+      'Explora Baqueira como un local. Te guiamos por los mejores rincones y zonas de la estación según las condiciones del día, sin colas ni tiempo perdido.',
     backgroundColor: 'var(--color-cream)',
     textColor: '#333',
     reservasPath: '/reservas/safari-en-baqueira',
@@ -52,7 +43,7 @@ const SERVICES: Service[] = [
     id: 'kaiten-2-5',
     title: 'KAITEN 2.5',
     description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.',
+      'El sello Kaiten en un formato de 2 horas y media. Una sesión intensiva para sacar el máximo partido a tu tiempo en la nieve con seguimiento personalizado.',
     backgroundColor: 'var(--color-forest)',
     textColor: 'var(--color-vermillion)',
     reservasPath: '/reservas/experiencia-kaiten-2.5',
@@ -61,7 +52,7 @@ const SERVICES: Service[] = [
     id: 'freeride',
     title: 'Freeride',
     description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.',
+      'Descubre Baqueira más allá de las pistas. Aprende a leer la montaña, elegir líneas y moverte con criterio en nieve no pisada, siempre acompañado por profesionales.',
     backgroundColor: 'var(--color-cream)',
     textColor: '#333',
     reservasPath: '/reservas/freeride-en-baqueira',
