@@ -82,7 +82,7 @@ function Footer() {
         <div className="footer__circle" />
       </div>
 
-      <p className="footer__copyright">COPYRIGHT</p>
+      <p className="footer__copyright">© {new Date().getFullYear()} Kaiten</p>
     </footer>
   )
 }
