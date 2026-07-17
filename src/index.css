@@ -2,15 +2,15 @@
   --navbar-height: 3.25rem;
 
   /* Brand palette */
-  --color-cream: #DCD6D0;
-  --color-lavender: #8B82A8;
-  --color-sage: #899E8E;
-  --color-forest: #172410;
-  --color-lime: #9BC413;
-  --color-sand: #C8BBA4;
-  --color-vermillion: #CC4422;
-  --color-chartreuse: #D8E45A;
-  --color-midnight: #1E2810;
+  --color-cream: #E6E5E1;
+  --color-lavender: #857F9D;
+  --color-sage: #99A28F;
+  --color-forest: #1D2B00;
+  --color-lime: #A5D900;
+  --color-green: #B6F352;
+  --color-magenta: #D93092;
+  --color-chartreuse: #E1FF6B;
+  --color-midnight: #1D2B00;
 
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;

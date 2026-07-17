@@ -41,7 +41,7 @@ export const SERVICES: Service[] = [
     description:
       'El sello Kaiten en un formato de 2 horas y media. Una sesión intensiva para sacar el máximo partido a tu tiempo en la nieve con seguimiento personalizado.',
     backgroundColor: 'var(--color-forest)',
-    textColor: 'var(--color-vermillion)',
+    textColor: 'var(--color-magenta)',
     reservasPath: '/reservas/experiencia-kaiten-2.5',
   },
   {

@@ -34,7 +34,7 @@
 
 .hero__divider {
   width: 3px;
-  background-color: var(--color-vermillion);
+  background-color: var(--color-magenta);
   z-index: 2;
   flex-shrink: 0;
 }
