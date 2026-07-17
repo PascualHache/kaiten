@@ -3,13 +3,13 @@
 }
 
 .actividad--verde {
-  background-color: #c9dc00;
-  color: #111;
+  background-color: var(--color-lavender);
+  color: var(--color-cream);
 }
 
 .actividad--naranja {
-  background-color: #e05500;
-  color: #111;
+  background-color: var(--color-magenta);
+  color: var(--color-cream);
 }
 
 .actividad__inner {
@@ -95,7 +95,7 @@
 /* CTA */
 .actividad__cta {
   padding-top: 1.5rem;
-  border-top: 1px solid rgba(0, 0, 0, 0.2);
+  border-top: 1px solid rgba(230, 229, 225, 0.3);
 }
 
 .actividad__cta-titulo {
@@ -117,8 +117,8 @@
 
 .actividad__boton {
   display: inline-block;
-  background-color: #111;
-  color: #fff;
+  background-color: var(--color-forest);
+  color: var(--color-cream);
   border: none;
   padding: 0.75rem 2rem;
   font-size: 0.95rem;
