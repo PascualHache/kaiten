@@ -5,7 +5,6 @@
 .home__hero-section {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
   height: calc(100vh - var(--navbar-height));
   padding: 1rem clamp(1rem, 3vw, 2rem) 1.5rem;
 }
