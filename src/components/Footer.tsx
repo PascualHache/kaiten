@@ -78,6 +78,9 @@ function Footer() {
           <Link to="/historia" className="footer__link">
             Conócenos
           </Link>
+          <Link to="/historia" className="footer__link">
+            Historia
+          </Link>
           <Link to="/valores" className="footer__link">
             Valores
           </Link>

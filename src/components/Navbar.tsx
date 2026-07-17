@@ -135,6 +135,13 @@ function Navbar() {
           >
             RESERVAS
           </Link>
+          <Link
+            to="/tarifas"
+            className="navbar__menu-item"
+            onClick={() => setMenuOpen(false)}
+          >
+            TARIFAS Y NIVELES
+          </Link>
         </div>
       )}
     </nav>

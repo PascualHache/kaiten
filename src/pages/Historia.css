@@ -5,18 +5,370 @@
   background-color: var(--color-cream);
 }
 
-.historia__content {
-  flex: 1;
+/* Shared */
+.historia__rule {
+  display: block;
+  width: 2.5rem;
+  height: 2px;
+  margin: 1.5rem 0 0;
+  background-color: var(--color-lime);
+}
+
+.historia__paragraph {
+  margin: 0 0 1rem;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: rgba(29, 43, 0, 0.75);
+}
+
+.historia__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  color: var(--color-lavender);
+  transition: opacity 0.2s;
+}
+
+.historia__link:hover {
+  opacity: 0.7;
+  color: var(--color-lavender);
+}
+
+.historia__link--light {
+  color: var(--color-cream);
+}
+
+.historia__link--light:hover {
+  color: var(--color-cream);
+}
+
+/* Intro statement */
+.historia__intro {
+  padding: clamp(2.5rem, 6vw, 5rem) clamp(1.5rem, 5vw, 5rem) 0;
+  max-width: 46rem;
+}
+
+.historia__lead {
+  margin: 0;
+  font-size: clamp(1.15rem, 2.2vw, 1.6rem);
+  font-style: italic;
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--color-lavender);
+}
+
+.historia__lead--tag {
+  margin-top: 1.5rem;
+}
+
+/* Origin composition */
+.historia__origin {
+  display: grid;
+  grid-template-columns: 1.1fr 0.85fr 0.85fr;
+  gap: 0.75rem;
+  align-items: start;
+  padding: clamp(2rem, 5vw, 4rem) clamp(1.5rem, 5vw, 5rem);
+}
+
+.historia__photo {
+  border-radius: 0.75rem;
+  overflow: hidden;
+  aspect-ratio: 16 / 10;
+}
+
+.historia__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.historia__origin-text {
+  padding-top: 2rem;
+}
+
+.historia__origin-title {
+  margin: 0 0 1.5rem;
+  font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+  font-weight: 700;
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  color: var(--color-lavender);
+}
+
+/* Cards */
+.historia__card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 22rem;
+  padding: 1.75rem;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  margin-top: clamp(0rem, 6vw, 4.5rem);
+}
+
+.historia__card--dark {
+  background-color: var(--color-forest);
+  color: var(--color-cream);
+}
+
+.historia__card-title {
+  margin: 0 0 auto;
+  font-size: clamp(1.15rem, 2vw, 1.6rem);
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--color-cream);
+}
+
+.historia__card--dark .historia__link {
+  margin-top: 2rem;
+}
+
+/* Photo card */
+.historia__card--photo {
+  padding: 0;
+}
+
+.historia__card-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.historia__card-overlay {
+  position: relative;
+  z-index: 1;
+  padding: 1.75rem;
+  background: linear-gradient(
+    to top,
+    rgba(29, 43, 0, 0.85) 0%,
+    rgba(29, 43, 0, 0.4) 55%,
+    rgba(29, 43, 0, 0) 100%
+  );
+}
+
+.historia__card-quote {
+  margin: 0 0 1.25rem;
+  font-size: 0.95rem;
+  line-height: 1.45;
+  color: var(--color-cream);
+}
+
+/* Brand meaning */
+.historia__brand {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 2rem;
+  padding: clamp(2.5rem, 6vw, 4.5rem) clamp(1.5rem, 5vw, 5rem);
+  border-top: 1px solid rgba(29, 43, 0, 0.1);
+  background-color: rgba(133, 127, 157, 0.05);
+}
+
+.historia__brand-label {
+  align-self: start;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-lavender);
+}
+
+.historia__brand-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  text-align: center;
+}
+
+.historia__brand-word {
+  font-size: clamp(3rem, 8vw, 6rem);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  color: var(--color-lavender);
+}
+
+.historia__brand-kanji {
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-weight: 500;
+  color: var(--color-lavender);
+}
+
+.historia__brand-tagline {
+  margin-top: 0.5rem;
+  font-size: clamp(0.9rem, 1.6vw, 1.1rem);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--color-lavender);
+}
+
+.historia__brand-aside {
+  align-self: center;
+  max-width: 16rem;
+  justify-self: end;
+}
+
+.historia__brand-aside .historia__paragraph:last-child {
+  margin-bottom: 0;
+}
+
+.historia__eyebrow {
+  margin: 0 0 0.75rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-lavender);
+}
+
+.historia__paragraph--strong {
+  font-weight: 600;
+  color: rgba(29, 43, 0, 0.9);
+}
+
+/* Founder story */
+.historia__story {
+  display: grid;
+  grid-template-columns: 1fr 0.85fr;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: start;
+  padding: clamp(2rem, 5vw, 4rem) clamp(1.5rem, 5vw, 5rem);
+}
+
+.historia__story-block {
+  padding: 2rem 0;
+  border-top: 1px solid rgba(29, 43, 0, 0.1);
+}
+
+.historia__story-block:first-child {
+  padding-top: 0;
+  border-top: none;
+}
+
+.historia__story-title {
+  margin: 0 0 1.25rem;
+  font-size: clamp(1.4rem, 2.6vw, 2rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  color: var(--color-lavender);
+}
+
+.historia__story-media {
+  position: sticky;
+  top: 5rem;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  height: calc(100vh - 7rem);
+}
+
+.historia__story-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Manifesto */
+.historia__manifesto {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: start;
+  padding: clamp(2.5rem, 6vw, 4.5rem) clamp(1.5rem, 5vw, 5rem);
+  border-top: 1px solid rgba(29, 43, 0, 0.1);
+  background-color: rgba(133, 127, 157, 0.05);
+}
+
+.historia__manifesto-title {
+  margin: 0 0 1.5rem;
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  color: var(--color-lavender);
+}
+
+.historia__manifesto-mark {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2rem;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 2px solid var(--color-lavender);
+  border-radius: 0.4rem;
 }
 
-.historia__title {
+.historia__manifesto-mark::after {
+  content: '';
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid var(--color-lavender);
+  border-radius: 0.15rem;
+}
+
+.historia__manifesto-list .historia__paragraph {
+  font-size: 1.05rem;
+  color: rgba(29, 43, 0, 0.8);
+}
+
+.historia__manifesto-list .historia__paragraph:last-child {
+  margin-bottom: 0;
+  margin-top: 1.5rem;
+  font-weight: 600;
   color: var(--color-lavender);
-  font-size: clamp(2rem, 5vw, 4rem);
-  font-weight: 300;
-  letter-spacing: 0.3em;
-  margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .historia__origin {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .historia__story {
+    grid-template-columns: 1fr;
+  }
+
+  .historia__story-media {
+    position: static;
+    height: auto;
+    aspect-ratio: 3 / 4;
+    order: -1;
+  }
+
+  .historia__manifesto {
+    grid-template-columns: 1fr;
+  }
+
+  .historia__origin-main {
+    grid-column: 1 / -1;
+  }
+
+  .historia__card {
+    margin-top: 0;
+  }
+
+  .historia__brand {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+    gap: 1.5rem;
+  }
+
+  .historia__brand-aside {
+    justify-self: center;
+    text-align: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .historia__origin {
+    grid-template-columns: 1fr;
+  }
 }
