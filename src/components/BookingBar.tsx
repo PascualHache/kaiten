@@ -78,9 +78,6 @@ function BookingBar() {
         >
           RESERVA
         </Link>
-        <button type="button" className="booking-bar__action booking-bar__action--secondary">
-          TARIFAS
-        </button>
       </div>
       <div className={`booking-bar__panel${isPanelOpen ? ' booking-bar__panel--open' : ''}`}>
         <div className="booking-bar__panel-inner">

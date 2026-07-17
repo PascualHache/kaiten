@@ -1,33 +1,49 @@
-import { useRef } from 'react'
+import { Link } from 'react-router-dom'
+import { IconArrowRight } from '@tabler/icons-react'
 import heroImage from '../assets/images/kaiten_bg.png'
-import Viewfinder from './Viewfinder'
 import './Hero.css'
 
 function Hero() {
-  const viewportRef = useRef<HTMLDivElement>(null)
-
   return (
     <section className="hero">
-      <div className="hero__viewport" ref={viewportRef}>
-        <div className="hero__images">
-          <div
-            className="hero__image hero__image--left"
-            style={{ backgroundImage: `url(${heroImage})` }}
-          />
-          <div className="hero__divider" />
-          <div
-            className="hero__image hero__image--right"
-            style={{ backgroundImage: `url(${heroImage})` }}
-          />
+      <div className="hero__content">
+        <p className="hero__eyebrow">Escuela de esquí Baqueira Beret</p>
+        <h1 className="hero__title">
+          Revoluciona
+          <br />
+          tu forma
+          <br />
+          de esquiar.
+        </h1>
+        <span className="hero__rule" />
+        <p className="hero__text">
+          La primera escuela de Baqueira donde eliges a tu profesor antes de
+          reservar.
+        </p>
+        <div className="hero__actions">
+          <Link to="/reservas" className="hero__btn hero__btn--primary">
+            RESERVAR AHORA
+            <IconArrowRight size={18} stroke={2} />
+          </Link>
+          <Link to="/historia" className="hero__btn hero__btn--secondary">
+            CONOCER KAITEN
+            <IconArrowRight size={18} stroke={2} />
+          </Link>
         </div>
-        <div className="hero__watermark">
-          <span className="hero__watermark-k">K</span>
-          <span className="hero__watermark-text">KAITEN</span>
-        </div>
-        <Viewfinder viewportRef={viewportRef} />
-        <p className="hero__side-text hero__side-text--right">ESCUELA KAITEN</p>
-        <p className="hero__title">ESCUELA DE ESQUI BAQUEIRA BERET</p>
       </div>
+
+      <div className="hero__media">
+        <img
+          className="hero__image"
+          src={heroImage}
+          alt="Esquiador descendiendo una ladera en Baqueira Beret"
+          loading="eager"
+          decoding="async"
+        />
+      </div>
+
+      <span className="hero__side hero__side--left">00 00 00 05</span>
+      <span className="hero__side hero__side--right">SKI REVOLUTION</span>
     </section>
   )
 }

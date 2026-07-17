@@ -8,11 +8,14 @@
   display: flex;
   align-items: center;
   background-color: #fff;
+  border: 1px solid rgba(133, 127, 157, 0.35);
+  border-radius: 1rem;
+  overflow: hidden;
 }
 
 .booking-bar__field {
   flex: 1;
-  border-right: 1px solid #e0e0e0;
+  border-right: 1px solid rgba(133, 127, 157, 0.25);
   padding: 0.75rem 1.25rem;
 }
 
@@ -24,19 +27,18 @@
   border: none;
   cursor: pointer;
   font-size: 0.875rem;
-  color: #333;
+  color: var(--color-lavender);
   padding: 0.25rem 0;
   width: 100%;
   font-family: inherit;
-  transition: color 0.2s;
+  transition: opacity 0.2s;
 }
 
 .booking-bar__select:hover {
-  color: #000;
+  opacity: 0.75;
 }
 
 .booking-bar__select--active {
-  color: #000;
   font-weight: 600;
 }
 
@@ -59,11 +61,12 @@
   display: flex;
   align-items: center;
   gap: 0.75rem;
+  color: var(--color-lavender);
 }
 
 .booking-bar__people-label {
   font-size: 0.875rem;
-  color: #333;
+  color: var(--color-lavender);
 }
 
 .booking-bar__counter {
@@ -78,15 +81,19 @@
   justify-content: center;
   width: 2.25rem;
   height: 2.25rem;
-  border: 1px solid #333;
+  border: 1px solid rgba(133, 127, 157, 0.5);
   background: none;
   cursor: pointer;
-  color: #333;
+  color: var(--color-lavender);
   transition: background-color 0.2s;
 }
 
+.booking-bar__counter-btn:first-child {
+  border-radius: 0.25rem 0 0 0.25rem;
+}
+
 .booking-bar__counter-btn:hover {
-  background-color: #f0f0f0;
+  background-color: rgba(133, 127, 157, 0.1);
 }
 
 .booking-bar__counter-value {
@@ -94,16 +101,16 @@
   text-align: center;
   font-size: 0.875rem;
   font-weight: 600;
-  border-top: 1px solid #333;
-  border-bottom: 1px solid #333;
+  border-top: 1px solid rgba(133, 127, 157, 0.5);
+  border-bottom: 1px solid rgba(133, 127, 157, 0.5);
   line-height: 2.25rem;
   height: 2.25rem;
-  color: #333;
+  color: var(--color-lavender);
 }
 
-/* Action buttons */
+/* Action button */
 .booking-bar__action {
-  padding: 1rem 2rem;
+  padding: 1rem 2.5rem;
   font-size: 0.75rem;
   font-weight: 700;
   font-family: inherit;
@@ -113,27 +120,22 @@
   text-transform: uppercase;
   flex-shrink: 0;
   align-self: stretch;
+  display: flex;
+  align-items: center;
   transition: opacity 0.2s;
 }
 
 .booking-bar__action:hover {
-  opacity: 0.85;
+  opacity: 0.88;
 }
 
 .booking-bar__action--primary {
-  background-color: var(--color-lime);
-  color: #000;
-}
-
-.booking-bar__action--secondary {
-  background-color: transparent;
-  border: 1px solid var(--color-lavender);
-  color: var(--color-lavender);
-}
-
-.booking-bar__action--secondary:hover {
   background-color: var(--color-lavender);
-  color: #fff;
+  color: var(--color-cream);
+}
+
+.booking-bar__action--primary:hover {
+  color: var(--color-cream);
 }
 
 /* Slide panel (grid-rows trick for height animation) */
@@ -164,6 +166,7 @@
 
   .booking-bar__action {
     flex: 1 1 auto;
+    justify-content: center;
   }
 }
 
@@ -176,12 +179,13 @@
   .booking-bar__field {
     width: 100%;
     border-right: none;
-    border-bottom: 1px solid #e0e0e0;
+    border-bottom: 1px solid rgba(133, 127, 157, 0.25);
     padding: 0.75rem 1rem;
   }
 
   .booking-bar__action {
     width: 100%;
     padding: 1rem;
+    justify-content: center;
   }
 }

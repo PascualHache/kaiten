@@ -78,6 +78,18 @@ function Navbar() {
           >
             IG
           </a>
+        </div>
+        <Link to="/" className="navbar__logo">
+          KAITEN
+        </Link>
+        <div className="navbar__right">
+          <Link to="/reservas" className="navbar__reserve-btn">
+            RESERVA
+          </Link>
+          <a href="#webcams" className="navbar__link navbar__link--webcams">
+            <IconVideo size={18} stroke={1.5} />
+            <span>Webcams</span>
+          </a>
           <button
             type="button"
             className="navbar__menu-toggle"
@@ -90,18 +102,6 @@ function Navbar() {
               <IconMenu2 size={24} stroke={2} />
             )}
           </button>
-        </div>
-        <div className="navbar__right">
-          <Link to="/reservas" className="navbar__reserve-btn">
-            RESERVA
-          </Link>
-          <a href="#webcams" className="navbar__link navbar__link--webcams">
-            <IconVideo size={18} stroke={1.5} />
-            <span>Webcams</span>
-          </a>
-          <Link to="/" className="navbar__logo">
-            <span className="navbar__logo-k">K</span>aiten
-          </Link>
         </div>
       </div>
 
