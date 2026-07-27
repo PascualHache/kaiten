@@ -163,8 +163,8 @@
   grid-template-columns: repeat(4, 1fr);
   gap: 0;
   padding: clamp(1.75rem, 3.5vw, 2.5rem) 0;
-  border-top: 1px solid rgba(17, 17, 17, 0.45);
-  border-bottom: 1px solid rgba(17, 17, 17, 0.45);
+  border-top: 2px solid rgba(17, 17, 17, 0.55);
+  border-bottom: 2px solid rgba(17, 17, 17, 0.55);
 }
 
 .valores__feature {
@@ -176,7 +176,7 @@
 }
 
 .valores__feature:not(:first-child) {
-  border-left: 1px solid rgba(17, 17, 17, 0.25);
+  border-left: 2px solid rgba(17, 17, 17, 0.3);
 }
 
 .valores__feature-title {

@@ -2,7 +2,8 @@ import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import { IconArrowRight } from '@tabler/icons-react'
 import landscapeImage from '../assets/images/kaiten_bg.png'
-import portraitImage from '../assets/images/kaiten_bg.png'
+import aitorImage from '../assets/images/aitor.png'
+import naiaraImage from '../assets/images/naiara.png'
 import './Historia.css'
 
 function Historia() {
@@ -65,14 +66,14 @@ function Historia() {
         <div className="historia__card historia__card--photo">
           <img
             className="historia__card-img"
-            src={portraitImage}
+            src={aitorImage}
             alt="Aitor Bellver, fundador de Kaiten"
             loading="lazy"
             decoding="async"
           />
           <div className="historia__card-overlay">
             <p className="historia__card-quote">
-              Aitor Bellver quería una escuela de esquí que brindara una
+              Aitor Bellver, quería una escuela de esquí que brindara una
               experiencia totalmente nueva.
             </p>
             <a href="#" className="historia__link historia__link--light">
@@ -135,7 +136,7 @@ function Historia() {
               de entender el trabajo y la vida.
             </p>
             <p className="historia__paragraph historia__paragraph--strong">
-              Dejé atrás la rueda que nunca se detiene para empezar a construir
+              Dejé atrás la rueda que nunca se detenía para empezar a construir
               un proyecto con propósito, disfrutando del camino y del tiempo.
             </p>
           </div>
@@ -165,8 +166,8 @@ function Historia() {
               esencial, la que impulsa cada detalle, cada decisión y cada paso.
             </p>
             <p className="historia__paragraph">
-              Ella también eligió cambiar de vida, salir de la rutina y apostar
-              por una forma diferente de vivir.
+              Ella también eligió cambiar de vida, salir de la misma rueda y
+              apostar por una forma diferente de vivir.
             </p>
             <p className="historia__paragraph">
               Mientras yo estaba en la montaña, ella hacía posible que este
@@ -180,8 +181,8 @@ function Historia() {
 
         <div className="historia__story-media">
           <img
-            src={portraitImage}
-            alt="Esquiadora contemplando la montaña en Baqueira"
+            src={naiaraImage}
+            alt="Naiara contemplando la montaña en Baqueira"
             loading="lazy"
             decoding="async"
           />
