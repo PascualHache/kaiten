@@ -2,7 +2,6 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { IconArrowRight, IconArrowLeft } from '@tabler/icons-react'
 import { SERVICES } from '../data/services'
-import heroImage from '../assets/images/kaiten_bg.png'
 import './Experiences.css'
 
 function Experiences() {
@@ -68,7 +67,7 @@ function Experiences() {
             >
               <img
                 className="experience-card__img"
-                src={heroImage}
+                src={service.image}
                 alt=""
                 loading="lazy"
                 decoding="async"

@@ -263,7 +263,7 @@ export const ACTIVITIES: Activity[] = [
   {
     id: 'friends-family',
     calSlug: 'friends-family',
-    title: 'Friends & Family en Baqueira',
+    title: 'Kids & Friends & Family en Baqueira',
     color: 'verde',
     features: [
       {
@@ -330,7 +330,7 @@ export const ACTIVITIES: Activity[] = [
   {
     id: 'tardeo',
     calSlug: 'experiencia-de-tardeo-20',
-    title: 'Experiencia de Tardeo -20% en Baqueira',
+    title: 'Experiencia Tardeo -15% en Baqueira',
     color: 'verde',
     features: [
       {
@@ -345,8 +345,8 @@ export const ACTIVITIES: Activity[] = [
       },
       {
         emoji: '💰',
-        title: 'Tarifa especial con 20% de descuento',
-        desc: 'Disfruta de esta experiencia en horario de tarde con un precio reducido del 20% respecto al horario habitual.',
+        title: 'Tarifa especial con 15% de descuento',
+        desc: 'Disfruta de esta experiencia en horario de tarde con un precio reducido del 15% respecto al horario habitual.',
       },
     ],
     info: [
@@ -383,7 +383,7 @@ export const ACTIVITIES: Activity[] = [
   {
     id: 'kaiten-2-5',
     calSlug: 'experiencia-kaiten-2.5',
-    title: 'Experiencia Kaiten 2.5',
+    title: 'Programas Kaiten',
     color: 'verde',
     features: [
       {
@@ -413,6 +413,61 @@ export const ACTIVITIES: Activity[] = [
       headline: 'Vive la experiencia Kaiten',
       subline: 'El sello Kaiten en un formato de 2.5 horas.',
       buttonText: 'Reserva tu Experiencia Kaiten 2.5',
+    },
+  },
+  {
+    id: 'equipment-consultancy',
+    calSlug: 'asesoramiento-compra-material-ski',
+    title: 'Asesoramiento online de compra de material de ski',
+    color: 'verde',
+    features: [
+      {
+        emoji: '🎯',
+        title: 'Encuentra el material que realmente necesitas',
+        desc: 'Te ayudamos a elegir el material de ski que mejor se adapta a tu nivel, estilo, objetivos y presupuesto. Sin marcas impuestas, solo lo que realmente necesitas.',
+      },
+      {
+        emoji: '🔍',
+        title: 'Buscamos y comparamos por ti',
+        desc: 'Analizamos las mejores opciones disponibles en tiendas online especializadas para encontrar la mejor relación calidad-precio.',
+      },
+      {
+        emoji: '🛒',
+        title: 'Te recomendamos dónde comprar y qué necesitas',
+        desc: 'Recibes una selección personalizada con enlaces directos, precios actualizados y nuestra recomendación clara de dónde comprar cada producto.',
+      },
+      {
+        emoji: '⏱️',
+        title: 'Ahorra tiempo, dinero y evita errores',
+        desc: 'Evita compras poco acertadas y equípate con confianza con el asesoramiento de expertos que conocen el material y el mercado.',
+      },
+    ],
+    info: [
+      {
+        emoji: '📋',
+        label: 'Qué incluye',
+        content: 'Asesoramiento personalizado online para recomendarte el material de ski que necesitas según tu perfil y objetivos.',
+      },
+      {
+        emoji: '⚙️',
+        label: 'Cómo funciona',
+        content: 'Respondes a un breve cuestionario sobre tu nivel, estilo, objetivos y presupuesto. Analizamos opciones en tiendas online y te enviamos nuestras recomendaciones con enlaces y precios.',
+      },
+      {
+        emoji: '👥',
+        label: 'Para quién es',
+        content: 'Esquiadores de todos los niveles que quieren comprar material nuevo o renovar su equipo con la mejor elección.',
+      },
+      {
+        emoji: '💶',
+        label: 'Precio',
+        content: 'Desde XX € por asesoramiento completo.',
+      },
+    ],
+    cta: {
+      headline: 'Equípate con las mejores decisiones',
+      subline: 'Asesoramiento experto para comprar el material de ski que realmente necesitas.',
+      buttonText: 'Reserva tu asesoramiento',
     },
   },
 ]
