@@ -3,6 +3,7 @@
   flex-direction: column;
   min-height: 100vh;
   background-color: var(--color-cream);
+  color: #111;
 }
 
 .valores__section {
@@ -15,7 +16,7 @@
   font-size: 0.75rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--color-lavender);
+  color: rgba(17, 17, 17, 0.55);
 }
 
 .valores__title {
@@ -24,24 +25,7 @@
   font-weight: 700;
   line-height: 1.02;
   letter-spacing: -0.02em;
-  color: var(--color-lavender);
-}
-
-.valores__section-title {
-  margin: 0;
-  font-size: clamp(1.75rem, 4vw, 2.75rem);
-  font-weight: 700;
-  line-height: 1.05;
-  letter-spacing: -0.02em;
-  color: var(--color-lavender);
-}
-
-.valores__rule {
-  display: block;
-  width: 2.5rem;
-  height: 2px;
-  margin: 1.25rem 0;
-  background-color: var(--color-lavender);
+  color: #111;
 }
 
 .valores__paragraph {
@@ -49,7 +33,7 @@
   max-width: 30rem;
   font-size: 0.95rem;
   line-height: 1.6;
-  color: rgba(29, 43, 0, 0.75);
+  color: rgba(17, 17, 17, 0.75);
 }
 
 /* Intro / value cards */
@@ -73,12 +57,12 @@
   padding-top: 2rem;
   font-size: 0.8rem;
   letter-spacing: 0.05em;
-  color: var(--color-lavender);
+  color: #111;
 }
 
 .valores__more:hover {
-  opacity: 0.75;
-  color: var(--color-lavender);
+  opacity: 0.6;
+  color: #111;
 }
 
 .valores__cards {
@@ -110,8 +94,12 @@
   background-color: rgba(133, 127, 157, 0.08);
 }
 
+.value-card--d {
+  background-color: rgba(126, 142, 168, 0.25);
+}
+
 .value-card__icon {
-  color: var(--color-forest);
+  color: #111;
   opacity: 0.85;
 }
 
@@ -121,89 +109,124 @@
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--color-forest);
+  color: #111;
 }
 
 .value-card__desc {
   margin: 0;
   font-size: 0.8rem;
   line-height: 1.45;
-  color: rgba(29, 43, 0, 0.7);
+  color: rgba(17, 17, 17, 0.7);
 }
 
 /* More than skiing */
 .valores__more-section {
   display: grid;
-  grid-template-columns: 1fr 1.1fr;
-  gap: clamp(1.5rem, 4vw, 3.5rem);
-  align-items: center;
-}
-
-.valores__media {
-  position: relative;
-  border-radius: 1rem;
-  overflow: hidden;
-  aspect-ratio: 4 / 3;
-}
-
-.valores__media-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* Different school */
-.valores__different {
-  display: grid;
-  grid-template-columns: 1fr 1.2fr;
-  gap: clamp(1.5rem, 4vw, 3.5rem);
-}
-
-.valores__different-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
-}
-
-.valores__feature-title {
-  margin: 0 0 0.5rem;
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--color-lavender);
-}
-
-.valores__feature-desc {
-  margin: 0;
-  font-size: 0.9rem;
-  line-height: 1.55;
-  color: rgba(29, 43, 0, 0.75);
-}
-
-/* Philosophy */
-.valores__philosophy-grid {
-  display: grid;
-  grid-template-columns: 1.3fr 1fr;
+  grid-template-columns: 1.35fr 0.85fr;
   gap: clamp(1.5rem, 4vw, 3.5rem);
   align-items: start;
 }
 
-.valores__statement {
-  margin: 0;
-  font-size: clamp(1.25rem, 2.5vw, 1.9rem);
-  font-weight: 600;
-  line-height: 1.25;
-  letter-spacing: -0.01em;
-  color: var(--color-lavender);
+.valores__big-title {
+  margin: 0 0 2rem;
+  font-size: clamp(2.25rem, 6vw, 4.5rem);
+  font-weight: 700;
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: #111;
 }
 
-.valores__statement-sub {
+.valores__more-media {
+  display: flex;
+  justify-content: center;
+  border-left: 1px solid rgba(17, 17, 17, 0.15);
+  padding-left: clamp(1.5rem, 3vw, 3rem);
+}
+
+.valores__media-img {
+  width: 100%;
+  max-width: 26rem;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 0.5rem;
+}
+
+/* Differentiators */
+.valores__different-section {
+  padding-top: clamp(1.5rem, 3vw, 2.5rem);
+  padding-bottom: clamp(1rem, 2vw, 1.5rem);
+}
+
+.valores__different {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  padding: clamp(1.75rem, 3.5vw, 2.5rem) 0;
+  border-top: 1px solid rgba(17, 17, 17, 0.45);
+  border-bottom: 1px solid rgba(17, 17, 17, 0.45);
+}
+
+.valores__feature {
+  padding: 0 clamp(1.25rem, 2.5vw, 2.5rem);
+}
+
+.valores__feature:first-child {
+  padding-left: 0;
+}
+
+.valores__feature:not(:first-child) {
+  border-left: 1px solid rgba(17, 17, 17, 0.25);
+}
+
+.valores__feature-title {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin: 0 0 0.75rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #111;
+}
+
+.valores__feature-desc {
   margin: 0;
-  font-size: clamp(1.05rem, 2vw, 1.4rem);
-  font-weight: 500;
-  line-height: 1.35;
-  color: rgba(29, 43, 0, 0.7);
+  font-size: 0.85rem;
+  line-height: 1.55;
+  color: rgba(17, 17, 17, 0.7);
+}
+
+.valores__marker {
+  flex-shrink: 0;
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 50%;
+  background-color: #111;
+}
+
+.valores__philosophy-icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  color: #111;
+}
+
+/* Philosophy */
+.valores__philosophy {
+  padding: 0 clamp(1.5rem, 5vw, 5rem) clamp(2.5rem, 6vw, 4rem);
+}
+
+.valores__philosophy-line {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #111;
 }
 
 /* Responsive */
@@ -217,10 +240,18 @@
     padding-top: 0;
   }
 
-  .valores__more-section,
-  .valores__different,
-  .valores__philosophy-grid {
+  .valores__more-section {
     grid-template-columns: 1fr;
+  }
+
+  .valores__more-media {
+    border-left: none;
+    padding-left: 0;
+    order: -1;
+  }
+
+  .valores__different {
+    grid-template-columns: 1fr 1fr;
   }
 }
 
@@ -241,7 +272,7 @@
     flex: 1;
   }
 
-  .valores__different-grid {
+  .valores__different {
     grid-template-columns: 1fr;
     gap: 1.5rem;
   }

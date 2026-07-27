@@ -1,6 +1,6 @@
-import Navbar from '../components/Navbar'
-import Footer from '../components/Footer'
-import { Link } from 'react-router-dom'
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import { Link } from "react-router-dom";
 import {
   IconShield,
   IconHeart,
@@ -8,66 +8,66 @@ import {
   IconMountain,
   IconStar,
   IconArrowRight,
-} from '@tabler/icons-react'
-import valuesImage from '../assets/images/kaiten_bg.png'
-import './Valores.css'
+} from "@tabler/icons-react";
+import valuesImage from "../assets/images/valores.png";
+import "./Valores.css";
 
 const VALUES = [
   {
-    id: 'seguridad',
+    id: "seguridad",
     Icon: IconShield,
-    title: 'Seguridad',
-    desc: 'Sabemos cuándo frenar y cuándo virar.',
-    tint: 'a',
+    title: "Seguridad",
+    desc: "Sabemos cuándo frenar y cuándo virar.",
+    tint: "a",
   },
   {
-    id: 'pasion',
+    id: "pasion",
     Icon: IconHeart,
-    title: 'Pasión',
-    desc: 'Conexión total con el terreno.',
-    tint: 'b',
+    title: "Pasión",
+    desc: "Conexión total con el terreno.",
+    tint: "b",
   },
   {
-    id: 'honestidad',
+    id: "honestidad",
     Icon: IconCompass,
-    title: 'Honestidad',
-    desc: 'Decimos lo que necesitas, no lo que esperas.',
-    tint: 'c',
+    title: "Honestidad",
+    desc: "Decimos lo que necesitas, no lo que esperas.",
+    tint: "c",
   },
   {
-    id: 'profesionalidad',
+    id: "profesionalidad",
     Icon: IconMountain,
-    title: 'Profesionalidad',
-    desc: 'Enseñanza de alto nivel, con estilo y precisión en montaña.',
-    tint: 'a',
+    title: "Profesionalidad",
+    desc: "Enseñanza de alto nivel, con estilo y precisión en montaña.",
+    tint: "d",
   },
   {
-    id: 'excelencia',
+    id: "excelencia",
     Icon: IconStar,
-    title: 'Excelencia',
-    desc: 'Menos es más. Deja huella.',
-    tint: 'c',
+    title: "Excelencia",
+    desc: "Menos es más. Deja huella.",
+    tint: "c",
   },
-]
+];
 
 const DIFFERENCE = [
   {
-    title: 'Elige tu profesor',
-    desc: 'Conoce quién te enseñará antes de reservar.',
+    title: "Educación / Profesión",
+    desc: "Conoces a fondo el esquí y la montaña.",
   },
   {
-    title: 'Transparencia',
-    desc: 'Sin intermediarios. Sin sorpresas.',
+    title: "Transparencia",
+    desc: "Sin intermediarios. Sin sorpresas.",
   },
   {
-    title: 'Personalización',
-    desc: 'Cada persona a su propio ritmo de aprendizaje.',
+    title: "Personalización",
+    desc: "Cada persona aprende a su ritmo y a su forma.",
   },
   {
-    title: 'Experiencia',
-    desc: 'La mejor estación de España. La mejor forma de descubrirla.',
+    title: "Diferencia",
+    desc: "La mejor enseñanza de España. La mejor forma de descubrirlo.",
   },
-]
+];
 
 function Valores() {
   return (
@@ -84,16 +84,13 @@ function Valores() {
             que nos definen
           </h1>
           <Link to="/historia" className="valores__more">
-            Conocer más
+            Conocer nuestra historia
             <IconArrowRight size={16} stroke={2} />
           </Link>
         </div>
         <div className="valores__cards">
           {VALUES.map(({ id, Icon, title, desc, tint }) => (
-            <article
-              key={id}
-              className={`value-card value-card--${tint}`}
-            >
+            <article key={id} className={`value-card value-card--${tint}`}>
               <span className="value-card__icon">
                 <Icon size={34} stroke={1.4} />
               </span>
@@ -109,24 +106,24 @@ function Valores() {
       {/* More than skiing */}
       <section className="valores__section valores__more-section">
         <div className="valores__more-text">
-          <p className="valores__eyebrow">Más que aprender a esquiar</p>
-          <h2 className="valores__section-title">Más que aprender a esquiar.</h2>
-          <span className="valores__rule" />
-          <p className="valores__paragraph">
-            En Kaiten enseñamos técnica. Pero también buscamos transmitir
-            confianza, seguridad y pasión por la montaña.
-          </p>
-          <p className="valores__paragraph">
-            Creemos que cada descenso es una oportunidad para mejorar, disfrutar
-            y descubrir de lo que uno es capaz.
-          </p>
-          <p className="valores__paragraph">
-            Porque al final, la mejor clase no es la de la técnica con una
-            fotografía perfecta. Es la que hace que quieras volver a esquiar al
-            día siguiente.
-          </p>
+          <h2 className="valores__big-title">Más que aprender a esquiar.</h2>
+          <div className="valores__more-body">
+            <p className="valores__paragraph">
+              En KAITEN enseñamos técnica. Pero también te ayudamos a superar
+              tus límites, a ganar seguridad y pasión por la montaña.
+            </p>
+            <p className="valores__paragraph">
+              Creemos que cada descenso es una oportunidad para mejorar,
+              disfrutar y conectar con el esquí.
+            </p>
+            <p className="valores__paragraph">
+              Porque al final, la mejor clase no es la que termina con las
+              piernas perfectas. Es la que hace que quieras volver a esquiar al
+              día siguiente.
+            </p>
+          </div>
         </div>
-        <div className="valores__media">
+        <div className="valores__more-media">
           <img
             className="valores__media-img"
             src={valuesImage}
@@ -137,19 +134,15 @@ function Valores() {
         </div>
       </section>
 
-      {/* A different school */}
-      <section className="valores__section valores__different">
-        <div className="valores__different-heading">
-          <p className="valores__eyebrow">Una escuela diferente</p>
-          <h2 className="valores__section-title">
-            Una nueva forma de entender una escuela de esquí.
-          </h2>
-        </div>
-        <div className="valores__different-grid">
+      {/* Differentiators */}
+      <section className="valores__section valores__different-section">
+        <div className="valores__different">
           {DIFFERENCE.map((item) => (
             <div key={item.title} className="valores__feature">
-              <span className="valores__rule" />
-              <h3 className="valores__feature-title">{item.title}</h3>
+              <h3 className="valores__feature-title">
+                <span className="valores__marker" aria-hidden="true" />
+                {item.title}
+              </h3>
               <p className="valores__feature-desc">{item.desc}</p>
             </div>
           ))}
@@ -157,23 +150,38 @@ function Valores() {
       </section>
 
       {/* Philosophy */}
-      <section className="valores__section valores__philosophy">
-        <p className="valores__eyebrow">Nuestra filosofía</p>
-        <div className="valores__philosophy-grid">
-          <p className="valores__statement">
-            No creemos en vender clases. Creemos en cambiar la manera de vivir la
-            montaña.
-          </p>
-          <p className="valores__statement-sub">
-            Porque una buena clase no termina cuando tú quitas los esquís.
-            Empieza cuando quieres volver mañana.
-          </p>
-        </div>
+      <section className="valores__philosophy">
+        <p className="valores__philosophy-line">
+          <span className="valores__philosophy-icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <rect
+                x="1.5"
+                y="1.5"
+                width="17"
+                height="17"
+                rx="2.5"
+                stroke="currentColor"
+                strokeWidth="1.5"
+              />
+              <rect
+                x="7"
+                y="7"
+                width="6"
+                height="6"
+                rx="1"
+                stroke="currentColor"
+                strokeWidth="1.5"
+              />
+            </svg>
+          </span>
+          No creemos en vender clases. Creemos en cambiar la manera de vivir la
+          montaña.
+        </p>
       </section>
 
       <Footer />
     </div>
-  )
+  );
 }
 
-export default Valores
+export default Valores;
