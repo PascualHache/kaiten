@@ -1,6 +1,10 @@
 :root {
   --navbar-height: 3.25rem;
 
+  /* Typography */
+  --font-heading: 'Poppins', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+
   /* Brand palette */
   --color-cream: #E6E5E1;
   --color-lavender: #857F9D;
@@ -12,7 +16,7 @@
   --color-chartreuse: #E1FF6B;
   --color-midnight: #1D2B00;
 
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: var(--font-body);
   line-height: 1.5;
   font-weight: 400;
 
@@ -26,6 +30,19 @@
 *::before,
 *::after {
   box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.navbar__logo,
+.tarifas__logo,
+.historia__brand-word,
+.historia__brand-kanji {
+  font-family: var(--font-heading);
 }
 
 body {
