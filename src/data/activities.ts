@@ -12,12 +12,23 @@ export interface InfoItem {
   content: string | string[]
 }
 
+export interface Format {
+  name: string
+  schedule: string
+  label: string
+  hours: string
+  featured?: boolean
+  note?: string
+}
+
 export interface Activity {
   id: string
   calSlug: string
   title: string
+  subtitle?: string
   color: Color
   features: Feature[]
+  formats?: Format[]
   info: InfoItem[]
   cta: {
     headline: string
@@ -383,36 +394,85 @@ export const ACTIVITIES: Activity[] = [
   {
     id: 'kaiten-2-5',
     calSlug: 'experiencia-kaiten-2.5',
-    title: 'Programas Kaiten',
+    title: 'Kaiten Programs',
+    subtitle: 'Nuestros programas de mejora intensiva',
     color: 'verde',
     features: [
       {
-        emoji: '⭐',
-        title: 'La experiencia Kaiten en 2 horas y media',
-        desc: 'Una sesión intensiva diseñada para sacar el máximo partido a tu tiempo en la nieve con el sello Kaiten.',
+        emoji: '🎿',
+        title: 'Mejora real, en menos tiempo',
+        desc: 'Programas diseñados para que progreses más rápido con sesiones enfocadas y efectivas.',
       },
       {
-        emoji: '🎿',
-        title: 'Técnica y progresión concentrada',
-        desc: 'Maximiza tu evolución en un formato de tiempo reducido, con seguimiento personalizado y un ritmo adaptado a tu nivel.',
+        emoji: '🔁',
+        title: 'Continuidad y método',
+        desc: 'Diseñados para generar hábito técnico, confianza y control en cada descenso.',
+      },
+      {
+        emoji: '⭐',
+        title: 'Experiencia Kaiten',
+        desc: 'Más que horas: es nuestro método, nuestro enfoque y nuestra forma de entender la montaña.',
+      },
+    ],
+    formats: [
+      {
+        name: 'Kaiten 2.3',
+        schedule: '2 días · 3 h/día',
+        label: 'Fin de semana intenso',
+        hours: '6 horas',
+      },
+      {
+        name: 'Kaiten 2.5',
+        schedule: '3 días · 2,5 h/día',
+        label: 'Equilibrio perfecto',
+        hours: '7,5 horas',
+        featured: true,
+        note: 'Franjas: 9:30–12:00 · 13:00–15:30',
+      },
+      {
+        name: 'Kaiten 3.2',
+        schedule: '3 días · 2 h/día',
+        label: 'Progresión inteligente',
+        hours: '6 horas',
+      },
+      {
+        name: 'Kaiten 3.3',
+        schedule: '3 días · 3 h/día',
+        label: 'Intensivo total',
+        hours: '9 horas',
       },
     ],
     info: [
       {
-        emoji: '⏱️',
-        label: 'Duración',
-        content: '2 horas y 30 minutos.',
+        emoji: '👥',
+        label: 'Participantes',
+        content: 'Desde 1 persona hasta grupos reducidos.',
       },
       {
         emoji: '🎿',
-        label: 'Nivel',
-        content: 'Adaptado a todos los niveles.',
+        label: 'Nivel y edad',
+        content: 'Todos los niveles. Adaptamos el programa a tus objetivos.',
+      },
+      {
+        emoji: '⏱️',
+        label: 'Duración',
+        content: 'Según el formato elegido. Horarios flexibles dentro de la franja disponible.',
+      },
+      {
+        emoji: '🎓',
+        label: 'Qué incluye',
+        content: 'Profesor experto, seguimiento técnico, consejos personalizados y mucho más.',
+      },
+      {
+        emoji: '🏆',
+        label: 'Ventaja Kaiten',
+        content: 'Método propio, progreso real y disfrute asegurado en cada sesión.',
       },
     ],
     cta: {
-      headline: 'Vive la experiencia Kaiten',
-      subline: 'El sello Kaiten en un formato de 2.5 horas.',
-      buttonText: 'Reserva tu Experiencia Kaiten 2.5',
+      headline: 'Elige tu programa Kaiten',
+      subline: 'Progreso real con nuestro método de mejora intensiva.',
+      buttonText: 'Reserva tu programa Kaiten',
     },
   },
   {

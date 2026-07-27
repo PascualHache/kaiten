@@ -65,7 +65,7 @@ function Footer() {
           {SERVICES.map((service) => (
             <Link
               key={service.id}
-              to={service.reservasPath}
+              to={service.reservasPath.replace('/reservas/', '/reservas#')}
               className="footer__link"
             >
               {service.title}

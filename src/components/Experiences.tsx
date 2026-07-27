@@ -1,11 +1,33 @@
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useState, useRef, useEffect } from 'react'
+import { getCalApi } from '@calcom/embed-react'
 import { IconArrowRight, IconArrowLeft } from '@tabler/icons-react'
 import { SERVICES } from '../data/services'
+import { ACTIVITIES } from '../data/activities'
+import ExperienceDetail from './ExperienceDetail'
 import './Experiences.css'
 
 function Experiences() {
   const [activeIndex, setActiveIndex] = useState(0)
+  const rowRef = useRef<HTMLDivElement>(null)
+
+  const activeService = SERVICES[activeIndex]
+  const activeActivity =
+    ACTIVITIES.find(
+      (a) => a.calSlug === activeService.reservasPath.replace('/reservas/', ''),
+    ) ?? null
+
+  useEffect(() => {
+    if (!activeActivity) return
+    ;(async () => {
+      const cal = await getCalApi({ namespace: activeActivity.calSlug })
+      cal('ui', { theme: 'light' })
+    })()
+  }, [activeActivity])
+
+  const select = (i: number) => {
+    setActiveIndex(i)
+    rowRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
 
   const go = (dir: number) =>
     setActiveIndex((i) => (i + dir + SERVICES.length) % SERVICES.length)
@@ -47,21 +69,21 @@ function Experiences() {
         </div>
       </header>
 
-      <div className="experiences__row">
+      <div className="experiences__row" ref={rowRef}>
         {SERVICES.map((service, i) => {
           const isActive = i === activeIndex
           return (
             <article
               key={service.id}
               className={`experience-card${isActive ? ' experience-card--active' : ''}`}
-              onClick={() => setActiveIndex(i)}
+              onClick={() => select(i)}
               role="button"
               tabIndex={0}
               aria-expanded={isActive}
               onKeyDown={(e) => {
                 if (e.key === 'Enter' || e.key === ' ') {
                   e.preventDefault()
-                  setActiveIndex(i)
+                  select(i)
                 }
               }}
             >
@@ -82,21 +104,18 @@ function Experiences() {
                   <p className="experience-card__summary">
                     {service.description}
                   </p>
-                  <Link
-                    to={service.reservasPath}
-                    className="experience-card__cta"
-                    tabIndex={isActive ? 0 : -1}
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    Reservar
-                    <IconArrowRight size={18} stroke={2} />
-                  </Link>
                 </div>
               </div>
             </article>
           )
         })}
       </div>
+
+      {activeActivity && (
+        <div className="experiences__detail" key={activeActivity.calSlug}>
+          <ExperienceDetail activity={activeActivity} />
+        </div>
+      )}
     </section>
   )
 }

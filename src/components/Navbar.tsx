@@ -55,7 +55,7 @@ function Navbar() {
                 {ACTIVITIES.map((activity, i) => (
                   <Link
                     key={activity.id}
-                    to={`/reservas/${activity.calSlug}`}
+                    to={`/reservas#${activity.calSlug}`}
                     className={`navbar__services-item${i === 0 ? " navbar__services-item--default" : ""}`}
                     onClick={() => setServicesOpen(false)}
                   >
