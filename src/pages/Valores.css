@@ -2,21 +2,278 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-color: #000;
+  background-color: var(--color-cream);
+  color: #111;
 }
 
-.valores__content {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
+.valores__section {
+  padding: clamp(2.5rem, 6vw, 5rem) clamp(1.5rem, 5vw, 5rem);
+}
+
+/* Shared type */
+.valores__eyebrow {
+  margin: 0 0 1rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(17, 17, 17, 0.55);
 }
 
 .valores__title {
-  color: #fff;
-  font-size: clamp(2rem, 5vw, 4rem);
-  font-weight: 300;
-  letter-spacing: 0.3em;
   margin: 0;
+  font-size: clamp(2rem, 4.5vw, 3.25rem);
+  font-weight: 700;
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  color: #111;
+}
+
+.valores__paragraph {
+  margin: 0 0 1rem;
+  max-width: 30rem;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: rgba(17, 17, 17, 0.75);
+}
+
+/* Intro / value cards */
+.valores__intro {
+  display: grid;
+  grid-template-columns: minmax(200px, 0.7fr) 2.3fr;
+  gap: clamp(1.5rem, 4vw, 3rem);
+  align-items: stretch;
+}
+
+.valores__intro-heading {
+  display: flex;
+  flex-direction: column;
+}
+
+.valores__more {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: auto;
+  padding-top: 2rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  color: #111;
+}
+
+.valores__more:hover {
+  opacity: 0.6;
+  color: #111;
+}
+
+.valores__cards {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.value-card {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 3rem;
+  min-height: 20rem;
+  padding: 1.5rem;
+  border-radius: 1rem;
+}
+
+.value-card--a {
+  background-color: rgba(133, 127, 157, 0.22);
+}
+
+.value-card--b {
+  background-color: rgba(153, 162, 143, 0.3);
+}
+
+.value-card--c {
+  background-color: rgba(133, 127, 157, 0.08);
+}
+
+.value-card--d {
+  background-color: rgba(126, 142, 168, 0.25);
+}
+
+.value-card__icon {
+  color: #111;
+  opacity: 0.85;
+}
+
+.value-card__title {
+  margin: 0 0 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #111;
+}
+
+.value-card__desc {
+  margin: 0;
+  font-size: 0.8rem;
+  line-height: 1.45;
+  color: rgba(17, 17, 17, 0.7);
+}
+
+/* More than skiing */
+.valores__more-section {
+  display: grid;
+  grid-template-columns: 1.35fr 0.85fr;
+  gap: clamp(1.5rem, 4vw, 3.5rem);
+  align-items: start;
+}
+
+.valores__big-title {
+  margin: 0 0 2rem;
+  font-size: clamp(2.25rem, 6vw, 4.5rem);
+  font-weight: 700;
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: #111;
+}
+
+.valores__more-media {
+  display: flex;
+  justify-content: center;
+  border-left: 1px solid rgba(17, 17, 17, 0.15);
+  padding-left: clamp(1.5rem, 3vw, 3rem);
+}
+
+.valores__media-img {
+  width: 100%;
+  max-width: 26rem;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 0.5rem;
+}
+
+/* Differentiators */
+.valores__different-section {
+  padding-top: clamp(1.5rem, 3vw, 2.5rem);
+  padding-bottom: clamp(1rem, 2vw, 1.5rem);
+}
+
+.valores__different {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  padding: clamp(1.75rem, 3.5vw, 2.5rem) 0;
+  border-top: 2px solid rgba(17, 17, 17, 0.55);
+  border-bottom: 2px solid rgba(17, 17, 17, 0.55);
+}
+
+.valores__feature {
+  padding: 0 clamp(1.25rem, 2.5vw, 2.5rem);
+}
+
+.valores__feature:first-child {
+  padding-left: 0;
+}
+
+.valores__feature:not(:first-child) {
+  border-left: 2px solid rgba(17, 17, 17, 0.3);
+}
+
+.valores__feature-title {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin: 0 0 0.75rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #111;
+}
+
+.valores__feature-desc {
+  margin: 0;
+  font-size: 0.85rem;
+  line-height: 1.55;
+  color: rgba(17, 17, 17, 0.7);
+}
+
+.valores__marker {
+  flex-shrink: 0;
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 50%;
+  background-color: #111;
+}
+
+.valores__philosophy-icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  color: #111;
+}
+
+/* Philosophy */
+.valores__philosophy {
+  padding: 0 clamp(1.5rem, 5vw, 5rem) clamp(2.5rem, 6vw, 4rem);
+}
+
+.valores__philosophy-line {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #111;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .valores__intro {
+    grid-template-columns: 1fr;
+  }
+
+  .valores__more {
+    margin-top: 1rem;
+    padding-top: 0;
+  }
+
+  .valores__more-section {
+    grid-template-columns: 1fr;
+  }
+
+  .valores__more-media {
+    border-left: none;
+    padding-left: 0;
+    order: -1;
+  }
+
+  .valores__different {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .valores__cards {
+    flex-direction: column;
+  }
+
+  .value-card {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1.25rem;
+    min-height: 0;
+  }
+
+  .value-card__body {
+    flex: 1;
+  }
+
+  .valores__different {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
 }

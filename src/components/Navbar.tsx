@@ -9,12 +9,14 @@ import {
   IconVideo,
   IconX,
 } from "@tabler/icons-react";
+import { useHeroVariant, setHeroVariant, IS_DEV } from "../dev/heroVariant";
 import "./Navbar.css";
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const servicesRef = useRef<HTMLDivElement>(null);
+  const heroVariant = useHeroVariant();
 
   useEffect(() => {
     function handleOutsideClick(e: MouseEvent) {
@@ -55,7 +57,7 @@ function Navbar() {
                 {ACTIVITIES.map((activity, i) => (
                   <Link
                     key={activity.id}
-                    to={`/reservas/${activity.calSlug}`}
+                    to={`/reservas#${activity.calSlug}`}
                     className={`navbar__services-item${i === 0 ? " navbar__services-item--default" : ""}`}
                     onClick={() => setServicesOpen(false)}
                   >
@@ -78,6 +80,41 @@ function Navbar() {
           >
             IG
           </a>
+          {IS_DEV && (
+            <div
+              className="navbar__dev"
+              role="group"
+              aria-label="Variante de Hero (dev)"
+            >
+              <span className="navbar__dev-label">Hero</span>
+              <button
+                type="button"
+                className={`navbar__dev-btn${heroVariant === "side" ? " navbar__dev-btn--active" : ""}`}
+                onClick={() => setHeroVariant("side")}
+              >
+                side
+              </button>
+              <button
+                type="button"
+                className={`navbar__dev-btn${heroVariant === "full" ? " navbar__dev-btn--active" : ""}`}
+                onClick={() => setHeroVariant("full")}
+              >
+                full
+              </button>
+            </div>
+          )}
+        </div>
+        <Link to="/" className="navbar__logo">
+          KAITEN
+        </Link>
+        <div className="navbar__right">
+          <Link to="/reservas" className="navbar__reserve-btn">
+            RESERVA
+          </Link>
+          <a href="#webcams" className="navbar__link navbar__link--webcams">
+            <IconVideo size={18} stroke={1.5} />
+            <span>Webcams</span>
+          </a>
           <button
             type="button"
             className="navbar__menu-toggle"
@@ -90,18 +127,6 @@ function Navbar() {
               <IconMenu2 size={24} stroke={2} />
             )}
           </button>
-        </div>
-        <div className="navbar__right">
-          <Link to="/reservas" className="navbar__reserve-btn">
-            RESERVA
-          </Link>
-          <a href="#webcams" className="navbar__link navbar__link--webcams">
-            <IconVideo size={18} stroke={1.5} />
-            <span>Webcams</span>
-          </a>
-          <Link to="/" className="navbar__logo">
-            <span className="navbar__logo-k">K</span>aiten
-          </Link>
         </div>
       </div>
 
@@ -134,6 +159,13 @@ function Navbar() {
             onClick={() => setMenuOpen(false)}
           >
             RESERVAS
+          </Link>
+          <Link
+            to="/tarifas"
+            className="navbar__menu-item"
+            onClick={() => setMenuOpen(false)}
+          >
+            TARIFAS Y NIVELES
           </Link>
         </div>
       )}

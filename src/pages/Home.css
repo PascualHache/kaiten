@@ -1,16 +1,18 @@
 .home {
-  background-color: #000;
+  background-color: var(--color-cream);
 }
 
 .home__hero-section {
   display: flex;
   flex-direction: column;
   height: calc(100vh - var(--navbar-height));
+  padding: 1rem clamp(1rem, 3vw, 2rem) 1.5rem;
 }
 
 @media (max-width: 768px) {
   .home__hero-section {
     height: auto;
     min-height: calc(100vh - var(--navbar-height));
+    padding: 1rem;
   }
 }

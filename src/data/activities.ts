@@ -12,12 +12,23 @@ export interface InfoItem {
   content: string | string[]
 }
 
+export interface Format {
+  name: string
+  schedule: string
+  label: string
+  hours: string
+  featured?: boolean
+  note?: string
+}
+
 export interface Activity {
   id: string
   calSlug: string
   title: string
+  subtitle?: string
   color: Color
   features: Feature[]
+  formats?: Format[]
   info: InfoItem[]
   cta: {
     headline: string
@@ -263,7 +274,7 @@ export const ACTIVITIES: Activity[] = [
   {
     id: 'friends-family',
     calSlug: 'friends-family',
-    title: 'Friends & Family en Baqueira',
+    title: 'Kids & Friends & Family en Baqueira',
     color: 'verde',
     features: [
       {
@@ -330,7 +341,7 @@ export const ACTIVITIES: Activity[] = [
   {
     id: 'tardeo',
     calSlug: 'experiencia-de-tardeo-20',
-    title: 'Experiencia de Tardeo -20% en Baqueira',
+    title: 'Experiencia Tardeo -15% en Baqueira',
     color: 'verde',
     features: [
       {
@@ -345,8 +356,8 @@ export const ACTIVITIES: Activity[] = [
       },
       {
         emoji: '💰',
-        title: 'Tarifa especial con 20% de descuento',
-        desc: 'Disfruta de esta experiencia en horario de tarde con un precio reducido del 20% respecto al horario habitual.',
+        title: 'Tarifa especial con 15% de descuento',
+        desc: 'Disfruta de esta experiencia en horario de tarde con un precio reducido del 15% respecto al horario habitual.',
       },
     ],
     info: [
@@ -383,36 +394,140 @@ export const ACTIVITIES: Activity[] = [
   {
     id: 'kaiten-2-5',
     calSlug: 'experiencia-kaiten-2.5',
-    title: 'Experiencia Kaiten 2.5',
+    title: 'Kaiten Programs',
+    subtitle: 'Nuestros programas de mejora intensiva',
     color: 'verde',
     features: [
       {
-        emoji: '⭐',
-        title: 'La experiencia Kaiten en 2 horas y media',
-        desc: 'Una sesión intensiva diseñada para sacar el máximo partido a tu tiempo en la nieve con el sello Kaiten.',
+        emoji: '🎿',
+        title: 'Mejora real, en menos tiempo',
+        desc: 'Programas diseñados para que progreses más rápido con sesiones enfocadas y efectivas.',
       },
       {
-        emoji: '🎿',
-        title: 'Técnica y progresión concentrada',
-        desc: 'Maximiza tu evolución en un formato de tiempo reducido, con seguimiento personalizado y un ritmo adaptado a tu nivel.',
+        emoji: '🔁',
+        title: 'Continuidad y método',
+        desc: 'Diseñados para generar hábito técnico, confianza y control en cada descenso.',
+      },
+      {
+        emoji: '⭐',
+        title: 'Experiencia Kaiten',
+        desc: 'Más que horas: es nuestro método, nuestro enfoque y nuestra forma de entender la montaña.',
+      },
+    ],
+    formats: [
+      {
+        name: 'Kaiten 2.3',
+        schedule: '2 días · 3 h/día',
+        label: 'Fin de semana intenso',
+        hours: '6 horas',
+      },
+      {
+        name: 'Kaiten 2.5',
+        schedule: '3 días · 2,5 h/día',
+        label: 'Equilibrio perfecto',
+        hours: '7,5 horas',
+        featured: true,
+        note: 'Franjas: 9:30–12:00 · 13:00–15:30',
+      },
+      {
+        name: 'Kaiten 3.2',
+        schedule: '3 días · 2 h/día',
+        label: 'Progresión inteligente',
+        hours: '6 horas',
+      },
+      {
+        name: 'Kaiten 3.3',
+        schedule: '3 días · 3 h/día',
+        label: 'Intensivo total',
+        hours: '9 horas',
       },
     ],
     info: [
       {
-        emoji: '⏱️',
-        label: 'Duración',
-        content: '2 horas y 30 minutos.',
+        emoji: '👥',
+        label: 'Participantes',
+        content: 'Desde 1 persona hasta grupos reducidos.',
       },
       {
         emoji: '🎿',
-        label: 'Nivel',
-        content: 'Adaptado a todos los niveles.',
+        label: 'Nivel y edad',
+        content: 'Todos los niveles. Adaptamos el programa a tus objetivos.',
+      },
+      {
+        emoji: '⏱️',
+        label: 'Duración',
+        content: 'Según el formato elegido. Horarios flexibles dentro de la franja disponible.',
+      },
+      {
+        emoji: '🎓',
+        label: 'Qué incluye',
+        content: 'Profesor experto, seguimiento técnico, consejos personalizados y mucho más.',
+      },
+      {
+        emoji: '🏆',
+        label: 'Ventaja Kaiten',
+        content: 'Método propio, progreso real y disfrute asegurado en cada sesión.',
       },
     ],
     cta: {
-      headline: 'Vive la experiencia Kaiten',
-      subline: 'El sello Kaiten en un formato de 2.5 horas.',
-      buttonText: 'Reserva tu Experiencia Kaiten 2.5',
+      headline: 'Elige tu programa Kaiten',
+      subline: 'Progreso real con nuestro método de mejora intensiva.',
+      buttonText: 'Reserva tu programa Kaiten',
+    },
+  },
+  {
+    id: 'equipment-consultancy',
+    calSlug: 'asesoramiento-compra-material-ski',
+    title: 'Asesoramiento online de compra de material de ski',
+    color: 'verde',
+    features: [
+      {
+        emoji: '🎯',
+        title: 'Encuentra el material que realmente necesitas',
+        desc: 'Te ayudamos a elegir el material de ski que mejor se adapta a tu nivel, estilo, objetivos y presupuesto. Sin marcas impuestas, solo lo que realmente necesitas.',
+      },
+      {
+        emoji: '🔍',
+        title: 'Buscamos y comparamos por ti',
+        desc: 'Analizamos las mejores opciones disponibles en tiendas online especializadas para encontrar la mejor relación calidad-precio.',
+      },
+      {
+        emoji: '🛒',
+        title: 'Te recomendamos dónde comprar y qué necesitas',
+        desc: 'Recibes una selección personalizada con enlaces directos, precios actualizados y nuestra recomendación clara de dónde comprar cada producto.',
+      },
+      {
+        emoji: '⏱️',
+        title: 'Ahorra tiempo, dinero y evita errores',
+        desc: 'Evita compras poco acertadas y equípate con confianza con el asesoramiento de expertos que conocen el material y el mercado.',
+      },
+    ],
+    info: [
+      {
+        emoji: '📋',
+        label: 'Qué incluye',
+        content: 'Asesoramiento personalizado online para recomendarte el material de ski que necesitas según tu perfil y objetivos.',
+      },
+      {
+        emoji: '⚙️',
+        label: 'Cómo funciona',
+        content: 'Respondes a un breve cuestionario sobre tu nivel, estilo, objetivos y presupuesto. Analizamos opciones en tiendas online y te enviamos nuestras recomendaciones con enlaces y precios.',
+      },
+      {
+        emoji: '👥',
+        label: 'Para quién es',
+        content: 'Esquiadores de todos los niveles que quieren comprar material nuevo o renovar su equipo con la mejor elección.',
+      },
+      {
+        emoji: '💶',
+        label: 'Precio',
+        content: 'Desde XX € por asesoramiento completo.',
+      },
+    ],
+    cta: {
+      headline: 'Equípate con las mejores decisiones',
+      subline: 'Asesoramiento experto para comprar el material de ski que realmente necesitas.',
+      buttonText: 'Reserva tu asesoramiento',
     },
   },
 ]

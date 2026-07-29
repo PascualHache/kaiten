@@ -1,17 +1,21 @@
 import Navbar from '../components/Navbar'
 import Hero from '../components/Hero'
-import BookingBar from '../components/BookingBar'
+import HeroFull from '../components/HeroFull'
+import Experiences from '../components/Experiences'
 import Footer from '../components/Footer'
+import { useHeroVariant } from '../dev/heroVariant'
 import './Home.css'
 
 function Home() {
+  const heroVariant = useHeroVariant()
+
   return (
     <div className="home">
       <Navbar />
       <section className="home__hero-section">
-        <Hero />
-        <BookingBar />
+        {heroVariant === 'full' ? <HeroFull /> : <Hero />}
       </section>
+      <Experiences />
       <Footer />
     </div>
   )
