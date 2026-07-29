@@ -9,12 +9,14 @@ import {
   IconVideo,
   IconX,
 } from "@tabler/icons-react";
+import { useHeroVariant, setHeroVariant, IS_DEV } from "../dev/heroVariant";
 import "./Navbar.css";
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const servicesRef = useRef<HTMLDivElement>(null);
+  const heroVariant = useHeroVariant();
 
   useEffect(() => {
     function handleOutsideClick(e: MouseEvent) {
@@ -78,6 +80,29 @@ function Navbar() {
           >
             IG
           </a>
+          {IS_DEV && (
+            <div
+              className="navbar__dev"
+              role="group"
+              aria-label="Variante de Hero (dev)"
+            >
+              <span className="navbar__dev-label">Hero</span>
+              <button
+                type="button"
+                className={`navbar__dev-btn${heroVariant === "side" ? " navbar__dev-btn--active" : ""}`}
+                onClick={() => setHeroVariant("side")}
+              >
+                side
+              </button>
+              <button
+                type="button"
+                className={`navbar__dev-btn${heroVariant === "full" ? " navbar__dev-btn--active" : ""}`}
+                onClick={() => setHeroVariant("full")}
+              >
+                full
+              </button>
+            </div>
+          )}
         </div>
         <Link to="/" className="navbar__logo">
           KAITEN

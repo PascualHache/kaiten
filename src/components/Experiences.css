@@ -198,6 +198,25 @@
   opacity: 0.85;
 }
 
+.experience-card--active .experience-card__tagline {
+  display: none;
+}
+
+/* Keep the title hidden while the card is widening, then fade it back in */
+.experience-card--active .experience-card__title {
+  animation: experience-title-in 0.9s ease;
+}
+
+@keyframes experience-title-in {
+  0%,
+  55% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 /* Revealed on active (grid-rows height animation) */
 .experience-card__reveal {
   display: grid;
@@ -237,8 +256,9 @@
   transition: opacity 0.4s ease 0.85s, transform 0.4s ease 0.85s;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
+/* Responsive: switch to a vertical accordion (one card per row) once the
+   horizontal cards would get too thin (8 experiences). */
+@media (max-width: 1024px) {
   .experiences__header {
     flex-direction: column;
     align-items: flex-start;
@@ -249,7 +269,6 @@
     align-items: flex-start;
   }
 
-  /* Vertical accordion on mobile */
   .experiences__row {
     flex-direction: column;
     height: auto;
