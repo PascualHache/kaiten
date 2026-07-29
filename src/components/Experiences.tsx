@@ -6,7 +6,11 @@ import { ACTIVITIES } from '../data/activities'
 import ExperienceDetail from './ExperienceDetail'
 import './Experiences.css'
 
+const PAGE_SIZE = 4
+const PAGE_COUNT = Math.ceil(SERVICES.length / PAGE_SIZE)
+
 function Experiences() {
+  const [page, setPage] = useState(0)
   const [activeIndex, setActiveIndex] = useState(0)
   const rowRef = useRef<HTMLDivElement>(null)
 
@@ -29,8 +33,13 @@ function Experiences() {
     rowRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }
 
-  const go = (dir: number) =>
-    setActiveIndex((i) => (i + dir + SERVICES.length) % SERVICES.length)
+  const goPage = (dir: number) => {
+    const next = (page + dir + PAGE_COUNT) % PAGE_COUNT
+    setPage(next)
+    setActiveIndex(next * PAGE_SIZE)
+  }
+
+  const visible = SERVICES.slice(page * PAGE_SIZE, page * PAGE_SIZE + PAGE_SIZE)
 
   return (
     <section className="experiences">
@@ -52,16 +61,19 @@ function Experiences() {
             <button
               type="button"
               className="experiences__nav-btn"
-              aria-label="Experiencia anterior"
-              onClick={() => go(-1)}
+              aria-label="Página anterior"
+              onClick={() => goPage(-1)}
             >
               <IconArrowLeft size={20} stroke={2} />
             </button>
+            <span className="experiences__nav-count">
+              {page + 1} / {PAGE_COUNT}
+            </span>
             <button
               type="button"
               className="experiences__nav-btn experiences__nav-btn--primary"
-              aria-label="Experiencia siguiente"
-              onClick={() => go(1)}
+              aria-label="Página siguiente"
+              onClick={() => goPage(1)}
             >
               <IconArrowRight size={20} stroke={2} />
             </button>
@@ -70,7 +82,8 @@ function Experiences() {
       </header>
 
       <div className="experiences__row" ref={rowRef}>
-        {SERVICES.map((service, i) => {
+        {visible.map((service, localIndex) => {
+          const i = page * PAGE_SIZE + localIndex
           const isActive = i === activeIndex
           return (
             <article

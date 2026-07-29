@@ -1,51 +1,98 @@
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { Link } from "react-router-dom";
-import {
-  IconShield,
-  IconHeart,
-  IconCompass,
-  IconMountain,
-  IconStar,
-  IconArrowRight,
-} from "@tabler/icons-react";
+import { IconArrowRight } from "@tabler/icons-react";
 import valuesImage from "../assets/images/valores.png";
 import "./Valores.css";
 
-const VALUES = [
+interface ValueItem {
+  id: string;
+  Icon: React.FC;
+  title: string;
+  tagline: string;
+  body: string;
+  tint: string;
+}
+
+const MountainIcon: React.FC = () => (
+  <svg width="42" height="36" viewBox="0 0 42 36" fill="none" aria-hidden="true">
+    <polyline points="2,34 14,6 26,34" stroke="currentColor" strokeWidth="1.4" strokeLinejoin="round" />
+    <polyline points="18,34 30,12 42,34" stroke="currentColor" strokeWidth="1.4" strokeLinejoin="round" />
+  </svg>
+);
+
+const WavesIcon: React.FC = () => (
+  <svg width="42" height="22" viewBox="0 0 42 22" fill="none" aria-hidden="true">
+    <path d="M1,4 C6,0 10,8 14,4 C18,0 22,8 26,4 C30,0 34,8 38,4" stroke="currentColor" strokeWidth="1.4" fill="none" strokeLinecap="round" />
+    <path d="M1,11 C6,7 10,15 14,11 C18,7 22,15 26,11 C30,7 34,15 38,11" stroke="currentColor" strokeWidth="1.4" fill="none" strokeLinecap="round" />
+    <path d="M1,18 C6,14 10,22 14,18 C18,14 22,22 26,18 C30,14 34,22 38,18" stroke="currentColor" strokeWidth="1.4" fill="none" strokeLinecap="round" />
+  </svg>
+);
+
+const SpiralIcon: React.FC = () => (
+  <svg width="40" height="40" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+    <circle cx="20" cy="20" r="17" stroke="currentColor" strokeWidth="1.4" />
+    <circle cx="20" cy="20" r="10" stroke="currentColor" strokeWidth="1.4" />
+    <circle cx="20" cy="20" r="3.5" stroke="currentColor" strokeWidth="1.4" />
+  </svg>
+);
+
+const StyleIcon: React.FC = () => (
+  <svg width="40" height="40" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+    <line x1="6" y1="34" x2="34" y2="10" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+    <line x1="6" y1="30" x2="34" y2="30" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+    <circle cx="25" cy="16" r="2.5" fill="currentColor" />
+  </svg>
+);
+
+const AsteriskIcon: React.FC = () => (
+  <svg width="40" height="40" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+    <line x1="20" y1="3" x2="20" y2="37" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+    <line x1="3" y1="20" x2="37" y2="20" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+    <line x1="7.4" y1="7.4" x2="32.6" y2="32.6" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+    <line x1="32.6" y1="7.4" x2="7.4" y2="32.6" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+  </svg>
+);
+
+const VALUES: ValueItem[] = [
   {
-    id: "seguridad",
-    Icon: IconShield,
-    title: "Seguridad",
-    desc: "Sabemos cuándo frenar y cuándo virar.",
+    id: "curiosidad",
+    Icon: MountainIcon,
+    title: "Curiosidad",
+    tagline: "Nunca dejamos de explorar.",
+    body: "Seguimos preguntando. Seguimos aprendiendo. La montaña siempre enseña.",
     tint: "a",
   },
   {
-    id: "pasion",
-    Icon: IconHeart,
-    title: "Pasión",
-    desc: "Conexión total con el terreno.",
+    id: "precision",
+    Icon: WavesIcon,
+    title: "Precisión",
+    tagline: "Nos importa cada detalle.",
+    body: "Pequeños ajustes. Grandes diferencias. Mejor cada día.",
     tint: "b",
   },
   {
-    id: "honestidad",
-    Icon: IconCompass,
-    title: "Honestidad",
-    desc: "Decimos lo que necesitas, no lo que esperas.",
+    id: "respeto",
+    Icon: SpiralIcon,
+    title: "Respeto",
+    tagline: "Por la montaña. Por las personas. Por el momento.",
+    body: "Cuidamos lo que amamos para que las futuras generaciones también puedan disfrutarlo.",
     tint: "c",
   },
   {
-    id: "profesionalidad",
-    Icon: IconMountain,
-    title: "Profesionalidad",
-    desc: "Enseñanza de alto nivel, con estilo y precisión en montaña.",
+    id: "estilo",
+    Icon: StyleIcon,
+    title: "Estilo",
+    tagline: "Menos ruido. Más intención.",
+    body: "Valoramos la simplicidad, la función y el buen gusto en todo lo que hacemos.",
     tint: "d",
   },
   {
-    id: "excelencia",
-    Icon: IconStar,
-    title: "Excelencia",
-    desc: "Menos es más. Deja huella.",
+    id: "comunidad",
+    Icon: AsteriskIcon,
+    title: "Comunidad",
+    tagline: "Subimos juntos.",
+    body: "No somos clientes. No somos profesores. Somos personas que comparten la misma pasión.",
     tint: "c",
   },
 ];
@@ -77,26 +124,30 @@ function Valores() {
       {/* Values cards */}
       <section className="valores__section valores__intro">
         <div className="valores__intro-heading">
-          <p className="valores__eyebrow">Valores</p>
+          <p className="valores__eyebrow">Nuestros valores</p>
           <h1 className="valores__title">
-            Los valores
+            Lo que
             <br />
-            que nos definen
+            nos guía.
           </h1>
           <Link to="/historia" className="valores__more">
-            Conocer nuestra historia
+            Nuestro manifiesto
             <IconArrowRight size={16} stroke={2} />
           </Link>
         </div>
         <div className="valores__cards">
-          {VALUES.map(({ id, Icon, title, desc, tint }) => (
+          {VALUES.map(({ id, Icon, title, tagline, body, tint }) => (
             <article key={id} className={`value-card value-card--${tint}`}>
-              <span className="value-card__icon">
-                <Icon size={34} stroke={1.4} />
-              </span>
-              <div className="value-card__body">
+              <div className="value-card__top">
+                <span className="value-card__icon">
+                  <Icon />
+                </span>
                 <h3 className="value-card__title">{title}</h3>
-                <p className="value-card__desc">{desc}</p>
+                <p className="value-card__tagline">{tagline}</p>
+              </div>
+              <div className="value-card__bottom">
+                <span className="value-card__rule" aria-hidden="true" />
+                <p className="value-card__body">{body}</p>
               </div>
             </article>
           ))}

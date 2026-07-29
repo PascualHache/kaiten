@@ -84,9 +84,11 @@ function Footer() {
           <Link to="/valores" className="footer__link">
             Valores
           </Link>
+          {/* Equipo oculto temporalmente
           <Link to="/equipo" className="footer__link">
             Equipo
           </Link>
+          */}
           <Link to="/reservas" className="footer__link">
             Reservas
           </Link>
