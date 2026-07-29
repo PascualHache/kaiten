@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom'
 import {
   IconArrowRight,
-  IconHelpCircle,
   IconMessageCircle,
   IconBrandInstagram,
   IconBrandSpotify,
@@ -41,12 +40,6 @@ function Footer() {
         </div>
 
         <div className="footer__help">
-          <Link to="/reservas" className="footer__help-item">
-            <span className="footer__help-icon">
-              <IconHelpCircle size={20} stroke={1.5} />
-            </span>
-            Centro de ayuda
-          </Link>
           <a
             href="https://wa.me/34600000000"
             className="footer__help-item"
@@ -103,10 +96,10 @@ function Footer() {
         <div className="footer__legal-row">
           <div className="footer__legal">
             <span>© {new Date().getFullYear()} Kaiten</span>
-            <a href="#">Términos y condiciones</a>
-            <a href="#">Política de privacidad</a>
-            <a href="#">Aviso legal</a>
-            <a href="#">Cookies</a>
+            <Link to="/terminos">Términos y condiciones</Link>
+            <Link to="/privacidad">Política de privacidad</Link>
+            <Link to="/aviso-legal">Aviso legal</Link>
+            <Link to="/cookies">Cookies</Link>
           </div>
           <div className="footer__socials">
             <a
