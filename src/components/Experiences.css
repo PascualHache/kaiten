@@ -46,8 +46,18 @@
 
 .experiences__nav {
   display: flex;
-  gap: 0.5rem;
+  align-items: center;
+  gap: 0.75rem;
   flex-shrink: 0;
+}
+
+.experiences__nav-count {
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: var(--color-lavender);
+  min-width: 2.5rem;
+  text-align: center;
 }
 
 .experiences__nav-btn {
@@ -80,11 +90,27 @@
 }
 
 /* Card row (horizontal accordion) */
+.experiences__row-wrap {
+  overflow: hidden;
+}
+
 .experiences__row {
   display: flex;
   gap: 0.75rem;
   height: clamp(20rem, 45vh, 28rem);
   scroll-margin-top: calc(var(--navbar-height) + 1.5rem);
+  animation: experiences-row-slide-in 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes experiences-row-slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(calc(var(--slide-dir, 1) * 4rem));
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 /* Active card's detail, shown below the row */
@@ -204,12 +230,12 @@
 
 /* Keep the title hidden while the card is widening, then fade it back in */
 .experience-card--active .experience-card__title {
-  animation: experience-title-in 0.9s ease;
+  animation: experience-title-in 0.7s ease;
 }
 
 @keyframes experience-title-in {
   0%,
-  55% {
+  68% {
     opacity: 0;
   }
   100% {
@@ -233,8 +259,8 @@
   opacity: 1;
   margin-top: 1rem;
   /* Wait until the card has finished widening (0.5s) before opening */
-  transition: grid-template-rows 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.5s,
-    opacity 0.3s ease 0.5s, margin-top 0.4s ease 0.5s;
+  transition: grid-template-rows 0.3s cubic-bezier(0.4, 0, 0.2, 1) 0.5s,
+    opacity 0.25s ease 0.5s, margin-top 0.3s ease 0.5s;
 }
 
 .experience-card__summary {
@@ -253,7 +279,7 @@
   opacity: 1;
   transform: none;
   /* Fade in once the reveal has opened */
-  transition: opacity 0.4s ease 0.85s, transform 0.4s ease 0.85s;
+  transition: opacity 0.3s ease 0.75s, transform 0.3s ease 0.75s;
 }
 
 /* Responsive: switch to a vertical accordion (one card per row) once the
@@ -272,6 +298,18 @@
   .experiences__row {
     flex-direction: column;
     height: auto;
+    animation-name: experiences-row-slide-in-v;
+  }
+
+  @keyframes experiences-row-slide-in-v {
+    from {
+      opacity: 0;
+      transform: translateY(calc(var(--slide-dir, 1) * 2rem));
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
   }
 
   .experience-card {

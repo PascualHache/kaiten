@@ -146,6 +146,7 @@ function Navbar() {
           >
             VALORES
           </Link>
+          {/* Equipo oculto temporalmente
           <Link
             to="/equipo"
             className="navbar__menu-item"
@@ -153,6 +154,7 @@ function Navbar() {
           >
             EQUIPO
           </Link>
+          */}
           <Link
             to="/reservas"
             className="navbar__menu-item"
@@ -165,7 +167,14 @@ function Navbar() {
             className="navbar__menu-item"
             onClick={() => setMenuOpen(false)}
           >
-            TARIFAS Y NIVELES
+            TARIFAS
+          </Link>
+          <Link
+            to="/niveles"
+            className="navbar__menu-item"
+            onClick={() => setMenuOpen(false)}
+          >
+            NIVELES
           </Link>
         </div>
       )}

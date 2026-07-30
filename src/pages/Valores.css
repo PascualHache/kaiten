@@ -76,10 +76,18 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 3rem;
   min-height: 20rem;
   padding: 1.5rem;
   border-radius: 1rem;
+  cursor: default;
+  transition:
+    transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    box-shadow 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.value-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(17, 17, 17, 0.1);
 }
 
 .value-card--a {
@@ -98,29 +106,68 @@
   background-color: rgba(126, 142, 168, 0.25);
 }
 
+.value-card__top {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.value-card__bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
 .value-card__icon {
   color: #111;
   opacity: 0.85;
+  transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.value-card:hover .value-card__icon {
+  transform: scale(1.12);
 }
 
 .value-card__title {
-  margin: 0 0 0.5rem;
-  font-size: 0.8rem;
+  margin: 0;
+  font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: #111;
 }
 
-.value-card__desc {
+.value-card__tagline {
   margin: 0;
-  font-size: 0.8rem;
-  line-height: 1.45;
-  color: rgba(17, 17, 17, 0.7);
+  font-size: 0.88rem;
+  font-weight: 500;
+  line-height: 1.35;
+  color: #111;
+}
+
+.value-card__rule {
+  display: block;
+  width: 2rem;
+  height: 1.5px;
+  background-color: rgba(17, 17, 17, 0.3);
+  transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.value-card:hover .value-card__rule {
+  width: 4rem;
+}
+
+.value-card__body {
+  margin: 0;
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: rgba(17, 17, 17, 0.65);
 }
 
 /* More than skiing */
 .valores__more-section {
+  padding-top: clamp(1.25rem, 3vw, 2rem);
+  padding-bottom: clamp(1.25rem, 3vw, 2rem);
   display: grid;
   grid-template-columns: 1.35fr 0.85fr;
   gap: clamp(1.5rem, 4vw, 3.5rem);
@@ -261,15 +308,12 @@
   }
 
   .value-card {
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 1.25rem;
     min-height: 0;
+    gap: 1.5rem;
   }
 
-  .value-card__body {
-    flex: 1;
+  .value-card__bottom {
+    display: none;
   }
 
   .valores__different {
