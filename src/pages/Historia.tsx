@@ -1,10 +1,10 @@
-import Navbar from '../components/Navbar'
-import Footer from '../components/Footer'
-import { IconArrowRight } from '@tabler/icons-react'
-import landscapeImage from '../assets/images/kaiten_bg.png'
-import aitorImage from '../assets/images/aitor.png'
-import naiaraImage from '../assets/images/naiara.png'
-import './Historia.css'
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import { IconArrowRight } from "@tabler/icons-react";
+import landscapeImage from "../assets/images/kaiten_bg.png";
+import aitorImage from "../assets/images/aitor.png";
+import naiaraImage from "../assets/images/naiara.png";
+import "./Historia.css";
 
 function Historia() {
   return (
@@ -13,80 +13,80 @@ function Historia() {
 
       {/* Intro statement */}
       <section className="historia__intro">
-        <p className="historia__lead">
-          <em>The Kaiten Line</em> es el estado mental en el que la técnica deja
-          de ser un pensamiento para convertirse en intuición. Es el momento en
-          el que desaparece el ruido, el cuerpo responde antes que la mente y la
-          montaña deja de ser un lugar por el que desciendes{' '}
-          <em>para convertirse en un lenguaje que entendemos.</em>
-        </p>
-        <p className="historia__lead historia__lead--tag">
-          <em>We call it The Kaiten Line.</em>
-        </p>
+        <div className="historia__lead-box">
+          <p className="historia__lead">
+            <em>The Kaiten Line</em> es el estado mental en el que la técnica
+            deja de ser un pensamiento para convertirse en intuición. Es el
+            momento en el que desaparece el ruido, el cuerpo responde antes que
+            la mente y la montaña deja de ser un lugar por el que desciendes{" "}
+            <em>para convertirse en un lenguaje que entendemos.</em>
+          </p>
+          <p className="historia__lead historia__lead--tag">
+            <em>We call it The Kaiten Line.</em>
+          </p>
+        </div>
         <span className="historia__rule" />
       </section>
 
       {/* Origin composition */}
       <section className="historia__origin">
-        <div className="historia__origin-main">
-          <div className="historia__photo">
+        <div className="historia__origin-strip">
+          <div className="historia__origin-left">
+            <div className="historia__photo">
+              <img
+                src={landscapeImage}
+                alt="Montañas de Baqueira Beret con dos montañeros"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+            <div className="historia__origin-text">
+              <h2 className="historia__origin-title">
+                El origen
+                <br />
+                de KAITEN.
+              </h2>
+              <p className="historia__paragraph historia__paragraph-origin">
+                No nacimos para crear otra escuela de esquí.
+              </p>
+              <p className="historia__paragraph historia__paragraph-origin">
+                Nacimos porque creíamos que existía una forma mejor de enseñar.
+              </p>
+              <span className="historia__rule" />
+            </div>
+          </div>
+
+          <div className="historia__card historia__card--dark">
+            <h3 className="historia__card-title">
+              Todo comenzó en el Valle de Arán.
+            </h3>
+          </div>
+
+          <div className="historia__card historia__card--photo">
             <img
-              src={landscapeImage}
-              alt="Montañas de Baqueira Beret con dos montañeros"
+              className="historia__card-img"
+              src={aitorImage}
+              alt="Aitor Bellver, fundador de Kaiten"
               loading="lazy"
               decoding="async"
             />
-          </div>
-          <div className="historia__origin-text">
-            <h2 className="historia__origin-title">
-              El origen
-              <br />
-              de KAITEN.
-            </h2>
-            <p className="historia__paragraph">
-              No nacimos para crear otra escuela de esquí.
-            </p>
-            <p className="historia__paragraph">
-              Nacimos porque creíamos que existía una forma mejor de enseñar.
-            </p>
-            <span className="historia__rule" />
-          </div>
-        </div>
-
-        <div className="historia__card historia__card--dark">
-          <h3 className="historia__card-title">
-            Todo comenzó en el Valle de Arán.
-          </h3>
-          <a href="#" className="historia__link">
-            Leer más
-            <IconArrowRight size={16} stroke={2} />
-          </a>
-        </div>
-
-        <div className="historia__card historia__card--photo">
-          <img
-            className="historia__card-img"
-            src={aitorImage}
-            alt="Aitor Bellver, fundador de Kaiten"
-            loading="lazy"
-            decoding="async"
-          />
-          <div className="historia__card-overlay">
-            <p className="historia__card-quote">
-              Aitor Bellver, quería una escuela de esquí que brindara una
-              experiencia totalmente nueva.
-            </p>
-            <a href="#" className="historia__link historia__link--light">
-              Conoce su visión
-              <IconArrowRight size={16} stroke={2} />
-            </a>
+            <div className="historia__card-overlay">
+              <p className="historia__card-quote">
+                Aitor Bellver, quería una escuela de esquí que brindara una
+                experiencia totalmente nueva.
+              </p>
+              <a href="#" className="historia__link historia__link--light">
+                Conoce su visión
+                <IconArrowRight size={16} stroke={2} />
+              </a>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Brand meaning */}
       <section className="historia__brand">
-        <span className="historia__brand-label">Kaiten</span>
+        <span className="historia__brand-label"></span>
         <div className="historia__brand-center">
           <span className="historia__brand-word">KAITEN</span>
           <span className="historia__brand-kanji">回転</span>
@@ -96,6 +96,7 @@ function Historia() {
         </div>
         <div className="historia__brand-aside">
           <p className="historia__paragraph">Descubrí esa palabra en Japón.</p>
+          <br />
           <p className="historia__paragraph">
             En ese instante supe que algún día daría nombre a este proyecto.
           </p>
@@ -213,7 +214,7 @@ function Historia() {
 
       <Footer />
     </div>
-  )
+  );
 }
 
-export default Historia
+export default Historia;

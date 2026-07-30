@@ -166,6 +166,8 @@
 
 /* More than skiing */
 .valores__more-section {
+  padding-top: clamp(1.25rem, 3vw, 2rem);
+  padding-bottom: clamp(1.25rem, 3vw, 2rem);
   display: grid;
   grid-template-columns: 1.35fr 0.85fr;
   gap: clamp(1.5rem, 4vw, 3.5rem);

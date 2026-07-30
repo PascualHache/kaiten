@@ -1,7 +1,7 @@
-import Navbar from '../components/Navbar'
-import Footer from '../components/Footer'
-import { LEVELS } from '../data/levels'
-import './Tarifas.css'
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import { LEVELS } from "../data/levels";
+import "./Tarifas.css";
 
 function Niveles() {
   return (
@@ -9,11 +9,6 @@ function Niveles() {
       <Navbar />
 
       <main className="tarifas__sheet">
-        <header className="tarifas__masthead">
-          <span className="tarifas__logo">KAITEN</span>
-          <span className="tarifas__logo-sub">Escuela de esquí</span>
-        </header>
-
         <section className="tarifas__niveles tarifas__niveles--page">
           <header className="tarifas__niveles-head">
             <h2 className="tarifas__niveles-title">Niveles</h2>
@@ -42,7 +37,7 @@ function Niveles() {
       </main>
       <Footer />
     </div>
-  )
+  );
 }
 
-export default Niveles
+export default Niveles;

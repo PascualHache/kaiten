@@ -11,6 +11,7 @@ const PAGE_COUNT = Math.ceil(SERVICES.length / PAGE_SIZE)
 
 function Experiences() {
   const [page, setPage] = useState(0)
+  const [slideDir, setSlideDir] = useState<1 | -1>(1)
   const [activeIndex, setActiveIndex] = useState(0)
   const rowRef = useRef<HTMLDivElement>(null)
 
@@ -34,6 +35,7 @@ function Experiences() {
   }
 
   const goPage = (dir: number) => {
+    setSlideDir(dir > 0 ? 1 : -1)
     const next = (page + dir + PAGE_COUNT) % PAGE_COUNT
     setPage(next)
     setActiveIndex(next * PAGE_SIZE)
@@ -81,7 +83,13 @@ function Experiences() {
         </div>
       </header>
 
-      <div className="experiences__row" ref={rowRef}>
+      <div className="experiences__row-wrap">
+      <div
+        className="experiences__row"
+        key={page}
+        ref={rowRef}
+        style={{ '--slide-dir': slideDir } as React.CSSProperties}
+      >
         {visible.map((service, localIndex) => {
           const i = page * PAGE_SIZE + localIndex
           const isActive = i === activeIndex
@@ -122,6 +130,7 @@ function Experiences() {
             </article>
           )
         })}
+      </div>
       </div>
 
       {activeActivity && (

@@ -90,11 +90,27 @@
 }
 
 /* Card row (horizontal accordion) */
+.experiences__row-wrap {
+  overflow: hidden;
+}
+
 .experiences__row {
   display: flex;
   gap: 0.75rem;
   height: clamp(20rem, 45vh, 28rem);
   scroll-margin-top: calc(var(--navbar-height) + 1.5rem);
+  animation: experiences-row-slide-in 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes experiences-row-slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(calc(var(--slide-dir, 1) * 4rem));
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 /* Active card's detail, shown below the row */
@@ -282,6 +298,18 @@
   .experiences__row {
     flex-direction: column;
     height: auto;
+    animation-name: experiences-row-slide-in-v;
+  }
+
+  @keyframes experiences-row-slide-in-v {
+    from {
+      opacity: 0;
+      transform: translateY(calc(var(--slide-dir, 1) * 2rem));
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
   }
 
   .experience-card {
