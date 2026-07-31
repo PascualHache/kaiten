@@ -2,6 +2,11 @@
   position: sticky;
   top: 0;
   z-index: 100;
+  transition: box-shadow 0.3s ease;
+}
+
+.navbar--scrolled .navbar__bar {
+  box-shadow: 0 2px 16px rgba(133, 127, 157, 0.18);
 }
 
 .navbar__bar {
@@ -50,8 +55,9 @@
   color: var(--color-lavender);
 }
 
-.navbar__link--webcams {
-  gap: 0.5rem;
+.navbar__phone-text {
+  font-size: 0.8rem;
+  letter-spacing: 0.02em;
 }
 
 .navbar__dropdown {
@@ -73,7 +79,7 @@
 }
 
 .navbar__menu-toggle {
-  display: flex;
+  display: none;
   align-items: center;
   background: none;
   border: none;
@@ -119,6 +125,34 @@
   color: var(--color-lavender);
 }
 
+/* Desktop nav links */
+.navbar__nav {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.navbar__nav-link {
+  padding: 0.35rem 0.65rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--color-lavender);
+  text-decoration: none;
+  border-radius: 0.25rem;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.navbar__nav-link:hover {
+  background-color: rgba(133, 127, 157, 0.1);
+  color: var(--color-lavender);
+}
+
+.navbar__nav-link--active {
+  color: var(--color-forest);
+  font-weight: 700;
+}
+
 /* Dev-only Hero variant toggle */
 .navbar__dev {
   display: flex;
@@ -154,13 +188,12 @@
   color: var(--color-cream);
 }
 
-
-/* Dropdown menu */
+/* Mobile dropdown menu */
 .navbar__menu {
   position: absolute;
   top: 100%;
   right: clamp(1rem, 3vw, 2rem);
-  background-color: #fff;
+  background-color: var(--color-cream);
   min-width: 240px;
   display: flex;
   flex-direction: column;
@@ -173,13 +206,13 @@
 .navbar__menu-item {
   display: block;
   padding: 1rem 1.5rem;
-  color: #333;
+  color: var(--color-forest);
   text-decoration: none;
   font-size: 0.875rem;
   font-weight: 500;
   letter-spacing: 0.1em;
-  border-bottom: 1px solid #ececec;
-  transition: background-color 0.2s;
+  border-bottom: 1px solid rgba(29, 43, 0, 0.08);
+  transition: background-color 0.2s, color 0.2s;
 }
 
 .navbar__menu-item:last-child {
@@ -187,20 +220,39 @@
 }
 
 .navbar__menu-item:hover {
-  background-color: #f5f5f5;
-  color: #000;
+  background-color: rgba(133, 127, 157, 0.1);
+  color: var(--color-forest);
+}
+
+.navbar__menu-item--active {
+  color: var(--color-lavender);
+  font-weight: 700;
+  border-left: 2px solid var(--color-lavender);
+  padding-left: calc(1.5rem - 2px);
 }
 
 /* Responsive */
+@media (max-width: 900px) {
+  .navbar__nav {
+    display: none;
+  }
+
+  .navbar__menu-toggle {
+    display: flex;
+  }
+}
+
 @media (max-width: 768px) {
   .navbar__bar {
     padding: 0.5rem 1rem;
   }
 
   .navbar__dropdown,
-  .navbar__link--webcams,
-  .navbar__reserve-btn,
   .navbar__dev {
+    display: none;
+  }
+
+  .navbar__phone-text {
     display: none;
   }
 
