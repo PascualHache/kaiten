@@ -1,55 +1,75 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import {
   IconArrowRight,
-  IconMessageCircle,
-  IconBrandInstagram,
-  IconBrandSpotify,
   IconBrandWhatsapp,
+  IconBrandInstagram,
+  IconPhone,
 } from '@tabler/icons-react'
 import { SERVICES } from '../data/services'
 import './Footer.css'
 
 function Footer() {
+  const [submitted, setSubmitted] = useState(false)
+
   return (
     <footer className="footer">
+      <div className="footer__brand">
+        <Link to="/" className="footer__brand-logo">KAITEN</Link>
+        <p className="footer__brand-sub">Escuela de esquí · Valle de Arán</p>
+      </div>
+
       <div className="footer__top">
         <div className="footer__newsletter">
           <p className="footer__newsletter-text">
             Suscríbete para recibir novedades, ofertas y partes de nieve antes
             que nadie.
           </p>
-          <form
-            className="footer__form"
-            onSubmit={(e) => e.preventDefault()}
-          >
-            <input
-              type="email"
-              className="footer__input"
-              placeholder="Correo electrónico *"
-              aria-label="Correo electrónico"
-              required
-            />
-            <button
-              type="submit"
-              className="footer__submit"
-              aria-label="Suscribirse"
+          {submitted ? (
+            <p className="footer__newsletter-success">
+              ¡Apuntado! Te avisaremos pronto.
+            </p>
+          ) : (
+            <form
+              className="footer__form"
+              onSubmit={(e) => { e.preventDefault(); setSubmitted(true) }}
             >
-              <IconArrowRight size={18} stroke={2} />
-            </button>
-          </form>
+              <input
+                type="email"
+                className="footer__input"
+                placeholder="Correo electrónico *"
+                aria-label="Correo electrónico"
+                required
+              />
+              <button
+                type="submit"
+                className="footer__submit"
+                aria-label="Suscribirse"
+              >
+                <IconArrowRight size={18} stroke={2} />
+              </button>
+            </form>
+          )}
         </div>
 
         <div className="footer__help">
+          <span className="footer__col-title">¿Hablamos?</span>
           <a
-            href="https://wa.me/34600000000"
+            href="https://wa.me/34699820954"
             className="footer__help-item"
             target="_blank"
             rel="noopener noreferrer"
           >
             <span className="footer__help-icon">
-              <IconMessageCircle size={20} stroke={1.5} />
+              <IconBrandWhatsapp size={20} stroke={1.5} />
             </span>
-            WhatsApp
+            +34 699 820 954
+          </a>
+          <a href="tel:+34699820954" className="footer__help-item">
+            <span className="footer__help-icon">
+              <IconPhone size={20} stroke={1.5} />
+            </span>
+            +34 699 820 954
           </a>
         </div>
 
@@ -68,31 +88,23 @@ function Footer() {
 
         <nav className="footer__col" aria-label="Kaiten">
           <span className="footer__col-title">Kaiten</span>
-          <Link to="/historia" className="footer__link">
-            Conócenos
-          </Link>
-          <Link to="/historia" className="footer__link">
-            Historia
-          </Link>
-          <Link to="/valores" className="footer__link">
-            Valores
-          </Link>
-          {/* Equipo oculto temporalmente
-          <Link to="/equipo" className="footer__link">
-            Equipo
-          </Link>
-          */}
-          <Link to="/reservas" className="footer__link">
-            Reservas
-          </Link>
+          <Link to="/historia" className="footer__link">Historia</Link>
+          <Link to="/valores" className="footer__link">Valores</Link>
+          <Link to="/tarifas" className="footer__link">Tarifas</Link>
+          <Link to="/niveles" className="footer__link">Niveles</Link>
+          <Link to="/reservas" className="footer__link">Reservas</Link>
         </nav>
       </div>
 
+      <div className="footer__cta">
+        <p className="footer__cta-text">¿Listo para empezar?</p>
+        <Link to="/reservas" className="footer__cta-btn">
+          Reserva tu clase
+          <IconArrowRight size={16} stroke={2} />
+        </Link>
+      </div>
+
       <div className="footer__bottom">
-        <div className="footer__region">
-          <span aria-hidden="true">🇪🇸</span>
-          España
-        </div>
         <div className="footer__legal-row">
           <div className="footer__legal">
             <span>© {new Date().getFullYear()} Kaiten</span>
@@ -103,29 +115,13 @@ function Footer() {
           </div>
           <div className="footer__socials">
             <a
-              href="https://instagram.com"
+              href="https://instagram.com/kaiten"
               className="footer__social"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Instagram"
             >
               <IconBrandInstagram size={20} stroke={1.5} />
-            </a>
-            <a
-              href="https://wa.me/34600000000"
-              className="footer__social"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="WhatsApp"
-            >
-              <IconBrandWhatsapp size={20} stroke={1.5} />
-            </a>
-            <a
-              href="#"
-              className="footer__social"
-              aria-label="Spotify"
-            >
-              <IconBrandSpotify size={20} stroke={1.5} />
             </a>
           </div>
         </div>
