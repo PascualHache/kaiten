@@ -75,10 +75,6 @@ function Historia() {
                 Aitor Bellver, quería una escuela de esquí que brindara una
                 experiencia totalmente nueva.
               </p>
-              <a href="#" className="historia__link historia__link--light">
-                Conoce su visión
-                <IconArrowRight size={16} stroke={2} />
-              </a>
             </div>
           </div>
         </div>
