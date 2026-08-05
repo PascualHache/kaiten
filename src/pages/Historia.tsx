@@ -1,9 +1,8 @@
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import { IconArrowRight } from "@tabler/icons-react";
-import landscapeImage from "../assets/images/kaiten_bg.png";
 import aitorImage from "../assets/images/aitor.png";
-import naiaraImage from "../assets/images/naiara.png";
+import historiaImage from "../assets/images/historia.png";
+import historiaFullImage from "../assets/images/historia_full.png";
 import "./Historia.css";
 
 function Historia() {
@@ -34,7 +33,7 @@ function Historia() {
           <div className="historia__origin-left">
             <div className="historia__photo">
               <img
-                src={landscapeImage}
+                src={historiaImage}
                 alt="Montañas de Baqueira Beret con dos montañeros"
                 loading="lazy"
                 decoding="async"
@@ -178,7 +177,7 @@ function Historia() {
 
         <div className="historia__story-media">
           <img
-            src={naiaraImage}
+            src={historiaFullImage}
             alt="Naiara contemplando la montaña en Baqueira"
             loading="lazy"
             decoding="async"
