@@ -7,6 +7,7 @@ import {
   IconPhone,
 } from '@tabler/icons-react'
 import { SERVICES } from '../data/services'
+import logoText from '../assets/logos/logo_text.png'
 import './Footer.css'
 
 function Footer() {
@@ -15,7 +16,9 @@ function Footer() {
   return (
     <footer className="footer">
       <div className="footer__brand">
-        <Link to="/" className="footer__brand-logo">KAITEN</Link>
+        <Link to="/" className="footer__brand-logo">
+          <img src={logoText} alt="Kaiten" className="footer__brand-logo-img" />
+        </Link>
         <p className="footer__brand-sub">Escuela de esquí · Valle de Arán</p>
       </div>
 

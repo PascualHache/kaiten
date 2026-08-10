@@ -48,7 +48,7 @@
   display: inline-block;
   max-width: 46rem;
   padding: clamp(1.25rem, 3vw, 2rem) clamp(1.5rem, 3vw, 2.5rem);
-  background-color: rgba(255, 255, 255, 0.55);
+  background-color: transparent;
   border-radius: 0.5rem;
 }
 
@@ -216,11 +216,14 @@
 }
 
 .historia__brand-word {
-  font-size: clamp(3rem, 8vw, 6rem);
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  line-height: 1;
-  color: #111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.historia__brand-word img {
+  height: clamp(3rem, 8vw, 6rem);
+  width: auto;
 }
 
 .historia__brand-kanji {
@@ -338,21 +341,10 @@
 }
 
 .historia__manifesto-mark {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: block;
   width: 2.75rem;
   height: 2.75rem;
-  border: 2px solid #111;
-  border-radius: 0.4rem;
-}
-
-.historia__manifesto-mark::after {
-  content: '';
-  width: 1rem;
-  height: 1rem;
-  border: 2px solid #111;
-  border-radius: 0.15rem;
+  object-fit: contain;
 }
 
 .historia__manifesto-list .historia__paragraph {

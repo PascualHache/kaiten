@@ -94,6 +94,10 @@
 }
 
 .navbar__reserve-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
   padding: 0.5rem 1.25rem;
   background: var(--color-lavender);
   border: 1px solid var(--color-lavender);
@@ -114,15 +118,20 @@
 
 .navbar__logo {
   justify-self: center;
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: var(--color-lavender);
+  display: flex;
+  align-items: center;
   text-decoration: none;
-  letter-spacing: 0.2em;
 }
 
-.navbar__logo:hover {
-  color: var(--color-lavender);
+.navbar__logo-img {
+  height: 1.75rem;
+  width: auto;
+}
+
+@media (max-width: 768px) {
+  .navbar__logo-img {
+    height: 1.4rem;
+  }
 }
 
 /* Desktop nav links */
@@ -153,40 +162,6 @@
   font-weight: 700;
 }
 
-/* Dev-only Hero variant toggle */
-.navbar__dev {
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
-  padding: 0.15rem;
-  border: 1px solid rgba(133, 127, 157, 0.4);
-  border-radius: 1rem;
-}
-
-.navbar__dev-label {
-  padding: 0 0.4rem;
-  font-size: 0.6rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: rgba(17, 17, 17, 0.45);
-}
-
-.navbar__dev-btn {
-  padding: 0.25rem 0.65rem;
-  font-family: inherit;
-  font-size: 0.7rem;
-  color: var(--color-lavender);
-  background: transparent;
-  border: none;
-  border-radius: 0.85rem;
-  cursor: pointer;
-  transition: background-color 0.2s, color 0.2s;
-}
-
-.navbar__dev-btn--active {
-  background-color: var(--color-lavender);
-  color: var(--color-cream);
-}
 
 /* Mobile dropdown menu */
 .navbar__menu {
@@ -247,8 +222,7 @@
     padding: 0.5rem 1rem;
   }
 
-  .navbar__dropdown,
-  .navbar__dev {
+  .navbar__dropdown {
     display: none;
   }
 
