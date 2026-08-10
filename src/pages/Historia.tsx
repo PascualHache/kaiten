@@ -3,6 +3,8 @@ import Footer from "../components/Footer";
 import aitorImage from "../assets/images/aitor.png";
 import historiaImage from "../assets/images/historia.png";
 import historiaFullImage from "../assets/images/historia_full.png";
+import logoText from "../assets/logos/logo_text.png";
+import logoSquared from "../assets/logos/logo_squared.png";
 import "./Historia.css";
 
 function Historia() {
@@ -83,7 +85,9 @@ function Historia() {
       <section className="historia__brand">
         <span className="historia__brand-label"></span>
         <div className="historia__brand-center">
-          <span className="historia__brand-word">KAITEN</span>
+          <span className="historia__brand-word">
+            <img src={logoText} alt="Kaiten" />
+          </span>
           <span className="historia__brand-kanji">回転</span>
           <span className="historia__brand-tagline">
             Revolución. Cambio. Evolución.
@@ -192,7 +196,14 @@ function Historia() {
           <h2 className="historia__manifesto-title">
             Es una manera de entender la montaña.
           </h2>
-          <span className="historia__manifesto-mark" aria-hidden="true" />
+          <img
+            className="historia__manifesto-mark"
+            src={logoSquared}
+            alt=""
+            aria-hidden="true"
+            loading="lazy"
+            decoding="async"
+          />
         </div>
         <div className="historia__manifesto-list">
           <p className="historia__paragraph">

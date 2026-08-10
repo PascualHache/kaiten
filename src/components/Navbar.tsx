@@ -7,7 +7,8 @@ import {
   IconMenu2,
   IconX,
 } from "@tabler/icons-react";
-import { useHeroVariant, setHeroVariant, IS_DEV } from "../dev/heroVariant";
+import logoText from "../assets/logos/logo_text.png";
+import PromoBanner from "./PromoBanner";
 import "./Navbar.css";
 
 const NAV_LINKS = [
@@ -21,7 +22,6 @@ const NAV_LINKS = [
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const heroVariant = useHeroVariant();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 10);
@@ -31,6 +31,7 @@ function Navbar() {
 
   return (
     <nav className={`navbar${scrolled ? " navbar--scrolled" : ""}`}>
+      <PromoBanner />
       <div className="navbar__bar">
         <div className="navbar__left">
           <a href="tel:+34699820954" className="navbar__link navbar__link--phone">
@@ -50,33 +51,10 @@ function Navbar() {
           >
             IG
           </a>
-          {IS_DEV && (
-            <div
-              className="navbar__dev"
-              role="group"
-              aria-label="Variante de Hero (dev)"
-            >
-              <span className="navbar__dev-label">Hero</span>
-              <button
-                type="button"
-                className={`navbar__dev-btn${heroVariant === "side" ? " navbar__dev-btn--active" : ""}`}
-                onClick={() => setHeroVariant("side")}
-              >
-                side
-              </button>
-              <button
-                type="button"
-                className={`navbar__dev-btn${heroVariant === "full" ? " navbar__dev-btn--active" : ""}`}
-                onClick={() => setHeroVariant("full")}
-              >
-                full
-              </button>
-            </div>
-          )}
         </div>
 
         <Link to="/" className="navbar__logo">
-          KAITEN
+          <img src={logoText} alt="Kaiten" className="navbar__logo-img" />
         </Link>
 
         <div className="navbar__right">
