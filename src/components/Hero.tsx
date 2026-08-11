@@ -25,7 +25,7 @@ function Hero() {
               <br />
               tu forma
               <br />
-              de esquiar.
+              de esquiar
             </h1>
             <span className="hero__rule" />
             <p className="hero__text">
@@ -34,7 +34,7 @@ function Hero() {
             </p>
             <div className="hero__actions">
               <Link to="/reservas" className="hero__btn hero__btn--primary">
-                RESERVAR AHORA
+                Reservar
                 <IconArrowRight size={18} stroke={2} />
               </Link>
               <Link to="/historia" className="hero__btn hero__btn--secondary">

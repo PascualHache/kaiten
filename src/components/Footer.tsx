@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import {
   IconArrowRight,
@@ -12,6 +12,18 @@ import './Footer.css'
 
 function Footer() {
   const [submitted, setSubmitted] = useState(false)
+  const [error, setError] = useState('')
+  const consentRef = useRef<HTMLInputElement>(null)
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!consentRef.current?.checked) {
+      setError('Debes aceptar la política de privacidad para suscribirte.')
+      return
+    }
+    setError('')
+    setSubmitted(true)
+  }
 
   return (
     <footer className="footer">
@@ -33,47 +45,64 @@ function Footer() {
               ¡Apuntado! Te avisaremos pronto.
             </p>
           ) : (
-            <form
-              className="footer__form"
-              onSubmit={(e) => { e.preventDefault(); setSubmitted(true) }}
-            >
-              <input
-                type="email"
-                className="footer__input"
-                placeholder="Correo electrónico *"
-                aria-label="Correo electrónico"
-                required
-              />
-              <button
-                type="submit"
-                className="footer__submit"
-                aria-label="Suscribirse"
-              >
-                <IconArrowRight size={18} stroke={2} />
-              </button>
-            </form>
+            <>
+              <form className="footer__form" onSubmit={handleSubmit}>
+                <input
+                  type="email"
+                  className="footer__input"
+                  placeholder="Correo electrónico *"
+                  aria-label="Correo electrónico"
+                  required
+                />
+                <button
+                  type="submit"
+                  className="footer__submit"
+                  aria-label="Suscribirse"
+                >
+                  <IconArrowRight size={18} stroke={2} />
+                </button>
+              </form>
+              <label className="footer__consent">
+                <input
+                  ref={consentRef}
+                  type="checkbox"
+                  className="footer__consent-check"
+                />
+                <span className="footer__consent-text">
+                  Acepto la{' '}
+                  <Link to="/privacidad" className="footer__consent-link">
+                    política de privacidad
+                  </Link>
+                </span>
+              </label>
+              {error && <p className="footer__newsletter-error">{error}</p>}
+            </>
           )}
         </div>
 
         <div className="footer__help">
           <span className="footer__col-title">¿Hablamos?</span>
-          <a
-            href="https://wa.me/34699820954"
-            className="footer__help-item"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <span className="footer__help-icon">
-              <IconBrandWhatsapp size={20} stroke={1.5} />
-            </span>
-            +34 699 820 954
-          </a>
-          <a href="tel:+34699820954" className="footer__help-item">
-            <span className="footer__help-icon">
-              <IconPhone size={20} stroke={1.5} />
-            </span>
-            +34 699 820 954
-          </a>
+          <div className="footer__help-contact">
+            <span className="footer__help-number">+34 699 820 954</span>
+            <div className="footer__help-actions">
+              <a
+                href="https://wa.me/34699820954"
+                className="footer__help-action"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Contactar por WhatsApp"
+              >
+                <IconBrandWhatsapp size={18} stroke={1.5} />
+              </a>
+              <a
+                href="tel:+34699820954"
+                className="footer__help-action"
+                aria-label="Llamar por teléfono"
+              >
+                <IconPhone size={18} stroke={1.5} />
+              </a>
+            </div>
+          </div>
         </div>
 
         <nav className="footer__col" aria-label="Experiencias">
@@ -91,10 +120,10 @@ function Footer() {
 
         <nav className="footer__col" aria-label="Kaiten">
           <span className="footer__col-title">Kaiten</span>
-          <Link to="/historia" className="footer__link">Historia</Link>
-          <Link to="/valores" className="footer__link">Valores</Link>
+          <Link to="/nosotros" className="footer__link">Nosotros</Link>
           <Link to="/tarifas" className="footer__link">Tarifas</Link>
           <Link to="/niveles" className="footer__link">Niveles</Link>
+          <Link to="/faq" className="footer__link">Preguntas frecuentes</Link>
           <Link to="/reservas" className="footer__link">Reservas</Link>
         </nav>
       </div>
@@ -102,7 +131,7 @@ function Footer() {
       <div className="footer__cta">
         <p className="footer__cta-text">¿Listo para empezar?</p>
         <Link to="/reservas" className="footer__cta-btn">
-          Reserva tu clase
+          Reservar
           <IconArrowRight size={16} stroke={2} />
         </Link>
       </div>

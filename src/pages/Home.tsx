@@ -1,6 +1,7 @@
 import Navbar from '../components/Navbar'
 import Hero from '../components/Hero'
 import Experiences from '../components/Experiences'
+import Reviews from '../components/Reviews'
 import Footer from '../components/Footer'
 import './Home.css'
 
@@ -12,6 +13,7 @@ function Home() {
         <Hero />
       </section>
       <Experiences />
+      <Reviews />
       <Footer />
     </div>
   )

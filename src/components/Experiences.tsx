@@ -51,7 +51,7 @@ function Experiences() {
           <h2 className="experiences__title">
             Encuentra tu forma
             <br />
-            de esquiar.
+            de esquiar
           </h2>
         </div>
         <div className="experiences__aside">

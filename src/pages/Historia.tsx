@@ -45,7 +45,7 @@ function Historia() {
               <h2 className="historia__origin-title">
                 El origen
                 <br />
-                de KAITEN.
+                de KAITEN
               </h2>
               <p className="historia__paragraph historia__paragraph-origin">
                 No nacimos para crear otra escuela de esquí.
@@ -59,7 +59,7 @@ function Historia() {
 
           <div className="historia__card historia__card--dark">
             <h3 className="historia__card-title">
-              Todo comenzó en el Valle de Arán.
+              Todo comenzó en el Valle de Arán
             </h3>
           </div>
 
@@ -90,7 +90,7 @@ function Historia() {
           </span>
           <span className="historia__brand-kanji">回転</span>
           <span className="historia__brand-tagline">
-            Revolución. Cambio. Evolución.
+            Revolución. Cambio. Evolución
           </span>
         </div>
         <div className="historia__brand-aside">
@@ -107,7 +107,7 @@ function Historia() {
         <div className="historia__story-text">
           <div className="historia__story-block">
             <p className="historia__eyebrow">Todo comenzó</p>
-            <h2 className="historia__story-title">Con una elección.</h2>
+            <h2 className="historia__story-title">Con una elección</h2>
             <p className="historia__paragraph">
               Decidí dejar atrás la vida en la ciudad, la rutina, los horarios y
               la sensación de que el tiempo se escapa.
@@ -128,7 +128,7 @@ function Historia() {
           <div className="historia__story-block">
             <p className="historia__eyebrow">Seis años de evolución</p>
             <h2 className="historia__story-title">
-              Aprender. Crecer. Evolucionar.
+              Aprender. Crecer. Evolucionar
             </h2>
             <p className="historia__paragraph">
               Durante estos años completé mi formación como TD3 de Esquí Alpino,
@@ -143,7 +143,7 @@ function Historia() {
 
           <div className="historia__story-block">
             <p className="historia__eyebrow">La palabra que lo cambió todo</p>
-            <h2 className="historia__story-title">Kaiten (回転).</h2>
+            <h2 className="historia__story-title">Kaiten (回転)</h2>
             <p className="historia__paragraph">
               En Japón encontré una palabra que resumía exactamente lo que
               estaba viviendo.
@@ -159,7 +159,7 @@ function Historia() {
               Nada de esto sería posible sin Naiara
             </p>
             <h2 className="historia__story-title">
-              Ella está detrás de todo lo que no se ve.
+              Ella está detrás de todo lo que no se ve
             </h2>
             <p className="historia__paragraph">
               Naiara ha sido mi compañera en este viaje. La que sostiene lo
@@ -194,7 +194,7 @@ function Historia() {
         <div className="historia__manifesto-heading">
           <p className="historia__eyebrow">Más que una escuela</p>
           <h2 className="historia__manifesto-title">
-            Es una manera de entender la montaña.
+            Es una manera de entender la montaña
           </h2>
           <img
             className="historia__manifesto-mark"

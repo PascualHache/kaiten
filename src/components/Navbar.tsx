@@ -12,8 +12,7 @@ import PromoBanner from "./PromoBanner";
 import "./Navbar.css";
 
 const NAV_LINKS = [
-  { to: "/historia", label: "Historia" },
-  { to: "/valores", label: "Valores" },
+  { to: "/nosotros", label: "Nosotros" },
   { to: "/reservas", label: "Reservas" },
   { to: "/tarifas", label: "Tarifas" },
   { to: "/niveles", label: "Niveles" },
@@ -72,7 +71,7 @@ function Navbar() {
             ))}
           </nav>
           <Link to="/reservas" className="navbar__reserve-btn">
-            RESERVA
+            Reservar
           </Link>
           <button
             type="button"

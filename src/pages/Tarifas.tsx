@@ -3,13 +3,16 @@ import Footer from "../components/Footer";
 import { TARIFFS } from "../data/tariffs";
 import { SERVICES } from "../data/services";
 import fallbackImage from "../assets/images/kaiten_bg.png";
+import halfDayImage from "../assets/images/historia_full.png";
 import "./Tarifas.css";
+
+const CAL_USERNAME = "aitor-bellver-abenoza-ofg9rm";
 
 const privadas = TARIFFS.filter((t) => t.category === "privada");
 const especiales = TARIFFS.filter((t) => t.category === "especial");
 
-/** Image of the activity/service a tariff belongs to (falls back to a placeholder). */
-function tariffImage(slug: string): string {
+function tariffImage(id: string, slug: string): string {
+  if (id === "half-day") return halfDayImage;
   const service = SERVICES.find(
     (s) => s.reservasPath.replace("/reservas/", "") === slug,
   );
@@ -31,14 +34,14 @@ function TariffColumn({
           <article key={t.id} className="tariff-card">
             <div className="tariff-card__media">
               <img
-                src={tariffImage(t.slug)}
+                src={tariffImage(t.id, t.slug)}
                 alt=""
                 loading="lazy"
                 decoding="async"
               />
             </div>
             <div className="tariff-card__body">
-              <span className="tariff-card__number">{t.number}</span>
+              <span className="tariff-card__number" aria-hidden="true">{t.number}</span>
               <h3 className="tariff-card__title">
                 {t.title}
                 {t.subtitle && (
@@ -52,15 +55,26 @@ function TariffColumn({
                   </li>
                 ))}
               </ul>
-              <p className="tariff-card__price">
-                {t.price}
-                {t.priceNote && (
-                  <span className="tariff-card__price-note">
-                    {" "}
-                    {t.priceNote}
-                  </span>
-                )}
-              </p>
+              <div className="tariff-card__footer">
+                <p className="tariff-card__price">
+                  {t.price}
+                  {t.priceNote && (
+                    <span className="tariff-card__price-note">
+                      {" "}
+                      {t.priceNote}
+                    </span>
+                  )}
+                </p>
+                <button
+                  type="button"
+                  className="tariff-card__reserve"
+                  data-cal-namespace={t.slug}
+                  data-cal-link={`${CAL_USERNAME}/${t.slug}`}
+                  data-cal-config='{"theme":"light"}'
+                >
+                  Reservar
+                </button>
+              </div>
             </div>
           </article>
         ))}
@@ -75,6 +89,12 @@ function Tarifas() {
       <Navbar />
 
       <main className="tarifas__sheet">
+        <p className="tarifas__eyebrow">Baqueira Beret</p>
+        <h1 className="tarifas__page-title">Tarifas</h1>
+        <p className="tarifas__includes">
+          Todas las experiencias incluyen: Instructor titulado · Seguro de RC ·
+          Atención personalizada
+        </p>
         <section className="tarifas__grid">
           <TariffColumn heading="Experiencias privadas" items={privadas} />
           <TariffColumn heading="Experiencias especiales" items={especiales} />

@@ -1,5 +1,6 @@
 :root {
   --navbar-height: 3.25rem;
+  --content-max-width: 1400px;
 
   /* Typography */
   --font-heading: 'Poppins', system-ui, sans-serif;
@@ -8,6 +9,7 @@
   /* Brand palette */
   --color-cream: #E6E5E1;
   --color-lavender: #857F9D;
+  --color-lavender-dark: #4e4966; /* AA-contrast for small text */
   --color-sage: #99A28F;
   --color-forest: #1D2B00;
   --color-lime: #A5D900;
@@ -62,4 +64,16 @@ img {
   max-width: 100%;
   height: auto;
   display: block;
+}
+
+/* Accessible focus ring for keyboard navigation */
+:focus-visible {
+  outline: 2px solid var(--color-lavender);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+/* Remove default focus ring (replaced by :focus-visible above) */
+:focus:not(:focus-visible) {
+  outline: none;
 }
