@@ -61,7 +61,7 @@
   margin: 0;
   font-size: 0.9rem;
   font-weight: 600;
-  color: var(--color-lavender);
+  color: var(--color-lavender-dark);
   padding: 0.9rem 1rem;
   background-color: rgba(133, 127, 157, 0.12);
   border-radius: 0.5rem;
@@ -89,7 +89,7 @@
 }
 
 .footer__consent-link {
-  color: var(--color-lavender);
+  color: var(--color-lavender-dark);
   text-decoration: underline;
   text-underline-offset: 2px;
 }

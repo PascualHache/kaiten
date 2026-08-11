@@ -115,7 +115,7 @@ function Experiences() {
                 loading="lazy"
                 decoding="async"
               />
-              <span className="experience-card__number">
+              <span className="experience-card__number" aria-hidden="true">
                 {String(i + 1).padStart(2, '0')}
               </span>
               <div className="experience-card__body">

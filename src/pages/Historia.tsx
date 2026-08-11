@@ -14,6 +14,10 @@ function Historia() {
 
       {/* Intro statement */}
       <section className="historia__intro">
+        <div className="historia__page-header">
+          <p className="historia__eyebrow">Kaiten</p>
+          <h1 className="historia__page-title">Nuestra historia</h1>
+        </div>
         <div className="historia__lead-box">
           <p className="historia__lead">
             <em>The Kaiten Line</em> es el estado mental en el que la técnica

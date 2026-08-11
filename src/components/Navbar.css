@@ -36,7 +36,7 @@
   display: flex;
   align-items: center;
   gap: 0.375rem;
-  color: var(--color-lavender);
+  color: var(--color-lavender-dark);
   text-decoration: none;
   font-size: 0.875rem;
   font-weight: 400;
@@ -48,11 +48,11 @@
 
 .navbar__link:hover {
   opacity: 0.7;
-  color: var(--color-lavender);
+  color: var(--color-lavender-dark);
 }
 
 .navbar__link--phone {
-  color: var(--color-lavender);
+  color: var(--color-lavender-dark);
 }
 
 .navbar__phone-text {
@@ -66,7 +66,7 @@
   gap: 0.375rem;
   background: none;
   border: none;
-  color: var(--color-lavender);
+  color: var(--color-lavender-dark);
   font-size: 0.875rem;
   cursor: pointer;
   padding: 0.25rem 0;
@@ -83,7 +83,7 @@
   align-items: center;
   background: none;
   border: none;
-  color: var(--color-lavender);
+  color: var(--color-lavender-dark);
   cursor: pointer;
   padding: 0.25rem;
   transition: opacity 0.2s;
@@ -146,7 +146,7 @@
   font-size: 0.8rem;
   font-weight: 500;
   letter-spacing: 0.04em;
-  color: var(--color-lavender);
+  color: var(--color-lavender-dark);
   text-decoration: none;
   border-radius: 0.25rem;
   transition: background-color 0.2s, color 0.2s;
@@ -154,7 +154,7 @@
 
 .navbar__nav-link:hover {
   background-color: rgba(133, 127, 157, 0.1);
-  color: var(--color-lavender);
+  color: var(--color-lavender-dark);
 }
 
 .navbar__nav-link--active {
@@ -200,7 +200,7 @@
 }
 
 .navbar__menu-item--active {
-  color: var(--color-lavender);
+  color: var(--color-lavender-dark);
   font-weight: 700;
   border-left: 2px solid var(--color-lavender);
   padding-left: calc(1.5rem - 2px);

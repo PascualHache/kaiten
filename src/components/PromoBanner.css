@@ -12,7 +12,7 @@
 }
 
 .promo-banner:hover {
-  background-color: var(--color-green);
+  background-color: #b6f352;
   color: var(--color-forest);
 }
 

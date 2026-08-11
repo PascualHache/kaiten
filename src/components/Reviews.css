@@ -17,7 +17,7 @@
   font-size: 0.75rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--color-lavender);
+  color: var(--color-lavender-dark);
 }
 
 .reviews__title {

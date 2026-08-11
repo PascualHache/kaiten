@@ -16,7 +16,7 @@
   font-size: 0.75rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--color-lavender);
+  color: var(--color-lavender-dark);
 }
 
 .reservas__titulo {
@@ -52,7 +52,7 @@
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--color-lavender);
+  color: var(--color-lavender-dark);
   white-space: nowrap;
 }
 
@@ -110,7 +110,7 @@ tbody tr:first-child .reservas__outer-cell {
 
 .reservas__col-price {
   font-weight: 700;
-  color: var(--color-lavender);
+  color: var(--color-lavender-dark);
   white-space: nowrap;
 }
 
@@ -124,7 +124,7 @@ tbody tr:first-child .reservas__outer-cell {
   background-color: transparent;
   border: 1px solid rgba(133, 127, 157, 0.4);
   border-radius: 2rem;
-  color: var(--color-lavender);
+  color: var(--color-lavender-dark);
   font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.04em;
