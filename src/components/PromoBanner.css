@@ -12,8 +12,14 @@
 }
 
 .promo-banner:hover {
-  background-color: var(--color-green);
+  background-color: #b6f352;
   color: var(--color-forest);
+}
+
+.promo-banner__icon {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
 }
 
 .promo-banner__text {

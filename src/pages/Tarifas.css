@@ -7,7 +7,7 @@
 
 /* Sheet frame */
 .tarifas__sheet {
-  width: min(72rem, 100% - clamp(2rem, 6vw, 5rem) * 2);
+  width: min(var(--content-max-width), 100% - clamp(2rem, 6vw, 5rem) * 2);
   margin: clamp(1rem, 3vw, 2.5rem) auto;
   padding: clamp(0.75rem, 2vw, 1.25rem) clamp(1.5rem, 4vw, 3rem) clamp(1.5rem, 4vw, 3rem);
 }
@@ -26,6 +26,36 @@
   color: rgba(29, 43, 0, 0.55);
 }
 
+/* Page heading */
+.tarifas__eyebrow {
+  margin: 0 0 0.5rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-lavender-dark);
+}
+
+.tarifas__page-title {
+  margin: 0 0 1.5rem;
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--color-forest);
+}
+
+/* Common includes line */
+.tarifas__includes {
+  margin: 0 0 1.5rem;
+  padding: 0.85rem 1.25rem;
+  background-color: rgba(133, 127, 157, 0.1);
+  border-left: 3px solid var(--color-lavender);
+  border-radius: 0 0.5rem 0.5rem 0;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--color-lavender-dark);
+}
+
 /* Tariff grid */
 .tarifas__grid {
   display: grid;
@@ -40,7 +70,7 @@
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--color-lavender);
+  color: var(--color-lavender-dark);
 }
 
 .tarifas__cards {
@@ -86,7 +116,7 @@
 .tariff-card__number {
   font-size: 0.85rem;
   font-weight: 700;
-  color: var(--color-lavender);
+  color: var(--color-lavender-dark);
 }
 
 .tariff-card__title {
@@ -128,17 +158,44 @@
   left: 0;
 }
 
+.tariff-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: auto;
+}
+
 .tariff-card__price {
-  margin: auto 0 0;
-  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-size: clamp(1.35rem, 2.5vw, 1.75rem);
   font-weight: 700;
   color: var(--color-lavender);
+  margin: 0;
 }
 
 .tariff-card__price-note {
   font-size: 0.8rem;
   font-weight: 500;
   color: rgba(29, 43, 0, 0.6);
+}
+
+.tariff-card__reserve {
+  flex-shrink: 0;
+  padding: 0.5rem 1rem;
+  background-color: var(--color-lavender);
+  color: var(--color-cream);
+  border: none;
+  border-radius: 0.3rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  font-family: inherit;
+  transition: opacity 0.2s;
+}
+
+.tariff-card__reserve:hover {
+  opacity: 0.88;
 }
 
 /* Niveles */
@@ -230,6 +287,35 @@
   text-transform: uppercase;
   letter-spacing: 0.02em;
   color: rgba(29, 43, 0, 0.65);
+}
+
+/* 4-column layout for page with actions */
+.niveles-table__row--4col {
+  grid-template-columns: 6rem 1.5fr 1fr auto;
+}
+
+.niveles-table__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.niveles-table__link {
+  display: inline-block;
+  padding: 0.25rem 0.6rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  background-color: rgba(133, 127, 157, 0.12);
+  color: var(--color-lavender);
+  border-radius: 0.3rem;
+  border: 1px solid rgba(133, 127, 157, 0.3);
+  transition: background-color 0.2s;
+  white-space: nowrap;
+}
+
+.niveles-table__link:hover {
+  background-color: rgba(133, 127, 157, 0.22);
 }
 
 /* Responsive */

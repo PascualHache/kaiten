@@ -11,6 +11,10 @@ function Equipo() {
     <div className="equipo">
       <Navbar />
 
+      <header className="equipo__header">
+        <p className="equipo__eyebrow">Nuestro equipo</p>
+        <h1 className="equipo__title">Los que hacen posible Kaiten</h1>
+      </header>
       <section className="equipo__grid">
         {TEAM.map((m) => (
           <article key={m.id} className="member">
@@ -34,7 +38,7 @@ function Equipo() {
                 />
               </div>
               <Link to="/reservas" className="member__reserve">
-                RESERVA
+                Reservar
               </Link>
             </div>
 
@@ -60,7 +64,7 @@ function Equipo() {
               </div>
 
               <Link to="/reservas" className="member__reserve">
-                RESERVA
+                Reservar
               </Link>
             </div>
           </article>

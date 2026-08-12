@@ -33,7 +33,7 @@ export const SERVICES: Service[] = [
   {
     id: "friends-family",
     title: "Kids & Friends & Family",
-    tagline: "Disfrutad juntos, al mismo nivel.",
+    tagline: "Disfrutad juntos, al mismo nivel",
     description:
       "Experiencia de esquí en grupo pensada para amigos o familia, donde combinas aprendizaje, diversión y la comodidad de estar acompañado por los tuyos. Cada persona progresa a su ritmo dentro de una dinámica flexible.",
     image: clasesFriendsFamily,
@@ -55,7 +55,7 @@ export const SERVICES: Service[] = [
   {
     id: "tardeo",
     title: "Tardeo (-15%)",
-    tagline: "Esquí de tarde, más por menos.",
+    tagline: "Esquí de tarde, más por menos",
     description:
       "Disfruta de Baqueira Beret en horario de tarde, cuando la estación está más despejada y el ritmo es más relajado. Mejor luz, menos afluencia y una tarifa especial con un 15% de descuento.",
     image: clasesTardeo,
@@ -65,7 +65,7 @@ export const SERVICES: Service[] = [
   },
   {
     id: "full-half-day",
-    title: "Full o half day",
+    title: "Full Day",
     tagline: "Una jornada completa de esquí",
     description:
       "Una jornada completa o media jornada de esquí intensivo en Baqueira Beret. Técnica, práctica y recorrido de estación, siempre acompañado por un profesional adaptado a tu ritmo.",
@@ -98,8 +98,8 @@ export const SERVICES: Service[] = [
   },
   {
     id: "equipment-consultancy",
-    title: "Equipment Consultancy",
-    tagline: "Te ayudamos a elegir lo que mejor va contigo.",
+    title: "Asesoramiento de Material",
+    tagline: "Te ayudamos a elegir lo que mejor va contigo",
     description:
       "Asesoramiento online personalizado para comprar el material de ski que realmente necesitas: buscamos, comparamos y te decimos qué y dónde comprar según tu nivel y presupuesto.",
     image: clasesEquipment,

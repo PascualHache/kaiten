@@ -1,134 +1,177 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { Link } from 'react-router-dom'
-import {
-  IconArrowRight,
-  IconBrandWhatsapp,
-  IconBrandInstagram,
-  IconPhone,
-} from '@tabler/icons-react'
-import { SERVICES } from '../data/services'
-import logoText from '../assets/logos/logo_text.png'
+import { IconArrowRight } from '@tabler/icons-react'
 import './Footer.css'
+
+const EXPERIENCES = [
+  { label: 'Clases Privadas', hash: 'clases-particulares-en-baqueira' },
+  { label: 'Kids & Friends & Family', hash: 'friends-family' },
+  { label: 'Kaiten Programs', hash: 'experiencia-kaiten-2.5' },
+  { label: 'Tardeo (-15%)', hash: 'experiencia-de-tardeo-20' },
+  { label: 'Full Day · Safari · Freeride', hash: '' },
+  { label: 'Asesoramiento de material', hash: 'asesoramiento-compra-material-ski' },
+]
+
+const NAV_LINKS = [
+  { label: 'Nosotros', to: '/nosotros' },
+  { label: 'Tarifas', to: '/tarifas' },
+  { label: 'Niveles', to: '/niveles' },
+  { label: 'Preguntas frecuentes', to: '/faq' },
+  { label: 'Reservas', to: '/reservas' },
+]
 
 function Footer() {
   const [submitted, setSubmitted] = useState(false)
+  const [error, setError] = useState('')
+  const consentRef = useRef<HTMLInputElement>(null)
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!consentRef.current?.checked) {
+      setError('Debes aceptar la política de privacidad para suscribirte.')
+      return
+    }
+    setError('')
+    setSubmitted(true)
+  }
 
   return (
     <footer className="footer">
-      <div className="footer__brand">
-        <Link to="/" className="footer__brand-logo">
-          <img src={logoText} alt="Kaiten" className="footer__brand-logo-img" />
-        </Link>
-        <p className="footer__brand-sub">Escuela de esquí · Valle de Arán</p>
-      </div>
 
-      <div className="footer__top">
-        <div className="footer__newsletter">
-          <p className="footer__newsletter-text">
-            Suscríbete para recibir novedades, ofertas y partes de nieve antes
-            que nadie.
-          </p>
-          {submitted ? (
-            <p className="footer__newsletter-success">
-              ¡Apuntado! Te avisaremos pronto.
-            </p>
-          ) : (
-            <form
-              className="footer__form"
-              onSubmit={(e) => { e.preventDefault(); setSubmitted(true) }}
-            >
-              <input
-                type="email"
-                className="footer__input"
-                placeholder="Correo electrónico *"
-                aria-label="Correo electrónico"
-                required
-              />
-              <button
-                type="submit"
-                className="footer__submit"
-                aria-label="Suscribirse"
-              >
-                <IconArrowRight size={18} stroke={2} />
-              </button>
-            </form>
-          )}
-        </div>
-
-        <div className="footer__help">
-          <span className="footer__col-title">¿Hablamos?</span>
-          <a
-            href="https://wa.me/34699820954"
-            className="footer__help-item"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <span className="footer__help-icon">
-              <IconBrandWhatsapp size={20} stroke={1.5} />
-            </span>
-            +34 699 820 954
-          </a>
-          <a href="tel:+34699820954" className="footer__help-item">
-            <span className="footer__help-icon">
-              <IconPhone size={20} stroke={1.5} />
-            </span>
-            +34 699 820 954
-          </a>
-        </div>
-
-        <nav className="footer__col" aria-label="Experiencias">
-          <span className="footer__col-title">Experiencias</span>
-          {SERVICES.map((service) => (
-            <Link
-              key={service.id}
-              to={service.reservasPath.replace('/reservas/', '/reservas#')}
-              className="footer__link"
-            >
-              {service.title}
-            </Link>
-          ))}
-        </nav>
-
-        <nav className="footer__col" aria-label="Kaiten">
-          <span className="footer__col-title">Kaiten</span>
-          <Link to="/historia" className="footer__link">Historia</Link>
-          <Link to="/valores" className="footer__link">Valores</Link>
-          <Link to="/tarifas" className="footer__link">Tarifas</Link>
-          <Link to="/niveles" className="footer__link">Niveles</Link>
-          <Link to="/reservas" className="footer__link">Reservas</Link>
-        </nav>
-      </div>
-
+      {/* ─── CTA strip ─────────────────────────────────────── */}
       <div className="footer__cta">
-        <p className="footer__cta-text">¿Listo para empezar?</p>
-        <Link to="/reservas" className="footer__cta-btn">
-          Reserva tu clase
-          <IconArrowRight size={16} stroke={2} />
-        </Link>
+        <div className="footer__cta-left">
+          <p className="footer__cta-eyebrow">Temporada 2026 · 27</p>
+          <h2 className="footer__cta-heading">¿Listo para empezar?</h2>
+          <p className="footer__cta-sub">
+            Elige a tu profesor y reserva tu primera clase en menos de dos minutos.
+          </p>
+        </div>
+        <div className="footer__cta-actions">
+          <Link to="/reservas" className="footer__cta-btn footer__cta-btn--primary">
+            Reservar
+            <IconArrowRight size={16} stroke={2} />
+          </Link>
+          <a href="tel:+34699820954" className="footer__cta-btn footer__cta-btn--outline">
+            Llámanos
+          </a>
+        </div>
       </div>
 
-      <div className="footer__bottom">
-        <div className="footer__legal-row">
-          <div className="footer__legal">
-            <span>© {new Date().getFullYear()} Kaiten</span>
-            <Link to="/terminos">Términos y condiciones</Link>
-            <Link to="/privacidad">Política de privacidad</Link>
-            <Link to="/aviso-legal">Aviso legal</Link>
-            <Link to="/cookies">Cookies</Link>
+      <div className="footer__divider" />
+
+      {/* ─── Body grid ─────────────────────────────────────── */}
+      <div className="footer__body">
+
+        {/* Brand */}
+        <div className="footer__brand">
+          <Link to="/" className="footer__brand-name">KAITEN</Link>
+          <p className="footer__brand-desc">
+            La primera escuela de Baqueira Beret donde eliges a tu profesor antes de reservar.
+          </p>
+          <div className="footer__contact">
+            <a href="tel:+34699820954" className="footer__contact-item">+34 699 820 954</a>
+            <a href="mailto:hola@kaiten.es" className="footer__contact-item">hola@kaiten.es</a>
+            <span className="footer__contact-item">Baqueira Beret · Val d'Aran</span>
           </div>
           <div className="footer__socials">
             <a
               href="https://instagram.com/kaiten"
-              className="footer__social"
+              className="footer__social-pill"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Instagram"
             >
-              <IconBrandInstagram size={20} stroke={1.5} />
+              IG
             </a>
+            <a
+              href="https://wa.me/34699820954"
+              className="footer__social-pill"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="WhatsApp"
+            >
+              WA
+            </a>
+            <span className="footer__social-pill" aria-label="Valoración 5 de 5 en Google">★ 5.0</span>
           </div>
         </div>
+
+        {/* Experiencias */}
+        <nav className="footer__col" aria-label="Experiencias">
+          <span className="footer__col-title">Experiencias</span>
+          {EXPERIENCES.map((e) => (
+            <Link
+              key={e.label}
+              to={e.hash ? `/reservas#${e.hash}` : '/reservas'}
+              className="footer__link"
+            >
+              {e.label}
+            </Link>
+          ))}
+        </nav>
+
+        {/* Kaiten nav */}
+        <nav className="footer__col" aria-label="Kaiten">
+          <span className="footer__col-title">Kaiten</span>
+          {NAV_LINKS.map((l) => (
+            <Link key={l.to} to={l.to} className="footer__link">
+              {l.label}
+            </Link>
+          ))}
+        </nav>
+
+        {/* Newsletter */}
+        <div className="footer__newsletter">
+          <span className="footer__col-title">Partes de nieve</span>
+          <p className="footer__newsletter-text">
+            Novedades, ofertas y partes de nieve antes que nadie. Sin spam, solo nieve.
+          </p>
+          {submitted ? (
+            <p className="footer__newsletter-success">¡Apuntado! Te avisaremos pronto.</p>
+          ) : (
+            <>
+              <form className="footer__form" onSubmit={handleSubmit}>
+                <input
+                  type="email"
+                  className="footer__input"
+                  placeholder="Correo electrónico"
+                  aria-label="Correo electrónico"
+                  required
+                />
+                <button type="submit" className="footer__submit" aria-label="Suscribirse">
+                  <IconArrowRight size={18} stroke={2} />
+                </button>
+              </form>
+              <label className="footer__consent">
+                <input ref={consentRef} type="checkbox" className="footer__consent-check" />
+                <span className="footer__consent-text">
+                  Acepto la{' '}
+                  <Link to="/privacidad" className="footer__consent-link">
+                    política de privacidad
+                  </Link>
+                </span>
+              </label>
+              {error && <p className="footer__newsletter-error">{error}</p>}
+            </>
+          )}
+        </div>
       </div>
+
+      {/* ─── Legal ─────────────────────────────────────────── */}
+      <div className="footer__bottom">
+        <div className="footer__legal">
+          <span>© {new Date().getFullYear()} Kaiten</span>
+          <Link to="/terminos">Términos y condiciones</Link>
+          <Link to="/privacidad">Política de privacidad</Link>
+          <Link to="/aviso-legal">Aviso legal</Link>
+          <Link to="/cookies">Cookies</Link>
+        </div>
+      </div>
+
+      {/* ─── Watermark ─────────────────────────────────────── */}
+      <div className="footer__watermark" aria-hidden="true">KAITEN</div>
+
     </footer>
   )
 }

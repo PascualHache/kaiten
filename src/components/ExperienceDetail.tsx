@@ -35,7 +35,7 @@ export default function ExperienceDetail({ activity }: Props) {
         <div className="exp-detail__features">
           {activity.features.map((f, i) => (
             <div key={i} className="exp-detail__feature">
-              <span className="exp-detail__feature-num">
+              <span className="exp-detail__feature-num" aria-hidden="true">
                 {String(i + 1).padStart(2, '0')}
               </span>
               <h4 className="exp-detail__feature-title">{f.title}</h4>

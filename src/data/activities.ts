@@ -41,7 +41,7 @@ export const ACTIVITIES: Activity[] = [
   {
     id: 'full-day',
     calSlug: 'full-day-half-day-en-baqueira',
-    title: 'Full Day | Half Day en Baqueira',
+    title: 'Full Day | Half Day',
     color: 'verde',
     features: [
       {
@@ -106,13 +106,13 @@ export const ACTIVITIES: Activity[] = [
     cta: {
       headline: 'Un día para mejorar de verdad',
       subline: 'Esquí, progresión y disfrute en una experiencia completamente personalizada en Baqueira.',
-      buttonText: 'Reserva tu Full Day / Half Day',
+      buttonText: 'Reservar',
     },
   },
   {
     id: 'safari',
     calSlug: 'safari-en-baqueira',
-    title: 'Safari en Baqueira',
+    title: 'Safari',
     color: 'verde',
     features: [
       {
@@ -159,13 +159,13 @@ export const ACTIVITIES: Activity[] = [
     cta: {
       headline: 'Descubre Baqueira como un local',
       subline: '',
-      buttonText: 'Reserva tu Safari',
+      buttonText: 'Reservar',
     },
   },
   {
     id: 'clases-particulares',
     calSlug: 'clases-particulares-en-baqueira',
-    title: 'Clases Particulares en Baqueira',
+    title: 'Clases Privadas',
     color: 'verde',
     features: [
       {
@@ -210,13 +210,13 @@ export const ACTIVITIES: Activity[] = [
     cta: {
       headline: 'Aprende más en menos tiempo',
       subline: 'Más confianza, más control y una evolución real en cada sesión.',
-      buttonText: 'Reserva tu clase particular',
+      buttonText: 'Reservar',
     },
   },
   {
     id: 'freeride',
     calSlug: 'freeride-en-baqueira',
-    title: 'Freeride en Baqueira',
+    title: 'Freeride',
     color: 'naranja',
     features: [
       {
@@ -268,13 +268,13 @@ export const ACTIVITIES: Activity[] = [
     cta: {
       headline: 'Vive la montaña de otra forma',
       subline: 'Sensación de libertad, líneas únicas y la experiencia de esquiar la nieve más pura de Baqueira Beret.',
-      buttonText: 'Reserva tu Freeride',
+      buttonText: 'Reservar',
     },
   },
   {
     id: 'friends-family',
     calSlug: 'friends-family',
-    title: 'Kids & Friends & Family en Baqueira',
+    title: 'Kids & Friends & Family',
     color: 'verde',
     features: [
       {
@@ -335,13 +335,13 @@ export const ACTIVITIES: Activity[] = [
     cta: {
       headline: 'Comparte la nieve con los tuyos',
       subline: 'Aprende, mejora y disfruta en grupo con una experiencia flexible, divertida y totalmente adaptada.',
-      buttonText: 'Reserva tu Friends & Family',
+      buttonText: 'Reservar',
     },
   },
   {
     id: 'tardeo',
     calSlug: 'experiencia-de-tardeo-20',
-    title: 'Experiencia Tardeo -15% en Baqueira',
+    title: 'Tardeo (-15%)',
     color: 'verde',
     features: [
       {
@@ -388,7 +388,7 @@ export const ACTIVITIES: Activity[] = [
     cta: {
       headline: 'Esquí con más calma y mejores sensaciones',
       subline: 'Menos colas, más fluidez y una experiencia más relajada en Baqueira Beret.',
-      buttonText: 'Reserva tu Experiencia Tarde',
+      buttonText: 'Reservar',
     },
   },
   {
@@ -472,13 +472,13 @@ export const ACTIVITIES: Activity[] = [
     cta: {
       headline: 'Elige tu programa Kaiten',
       subline: 'Progreso real con nuestro método de mejora intensiva.',
-      buttonText: 'Reserva tu programa Kaiten',
+      buttonText: 'Reservar',
     },
   },
   {
     id: 'equipment-consultancy',
     calSlug: 'asesoramiento-compra-material-ski',
-    title: 'Asesoramiento online de compra de material de ski',
+    title: 'Asesoramiento de Material',
     color: 'verde',
     features: [
       {
@@ -527,7 +527,7 @@ export const ACTIVITIES: Activity[] = [
     cta: {
       headline: 'Equípate con las mejores decisiones',
       subline: 'Asesoramiento experto para comprar el material de ski que realmente necesitas.',
-      buttonText: 'Reserva tu asesoramiento',
+      buttonText: 'Reservar',
     },
   },
 ]

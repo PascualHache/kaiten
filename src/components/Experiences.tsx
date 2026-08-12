@@ -51,7 +51,7 @@ function Experiences() {
           <h2 className="experiences__title">
             Encuentra tu forma
             <br />
-            de esquiar.
+            de esquiar
           </h2>
         </div>
         <div className="experiences__aside">
@@ -115,7 +115,7 @@ function Experiences() {
                 loading="lazy"
                 decoding="async"
               />
-              <span className="experience-card__number">
+              <span className="experience-card__number" aria-hidden="true">
                 {String(i + 1).padStart(2, '0')}
               </span>
               <div className="experience-card__body">

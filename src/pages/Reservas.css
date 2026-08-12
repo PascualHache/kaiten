@@ -16,7 +16,7 @@
   font-size: 0.75rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--color-lavender);
+  color: var(--color-lavender-dark);
 }
 
 .reservas__titulo {
@@ -27,108 +27,208 @@
   color: var(--color-lavender);
 }
 
-/* Accordion list */
-.reservas__lista {
-  list-style: none;
+/* ─── Table shell ─────────────────────────────────────────── */
+
+.reservas__table-wrap {
+  border: 1px solid rgba(133, 127, 157, 0.2);
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+.reservas__table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* Header row */
+.reservas__thead-row {
+  background-color: rgba(133, 127, 157, 0.06);
+}
+
+.reservas__th {
+  padding: 0.75rem 1.25rem;
+  text-align: left;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-lavender-dark);
+  white-space: nowrap;
+}
+
+.reservas__th--name {
+  width: 14rem;
+}
+
+/* ─── Outer cell (wraps summary + detail) ─────────────────── */
+
+.reservas__outer-cell {
   padding: 0;
-  margin: 0;
+  /* separating line between activities */
+  border-top: 1px solid rgba(133, 127, 157, 0.15);
 }
 
-.reservas__item {
-  border-top: 1px solid rgba(17, 17, 17, 0.14);
-  scroll-margin-top: calc(var(--navbar-height) + 1rem);
-  transition: background-color 0.3s ease;
+/* Remove the top border on the very first row */
+tbody tr:first-child .reservas__outer-cell {
+  border-top: none;
 }
 
-.reservas__item:last-child {
-  border-bottom: 1px solid rgba(17, 17, 17, 0.14);
+/* ─── Summary row (the visible grid) ─────────────────────── */
+
+.reservas__summary {
+  display: grid;
+  /* match column widths from the <th> row */
+  grid-template-columns: 14rem 1fr 1fr 1fr auto auto;
+  align-items: center;
+  gap: 0;
+  padding: 0;
+  transition: background-color 0.2s;
+  cursor: default;
 }
 
-.reservas__item--open {
-  background-color: rgba(133, 127, 157, 0.05);
-  padding: 0 clamp(1rem, 2.5vw, 2rem) 1.5rem;
-  border-radius: 0.75rem;
+.reservas__summary--open {
+  background-color: rgba(133, 127, 157, 0.06);
+  border-bottom: 1px solid rgba(133, 127, 157, 0.15);
 }
 
-.reservas__item--open .reservas__row-titulo {
-  color: var(--color-lavender);
+/* Each column cell within the summary grid */
+.reservas__col-name,
+.reservas__col-dur,
+.reservas__col-pax,
+.reservas__col-level,
+.reservas__col-price {
+  padding: 1.1rem 1.25rem;
+  font-size: 0.875rem;
+  color: var(--color-forest);
+  line-height: 1.4;
 }
 
-.reservas__row {
+.reservas__col-name {
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.reservas__col-price {
+  font-weight: 700;
+  color: var(--color-lavender-dark);
+  white-space: nowrap;
+}
+
+/* "Conocer más" button */
+.reservas__expand-btn {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
-  width: 100%;
-  padding: 1.5rem 0.5rem;
-  background: none;
-  border: none;
+  gap: 0.4rem;
+  padding: 0.5rem 1.1rem 0.5rem 0.9rem;
+  margin: 0.75rem 1rem 0.75rem 0;
+  background-color: transparent;
+  border: 1px solid rgba(133, 127, 157, 0.4);
+  border-radius: 2rem;
+  color: var(--color-lavender-dark);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
   cursor: pointer;
-  text-align: left;
   font-family: inherit;
-  transition: opacity 0.2s;
-}
-
-.reservas__row:hover {
-  opacity: 0.75;
-}
-
-.reservas__row-titulo {
-  flex: 1;
-  min-width: 0;
-  font-size: clamp(1.05rem, 2vw, 1.35rem);
-  font-weight: 700;
-  color: #111;
-}
-
-.reservas__row-feature {
-  font-size: 0.85rem;
-  color: rgba(17, 17, 17, 0.6);
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 280px;
+  transition: background-color 0.2s, border-color 0.2s, color 0.2s;
 }
 
-.reservas__row-chevron {
+.reservas__expand-btn:hover {
+  background-color: rgba(133, 127, 157, 0.1);
+  border-color: var(--color-lavender);
+}
+
+.reservas__expand-chevron {
   flex-shrink: 0;
-  color: var(--color-lavender);
   transition: transform 0.3s ease;
 }
 
-.reservas__item--open .reservas__row-chevron {
+.reservas__expand-chevron--open {
   transform: rotate(180deg);
 }
 
-/* Expanding panel */
-.reservas__panel {
+/* ─── Inline detail panel ─────────────────────────────────── */
+
+.reservas__detail {
   display: grid;
   grid-template-rows: 0fr;
   transition: grid-template-rows 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.reservas__panel--open {
+.reservas__detail--open {
   grid-template-rows: 1fr;
 }
 
-.reservas__panel-inner {
+.reservas__detail-inner {
   overflow: hidden;
+  /* indent the ExperienceDetail content */
+  padding: 0 clamp(1rem, 2vw, 2rem);
 }
 
-/* Neutralize ExperienceDetail's standalone top spacing inside the accordion */
-.reservas__panel-inner .exp-detail {
+/* Adjust ExperienceDetail styles when inside the table */
+.reservas__detail-inner .exp-detail {
   margin-top: 0;
   border-top: none;
-  padding-top: 0.5rem;
+  padding-top: 1.5rem;
   padding-bottom: 2.5rem;
 }
 
-/* Title already shown in the accordion row — avoid duplicating it */
-.reservas__panel-inner .exp-detail__title {
-  display: none;
+.reservas__detail-inner .exp-detail__title {
+  display: none; /* title already visible in the summary row */
+}
+
+/* ─── Responsive helpers ──────────────────────────────────── */
+
+.reservas__hide-sm,
+.reservas__th--hide-sm {
+  /* hidden on small screens */
+}
+
+.reservas__hide-md,
+.reservas__th--hide-md {
+  /* hidden on medium screens */
+}
+
+@media (max-width: 900px) {
+  .reservas__summary {
+    grid-template-columns: 1fr auto auto auto auto auto;
+  }
+
+  .reservas__th--name {
+    width: auto;
+  }
+
+  .reservas__hide-md,
+  .reservas__th--hide-md {
+    display: none;
+  }
+
+  .reservas__summary {
+    grid-template-columns: 1fr auto auto auto auto;
+  }
 }
 
 @media (max-width: 640px) {
-  .reservas__row-feature {
+  .reservas__hide-sm,
+  .reservas__th--hide-sm {
     display: none;
+  }
+
+  .reservas__summary {
+    grid-template-columns: 1fr auto auto auto;
+  }
+
+  .reservas__col-name {
+    font-size: 0.85rem;
+  }
+
+  .reservas__expand-label {
+    display: none;
+  }
+
+  .reservas__expand-btn {
+    padding: 0.5rem 0.65rem;
+    border-radius: 50%;
   }
 }

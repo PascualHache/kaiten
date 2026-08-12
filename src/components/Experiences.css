@@ -18,7 +18,7 @@
   font-size: 0.75rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--color-lavender);
+  color: var(--color-lavender-dark);
 }
 
 .experiences__title {
@@ -41,7 +41,7 @@
   margin: 0;
   font-size: 0.9rem;
   line-height: 1.5;
-  color: var(--color-lavender);
+  color: var(--color-forest);
 }
 
 .experiences__nav {
@@ -55,7 +55,7 @@
   font-size: 0.85rem;
   font-weight: 600;
   letter-spacing: 0.05em;
-  color: var(--color-lavender);
+  color: var(--color-lavender-dark);
   min-width: 2.5rem;
   text-align: center;
 }
@@ -417,7 +417,7 @@
   margin-bottom: 0.75rem;
   font-size: 0.8rem;
   font-weight: 700;
-  color: var(--color-lavender);
+  color: var(--color-lavender-dark);
 }
 
 .exp-detail__feature-title {
@@ -447,7 +447,7 @@
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--color-lavender);
+  color: var(--color-lavender-dark);
 }
 
 .exp-detail__info-list {
@@ -520,7 +520,7 @@
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--color-lavender);
+  color: var(--color-lavender-dark);
 }
 
 .exp-detail__formats-grid {
@@ -567,7 +567,7 @@
   margin: 0 0 0.75rem;
   font-size: 0.82rem;
   font-weight: 600;
-  color: var(--color-lavender);
+  color: var(--color-lavender-dark);
 }
 
 .exp-format__label {

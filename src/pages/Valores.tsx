@@ -59,7 +59,7 @@ const VALUES: ValueItem[] = [
     id: "curiosidad",
     Icon: MountainIcon,
     title: "Curiosidad",
-    tagline: "Nunca dejamos de explorar.",
+    tagline: "Nunca dejamos de explorar",
     body: "Seguimos preguntando. Seguimos aprendiendo. La montaña siempre enseña.",
     tint: "a",
   },
@@ -67,7 +67,7 @@ const VALUES: ValueItem[] = [
     id: "precision",
     Icon: WavesIcon,
     title: "Precisión",
-    tagline: "Nos importa cada detalle.",
+    tagline: "Nos importa cada detalle",
     body: "Pequeños ajustes. Grandes diferencias. Mejor cada día.",
     tint: "b",
   },
@@ -75,7 +75,7 @@ const VALUES: ValueItem[] = [
     id: "respeto",
     Icon: SpiralIcon,
     title: "Respeto",
-    tagline: "Por la montaña. Por las personas. Por el momento.",
+    tagline: "Por la montaña. Por las personas. Por el momento",
     body: "Cuidamos lo que amamos para que las futuras generaciones también puedan disfrutarlo.",
     tint: "c",
   },
@@ -83,7 +83,7 @@ const VALUES: ValueItem[] = [
     id: "estilo",
     Icon: StyleIcon,
     title: "Estilo",
-    tagline: "Menos ruido. Más intención.",
+    tagline: "Menos ruido. Más intención",
     body: "Valoramos la simplicidad, la función y el buen gusto en todo lo que hacemos.",
     tint: "d",
   },
@@ -91,7 +91,7 @@ const VALUES: ValueItem[] = [
     id: "comunidad",
     Icon: AsteriskIcon,
     title: "Comunidad",
-    tagline: "Subimos juntos.",
+    tagline: "Subimos juntos",
     body: "No somos clientes. No somos profesores. Somos personas que comparten la misma pasión.",
     tint: "c",
   },
@@ -128,7 +128,7 @@ function Valores() {
           <h1 className="valores__title">
             Lo que
             <br />
-            nos guía.
+            nos guía
           </h1>
           <Link to="/historia" className="valores__more">
             Nuestro manifiesto
@@ -157,7 +157,7 @@ function Valores() {
       {/* More than skiing */}
       <section className="valores__section valores__more-section">
         <div className="valores__more-text">
-          <h2 className="valores__big-title">Más que aprender a esquiar.</h2>
+          <h2 className="valores__big-title">Más que aprender a esquiar</h2>
           <div className="valores__more-body">
             <p className="valores__paragraph">
               En KAITEN enseñamos técnica. Pero también te ayudamos a superar
