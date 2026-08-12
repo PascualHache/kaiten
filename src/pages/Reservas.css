@@ -36,12 +36,25 @@
 }
 
 .reservas__table {
+  /* Shared column template: header row and body rows are independent grids,
+     so they only align if both use exactly these tracks (no auto sizing) */
+  --reservas-cols: 1.9fr 0.9fr 0.6fr 1.7fr 8rem 9.5rem;
+  display: block;
   width: 100%;
   border-collapse: collapse;
 }
 
+.reservas__table thead,
+.reservas__table tbody,
+.reservas__table tbody tr {
+  display: block;
+}
+
 /* Header row */
 .reservas__thead-row {
+  display: grid;
+  grid-template-columns: var(--reservas-cols);
+  align-items: center;
   background-color: rgba(133, 127, 157, 0.06);
 }
 
@@ -56,13 +69,10 @@
   white-space: nowrap;
 }
 
-.reservas__th--name {
-  width: 14rem;
-}
-
 /* ─── Outer cell (wraps summary + detail) ─────────────────── */
 
 .reservas__outer-cell {
+  display: block;
   padding: 0;
   /* separating line between activities */
   border-top: 1px solid rgba(133, 127, 157, 0.15);
@@ -77,8 +87,7 @@ tbody tr:first-child .reservas__outer-cell {
 
 .reservas__summary {
   display: grid;
-  /* match column widths from the <th> row */
-  grid-template-columns: 14rem 1fr 1fr 1fr auto auto;
+  grid-template-columns: var(--reservas-cols);
   align-items: center;
   gap: 0;
   padding: 0;
@@ -104,8 +113,19 @@ tbody tr:first-child .reservas__outer-cell {
 }
 
 .reservas__col-name {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.4rem;
   font-weight: 700;
   font-size: 0.95rem;
+}
+
+.reservas__col-level {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  gap: 0.3rem;
 }
 
 .reservas__col-price {
@@ -118,6 +138,7 @@ tbody tr:first-child .reservas__outer-cell {
 .reservas__expand-btn {
   display: flex;
   align-items: center;
+  justify-self: end;
   gap: 0.4rem;
   padding: 0.5rem 1.1rem 0.5rem 0.9rem;
   margin: 0.75rem 1rem 0.75rem 0;
@@ -191,32 +212,26 @@ tbody tr:first-child .reservas__outer-cell {
 }
 
 @media (max-width: 900px) {
-  .reservas__summary {
-    grid-template-columns: 1fr auto auto auto auto auto;
-  }
-
-  .reservas__th--name {
-    width: auto;
+  .reservas__table {
+    /* Nivel column hidden: name, duración, personas, precio, botón */
+    --reservas-cols: 1.6fr 1fr 0.7fr 7rem 9rem;
   }
 
   .reservas__hide-md,
   .reservas__th--hide-md {
     display: none;
   }
-
-  .reservas__summary {
-    grid-template-columns: 1fr auto auto auto auto;
-  }
 }
 
 @media (max-width: 640px) {
+  .reservas__table {
+    /* Personas column also hidden: name, duración, precio, botón */
+    --reservas-cols: 1.4fr 1fr 6rem 3.5rem;
+  }
+
   .reservas__hide-sm,
   .reservas__th--hide-sm {
     display: none;
-  }
-
-  .reservas__summary {
-    grid-template-columns: 1fr auto auto auto;
   }
 
   .reservas__col-name {

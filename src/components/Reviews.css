@@ -1,5 +1,5 @@
 .reviews {
-  padding: clamp(3rem, 8vw, 5rem) clamp(1.5rem, 5vw, 5rem);
+  padding: clamp(1.5rem, 3vw, 2.5rem) clamp(1.5rem, 5vw, 5rem) clamp(3rem, 8vw, 5rem);
   background-color: var(--color-cream);
 }
 

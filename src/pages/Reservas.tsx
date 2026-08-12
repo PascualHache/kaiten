@@ -2,35 +2,20 @@ import { useState, useEffect, useRef } from 'react'
 import { useLocation } from 'react-router-dom'
 import { getCalApi } from '@calcom/embed-react'
 import { IconChevronDown } from '@tabler/icons-react'
-import { ACTIVITIES } from '../data/activities'
+import {
+  ACTIVITIES,
+  EXPERIENCE_TYPE_LABELS,
+  LEVEL_LABELS,
+} from '../data/activities'
 import { TARIFFS } from '../data/tariffs'
 import ExperienceDetail from '../components/ExperienceDetail'
+import Tag from '../components/Tag'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import './Reservas.css'
 
-function getActivitySummary(activity: (typeof ACTIVITIES)[number]) {
-  const dur = activity.info.find((i) => i.label === 'Duración')
-  const pax = activity.info.find(
-    (i) => i.label === 'Participantes' || i.label === 'Tipo de grupo',
-  )
-  const nivel = activity.info.find(
-    (i) =>
-      i.label === 'Nivel y edad' ||
-      i.label === 'Nivel mínimo' ||
-      i.label === 'Nivel' ||
-      i.label === 'Niveles',
-  )
-  const tariff = TARIFFS.find((t) => t.slug === activity.calSlug)
-  const firstLine = (val: string | string[]) =>
-    Array.isArray(val) ? val[0] : val
-
-  return {
-    duration: dur ? firstLine(dur.content) : '—',
-    people: pax ? firstLine(pax.content) : '—',
-    level: nivel ? firstLine(nivel.content) : 'Todos los niveles',
-    price: tariff?.price ?? '—',
-  }
+function getActivityPrice(activity: (typeof ACTIVITIES)[number]) {
+  return TARIFFS.find((t) => t.slug === activity.calSlug)?.price ?? '—'
 }
 
 export default function Reservas() {
@@ -88,7 +73,7 @@ export default function Reservas() {
             <tbody>
               {ACTIVITIES.map((activity) => {
                 const isOpen = activity.calSlug === openSlug
-                const s = getActivitySummary(activity)
+                const price = getActivityPrice(activity)
                 return (
                   <tr key={activity.id}>
                     {/* colspan trick: we wrap data + detail in a single column cell */}
@@ -101,12 +86,24 @@ export default function Reservas() {
                         className={`reservas__summary${isOpen ? ' reservas__summary--open' : ''}`}
                         style={{ scrollMarginTop: 'calc(var(--navbar-height) + 1rem)' }}
                       >
-                        <span className="reservas__col-name">{activity.title}</span>
-                        <span className="reservas__col-dur">{s.duration}</span>
-                        <span className="reservas__col-pax reservas__hide-sm">{s.people}</span>
-                        <span className="reservas__col-level reservas__hide-md">{s.level}</span>
+                        <span className="reservas__col-name">
+                          <span className="reservas__name-text">{activity.title}</span>
+                          <Tag
+                            variant={activity.experienceType}
+                            label={EXPERIENCE_TYPE_LABELS[activity.experienceType]}
+                          />
+                        </span>
+                        <span className="reservas__col-dur">{activity.summary.duration}</span>
+                        <span className="reservas__col-pax reservas__hide-sm">
+                          {activity.summary.people}
+                        </span>
+                        <span className="reservas__col-level reservas__hide-md">
+                          {activity.levels.map((level) => (
+                            <Tag key={level} variant={level} label={LEVEL_LABELS[level]} />
+                          ))}
+                        </span>
                         <span className="reservas__col-price">
-                          {s.price !== '—' ? `Desde ${s.price}` : '—'}
+                          {price !== '—' ? `Desde ${price}` : '—'}
                         </span>
                         <button
                           type="button"

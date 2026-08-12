@@ -1,4 +1,4 @@
-import kaitenBg from "../assets/images/kaiten_bg.png";
+import clasesFullday from "../assets/images/clases_fullday.png";
 import clasesPrivadas from "../assets/images/clases_privadas.png";
 import clasesFriendsFamily from "../assets/images/clases_friends_family.png";
 import clasesKaiten25 from "../assets/images/clases_kaiten25.png";
@@ -69,7 +69,7 @@ export const SERVICES: Service[] = [
     tagline: "Una jornada completa de esquí",
     description:
       "Una jornada completa o media jornada de esquí intensivo en Baqueira Beret. Técnica, práctica y recorrido de estación, siempre acompañado por un profesional adaptado a tu ritmo.",
-    image: kaitenBg,
+    image: clasesFullday,
     backgroundColor: "var(--color-cream)",
     textColor: "#333",
     reservasPath: "/reservas/full-day-half-day-en-baqueira",

@@ -11,29 +11,69 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
+  gap: 0.75rem;
   text-align: center;
 }
 
-.wip__logo-k {
-  font-size: clamp(4rem, 12vw, 8rem);
-  font-weight: 700;
-  font-style: italic;
-  color: var(--color-lavender);
-  line-height: 1;
+.wip__logo {
+  width: clamp(9rem, 22vw, 13rem);
+  margin-bottom: 1rem;
 }
 
-.wip__title {
-  font-size: clamp(1rem, 3vw, 1.75rem);
-  font-weight: 300;
-  letter-spacing: 0.4em;
-  color: var(--color-lavender);
+.wip__eyebrow {
   margin: 0;
+  font-size: 0.75rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--color-lavender-dark);
 }
 
 .wip__subtitle {
-  font-size: 0.875rem;
-  color: rgba(133, 127, 157, 0.7);
-  letter-spacing: 0.1em;
   margin: 0;
+  max-width: 28rem;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--color-forest);
+}
+
+.wip__countdown {
+  display: flex;
+  margin-top: clamp(1.5rem, 4vw, 2.5rem);
+}
+
+.wip__count-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  min-width: clamp(4rem, 12vw, 6.5rem);
+  padding: 0 clamp(0.5rem, 2vw, 1.25rem);
+}
+
+.wip__count-unit + .wip__count-unit {
+  border-left: 1px solid rgba(133, 127, 157, 0.35);
+}
+
+.wip__count-value {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 7vw, 3.5rem);
+  font-weight: 700;
+  line-height: 1;
+  color: var(--color-lavender);
+  font-variant-numeric: tabular-nums;
+}
+
+.wip__count-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-lavender-dark);
+}
+
+.wip__date {
+  margin: clamp(1.25rem, 3vw, 2rem) 0 0;
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-lavender-dark);
 }

@@ -261,6 +261,19 @@
   padding-left: 0.85rem;
 }
 
+/* Border tinted by skill tier (matches the level tags) */
+.niveles-table__level--principiante {
+  border-left-color: var(--color-sage);
+}
+
+.niveles-table__level--intermedio {
+  border-left-color: var(--color-lavender-dark);
+}
+
+.niveles-table__level--avanzado {
+  border-left-color: var(--color-forest);
+}
+
 .niveles-table__level-label {
   font-size: 0.6rem;
   letter-spacing: 0.15em;
@@ -275,6 +288,10 @@
 }
 
 .niveles-table__desc {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.4rem;
   font-size: 0.85rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -289,9 +306,11 @@
   color: rgba(29, 43, 0, 0.65);
 }
 
-/* 4-column layout for page with actions */
+/* 4-column layout for page with actions.
+   Fixed/fr tracks only: each row is its own grid, so an `auto` track
+   would size differently per row and break column alignment */
 .niveles-table__row--4col {
-  grid-template-columns: 6rem 1.5fr 1fr auto;
+  grid-template-columns: 6rem 1.5fr 1fr 1.2fr;
 }
 
 .niveles-table__actions {
@@ -300,22 +319,14 @@
   gap: 0.4rem;
 }
 
+/* Visuals come from the .tag--* classes; this only adds link affordance */
 .niveles-table__link {
-  display: inline-block;
-  padding: 0.25rem 0.6rem;
-  font-size: 0.7rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  background-color: rgba(133, 127, 157, 0.12);
-  color: var(--color-lavender);
-  border-radius: 0.3rem;
-  border: 1px solid rgba(133, 127, 157, 0.3);
-  transition: background-color 0.2s;
-  white-space: nowrap;
+  cursor: pointer;
+  transition: opacity 0.2s;
 }
 
 .niveles-table__link:hover {
-  background-color: rgba(133, 127, 157, 0.22);
+  opacity: 0.75;
 }
 
 /* Responsive */
@@ -339,7 +350,8 @@
     margin: 0 auto;
   }
 
-  .niveles-table__row {
+  .niveles-table__row,
+  .niveles-table__row--4col {
     grid-template-columns: 4.5rem 1fr;
     gap: 0.75rem 1rem;
   }
@@ -347,6 +359,10 @@
   .niveles-table__ref {
     grid-column: 2;
     padding-left: 0;
+  }
+
+  .niveles-table__actions {
+    grid-column: 2;
   }
 
   .niveles-table__row--head {

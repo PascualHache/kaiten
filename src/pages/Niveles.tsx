@@ -1,8 +1,14 @@
 import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import Tag from "../components/Tag";
+import { ACTIVITIES, LEVEL_LABELS } from "../data/activities";
 import { LEVELS } from "../data/levels";
 import "./Tarifas.css";
+
+const TYPE_BY_SLUG = new Map(
+  ACTIVITIES.map((a) => [a.calSlug, a.experienceType]),
+);
 
 const LEVEL_LINKS: Record<string, { label: string; hash: string }[]> = {
   A: [{ label: "Clases Privadas", hash: "clases-particulares-en-baqueira" }],
@@ -54,7 +60,7 @@ function Niveles() {
             <p className="tarifas__niveles-sub">Referencia en Baqueira Beret</p>
           </header>
           <div className="niveles-table">
-            <div className="niveles-table__row niveles-table__row--head">
+            <div className="niveles-table__row niveles-table__row--head niveles-table__row--4col">
               <span />
               <span className="niveles-table__col-label">Descripción</span>
               <span className="niveles-table__col-label">
@@ -64,18 +70,21 @@ function Niveles() {
             </div>
             {LEVELS.map((l) => (
               <div key={l.code} className="niveles-table__row niveles-table__row--4col">
-                <div className="niveles-table__level">
+                <div className={`niveles-table__level niveles-table__level--${l.tier}`}>
                   <span className="niveles-table__level-label">Nivel</span>
                   <span className="niveles-table__level-code">{l.code}</span>
                 </div>
-                <div className="niveles-table__desc">{l.description}</div>
+                <div className="niveles-table__desc">
+                  {l.description}
+                  <Tag variant={l.tier} label={LEVEL_LABELS[l.tier]} />
+                </div>
                 <div className="niveles-table__ref">{l.reference}</div>
                 <div className="niveles-table__actions">
                   {(LEVEL_LINKS[l.code] ?? []).map((link) => (
                     <Link
                       key={link.hash}
                       to={`/reservas#${link.hash}`}
-                      className="niveles-table__link"
+                      className={`tag tag--${TYPE_BY_SLUG.get(link.hash) ?? "clase"} niveles-table__link`}
                     >
                       {link.label}
                     </Link>

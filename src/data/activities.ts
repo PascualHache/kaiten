@@ -21,12 +21,47 @@ export interface Format {
   note?: string
 }
 
+export type Level = 'principiante' | 'intermedio' | 'avanzado'
+
+export const LEVEL_LABELS: Record<Level, string> = {
+  principiante: 'Principiante',
+  intermedio: 'Intermedio',
+  avanzado: 'Avanzado',
+}
+
+export type ExperienceType =
+  | 'jornada'
+  | 'guiado'
+  | 'clase'
+  | 'fuera-pista'
+  | 'grupo'
+  | 'especial'
+  | 'programa'
+  | 'online'
+
+export const EXPERIENCE_TYPE_LABELS: Record<ExperienceType, string> = {
+  jornada: 'Jornada',
+  guiado: 'Guiado',
+  clase: 'Clase',
+  'fuera-pista': 'Fuera de pista',
+  grupo: 'En grupo',
+  especial: 'Especial',
+  programa: 'Programa',
+  online: 'Online',
+}
+
 export interface Activity {
   id: string
   calSlug: string
   title: string
   subtitle?: string
   color: Color
+  experienceType: ExperienceType
+  levels: Level[]
+  summary: {
+    duration: string
+    people: string
+  }
   features: Feature[]
   formats?: Format[]
   info: InfoItem[]
@@ -43,6 +78,9 @@ export const ACTIVITIES: Activity[] = [
     calSlug: 'full-day-half-day-en-baqueira',
     title: 'Full Day | Half Day',
     color: 'verde',
+    experienceType: 'jornada',
+    levels: ['principiante', 'intermedio', 'avanzado'],
+    summary: { duration: 'Medio día · Día completo', people: '1 – 4' },
     features: [
       {
         emoji: '🎿',
@@ -114,6 +152,9 @@ export const ACTIVITIES: Activity[] = [
     calSlug: 'safari-en-baqueira',
     title: 'Safari',
     color: 'verde',
+    experienceType: 'guiado',
+    levels: ['intermedio', 'avanzado'],
+    summary: { duration: '3 h · 6 h', people: '1 – 4' },
     features: [
       {
         emoji: '⛰️',
@@ -167,6 +208,9 @@ export const ACTIVITIES: Activity[] = [
     calSlug: 'clases-particulares-en-baqueira',
     title: 'Clases Privadas',
     color: 'verde',
+    experienceType: 'clase',
+    levels: ['principiante', 'intermedio', 'avanzado'],
+    summary: { duration: 'Horas a tu medida', people: '1 – 5' },
     features: [
       {
         emoji: '🎯',
@@ -218,6 +262,9 @@ export const ACTIVITIES: Activity[] = [
     calSlug: 'freeride-en-baqueira',
     title: 'Freeride',
     color: 'naranja',
+    experienceType: 'fuera-pista',
+    levels: ['intermedio', 'avanzado'],
+    summary: { duration: '4 h · Día completo', people: '1 – 6' },
     features: [
       {
         emoji: '❄️',
@@ -276,6 +323,9 @@ export const ACTIVITIES: Activity[] = [
     calSlug: 'friends-family',
     title: 'Kids & Friends & Family',
     color: 'verde',
+    experienceType: 'grupo',
+    levels: ['principiante', 'intermedio', 'avanzado'],
+    summary: { duration: 'Horas a tu medida', people: '4 – 6' },
     features: [
       {
         emoji: '🎿',
@@ -343,6 +393,9 @@ export const ACTIVITIES: Activity[] = [
     calSlug: 'experiencia-de-tardeo-20',
     title: 'Tardeo (-15%)',
     color: 'verde',
+    experienceType: 'especial',
+    levels: ['principiante', 'intermedio', 'avanzado'],
+    summary: { duration: 'Desde las 14:00', people: '1 – 5' },
     features: [
       {
         emoji: '🎿',
@@ -397,6 +450,9 @@ export const ACTIVITIES: Activity[] = [
     title: 'Kaiten Programs',
     subtitle: 'Nuestros programas de mejora intensiva',
     color: 'verde',
+    experienceType: 'programa',
+    levels: ['principiante', 'intermedio', 'avanzado'],
+    summary: { duration: '2 – 3 días', people: 'Grupos reducidos' },
     features: [
       {
         emoji: '🎿',
@@ -480,6 +536,9 @@ export const ACTIVITIES: Activity[] = [
     calSlug: 'asesoramiento-compra-material-ski',
     title: 'Asesoramiento de Material',
     color: 'verde',
+    experienceType: 'online',
+    levels: ['principiante', 'intermedio', 'avanzado'],
+    summary: { duration: 'Online', people: 'Individual' },
     features: [
       {
         emoji: '🎯',
