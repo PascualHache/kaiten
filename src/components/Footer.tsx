@@ -1,7 +1,9 @@
-import { useState, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { IconArrowRight } from '@tabler/icons-react'
 import './Footer.css'
+
+// URL pendiente: enlace definitivo a las cámaras en directo de Baqueira Beret
+const LIVE_CAMS_URL = '#'
 
 const EXPERIENCES = [
   { label: 'Clases Privadas', hash: 'clases-particulares-en-baqueira' },
@@ -21,20 +23,6 @@ const NAV_LINKS = [
 ]
 
 function Footer() {
-  const [submitted, setSubmitted] = useState(false)
-  const [error, setError] = useState('')
-  const consentRef = useRef<HTMLInputElement>(null)
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    if (!consentRef.current?.checked) {
-      setError('Debes aceptar la política de privacidad para suscribirte.')
-      return
-    }
-    setError('')
-    setSubmitted(true)
-  }
-
   return (
     <footer className="footer">
 
@@ -121,40 +109,21 @@ function Footer() {
           ))}
         </nav>
 
-        {/* Newsletter */}
-        <div className="footer__newsletter">
-          <span className="footer__col-title">Partes de nieve</span>
-          <p className="footer__newsletter-text">
-            Novedades, ofertas y partes de nieve antes que nadie. Sin spam, solo nieve.
+        {/* Estado de las pistas */}
+        <div className="footer__live">
+          <span className="footer__col-title">Estado de las pistas</span>
+          <p className="footer__live-text">
+            Consulta las cámaras de Baqueira Beret en directo antes de subir
           </p>
-          {submitted ? (
-            <p className="footer__newsletter-success">¡Apuntado! Te avisaremos pronto.</p>
-          ) : (
-            <>
-              <form className="footer__form" onSubmit={handleSubmit}>
-                <input
-                  type="email"
-                  className="footer__input"
-                  placeholder="Correo electrónico"
-                  aria-label="Correo electrónico"
-                  required
-                />
-                <button type="submit" className="footer__submit" aria-label="Suscribirse">
-                  <IconArrowRight size={18} stroke={2} />
-                </button>
-              </form>
-              <label className="footer__consent">
-                <input ref={consentRef} type="checkbox" className="footer__consent-check" />
-                <span className="footer__consent-text">
-                  Acepto la{' '}
-                  <Link to="/privacidad" className="footer__consent-link">
-                    política de privacidad
-                  </Link>
-                </span>
-              </label>
-              {error && <p className="footer__newsletter-error">{error}</p>}
-            </>
-          )}
+          <a
+            href={LIVE_CAMS_URL}
+            className="footer__live-btn"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span className="footer__live-dot" aria-hidden="true" />
+            Baqueira Live Cams
+          </a>
         </div>
       </div>
 
