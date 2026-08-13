@@ -207,107 +207,59 @@ a.footer__social-pill:hover {
   color: var(--color-cream);
 }
 
-/* Newsletter column */
-.footer__newsletter {
+/* Live cams column */
+.footer__live {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   gap: 0.85rem;
 }
 
-.footer__newsletter-text {
+.footer__live-text {
   margin: 0;
   font-size: 0.875rem;
   line-height: 1.55;
   color: rgba(230, 229, 225, 0.65);
 }
 
-.footer__newsletter-success {
-  margin: 0;
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: var(--color-lime);
-}
-
-.footer__form {
-  display: flex;
-  align-items: stretch;
-  border: 1px solid rgba(230, 229, 225, 0.22);
-  border-radius: 0.5rem;
-  overflow: hidden;
-}
-
-.footer__input {
-  flex: 1;
-  min-width: 0;
-  border: none;
-  background: transparent;
-  font-family: inherit;
-  font-size: 0.85rem;
-  color: var(--color-cream);
-  padding: 0.8rem 1rem;
-}
-
-.footer__input::placeholder {
-  color: rgba(230, 229, 225, 0.38);
-}
-
-.footer__input:focus {
-  outline: none;
-}
-
-.footer__submit {
-  display: flex;
+.footer__live-btn {
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  width: 2.75rem;
-  border: none;
-  border-left: 1px solid rgba(230, 229, 225, 0.22);
-  background-color: var(--color-lime);
-  color: var(--color-forest);
-  cursor: pointer;
-  transition: opacity 0.2s;
-}
-
-.footer__submit:hover {
-  opacity: 0.88;
-}
-
-.footer__consent {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.5rem;
-  cursor: pointer;
-}
-
-.footer__consent-check {
-  flex-shrink: 0;
-  margin-top: 0.15rem;
-  accent-color: var(--color-lime);
-  cursor: pointer;
-}
-
-.footer__consent-text {
-  font-size: 0.78rem;
-  line-height: 1.45;
-  color: rgba(230, 229, 225, 0.5);
-}
-
-.footer__consent-link {
-  color: rgba(230, 229, 225, 0.75);
-  text-decoration: underline;
-  text-underline-offset: 2px;
-  transition: color 0.2s;
-}
-
-.footer__consent-link:hover {
+  gap: 0.6rem;
+  padding: 0.7rem 1.4rem;
+  border: 1px solid rgba(230, 229, 225, 0.35);
+  border-radius: 2rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   color: var(--color-cream);
+  transition: border-color 0.2s, background-color 0.2s;
 }
 
-.footer__newsletter-error {
-  margin: 0;
-  font-size: 0.78rem;
-  color: #ff8a80;
+.footer__live-btn:hover {
+  border-color: var(--color-lime);
+  background-color: rgba(165, 217, 0, 0.08);
+}
+
+.footer__live-dot {
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  background-color: var(--color-lime);
+  animation: footer-live-pulse 1.8s ease-out infinite;
+}
+
+@keyframes footer-live-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(165, 217, 0, 0.45);
+  }
+  70% {
+    box-shadow: 0 0 0 0.45rem rgba(165, 217, 0, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(165, 217, 0, 0);
+  }
 }
 
 /* ─── Legal bar ──────────────────────────────────────── */
