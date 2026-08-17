@@ -15,22 +15,68 @@ interface ValueItem {
 }
 
 const MountainIcon: React.FC = () => (
-  <svg width="42" height="36" viewBox="0 0 42 36" fill="none" aria-hidden="true">
-    <polyline points="2,34 14,6 26,34" stroke="currentColor" strokeWidth="1.4" strokeLinejoin="round" />
-    <polyline points="18,34 30,12 42,34" stroke="currentColor" strokeWidth="1.4" strokeLinejoin="round" />
+  <svg
+    width="42"
+    height="36"
+    viewBox="0 0 42 36"
+    fill="none"
+    aria-hidden="true"
+  >
+    <polyline
+      points="2,34 14,6 26,34"
+      stroke="currentColor"
+      strokeWidth="1.4"
+      strokeLinejoin="round"
+    />
+    <polyline
+      points="18,34 30,12 42,34"
+      stroke="currentColor"
+      strokeWidth="1.4"
+      strokeLinejoin="round"
+    />
   </svg>
 );
 
 const WavesIcon: React.FC = () => (
-  <svg width="42" height="22" viewBox="0 0 42 22" fill="none" aria-hidden="true">
-    <path d="M1,4 C6,0 10,8 14,4 C18,0 22,8 26,4 C30,0 34,8 38,4" stroke="currentColor" strokeWidth="1.4" fill="none" strokeLinecap="round" />
-    <path d="M1,11 C6,7 10,15 14,11 C18,7 22,15 26,11 C30,7 34,15 38,11" stroke="currentColor" strokeWidth="1.4" fill="none" strokeLinecap="round" />
-    <path d="M1,18 C6,14 10,22 14,18 C18,14 22,22 26,18 C30,14 34,22 38,18" stroke="currentColor" strokeWidth="1.4" fill="none" strokeLinecap="round" />
+  <svg
+    width="42"
+    height="22"
+    viewBox="0 0 42 22"
+    fill="none"
+    aria-hidden="true"
+  >
+    <path
+      d="M1,4 C6,0 10,8 14,4 C18,0 22,8 26,4 C30,0 34,8 38,4"
+      stroke="currentColor"
+      strokeWidth="1.4"
+      fill="none"
+      strokeLinecap="round"
+    />
+    <path
+      d="M1,11 C6,7 10,15 14,11 C18,7 22,15 26,11 C30,7 34,15 38,11"
+      stroke="currentColor"
+      strokeWidth="1.4"
+      fill="none"
+      strokeLinecap="round"
+    />
+    <path
+      d="M1,18 C6,14 10,22 14,18 C18,14 22,22 26,18 C30,14 34,22 38,18"
+      stroke="currentColor"
+      strokeWidth="1.4"
+      fill="none"
+      strokeLinecap="round"
+    />
   </svg>
 );
 
 const SpiralIcon: React.FC = () => (
-  <svg width="40" height="40" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+  <svg
+    width="40"
+    height="40"
+    viewBox="0 0 40 40"
+    fill="none"
+    aria-hidden="true"
+  >
     <circle cx="20" cy="20" r="17" stroke="currentColor" strokeWidth="1.4" />
     <circle cx="20" cy="20" r="10" stroke="currentColor" strokeWidth="1.4" />
     <circle cx="20" cy="20" r="3.5" stroke="currentColor" strokeWidth="1.4" />
@@ -38,19 +84,79 @@ const SpiralIcon: React.FC = () => (
 );
 
 const StyleIcon: React.FC = () => (
-  <svg width="40" height="40" viewBox="0 0 40 40" fill="none" aria-hidden="true">
-    <line x1="6" y1="34" x2="34" y2="10" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
-    <line x1="6" y1="30" x2="34" y2="30" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+  <svg
+    width="40"
+    height="40"
+    viewBox="0 0 40 40"
+    fill="none"
+    aria-hidden="true"
+  >
+    <line
+      x1="6"
+      y1="34"
+      x2="34"
+      y2="10"
+      stroke="currentColor"
+      strokeWidth="1.4"
+      strokeLinecap="round"
+    />
+    <line
+      x1="6"
+      y1="30"
+      x2="34"
+      y2="30"
+      stroke="currentColor"
+      strokeWidth="1.4"
+      strokeLinecap="round"
+    />
     <circle cx="25" cy="16" r="2.5" fill="currentColor" />
   </svg>
 );
 
 const AsteriskIcon: React.FC = () => (
-  <svg width="40" height="40" viewBox="0 0 40 40" fill="none" aria-hidden="true">
-    <line x1="20" y1="3" x2="20" y2="37" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
-    <line x1="3" y1="20" x2="37" y2="20" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
-    <line x1="7.4" y1="7.4" x2="32.6" y2="32.6" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
-    <line x1="32.6" y1="7.4" x2="7.4" y2="32.6" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+  <svg
+    width="40"
+    height="40"
+    viewBox="0 0 40 40"
+    fill="none"
+    aria-hidden="true"
+  >
+    <line
+      x1="20"
+      y1="3"
+      x2="20"
+      y2="37"
+      stroke="currentColor"
+      strokeWidth="1.4"
+      strokeLinecap="round"
+    />
+    <line
+      x1="3"
+      y1="20"
+      x2="37"
+      y2="20"
+      stroke="currentColor"
+      strokeWidth="1.4"
+      strokeLinecap="round"
+    />
+    <line
+      x1="7.4"
+      y1="7.4"
+      x2="32.6"
+      y2="32.6"
+      stroke="currentColor"
+      strokeWidth="1.4"
+      strokeLinecap="round"
+    />
+    <line
+      x1="32.6"
+      y1="7.4"
+      x2="7.4"
+      y2="32.6"
+      stroke="currentColor"
+      strokeWidth="1.4"
+      strokeLinecap="round"
+    />
   </svg>
 );
 

@@ -1,5 +1,6 @@
 .hero {
   flex: 1;
+  position: relative;
   display: flex;
   border: 1px solid rgba(133, 127, 157, 0.35);
   border-radius: 1.75rem;
@@ -41,8 +42,8 @@
 
 .hero__eyebrow {
   margin: 0;
-  max-width: 14rem;
-  font-size: clamp(0.65rem, 0.9vw, 0.75rem);
+  white-space: nowrap;
+  font-size: clamp(0.55rem, 0.75vw, 0.65rem);
   font-weight: 500;
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -74,7 +75,7 @@
 
 .hero__text {
   margin: 0 0 clamp(1.5rem, 3vw, 2.25rem);
-  max-width: 20rem;
+  white-space: nowrap;
   font-size: clamp(0.875rem, 1.1vw, 1rem);
   line-height: 1.5;
   color: var(--color-lavender-dark);
@@ -137,6 +138,23 @@
   filter: sepia(0.55) brightness(1.08) contrast(0.95);
 }
 
+/* ─── Watermark ─── */
+/* Logo K sobre la unión de los dos paneles: el palo de la K queda sobre
+   .hero__left y el círculo + diagonal sobre .hero__right.
+   Va al final del DOM para pintarse sobre la foto derecha sin z-index.
+   El hueco entre el palo y el resto del glifo está en el 41.6% del ancho
+   del PNG (columnas 224-242 de 560): el translate alinea ese hueco con la
+   unión. El -49.6% vertical compensa los márgenes asimétricos del lienzo. */
+.hero__watermark {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-41.6%, -49.6%);
+  width: clamp(8rem, 15vw, 13rem);
+  opacity: 0.8;
+  pointer-events: none;
+}
+
 /* ─── Vertical side labels ─── */
 .hero__side {
   position: absolute;
@@ -153,6 +171,7 @@
   top: 50%;
   transform: translateY(-50%) rotate(180deg);
   letter-spacing: 0.35em;
+  font-variant-numeric: tabular-nums;
 }
 
 .hero__side--right {
@@ -188,6 +207,10 @@
   }
 
   .hero__side {
+    display: none;
+  }
+
+  .hero__watermark {
     display: none;
   }
 }

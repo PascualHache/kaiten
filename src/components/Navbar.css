@@ -37,8 +37,10 @@
   display: inline-flex;
   align-items: center;
   padding: 10px 14px;
-  font-size: 14.5px;
+  font-size: 13px;
   font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   color: var(--color-forest);
   text-decoration: none;
   transition: opacity 0.15s;
@@ -89,6 +91,10 @@
   color: var(--color-forest);
 }
 
+.navbar__logo img {
+  width: 180px;
+}
+
 /* ─── Right: utilities ───────────────────────────────── */
 
 .navbar__utils {
@@ -116,25 +122,12 @@
   opacity: 0.65;
 }
 
-.navbar__phone {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--color-forest);
-  text-decoration: none;
-  transition: opacity 0.15s;
-}
-
-.navbar__phone:hover {
-  opacity: 0.65;
-  color: var(--color-forest);
-}
-
 .navbar__reserve-btn {
   display: inline-flex;
   align-items: center;
   padding: 11px 24px;
-  background: var(--color-forest);
-  color: var(--color-cream);
+  background: var(--color-lime);
+  color: var(--color-forest);
   font-family: inherit;
   font-size: 13px;
   font-weight: 500;
@@ -148,8 +141,8 @@
 }
 
 .navbar__reserve-btn:hover {
-  background: var(--color-lime);
-  color: var(--color-forest);
+  background: var(--color-forest);
+  color: var(--color-cream);
 }
 
 /* Mobile toggle — hidden on desktop */
@@ -208,10 +201,6 @@
     display: none;
   }
 
-  .navbar__phone {
-    display: none;
-  }
-
   .navbar__menu-toggle {
     display: flex;
   }
@@ -220,10 +209,6 @@
 @media (max-width: 640px) {
   .navbar__inner {
     padding: 0 20px;
-  }
-
-  .navbar__lang {
-    display: none;
   }
 
   .navbar__menu-item {
