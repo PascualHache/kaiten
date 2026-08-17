@@ -306,27 +306,15 @@
   color: rgba(29, 43, 0, 0.65);
 }
 
-/* 4-column layout for page with actions.
+/* 4-column layout for the Niveles page.
    Fixed/fr tracks only: each row is its own grid, so an `auto` track
    would size differently per row and break column alignment */
 .niveles-table__row--4col {
-  grid-template-columns: 6rem 1.5fr 1fr 1.2fr;
+  grid-template-columns: 6rem 1.5fr 1.2fr 0.7fr;
 }
 
-.niveles-table__actions {
+.niveles-table__tier {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-}
-
-/* Visuals come from the .tag--* classes; this only adds link affordance */
-.niveles-table__link {
-  cursor: pointer;
-  transition: opacity 0.2s;
-}
-
-.niveles-table__link:hover {
-  opacity: 0.75;
 }
 
 /* Responsive */
@@ -361,7 +349,7 @@
     padding-left: 0;
   }
 
-  .niveles-table__actions {
+  .niveles-table__tier {
     grid-column: 2;
   }
 
