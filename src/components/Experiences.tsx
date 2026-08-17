@@ -12,14 +12,16 @@ const PAGE_COUNT = Math.ceil(SERVICES.length / PAGE_SIZE)
 function Experiences() {
   const [page, setPage] = useState(0)
   const [slideDir, setSlideDir] = useState<1 | -1>(1)
-  const [activeIndex, setActiveIndex] = useState(0)
+  const [activeIndex, setActiveIndex] = useState<number | null>(null)
   const rowRef = useRef<HTMLDivElement>(null)
 
-  const activeService = SERVICES[activeIndex]
-  const activeActivity =
-    ACTIVITIES.find(
-      (a) => a.calSlug === activeService.reservasPath.replace('/reservas/', ''),
-    ) ?? null
+  const activeService = activeIndex !== null ? SERVICES[activeIndex] : null
+  const activeActivity = activeService
+    ? (ACTIVITIES.find(
+        (a) =>
+          a.calSlug === activeService.reservasPath.replace('/reservas/', ''),
+      ) ?? null)
+    : null
 
   useEffect(() => {
     if (!activeActivity) return
@@ -38,7 +40,7 @@ function Experiences() {
     setSlideDir(dir > 0 ? 1 : -1)
     const next = (page + dir + PAGE_COUNT) % PAGE_COUNT
     setPage(next)
-    setActiveIndex(next * PAGE_SIZE)
+    setActiveIndex(null)
   }
 
   const visible = SERVICES.slice(page * PAGE_SIZE, page * PAGE_SIZE + PAGE_SIZE)
@@ -114,6 +116,11 @@ function Experiences() {
                 alt=""
                 loading="lazy"
                 decoding="async"
+                style={
+                  service.imagePosition
+                    ? { objectPosition: service.imagePosition }
+                    : undefined
+                }
               />
               <span className="experience-card__number" aria-hidden="true">
                 {String(i + 1).padStart(2, '0')}

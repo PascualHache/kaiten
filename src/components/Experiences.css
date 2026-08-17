@@ -97,7 +97,7 @@
 .experiences__row {
   display: flex;
   gap: 0.75rem;
-  height: clamp(20rem, 45vh, 28rem);
+  height: clamp(26rem, 55vh, 34rem);
   scroll-margin-top: calc(var(--navbar-height) + 1.5rem);
   animation: experiences-row-slide-in 0.45s cubic-bezier(0.4, 0, 0.2, 1);
 }
