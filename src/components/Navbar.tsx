@@ -5,10 +5,11 @@ import PromoBanner from "./PromoBanner";
 import logoKaiten from "../assets/logos/logo_text.png";
 import "./Navbar.css";
 
-const NAV_LINKS = [{ to: "/niveles", label: "Niveles" }];
-
-// Misma URL pendiente que en Footer (Baqueira live cams)
-const LIVE_CAMS_URL = "#";
+const NAV_LINKS = [
+  { to: "/nosotros", label: "Nosotros" },
+  { to: "/niveles", label: "Niveles" },
+  { to: "/faq", label: "FAQs" },
+];
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -31,17 +32,6 @@ function Navbar() {
               <span className="navbar__nav-indicator" aria-hidden="true" />
             </NavLink>
           ))}
-          <button type="button" className="navbar__lang">
-            ES&nbsp;▾
-          </button>
-          <a
-            href={LIVE_CAMS_URL}
-            className="navbar__nav-link"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Webcam
-          </a>
         </nav>
 
         {/* Center: wordmark */}
@@ -57,6 +47,20 @@ function Navbar() {
 
         {/* Right: utilities */}
         <div className="navbar__utils">
+          <div className="navbar__lang" role="group" aria-label="Idioma">
+            <button
+              type="button"
+              className="navbar__lang-btn navbar__lang-btn--active"
+            >
+              ES
+            </button>
+            <span className="navbar__lang-sep" aria-hidden="true">
+              /
+            </span>
+            <button type="button" className="navbar__lang-btn">
+              EN
+            </button>
+          </div>
           <Link to="/reservas" className="navbar__reserve-btn">
             Reservar
           </Link>
@@ -90,15 +94,6 @@ function Navbar() {
               {label}
             </NavLink>
           ))}
-          <a
-            href={LIVE_CAMS_URL}
-            className="navbar__menu-item"
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => setMenuOpen(false)}
-          >
-            Webcam
-          </a>
         </div>
       )}
     </header>

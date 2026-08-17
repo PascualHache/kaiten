@@ -3,8 +3,7 @@ import { IconArrowRight } from '@tabler/icons-react'
 import logoText from '../assets/logos/logo_text.png'
 import './Footer.css'
 
-// URL pendiente: enlace definitivo a las cámaras en directo de Baqueira Beret
-const LIVE_CAMS_URL = '#'
+const LIVE_CAMS_URL = 'https://www.baqueira.es/en/webcams'
 
 // URL pendiente: lista de Spotify de Kaiten
 const SPOTIFY_URL = '#'
