@@ -53,21 +53,8 @@ export const TARIFFS: Tariff[] = [
     price: '400€',
   },
   {
-    id: 'freeride',
-    number: '04',
-    category: 'especial',
-    slug: 'freeride-en-baqueira',
-    title: 'Freeride 4h',
-    features: [
-      '4 horas mínimo',
-      '1-4 personas',
-      'Nivel intermedio-alto requerido',
-    ],
-    price: '350€',
-  },
-  {
     id: 'half-day',
-    number: '05',
+    number: '04',
     category: 'privada',
     slug: 'full-day-half-day-en-baqueira',
     title: 'Half Day 4h',
@@ -77,6 +64,19 @@ export const TARIFFS: Tariff[] = [
       'Técnica + recorrido de estación',
     ],
     price: '250€',
+  },
+  {
+    id: 'freeride',
+    number: '05',
+    category: 'especial',
+    slug: 'freeride-en-baqueira',
+    title: 'Freeride 4h',
+    features: [
+      '4 horas mínimo',
+      '1-4 personas',
+      'Nivel intermedio-alto requerido',
+    ],
+    price: '350€',
   },
   {
     id: 'kids-family',
