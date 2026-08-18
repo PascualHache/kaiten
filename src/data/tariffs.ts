@@ -55,7 +55,7 @@ export const TARIFFS: Tariff[] = [
   {
     id: 'half-day',
     number: '04',
-    category: 'privada',
+    category: 'especial',
     slug: 'full-day-half-day-en-baqueira',
     title: 'Half Day 4h',
     features: [
