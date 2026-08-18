@@ -68,7 +68,7 @@ export const TARIFFS: Tariff[] = [
   {
     id: 'freeride',
     number: '05',
-    category: 'especial',
+    category: 'privada',
     slug: 'freeride-en-baqueira',
     title: 'Freeride 4h',
     features: [
