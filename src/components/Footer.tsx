@@ -5,8 +5,8 @@ import './Footer.css'
 
 const LIVE_CAMS_URL = 'https://www.baqueira.es/en/webcams'
 
-// URL pendiente: lista de Spotify de Kaiten
-const SPOTIFY_URL = '#'
+const SPOTIFY_URL =
+  'https://open.spotify.com/playlist/07BMCGGFCarURRFnUIOlbx?si=BqZCksIdT6OFuF5yvjs42A'
 
 const EXPERIENCES = [
   { label: 'Clases Privadas', hash: 'clases-particulares-en-baqueira' },
