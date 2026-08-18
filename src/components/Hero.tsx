@@ -1,10 +1,41 @@
+import { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { IconArrowRight } from '@tabler/icons-react'
 import homeLeft from '../assets/images/home_left.png'
 import homeRight from '../assets/images/home_right.png'
+import logoK from '../assets/logos/logo_k.png'
 import './Hero.css'
 
+const REST_COORDS = '43 00 142 00'
+const REST_GROUPS = REST_COORDS.split(' ')
+
 function Hero() {
+  const coordsRef = useRef<HTMLSpanElement>(null)
+
+  // Efecto tragaperras al cargar: dígitos aleatorios que se asientan
+  // grupo a grupo hasta mostrar las coordenadas reales
+  useEffect(() => {
+    const el = coordsRef.current
+    if (!el) return
+
+    const randomDigits = (len: number) =>
+      Array.from({ length: len }, () => Math.floor(Math.random() * 10)).join('')
+
+    const lockTicks = [14, 22, 30, 38]
+    let tick = 0
+    const intervalId = window.setInterval(() => {
+      tick++
+      el.textContent = REST_GROUPS.map((group, i) =>
+        tick >= lockTicks[i] ? group : randomDigits(group.length),
+      ).join(' ')
+      if (tick >= lockTicks[lockTicks.length - 1]) {
+        window.clearInterval(intervalId)
+      }
+    }, 60)
+
+    return () => window.clearInterval(intervalId)
+  }, [])
+
   return (
     <section className="hero">
       {/* Left panel: person photo + text overlay */}
@@ -18,20 +49,17 @@ function Hero() {
           aria-hidden="true"
         />
         <div className="hero__content">
-          <p className="hero__eyebrow">Escuela de esquí Baqueira Beret</p>
+          <p className="hero__eyebrow">Escuela de esquí en Baqueira Beret</p>
           <div className="hero__bottom">
             <h1 className="hero__title">
-              Revoluciona
+              R-evoluciona
               <br />
               tu forma
               <br />
               de esquiar
             </h1>
             <span className="hero__rule" />
-            <p className="hero__text">
-              La primera escuela de Baqueira donde eliges a tu profesor antes de
-              reservar.
-            </p>
+            <p className="hero__text">Your Line. Your way.</p>
             <div className="hero__actions">
               <Link to="/reservas" className="hero__btn hero__btn--primary">
                 Reservar
@@ -44,7 +72,9 @@ function Hero() {
             </div>
           </div>
         </div>
-        <span className="hero__side hero__side--left">00 00 00 05</span>
+        <span className="hero__side hero__side--left" ref={coordsRef}>
+          {REST_COORDS}
+        </span>
       </div>
 
       {/* Right panel: mountain photo */}
@@ -58,6 +88,16 @@ function Hero() {
         />
         <span className="hero__side hero__side--right">SKI REVOLUTION</span>
       </div>
+
+      {/* Logo K difuminado, centrado en la unión de ambos paneles */}
+      <img
+        className="hero__watermark"
+        src={logoK}
+        alt=""
+        loading="eager"
+        decoding="async"
+        aria-hidden="true"
+      />
     </section>
   )
 }

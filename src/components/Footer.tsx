@@ -1,9 +1,12 @@
 import { Link } from 'react-router-dom'
 import { IconArrowRight } from '@tabler/icons-react'
+import logoText from '../assets/logos/logo_text.png'
 import './Footer.css'
 
-// URL pendiente: enlace definitivo a las cámaras en directo de Baqueira Beret
-const LIVE_CAMS_URL = '#'
+const LIVE_CAMS_URL = 'https://www.baqueira.es/en/webcams'
+
+// URL pendiente: lista de Spotify de Kaiten
+const SPOTIFY_URL = '#'
 
 const EXPERIENCES = [
   { label: 'Clases Privadas', hash: 'clases-particulares-en-baqueira' },
@@ -30,10 +33,8 @@ function Footer() {
       <div className="footer__cta">
         <div className="footer__cta-left">
           <p className="footer__cta-eyebrow">Temporada 2026 · 27</p>
-          <h2 className="footer__cta-heading">¿Listo para empezar?</h2>
-          <p className="footer__cta-sub">
-            Elige a tu profesor y reserva tu primera clase en menos de dos minutos.
-          </p>
+          <h2 className="footer__cta-heading">Listo para empezar?</h2>
+          <p className="footer__cta-sub">We call it The Kaiten Line.</p>
         </div>
         <div className="footer__cta-actions">
           <Link to="/reservas" className="footer__cta-btn footer__cta-btn--primary">
@@ -53,7 +54,9 @@ function Footer() {
 
         {/* Brand */}
         <div className="footer__brand">
-          <Link to="/" className="footer__brand-name">KAITEN</Link>
+          <Link to="/" className="footer__brand-name">
+            <img src={logoText} alt="Kaiten" loading="lazy" decoding="async" />
+          </Link>
           <p className="footer__brand-desc">
             La primera escuela de Baqueira Beret donde eliges a tu profesor antes de reservar.
           </p>
@@ -107,6 +110,14 @@ function Footer() {
               {l.label}
             </Link>
           ))}
+          <a
+            href={SPOTIFY_URL}
+            className="footer__link"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Playlist Spotify
+          </a>
         </nav>
 
         {/* Estado de las pistas */}
@@ -139,7 +150,9 @@ function Footer() {
       </div>
 
       {/* ─── Watermark ─────────────────────────────────────── */}
-      <div className="footer__watermark" aria-hidden="true">KAITEN</div>
+      <div className="footer__watermark" aria-hidden="true">
+        <img src={logoText} alt="" loading="lazy" decoding="async" />
+      </div>
 
     </footer>
   )

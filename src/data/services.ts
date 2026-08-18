@@ -13,6 +13,8 @@ export interface Service {
   tagline: string;
   description: string;
   image: string;
+  /** object-position del recorte de la foto en la tarjeta (por defecto, centrado) */
+  imagePosition?: string;
   backgroundColor: string;
   textColor: string;
   reservasPath: string;
@@ -26,6 +28,7 @@ export const SERVICES: Service[] = [
     description:
       "Atención total y corrección constante. Trabajamos contigo en cada bajada para que progreses rápido, ganes confianza y mejores tu técnica desde el primer momento.",
     image: clasesPrivadas,
+    imagePosition: "center 20%",
     backgroundColor: "var(--color-lavender)",
     textColor: "var(--color-lime)",
     reservasPath: "/reservas/clases-particulares-en-baqueira",

@@ -2,13 +2,13 @@ import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { IconMenu2, IconX } from "@tabler/icons-react";
 import PromoBanner from "./PromoBanner";
+import logoKaiten from "../assets/logos/logo_text.png";
 import "./Navbar.css";
 
 const NAV_LINKS = [
   { to: "/nosotros", label: "Nosotros" },
-  { to: "/reservas", label: "Reservas" },
-  { to: "/tarifas", label: "Tarifas" },
   { to: "/niveles", label: "Niveles" },
+  { to: "/faq", label: "FAQs" },
 ];
 
 function Navbar() {
@@ -18,7 +18,6 @@ function Navbar() {
     <header className="navbar">
       <PromoBanner />
       <div className="navbar__inner">
-
         {/* Left: nav links */}
         <nav className="navbar__nav" aria-label="Navegación principal">
           {NAV_LINKS.map(({ to, label }) => (
@@ -37,17 +36,31 @@ function Navbar() {
 
         {/* Center: wordmark */}
         <Link to="/" className="navbar__logo">
-          KAITEN
+          <img
+            className="logo-img"
+            src={logoKaiten}
+            alt="Kaiten"
+            loading="lazy"
+            decoding="async"
+          />
         </Link>
 
         {/* Right: utilities */}
         <div className="navbar__utils">
-          <button type="button" className="navbar__lang">
-            ES&nbsp;▾
-          </button>
-          <a href="tel:+34699820954" className="navbar__phone">
-            699 820 954
-          </a>
+          <div className="navbar__lang" role="group" aria-label="Idioma">
+            <button
+              type="button"
+              className="navbar__lang-btn navbar__lang-btn--active"
+            >
+              ES
+            </button>
+            <span className="navbar__lang-sep" aria-hidden="true">
+              /
+            </span>
+            <button type="button" className="navbar__lang-btn">
+              EN
+            </button>
+          </div>
           <Link to="/reservas" className="navbar__reserve-btn">
             Reservar
           </Link>
@@ -57,10 +70,13 @@ function Navbar() {
             aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"}
             onClick={() => setMenuOpen(!menuOpen)}
           >
-            {menuOpen ? <IconX size={22} stroke={2} /> : <IconMenu2 size={22} stroke={2} />}
+            {menuOpen ? (
+              <IconX size={22} stroke={2} />
+            ) : (
+              <IconMenu2 size={22} stroke={2} />
+            )}
           </button>
         </div>
-
       </div>
 
       {/* Mobile menu */}
@@ -78,9 +94,6 @@ function Navbar() {
               {label}
             </NavLink>
           ))}
-          <a href="tel:+34699820954" className="navbar__menu-item">
-            699 820 954
-          </a>
         </div>
       )}
     </header>
