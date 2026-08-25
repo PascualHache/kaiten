@@ -12,10 +12,9 @@ interface FAQItem {
 
 const FAQS: FAQItem[] = [
   {
-    q: "¿Dónde nos encontramos?",
+    q: "¿Dónde es el punto de encuentro?",
     a: [
-      "El punto de encuentro habitual es la base de la estación de Baqueira Beret (sector Baqueira, acceso principal).",
-      "Al reservar por Cal.com puedes indicar tu alojamiento y te confirmamos el punto exacto según la experiencia elegida.",
+      "El punto de encuentro es en Baqueira 1800, justo a la salida del telecabina.",
     ],
   },
   {
@@ -107,7 +106,10 @@ export default function FAQ() {
           {FAQS.map((item, i) => {
             const isOpen = open === i;
             return (
-              <li key={i} className={`faq__item${isOpen ? " faq__item--open" : ""}`}>
+              <li
+                key={i}
+                className={`faq__item${isOpen ? " faq__item--open" : ""}`}
+              >
                 <button
                   type="button"
                   className="faq__row"
@@ -121,7 +123,9 @@ export default function FAQ() {
                     stroke={2}
                   />
                 </button>
-                <div className={`faq__panel${isOpen ? " faq__panel--open" : ""}`}>
+                <div
+                  className={`faq__panel${isOpen ? " faq__panel--open" : ""}`}
+                >
                   <div className="faq__panel-inner">
                     {Array.isArray(item.a) ? (
                       <ul className="faq__answer-list">

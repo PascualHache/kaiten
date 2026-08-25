@@ -18,21 +18,21 @@ function Navbar() {
     <header className="navbar">
       <PromoBanner />
       <div className="navbar__inner">
-        {/* Left: nav links */}
-        <nav className="navbar__nav" aria-label="Navegación principal">
-          {NAV_LINKS.map(({ to, label }) => (
-            <NavLink
-              key={to}
-              to={to}
-              className={({ isActive }) =>
-                `navbar__nav-link${isActive ? " navbar__nav-link--active" : ""}`
-              }
-            >
-              {label}
-              <span className="navbar__nav-indicator" aria-hidden="true" />
-            </NavLink>
-          ))}
-        </nav>
+        {/* Left: menu toggle */}
+        <div className="navbar__left">
+          <button
+            type="button"
+            className="navbar__menu-toggle"
+            aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"}
+            onClick={() => setMenuOpen(!menuOpen)}
+          >
+            {menuOpen ? (
+              <IconX size={22} stroke={2} />
+            ) : (
+              <IconMenu2 size={22} stroke={2} />
+            )}
+          </button>
+        </div>
 
         {/* Center: wordmark */}
         <Link to="/" className="navbar__logo">
@@ -64,22 +64,10 @@ function Navbar() {
           <Link to="/reservas" className="navbar__reserve-btn">
             Reservar
           </Link>
-          <button
-            type="button"
-            className="navbar__menu-toggle"
-            aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"}
-            onClick={() => setMenuOpen(!menuOpen)}
-          >
-            {menuOpen ? (
-              <IconX size={22} stroke={2} />
-            ) : (
-              <IconMenu2 size={22} stroke={2} />
-            )}
-          </button>
         </div>
       </div>
 
-      {/* Mobile menu */}
+      {/* Dropdown menu */}
       {menuOpen && (
         <div className="navbar__menu">
           {NAV_LINKS.map(({ to, label }) => (

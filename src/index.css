@@ -13,7 +13,9 @@
   --color-sage: #99A28F;
   --color-forest: #1D2B00;
   --color-lime: #A5D900;
+  --color-lime-light: #DAFE99;
   --color-midnight: #1D2B00;
+  --color-black: #000000;
 
   font-family: var(--font-body);
   line-height: 1.5;

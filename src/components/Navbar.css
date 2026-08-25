@@ -24,54 +24,12 @@
   gap: 24px;
 }
 
-/* ─── Left: nav links ────────────────────────────────── */
+/* ─── Left: menu toggle ──────────────────────────────── */
 
-.navbar__nav {
+.navbar__left {
   flex: 1;
   display: flex;
   align-items: center;
-  gap: 1.75rem;
-}
-
-/* Sin padding horizontal: el primer enlace queda a ras del margen */
-.navbar__nav-link {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  padding: 10px 0;
-  font-size: 13px;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--color-forest);
-  text-decoration: none;
-  transition: opacity 0.15s;
-}
-
-.navbar__nav-link:hover {
-  opacity: 0.65;
-  color: var(--color-forest);
-}
-
-.navbar__nav-link--active {
-  font-weight: 700;
-  color: var(--color-forest);
-}
-
-/* Lime underline indicator */
-.navbar__nav-indicator {
-  display: none;
-}
-
-.navbar__nav-link--active .navbar__nav-indicator {
-  display: block;
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 4px;
-  height: 3px;
-  background: var(--color-lime);
-  border-radius: 1.5px;
 }
 
 /* ─── Center: wordmark ───────────────────────────────── */
@@ -146,8 +104,8 @@
   display: inline-flex;
   align-items: center;
   padding: 11px 24px;
-  background: transparent;
-  color: var(--color-forest);
+  background: var(--color-lime-light);
+  color: var(--color-black);
   font-family: inherit;
   font-size: 13px;
   font-weight: 600;
@@ -155,20 +113,18 @@
   text-transform: uppercase;
   border-radius: 6px;
   text-decoration: none;
-  border: 1px solid var(--color-forest);
+  border: 1px solid var(--color-black);
   cursor: pointer;
   white-space: nowrap;
-  transition: background-color 0.2s, color 0.2s;
+  transition: opacity 0.2s;
 }
 
 .navbar__reserve-btn:hover {
-  background: var(--color-forest);
-  color: var(--color-cream);
+  opacity: 0.85;
 }
 
-/* Mobile toggle — hidden on desktop */
 .navbar__menu-toggle {
-  display: none;
+  display: flex;
   align-items: center;
   background: none;
   border: none;
@@ -216,16 +172,6 @@
 }
 
 /* ─── Responsive ─────────────────────────────────────── */
-
-@media (max-width: 900px) {
-  .navbar__nav {
-    display: none;
-  }
-
-  .navbar__menu-toggle {
-    display: flex;
-  }
-}
 
 @media (max-width: 640px) {
   .navbar__inner {

@@ -210,7 +210,7 @@ export const ACTIVITIES: Activity[] = [
     color: 'verde',
     experienceType: 'clase',
     levels: ['principiante', 'intermedio', 'avanzado'],
-    summary: { duration: 'Horas a tu medida', people: '1 – 5' },
+    summary: { duration: 'Horas a tu medida', people: '1 – 4' },
     features: [
       {
         emoji: '🎯',
@@ -238,7 +238,7 @@ export const ACTIVITIES: Activity[] = [
         emoji: '👥',
         label: 'Participantes',
         content: [
-          'Desde 1 persona hasta 5 por grupo.',
+          'Desde 1 persona hasta 4 por grupo (consultar para más personas).',
           'Lo importante es que el nivel sea homogéneo para garantizar una progresión efectiva.',
         ],
       },
@@ -264,7 +264,7 @@ export const ACTIVITIES: Activity[] = [
     color: 'naranja',
     experienceType: 'fuera-pista',
     levels: ['intermedio', 'avanzado'],
-    summary: { duration: '4 h · Día completo', people: '1 – 6' },
+    summary: { duration: '4 h · Día completo', people: '1 – 4' },
     features: [
       {
         emoji: '❄️',
@@ -299,7 +299,7 @@ export const ACTIVITIES: Activity[] = [
       {
         emoji: '👥',
         label: 'Participantes',
-        content: 'Desde 1 persona. Recomendado hasta 4 personas (máximo 6 en grupos homogéneos de nivel similar).',
+        content: 'Desde 1 persona hasta 4 (consultar para más personas).',
       },
       {
         emoji: '🎓',
@@ -325,7 +325,7 @@ export const ACTIVITIES: Activity[] = [
     color: 'verde',
     experienceType: 'grupo',
     levels: ['principiante', 'intermedio', 'avanzado'],
-    summary: { duration: 'Horas a tu medida', people: '4 – 6' },
+    summary: { duration: 'Horas a tu medida', people: '1 – 4' },
     features: [
       {
         emoji: '🎿',
@@ -374,7 +374,7 @@ export const ACTIVITIES: Activity[] = [
       {
         emoji: '👥',
         label: 'Participantes',
-        content: 'Recomendado entre 4 y 6 personas por grupo para mantener una buena atención y calidad de enseñanza.',
+        content: 'Máximo 4 personas por grupo (consultar para más personas).',
       },
       {
         emoji: '🎓',
@@ -395,7 +395,7 @@ export const ACTIVITIES: Activity[] = [
     color: 'verde',
     experienceType: 'especial',
     levels: ['principiante', 'intermedio', 'avanzado'],
-    summary: { duration: 'Desde las 14:00', people: '1 – 5' },
+    summary: { duration: 'Desde las 14:00', people: '1 – 4' },
     features: [
       {
         emoji: '🎿',
@@ -423,7 +423,7 @@ export const ACTIVITIES: Activity[] = [
         emoji: '👥',
         label: 'Participantes',
         content: [
-          'Desde 1 persona hasta 5 por grupo.',
+          'Desde 1 persona hasta 4 por grupo (consultar para más personas).',
           'Lo importante es que el nivel sea homogéneo para garantizar una progresión efectiva.',
         ],
       },
@@ -452,7 +452,7 @@ export const ACTIVITIES: Activity[] = [
     color: 'verde',
     experienceType: 'programa',
     levels: ['principiante', 'intermedio', 'avanzado'],
-    summary: { duration: '2 – 3 días', people: 'Grupos reducidos' },
+    summary: { duration: '2 – 3 días', people: '1 – 4' },
     features: [
       {
         emoji: '🎿',
@@ -478,18 +478,11 @@ export const ACTIVITIES: Activity[] = [
         hours: '6 horas',
       },
       {
-        name: 'Kaiten 2.5',
-        schedule: '3 días · 2,5 h/día',
-        label: 'Equilibrio perfecto',
-        hours: '7,5 horas',
-        featured: true,
-        note: 'Franjas: 9:30–12:00 · 13:00–15:30',
-      },
-      {
         name: 'Kaiten 3.2',
         schedule: '3 días · 2 h/día',
         label: 'Progresión inteligente',
         hours: '6 horas',
+        featured: true,
       },
       {
         name: 'Kaiten 3.3',
@@ -502,7 +495,7 @@ export const ACTIVITIES: Activity[] = [
       {
         emoji: '👥',
         label: 'Participantes',
-        content: 'Desde 1 persona hasta grupos reducidos.',
+        content: 'Desde 1 persona hasta 4 (consultar para más personas).',
       },
       {
         emoji: '🎿',
@@ -580,7 +573,7 @@ export const ACTIVITIES: Activity[] = [
       {
         emoji: '💶',
         label: 'Precio',
-        content: 'Desde XX € por asesoramiento completo.',
+        content: 'Asesoramiento: 20€ · Asesoramiento y compra: 30€.',
       },
     ],
     cta: {
