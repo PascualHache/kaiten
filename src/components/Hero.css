@@ -1,20 +1,29 @@
 .hero {
   flex: 1;
   position: relative;
-  border: 1px solid rgba(133, 127, 157, 0.35);
-  border-radius: 1.75rem;
-  overflow: hidden;
 }
 
-/* ─── Full-bleed photo ─── */
+/* ─── Full-bleed photo ───
+   Breaks out of .home__hero-section's padding/max-width: pinned to the
+   true viewport edges on top/left/right (reaching behind the navbar),
+   while the bottom edge stays where .hero itself ends (unchanged).
+   68px matches .navbar__inner's fixed height (Navbar.css) — --navbar-height
+   (3.25rem) undershoots it, so it isn't precise enough for this reach.
+   The PromoBanner's own height sits on top and isn't accounted for here:
+   its height is content-driven, so the photo lands a little short of true
+   y:0 while it's showing, and flush with it once dismissed. */
 .hero__bg {
   position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
+  bottom: 0;
+  left: 50%;
+  width: 100vw;
+  max-width: 100vw;
+  height: calc(100% + 68px + 1rem);
+  transform: translateX(-50%);
   object-fit: cover;
   object-position: center 30%;
   z-index: 0;
+  border-radius: 0 0 1.75rem 1.75rem;
 }
 
 /* Light scrim behind the text so the (black) title stays readable
@@ -140,8 +149,8 @@
 
 /* ─── Responsive ─── */
 @media (max-width: 768px) {
-  .hero {
-    border-radius: 1.25rem;
+  .hero__bg {
+    border-radius: 0 0 1.25rem 1.25rem;
   }
 
   .hero__content {

@@ -1,38 +1,40 @@
-import { useEffect, useRef } from 'react'
-import { Link } from 'react-router-dom'
-import { IconArrowRight } from '@tabler/icons-react'
-import heroPhoto from '../assets/images/kaiten_home.jpg'
-import './Hero.css'
+import { useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
+import { IconArrowRight } from "@tabler/icons-react";
+import heroPhoto from "../assets/images/kaiten_home.png";
+import "./Hero.css";
 
-const REST_COORDS = '43 00 142 00'
-const REST_GROUPS = REST_COORDS.split(' ')
+const REST_COORDS = "43 00 142 00";
+const REST_GROUPS = REST_COORDS.split(" ");
 
 function Hero() {
-  const coordsRef = useRef<HTMLSpanElement>(null)
+  const coordsRef = useRef<HTMLSpanElement>(null);
 
   // Efecto tragaperras al cargar: dígitos aleatorios que se asientan
   // grupo a grupo hasta mostrar las coordenadas reales
   useEffect(() => {
-    const el = coordsRef.current
-    if (!el) return
+    const el = coordsRef.current;
+    if (!el) return;
 
     const randomDigits = (len: number) =>
-      Array.from({ length: len }, () => Math.floor(Math.random() * 10)).join('')
+      Array.from({ length: len }, () => Math.floor(Math.random() * 10)).join(
+        "",
+      );
 
-    const lockTicks = [14, 22, 30, 38]
-    let tick = 0
+    const lockTicks = [14, 22, 30, 38];
+    let tick = 0;
     const intervalId = window.setInterval(() => {
-      tick++
+      tick++;
       el.textContent = REST_GROUPS.map((group, i) =>
         tick >= lockTicks[i] ? group : randomDigits(group.length),
-      ).join(' ')
+      ).join(" ");
       if (tick >= lockTicks[lockTicks.length - 1]) {
-        window.clearInterval(intervalId)
+        window.clearInterval(intervalId);
       }
-    }, 60)
+    }, 60);
 
-    return () => window.clearInterval(intervalId)
-  }, [])
+    return () => window.clearInterval(intervalId);
+  }, []);
 
   return (
     <section className="hero">
@@ -72,7 +74,7 @@ function Hero() {
       </span>
       <span className="hero__side hero__side--right">Your Line. Your Way.</span>
     </section>
-  )
+  );
 }
 
-export default Hero
+export default Hero;

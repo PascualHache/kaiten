@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import { IconMenu2, IconX } from "@tabler/icons-react";
 import PromoBanner from "./PromoBanner";
 import logoKaiten from "../assets/logos/logo_text.png";
@@ -11,11 +11,27 @@ const NAV_LINKS = [
   { to: "/faq", label: "FAQs" },
 ];
 
+const SCROLL_THRESHOLD = 40;
+
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const { pathname } = useLocation();
+
+  // Navbar flota transparente sobre el Hero de Home hasta que se hace scroll
+  useEffect(() => {
+    function onScroll() {
+      setScrolled(window.scrollY > SCROLL_THRESHOLD);
+    }
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const transparent = pathname === "/" && !scrolled;
 
   return (
-    <header className="navbar">
+    <header className={`navbar${transparent ? " navbar--transparent" : ""}`}>
       <PromoBanner />
       <div className="navbar__inner">
         {/* Left: menu toggle */}
@@ -32,6 +48,24 @@ function Navbar() {
               <IconMenu2 size={22} stroke={2} />
             )}
           </button>
+
+          {/* Dropdown menu */}
+          {menuOpen && (
+            <div className="navbar__menu">
+              {NAV_LINKS.map(({ to, label }) => (
+                <NavLink
+                  key={to}
+                  to={to}
+                  className={({ isActive }) =>
+                    `navbar__menu-item${isActive ? " navbar__menu-item--active" : ""}`
+                  }
+                  onClick={() => setMenuOpen(false)}
+                >
+                  {label}
+                </NavLink>
+              ))}
+            </div>
+          )}
         </div>
 
         {/* Center: wordmark */}
@@ -66,24 +100,6 @@ function Navbar() {
           </Link>
         </div>
       </div>
-
-      {/* Dropdown menu */}
-      {menuOpen && (
-        <div className="navbar__menu">
-          {NAV_LINKS.map(({ to, label }) => (
-            <NavLink
-              key={to}
-              to={to}
-              className={({ isActive }) =>
-                `navbar__menu-item${isActive ? " navbar__menu-item--active" : ""}`
-              }
-              onClick={() => setMenuOpen(false)}
-            >
-              {label}
-            </NavLink>
-          ))}
-        </div>
-      )}
     </header>
   );
 }

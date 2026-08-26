@@ -8,6 +8,15 @@
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-bottom: 1px solid rgba(29, 43, 0, 0.1);
+  transition: background-color 0.3s, backdrop-filter 0.3s, border-color 0.3s;
+}
+
+/* Floats over the Home hero photo until the page scrolls */
+.navbar--transparent {
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border-bottom-color: transparent;
 }
 
 /* ─── Inner bar ──────────────────────────────────────── */
@@ -28,6 +37,7 @@
 
 .navbar__left {
   flex: 1;
+  position: relative;
   display: flex;
   align-items: center;
 }
@@ -138,28 +148,34 @@
   opacity: 0.65;
 }
 
-/* ─── Mobile menu ────────────────────────────────────── */
+/* ─── Menu dropdown ──────────────────────────────────── */
+/* Anchored under the hamburger toggle — a simple dropdown for now,
+   not a full design pass */
 
 .navbar__menu {
-  border-top: 1px solid rgba(29, 43, 0, 0.08);
+  position: absolute;
+  top: calc(100% + 0.75rem);
+  left: 0;
+  z-index: 60;
+  min-width: 190px;
+  padding: 0.4rem;
   display: flex;
   flex-direction: column;
-  background: rgba(230, 229, 225, 0.97);
+  background: var(--color-cream);
+  border: 1px solid rgba(29, 43, 0, 0.08);
+  border-radius: 0.75rem;
+  box-shadow: 0 16px 32px rgba(29, 43, 0, 0.18);
 }
 
 .navbar__menu-item {
   display: block;
-  padding: 1rem 40px;
+  padding: 0.7rem 0.9rem;
+  border-radius: 0.5rem;
   color: var(--color-forest);
   text-decoration: none;
   font-size: 0.9rem;
   font-weight: 500;
-  border-bottom: 1px solid rgba(29, 43, 0, 0.06);
   transition: background-color 0.15s;
-}
-
-.navbar__menu-item:last-child {
-  border-bottom: none;
 }
 
 .navbar__menu-item:hover {
@@ -180,9 +196,5 @@
 
   .navbar__lang {
     display: none;
-  }
-
-  .navbar__menu-item {
-    padding: 1rem 20px;
   }
 }
