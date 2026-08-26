@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import { IconMenu2, IconX } from "@tabler/icons-react";
 import PromoBanner from "./PromoBanner";
 import logoKaiten from "../assets/logos/logo_text.png";
@@ -11,28 +11,62 @@ const NAV_LINKS = [
   { to: "/faq", label: "FAQs" },
 ];
 
+const SCROLL_THRESHOLD = 40;
+
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const { pathname } = useLocation();
+
+  // Navbar flota transparente sobre el Hero de Home hasta que se hace scroll
+  useEffect(() => {
+    function onScroll() {
+      setScrolled(window.scrollY > SCROLL_THRESHOLD);
+    }
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const transparent = pathname === "/" && !scrolled;
 
   return (
-    <header className="navbar">
+    <header className={`navbar${transparent ? " navbar--transparent" : ""}`}>
       <PromoBanner />
       <div className="navbar__inner">
-        {/* Left: nav links */}
-        <nav className="navbar__nav" aria-label="Navegación principal">
-          {NAV_LINKS.map(({ to, label }) => (
-            <NavLink
-              key={to}
-              to={to}
-              className={({ isActive }) =>
-                `navbar__nav-link${isActive ? " navbar__nav-link--active" : ""}`
-              }
-            >
-              {label}
-              <span className="navbar__nav-indicator" aria-hidden="true" />
-            </NavLink>
-          ))}
-        </nav>
+        {/* Left: menu toggle */}
+        <div className="navbar__left">
+          <button
+            type="button"
+            className="navbar__menu-toggle"
+            aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"}
+            onClick={() => setMenuOpen(!menuOpen)}
+          >
+            {menuOpen ? (
+              <IconX size={22} stroke={2} />
+            ) : (
+              <IconMenu2 size={22} stroke={2} />
+            )}
+          </button>
+
+          {/* Dropdown menu */}
+          {menuOpen && (
+            <div className="navbar__menu">
+              {NAV_LINKS.map(({ to, label }) => (
+                <NavLink
+                  key={to}
+                  to={to}
+                  className={({ isActive }) =>
+                    `navbar__menu-item${isActive ? " navbar__menu-item--active" : ""}`
+                  }
+                  onClick={() => setMenuOpen(false)}
+                >
+                  {label}
+                </NavLink>
+              ))}
+            </div>
+          )}
+        </div>
 
         {/* Center: wordmark */}
         <Link to="/" className="navbar__logo">
@@ -64,38 +98,8 @@ function Navbar() {
           <Link to="/reservas" className="navbar__reserve-btn">
             Reservar
           </Link>
-          <button
-            type="button"
-            className="navbar__menu-toggle"
-            aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"}
-            onClick={() => setMenuOpen(!menuOpen)}
-          >
-            {menuOpen ? (
-              <IconX size={22} stroke={2} />
-            ) : (
-              <IconMenu2 size={22} stroke={2} />
-            )}
-          </button>
         </div>
       </div>
-
-      {/* Mobile menu */}
-      {menuOpen && (
-        <div className="navbar__menu">
-          {NAV_LINKS.map(({ to, label }) => (
-            <NavLink
-              key={to}
-              to={to}
-              className={({ isActive }) =>
-                `navbar__menu-item${isActive ? " navbar__menu-item--active" : ""}`
-              }
-              onClick={() => setMenuOpen(false)}
-            >
-              {label}
-            </NavLink>
-          ))}
-        </div>
-      )}
     </header>
   );
 }

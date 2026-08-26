@@ -56,27 +56,14 @@
   color: var(--color-lavender-dark);
 }
 
-/* Tariff grid */
+/* Tariff grid: direction: rtl fills each row right-to-left (2 per row)
+   while keeping card DOM order sequential for the number badges */
 .tarifas__grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: clamp(1.5rem, 4vw, 3rem);
   padding: clamp(1.5rem, 4vw, 3rem) 0;
-}
-
-.tarifas__column-title {
-  margin: 0 0 1.5rem;
-  font-size: 1rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--color-lavender-dark);
-}
-
-.tarifas__cards {
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
+  direction: rtl;
 }
 
 /* Tariff card */
@@ -88,6 +75,7 @@
   border-radius: 0.75rem;
   /* Uniform card height = image (250px) + vertical padding */
   height: calc(250px + 2rem);
+  direction: ltr;
 }
 
 .tariff-card__media {
@@ -103,7 +91,6 @@
   height: 100%;
   object-fit: cover;
   object-position: center;
-  filter: grayscale(1);
 }
 
 .tariff-card__body {
@@ -160,7 +147,7 @@
 
 .tariff-card__footer {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: space-between;
   gap: 1rem;
   margin-top: auto;
@@ -171,9 +158,11 @@
   font-weight: 700;
   color: var(--color-lavender);
   margin: 0;
+  min-width: 0;
 }
 
 .tariff-card__price-note {
+  display: block;
   font-size: 0.8rem;
   font-weight: 500;
   color: rgba(29, 43, 0, 0.6);
