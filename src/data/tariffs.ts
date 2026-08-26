@@ -54,8 +54,8 @@ export const TARIFFS: Tariff[] = [
   },
   {
     id: 'half-day',
-    number: '03',
-    category: 'privada',
+    number: '04',
+    category: 'especial',
     slug: 'full-day-half-day-en-baqueira',
     title: 'Half Day 4h',
     features: [
@@ -67,8 +67,8 @@ export const TARIFFS: Tariff[] = [
   },
   {
     id: 'freeride',
-    number: '04',
-    category: 'especial',
+    number: '05',
+    category: 'privada',
     slug: 'freeride-en-baqueira',
     title: 'Freeride 4h',
     features: [
@@ -80,7 +80,7 @@ export const TARIFFS: Tariff[] = [
   },
   {
     id: 'kids-family',
-    number: '05',
+    number: '06',
     category: 'especial',
     slug: 'friends-family',
     title: 'Kids & Friends & Family',
@@ -94,7 +94,7 @@ export const TARIFFS: Tariff[] = [
   },
   {
     id: 'kaiten-programs',
-    number: '06',
+    number: '07',
     category: 'privada',
     slug: 'experiencia-kaiten-2.5',
     title: 'Kaiten Programs',
@@ -109,7 +109,7 @@ export const TARIFFS: Tariff[] = [
   },
   {
     id: 'tardeo',
-    number: '07',
+    number: '08',
     category: 'especial',
     slug: 'experiencia-de-tardeo-20',
     title: 'Tardeo (-15%)',
@@ -122,7 +122,7 @@ export const TARIFFS: Tariff[] = [
   },
   {
     id: 'equipment-consultancy',
-    number: '08',
+    number: '09',
     category: 'especial',
     slug: 'asesoramiento-compra-material-ski',
     title: 'Equipment Consultancy',
