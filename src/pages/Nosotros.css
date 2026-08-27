@@ -36,6 +36,7 @@
   font-size: clamp(0.85rem, 1.2vw, 0.95rem);
   line-height: 1.7;
   color: #111;
+  text-align: justify;
 }
 
 .nosotros__intro-p:last-child {
@@ -109,7 +110,7 @@
 
 .nosotros__card-heading {
   margin: 0;
-  font-size: clamp(1.3rem, 2.4vw, 1.9rem);
+  font-size: clamp(1.05rem, 1.9vw, 1.5rem);
   font-weight: 700;
   line-height: 1.1;
   letter-spacing: -0.02em;
@@ -156,9 +157,9 @@
 
 .nosotros__card-quote {
   margin: 0 0 0.6rem;
-  font-size: clamp(1rem, 1.8vw, 1.35rem);
+  font-size: clamp(0.85rem, 1.3vw, 1.05rem);
   font-weight: 700;
-  line-height: 1.2;
+  line-height: 1.25;
   color: var(--color-cream);
 }
 
@@ -176,7 +177,7 @@
 
 .nosotros__title {
   margin: 0 0 0.5rem;
-  font-size: clamp(2rem, 5.5vw, 4.25rem);
+  font-size: clamp(1.75rem, 4.5vw, 3.5rem);
   font-weight: 700;
   letter-spacing: -0.025em;
   line-height: 0.97;
@@ -230,6 +231,7 @@
   font-size: clamp(0.85rem, 1.2vw, 0.95rem);
   line-height: 1.6;
   color: #111;
+  text-align: justify;
 }
 
 .nosotros__story-p:last-child {
@@ -238,6 +240,16 @@
 
 .nosotros__story-p strong {
   font-weight: 700;
+}
+
+/* Standalone label lines (e.g. "KAITEN.") that open a chapter — styled as
+   a subtitle rather than a plain bold paragraph */
+.nosotros__story-label {
+  display: block;
+  font-size: clamp(1.15rem, 2.2vw, 1.5rem);
+  letter-spacing: 0.03em;
+  line-height: 1.35;
+  text-align: left;
 }
 
 /* Foto de Naiara: alta, esquinas rectas, fija mientras se lee */
