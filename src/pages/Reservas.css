@@ -38,7 +38,7 @@
 .reservas__table {
   /* Shared column template: header row and body rows are independent grids,
      so they only align if both use exactly these tracks (no auto sizing) */
-  --reservas-cols: 1.9fr 0.9fr 0.6fr 1.7fr 8rem 9.5rem;
+  --reservas-cols: minmax(0, 1.9fr) minmax(0, 0.9fr) minmax(0, 0.6fr) minmax(0, 1.7fr) 9.5rem 9.5rem;
   display: block;
   width: 100%;
   border-collapse: collapse;
@@ -106,6 +106,7 @@ tbody tr:first-child .reservas__outer-cell {
 .reservas__col-pax,
 .reservas__col-level,
 .reservas__col-price {
+  min-width: 0;
   padding: 1.1rem 1.25rem;
   font-size: 0.875rem;
   color: var(--color-forest);
@@ -119,6 +120,15 @@ tbody tr:first-child .reservas__outer-cell {
   gap: 0.4rem;
   font-weight: 700;
   font-size: 0.95rem;
+  min-width: 0;
+}
+
+/* Long badge labels (e.g. "Fuera de pista") wrap instead of forcing the
+   column — and the whole row — wider than its grid track */
+.reservas__col-name .tag {
+  max-width: 100%;
+  white-space: normal;
+  text-align: left;
 }
 
 .reservas__col-level {
@@ -131,7 +141,6 @@ tbody tr:first-child .reservas__outer-cell {
 .reservas__col-price {
   font-weight: 700;
   color: var(--color-lavender-dark);
-  white-space: nowrap;
 }
 
 /* "Conocer más" button */
@@ -214,7 +223,7 @@ tbody tr:first-child .reservas__outer-cell {
 @media (max-width: 900px) {
   .reservas__table {
     /* Nivel column hidden: name, duración, personas, precio, botón */
-    --reservas-cols: 1.6fr 1fr 0.7fr 7rem 9rem;
+    --reservas-cols: minmax(0, 1.6fr) minmax(0, 1fr) minmax(0, 0.7fr) 8.5rem 9rem;
   }
 
   .reservas__hide-md,
@@ -226,7 +235,7 @@ tbody tr:first-child .reservas__outer-cell {
 @media (max-width: 640px) {
   .reservas__table {
     /* Personas column also hidden: name, duración, precio, botón */
-    --reservas-cols: 1.4fr 1fr 6rem 3.5rem;
+    --reservas-cols: minmax(0, 1.4fr) minmax(0, 1fr) 7rem 3.5rem;
   }
 
   .reservas__hide-sm,
