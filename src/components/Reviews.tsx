@@ -1,4 +1,5 @@
-import { IconStar, IconBrandGoogle } from "@tabler/icons-react";
+import { Link } from "react-router-dom";
+import { IconStar, IconBrandGoogle, IconArrowRight } from "@tabler/icons-react";
 import "./Reviews.css";
 
 interface Review {
@@ -22,20 +23,6 @@ const REVIEWS: Review[] = [
     rating: 5,
     text: "El Full Day fue perfecto. Recorrimos zonas de Baqueira que jamás hubiera encontrado solo. Completamente personalizado al nivel de cada uno.",
     date: "Febrero 2025",
-    source: "google",
-  },
-  {
-    author: "Marta S.",
-    rating: 5,
-    text: "Fuimos en familia con niños de 6 y 9 años. La flexibilidad y la atención fueron impecables. Los niños quedaron encantados y ya quieren volver.",
-    date: "Diciembre 2024",
-    source: "google",
-  },
-  {
-    author: "Diego F.",
-    rating: 5,
-    text: "El programa Kaiten 2.5 ha sido lo mejor que he hecho este invierno. Progresé de forma visible y constante en cada sesión. Lo recomiendo sin dudarlo.",
-    date: "Enero 2025",
     source: "google",
   },
 ];
@@ -72,17 +59,33 @@ function Reviews() {
         </div>
       </header>
 
-      <div className="reviews__grid">
-        {REVIEWS.map((r, i) => (
-          <article key={i} className="review-card">
-            <Stars count={r.rating} />
-            <p className="review-card__text">"{r.text}"</p>
-            <footer className="review-card__footer">
-              <span className="review-card__author">{r.author}</span>
-              <span className="review-card__date">{r.date}</span>
-            </footer>
-          </article>
-        ))}
+      <div className="reviews__body">
+        <div className="reviews__grid">
+          {REVIEWS.map((r, i) => (
+            <article key={i} className="review-card">
+              <Stars count={r.rating} />
+              <p className="review-card__text">"{r.text}"</p>
+              <footer className="review-card__footer">
+                <span className="review-card__author">{r.author}</span>
+                <span className="review-card__date">{r.date}</span>
+              </footer>
+            </article>
+          ))}
+        </div>
+
+        <div className="reviews__phrases">
+          <p className="reviews__phrase-title">
+            Una buena clase no termina cuando te quitas los esquís.
+          </p>
+          <span className="reviews__phrase-rule" aria-hidden="true" />
+          <p className="reviews__phrase-text">
+            Empieza cuando quieres volver mañana.
+          </p>
+          <Link to="/reservas" className="reviews__phrase-link">
+            Reserva tu experiencia
+            <IconArrowRight size={16} stroke={2} />
+          </Link>
+        </div>
       </div>
     </section>
   );
