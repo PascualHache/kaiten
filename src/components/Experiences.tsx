@@ -6,7 +6,7 @@ import { ACTIVITIES } from '../data/activities'
 import ExperienceDetail from './ExperienceDetail'
 import './Experiences.css'
 
-const PAGE_SIZE = 4
+const PAGE_SIZE = 5
 const PAGE_COUNT = Math.ceil(SERVICES.length / PAGE_SIZE)
 
 function Experiences() {
@@ -50,11 +50,7 @@ function Experiences() {
       <header className="experiences__header">
         <div className="experiences__heading">
           <p className="experiences__eyebrow">Experiencias</p>
-          <h2 className="experiences__title">
-            Encuentra tu forma
-            <br />
-            de esquiar
-          </h2>
+          <h2 className="experiences__title">Elige tu experiencia</h2>
         </div>
         <div className="experiences__aside">
           <p className="experiences__lead">

@@ -62,7 +62,7 @@ function Hero() {
             Reservar
             <IconArrowRight size={18} stroke={2} />
           </Link>
-          <Link to="/historia" className="hero__btn hero__btn--secondary">
+          <Link to="/nosotros" className="hero__btn hero__btn--secondary">
             CONOCER KAITEN
             <IconArrowRight size={18} stroke={2} />
           </Link>

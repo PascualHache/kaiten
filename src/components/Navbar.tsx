@@ -7,6 +7,7 @@ import "./Navbar.css";
 
 const NAV_LINKS = [
   { to: "/nosotros", label: "Nosotros" },
+  { to: "/tarifas", label: "Tarifas" },
   { to: "/niveles", label: "Niveles" },
   { to: "/faq", label: "FAQs" },
 ];

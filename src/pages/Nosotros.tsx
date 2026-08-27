@@ -42,7 +42,7 @@ const STORY: StoryChapter[] = [
     id: "evolucion",
     heading: "Seis años de evolución",
     paragraphs: [
-      <strong>
+      <strong className="nosotros__story-label">
         APRENDER.
         <br />
         CRECER.
@@ -61,7 +61,7 @@ const STORY: StoryChapter[] = [
     id: "kaiten",
     heading: "Una palabra cambió todo",
     paragraphs: [
-      <strong>KAITEN.</strong>,
+      <strong className="nosotros__story-label">KAITEN.</strong>,
       "En Japón encontré una palabra que resumía exactamente lo que llevaba años viviendo.",
       <>
         KAITEN habla de <strong>cambio, transformación y evolución.</strong>
