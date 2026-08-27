@@ -40,7 +40,7 @@ function HeroFull() {
             <IconArrowRight size={18} stroke={2} />
           </Link>
           <Link
-            to="/historia"
+            to="/nosotros"
             className="hero-full__btn hero-full__btn--secondary"
           >
             CONOCER KAITEN

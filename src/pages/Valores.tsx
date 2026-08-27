@@ -236,7 +236,7 @@ function Valores() {
             <br />
             nos guía
           </h1>
-          <Link to="/historia" className="valores__more">
+          <Link to="/nosotros" className="valores__more">
             Nuestro manifiesto
             <IconArrowRight size={16} stroke={2} />
           </Link>
