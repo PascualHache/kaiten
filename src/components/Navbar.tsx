@@ -44,9 +44,9 @@ function Navbar() {
             onClick={() => setMenuOpen(!menuOpen)}
           >
             {menuOpen ? (
-              <IconX size={22} stroke={2} />
+              <IconX size={26} stroke={2} />
             ) : (
-              <IconMenu2 size={22} stroke={2} />
+              <IconMenu2 size={26} stroke={2} />
             )}
           </button>
 
@@ -94,6 +94,12 @@ function Navbar() {
             </span>
             <button type="button" className="navbar__lang-btn">
               EN
+            </button>
+            <span className="navbar__lang-sep" aria-hidden="true">
+              /
+            </span>
+            <button type="button" className="navbar__lang-btn">
+              CAT
             </button>
           </div>
           <Link to="/reservas" className="navbar__reserve-btn">
