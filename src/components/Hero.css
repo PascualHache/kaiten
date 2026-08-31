@@ -43,22 +43,25 @@
   border: 1px solid var(--color-black);
   border-radius: clamp(1rem, 2.5vw, 1.5rem);
   pointer-events: none;
+  /* Gap sized in fixed rem (not %) so it always covers the side labels'
+     rendered height — a percentage gap would shrink along with a short
+     viewport and let the border/background cut through the vertical text. */
   mask-image: linear-gradient(
     to bottom,
     black 0%,
-    black 40%,
-    transparent 40%,
-    transparent 60%,
-    black 60%,
+    black calc(50% - 9rem),
+    transparent calc(50% - 9rem),
+    transparent calc(50% + 9rem),
+    black calc(50% + 9rem),
     black 100%
   );
   -webkit-mask-image: linear-gradient(
     to bottom,
     black 0%,
-    black 40%,
-    transparent 40%,
-    transparent 60%,
-    black 60%,
+    black calc(50% - 9rem),
+    transparent calc(50% - 9rem),
+    transparent calc(50% + 9rem),
+    black calc(50% + 9rem),
     black 100%
   );
 }
