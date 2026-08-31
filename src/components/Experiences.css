@@ -51,15 +51,6 @@
   flex-shrink: 0;
 }
 
-.experiences__nav-count {
-  font-size: 0.85rem;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-  color: var(--color-lavender-dark);
-  min-width: 2.5rem;
-  text-align: center;
-}
-
 .experiences__nav-btn {
   display: flex;
   align-items: center;
@@ -76,6 +67,15 @@
 
 .experiences__nav-btn:hover {
   background-color: rgba(0, 0, 0, 0.08);
+}
+
+.experiences__nav-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.experiences__nav-btn:disabled:hover {
+  background-color: transparent;
 }
 
 .experiences__nav-btn--primary {
@@ -99,23 +99,43 @@
   gap: 0.75rem;
   height: clamp(26rem, 55vh, 34rem);
   scroll-margin-top: calc(var(--navbar-height) + 1.5rem);
-  animation: experiences-row-slide-in 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.45s ease-in-out;
+  transform: translateX(0);
 }
 
-@keyframes experiences-row-slide-in {
-  from {
-    opacity: 0;
-    transform: translateX(calc(var(--slide-dir, 1) * 4rem));
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
+.experiences__row--no-transition {
+  transition: none;
+}
+
+/* Minimalist carousel shift: a 6th (incoming/outgoing) card is rendered
+   alongside the usual 5 and pinned to a fixed 1/5-of-row width so it doesn't
+   get squeezed by flex-grow, then the whole row eases by exactly one card's
+   width — nothing ever fades out or disappears mid-shift. */
+.experiences__row--sliding .experience-card {
+  flex: 0 0 calc((100% - 4 * 0.75rem) / 5);
+  pointer-events: none;
+}
+
+/* .experience-card normally transitions its `flex` value (for the
+   active-card expand/collapse). While the fixed slide width above is being
+   applied or released, that transition would fight the swap and produce a
+   momentary squeeze — so it's switched off for the handful of frames where
+   the value actually changes, and restored once things have settled. */
+.experiences__row--lock-card-transition .experience-card {
+  transition: none;
+}
+
+.experiences__row--shifted {
+  transform: translateX(calc(-1 * (20% + 0.15rem)));
 }
 
 /* Active card's detail, shown below the row */
 .experiences__detail {
   animation: experiences-detail-in 0.4s ease;
+}
+
+.experiences__detail--closing {
+  animation: experiences-detail-out 0.2s ease forwards;
 }
 
 @keyframes experiences-detail-in {
@@ -126,6 +146,17 @@
   to {
     opacity: 1;
     transform: none;
+  }
+}
+
+@keyframes experiences-detail-out {
+  from {
+    opacity: 1;
+    transform: none;
+  }
+  to {
+    opacity: 0;
+    transform: translateY(8px);
   }
 }
 
@@ -277,18 +308,18 @@
   .experiences__row {
     flex-direction: column;
     height: auto;
-    animation-name: experiences-row-slide-in-v;
   }
 
-  @keyframes experiences-row-slide-in-v {
-    from {
-      opacity: 0;
-      transform: translateY(calc(var(--slide-dir, 1) * 2rem));
-    }
-    to {
-      opacity: 1;
-      transform: none;
-    }
+  /* Cards already have a fixed height in this layout, so the shift is a
+     constant length (card height + gap) instead of the desktop's
+     percentage-based slot width. */
+  .experiences__row--shifted {
+    transform: translateY(-6.75rem);
+  }
+
+  .experiences__row--sliding .experience-card {
+    flex: none;
+    height: 6rem;
   }
 
   .experience-card {

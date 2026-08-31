@@ -102,7 +102,7 @@
 
 .navbar__lang-btn--active {
   color: var(--color-forest);
-  border-bottom-color: var(--color-lime);
+  font-weight: 700;
 }
 
 .navbar__lang-sep {
