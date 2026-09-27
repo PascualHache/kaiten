@@ -46,7 +46,7 @@ Todo lo demás del audit sigue aplicando.
    - Safari
    - Freeride
    - Kids & Friends & Family
-   - Tardeo (-15%)
+   - Tardeo (-25%)
    - Asesoramiento de Material (Equipment Consultancy)
 
 7. **Página Equipo (nueva)**

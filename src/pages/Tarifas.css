@@ -58,133 +58,94 @@
 
 /* Tariff grid: direction: rtl fills each row right-to-left (2 per row)
    while keeping card DOM order sequential for the number badges */
-.tarifas__grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: clamp(1.5rem, 4vw, 3rem);
-  padding: clamp(1.5rem, 4vw, 3rem) 0;
-  direction: rtl;
+/* ─── Tarifas table (same row grammar as the Niveles table) ─── */
+.tarifas__table-section {
+  padding-top: clamp(0.5rem, 2vw, 1rem);
 }
 
-/* Tariff card */
-.tariff-card {
-  display: flex;
-  gap: 1.25rem;
-  padding: 1rem;
-  border: 1px solid rgba(133, 127, 157, 0.4);
-  border-radius: 0.75rem;
-  /* Uniform card height = image (250px) + vertical padding */
-  height: calc(250px + 2rem);
-  direction: ltr;
-}
-
-.tariff-card__media {
-  flex: 0 0 250px;
-  width: 250px;
-  height: 250px;
-  border-radius: 0.5rem;
-  overflow: hidden;
-}
-
-.tariff-card__media img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-}
-
-.tariff-card__body {
-  flex: 1;
-  min-width: 0;
+.tarifas-table {
   display: flex;
   flex-direction: column;
 }
 
-.tariff-card__number {
-  font-size: 0.85rem;
-  font-weight: 700;
-  color: var(--color-lavender-dark);
+.tarifas-table__row {
+  display: grid;
+  grid-template-columns: 4rem 1.6fr 1fr 1.3fr;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 0.95rem 0;
+  border-top: 1px solid rgba(29, 43, 0, 0.1);
 }
 
-.tariff-card__title {
-  margin: 0.35rem 0 0.75rem;
-  font-size: 1.05rem;
+.tarifas-table__row--head {
+  border-top: none;
+  padding-bottom: 0.5rem;
+}
+
+.tarifas-table__col-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-lavender);
+}
+
+.tarifas-table__number {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: rgba(29, 43, 0, 0.45);
+}
+
+.tarifas-table__name {
+  min-width: 0;
+  font-size: 0.85rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.02em;
   color: var(--color-forest);
 }
 
-.tariff-card__subtitle {
-  display: block;
-  font-size: 0.7rem;
-  font-weight: 600;
-  color: rgba(29, 43, 0, 0.6);
+.tarifas-table__link {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s;
 }
 
-.tariff-card__features {
-  list-style: none;
-  margin: 0 0 1rem;
-  padding: 0;
+.tarifas-table__link:hover {
+  border-bottom-color: var(--color-lavender);
+}
+
+.tarifas-table__price {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--color-forest);
+}
+
+.tarifas-table__price-note {
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: var(--color-lavender-dark);
+}
+
+.tarifas-table__extra {
   display: flex;
   flex-direction: column;
-  gap: 0.2rem;
-}
-
-.tariff-card__feature {
-  position: relative;
-  padding-left: 0.85rem;
-  font-size: 0.78rem;
-  line-height: 1.35;
+  gap: 0.15rem;
+  font-size: 0.8rem;
   color: rgba(29, 43, 0, 0.75);
 }
 
-.tariff-card__feature::before {
-  content: '-';
-  position: absolute;
-  left: 0;
+.tarifas-table__max {
+  color: var(--color-lavender-dark);
 }
 
-.tariff-card__footer {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 1rem;
-  margin-top: auto;
-}
-
-.tariff-card__price {
-  font-size: clamp(1.35rem, 2.5vw, 1.75rem);
-  font-weight: 700;
-  color: var(--color-lavender);
-  margin: 0;
-  min-width: 0;
-}
-
-.tariff-card__price-note {
-  display: block;
+.tarifas__note {
+  margin: 1.25rem 0 0;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(29, 43, 0, 0.1);
   font-size: 0.8rem;
-  font-weight: 500;
-  color: rgba(29, 43, 0, 0.6);
-}
-
-.tariff-card__reserve {
-  flex-shrink: 0;
-  padding: 0.5rem 1rem;
-  background-color: var(--color-lavender);
-  color: var(--color-cream);
-  border: none;
-  border-radius: 0.3rem;
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-  cursor: pointer;
-  font-family: inherit;
-  transition: opacity 0.2s;
-}
-
-.tariff-card__reserve:hover {
-  opacity: 0.88;
+  color: var(--color-lavender-dark);
 }
 
 /* Niveles */
@@ -197,24 +158,6 @@
 .tarifas__niveles--page {
   padding-top: 0;
   border-top: none;
-}
-
-.tarifas__niveles-title {
-  margin: 0;
-  font-size: clamp(1.5rem, 3vw, 2rem);
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  color: var(--color-lavender);
-}
-
-.tarifas__niveles-sub {
-  margin: 0.25rem 0 1.5rem;
-  font-size: 0.75rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--color-lavender);
-  opacity: 0.8;
 }
 
 .niveles-table {
@@ -308,23 +251,28 @@
 
 /* Responsive */
 @media (max-width: 900px) {
-  .tarifas__grid {
-    grid-template-columns: 1fr;
+  .tarifas-table__row {
+    grid-template-columns: 3rem 1.4fr 1fr;
+    gap: 0.75rem 1rem;
+  }
+
+  .tarifas-table__extra {
+    grid-column: 2 / -1;
+  }
+
+  .tarifas-table__row--head {
+    display: none;
   }
 }
 
 @media (max-width: 640px) {
-  .tariff-card {
-    flex-direction: column;
-    height: auto;
+  .tarifas-table__row {
+    grid-template-columns: 3rem 1fr;
   }
 
-  .tariff-card__media {
-    flex-basis: auto;
-    width: 100%;
-    max-width: 250px;
-    height: 250px;
-    margin: 0 auto;
+  .tarifas-table__price,
+  .tarifas-table__extra {
+    grid-column: 2;
   }
 
   .niveles-table__row,

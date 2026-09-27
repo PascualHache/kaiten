@@ -1,34 +1,36 @@
-import { Link } from 'react-router-dom'
-import { IconArrowRight } from '@tabler/icons-react'
-import logoText from '../assets/logos/logo_text.png'
-import './Footer.css'
+import { Link } from "react-router-dom";
+import { IconArrowRight } from "@tabler/icons-react";
+import logoText from "../assets/logos/logo_text.png";
+import "./Footer.css";
 
-const LIVE_CAMS_URL = 'https://www.baqueira.es/en/webcams'
+const LIVE_CAMS_URL = "https://www.baqueira.es/en/webcams";
 
 const SPOTIFY_URL =
-  'https://open.spotify.com/playlist/07BMCGGFCarURRFnUIOlbx?si=BqZCksIdT6OFuF5yvjs42A'
+  "https://open.spotify.com/playlist/07BMCGGFCarURRFnUIOlbx?si=BqZCksIdT6OFuF5yvjs42A";
 
 const EXPERIENCES = [
-  { label: 'Clases Privadas', hash: 'clases-particulares-en-baqueira' },
-  { label: 'Kids & Friends & Family', hash: 'friends-family' },
-  { label: 'Kaiten Programs', hash: 'experiencia-kaiten-2.5' },
-  { label: 'Tardeo (-15%)', hash: 'experiencia-de-tardeo-20' },
-  { label: 'Full Day · Safari · Freeride', hash: '' },
-  { label: 'Asesoramiento de material', hash: 'asesoramiento-compra-material-ski' },
-]
+  { label: "Clases Privadas", hash: "clases-particulares-en-baqueira" },
+  { label: "Kids & Friends & Family", hash: "friends-family" },
+  { label: "Kaiten Programs", hash: "experiencia-kaiten-2.5" },
+  { label: "Tardeo (-25%)", hash: "experiencia-de-tardeo-20" },
+  { label: "Full Day · Safari · Freeride", hash: "" },
+  {
+    label: "Asesoramiento de material",
+    hash: "asesoramiento-compra-material-ski",
+  },
+];
 
 const NAV_LINKS = [
-  { label: 'Nosotros', to: '/nosotros' },
-  { label: 'Tarifas', to: '/tarifas' },
-  { label: 'Niveles', to: '/niveles' },
-  { label: 'Preguntas frecuentes', to: '/faq' },
-  { label: 'Reservas', to: '/reservas' },
-]
+  { label: "Nosotros", to: "/nosotros" },
+  { label: "Tarifas", to: "/tarifas" },
+  { label: "Niveles", to: "/niveles" },
+  { label: "Preguntas frecuentes", to: "/faq" },
+  { label: "Reservas", to: "/reservas" },
+];
 
 function Footer() {
   return (
     <footer className="footer">
-
       {/* ─── CTA strip ─────────────────────────────────────── */}
       <div className="footer__cta">
         <div className="footer__cta-left">
@@ -37,11 +39,17 @@ function Footer() {
           <p className="footer__cta-sub">We call it The Kaiten Line.</p>
         </div>
         <div className="footer__cta-actions">
-          <Link to="/reservas" className="footer__cta-btn footer__cta-btn--primary">
+          <Link
+            to="/reservas"
+            className="footer__cta-btn footer__cta-btn--primary"
+          >
             Reservar
             <IconArrowRight size={16} stroke={2} />
           </Link>
-          <a href="tel:+34699820954" className="footer__cta-btn footer__cta-btn--outline">
+          <a
+            href="tel:+34699820954"
+            className="footer__cta-btn footer__cta-btn--outline"
+          >
             Llámanos
           </a>
         </div>
@@ -51,19 +59,25 @@ function Footer() {
 
       {/* ─── Body grid ─────────────────────────────────────── */}
       <div className="footer__body">
-
         {/* Brand */}
         <div className="footer__brand">
           <Link to="/" className="footer__brand-name">
             <img src={logoText} alt="Kaiten" loading="lazy" decoding="async" />
           </Link>
           <p className="footer__brand-desc">
-            La primera escuela de Baqueira Beret donde eliges a tu profesor antes de reservar.
+            La primera escuela de Baqueira Beret donde eliges a tu profesor
+            antes de reservar.
           </p>
           <div className="footer__contact">
-            <a href="tel:+34699820954" className="footer__contact-item">+34 699 820 954</a>
-            <a href="mailto:hola@kaiten.es" className="footer__contact-item">hola@kaiten.es</a>
-            <span className="footer__contact-item">Baqueira Beret · Val d'Aran</span>
+            <a href="tel:+34699820954" className="footer__contact-item">
+              +34 699 820 954
+            </a>
+            <a href="mailto:hola@kaiten.es" className="footer__contact-item">
+              hola@kaiten.es
+            </a>
+            <span className="footer__contact-item">
+              Baqueira Beret · Val d'Aran
+            </span>
           </div>
           <div className="footer__socials">
             <a
@@ -84,7 +98,12 @@ function Footer() {
             >
               WA
             </a>
-            <span className="footer__social-pill" aria-label="Valoración 5 de 5 en Google">★ 5.0</span>
+            <span
+              className="footer__social-pill"
+              aria-label="Valoración 5 de 5 en Google"
+            >
+              ★ 5.0
+            </span>
           </div>
         </div>
 
@@ -94,7 +113,7 @@ function Footer() {
           {EXPERIENCES.map((e) => (
             <Link
               key={e.label}
-              to={e.hash ? `/reservas#${e.hash}` : '/reservas'}
+              to={e.hash ? `/reservas#${e.hash}` : "/reservas"}
               className="footer__link"
             >
               {e.label}
@@ -153,9 +172,8 @@ function Footer() {
       <div className="footer__watermark" aria-hidden="true">
         <img src={logoText} alt="" loading="lazy" decoding="async" />
       </div>
-
     </footer>
-  )
+  );
 }
 
-export default Footer
+export default Footer;

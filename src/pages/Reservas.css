@@ -133,8 +133,8 @@ tbody tr:first-child .reservas__outer-cell {
 
 .reservas__col-level {
   display: flex;
-  flex-wrap: wrap;
-  align-content: center;
+  flex-direction: column;
+  align-items: flex-start;
   gap: 0.3rem;
 }
 
@@ -143,7 +143,7 @@ tbody tr:first-child .reservas__outer-cell {
   color: var(--color-lavender-dark);
 }
 
-/* "Conocer más" button */
+/* "Reservar" button */
 .reservas__expand-btn {
   display: flex;
   align-items: center;

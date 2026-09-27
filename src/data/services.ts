@@ -57,7 +57,7 @@ export const SERVICES: Service[] = [
   },
   {
     id: "tardeo",
-    title: "Tardeo (-15%)",
+    title: "Tardeo (-25%)",
     tagline: "Esquí de tarde, más por menos",
     description:
       "Disfruta de Baqueira Beret en horario de tarde, cuando la estación está más despejada y el ritmo es más relajado. Mejor luz, menos afluencia y una tarifa especial con un 15% de descuento.",

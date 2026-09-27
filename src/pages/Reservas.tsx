@@ -4,9 +4,10 @@ import { getCalApi } from '@calcom/embed-react'
 import { IconChevronDown } from '@tabler/icons-react'
 import {
   ACTIVITIES,
-  EXPERIENCE_TYPE_LABELS,
   LEVEL_LABELS,
+  type Level,
 } from '../data/activities'
+import { SERVICES } from '../data/services'
 import { TARIFFS } from '../data/tariffs'
 import ExperienceDetail from '../components/ExperienceDetail'
 import Tag from '../components/Tag'
@@ -17,6 +18,21 @@ import './Reservas.css'
 function getActivityPrice(activity: (typeof ACTIVITIES)[number]) {
   return TARIFFS.find((t) => t.slug === activity.calSlug)?.price ?? '—'
 }
+
+/* Same order as the Home carousel (SERVICES), laid out top-to-bottom.
+   Activities missing from SERVICES keep their data order at the end. */
+const HOME_ORDER = SERVICES.map((s) => s.reservasPath.replace('/reservas/', ''))
+
+const ORDERED_ACTIVITIES = [...ACTIVITIES].sort((a, b) => {
+  const ia = HOME_ORDER.indexOf(a.calSlug)
+  const ib = HOME_ORDER.indexOf(b.calSlug)
+  return (ia === -1 ? HOME_ORDER.length : ia) - (ib === -1 ? HOME_ORDER.length : ib)
+})
+
+const LEVEL_ORDER: Level[] = ['principiante', 'intermedio', 'avanzado']
+
+const sortLevels = (levels: Level[]) =>
+  [...levels].sort((a, b) => LEVEL_ORDER.indexOf(a) - LEVEL_ORDER.indexOf(b))
 
 export default function Reservas() {
   const location = useLocation()
@@ -71,7 +87,7 @@ export default function Reservas() {
               </tr>
             </thead>
             <tbody>
-              {ACTIVITIES.map((activity) => {
+              {ORDERED_ACTIVITIES.map((activity) => {
                 const isOpen = activity.calSlug === openSlug
                 const price = getActivityPrice(activity)
                 return (
@@ -88,17 +104,13 @@ export default function Reservas() {
                       >
                         <span className="reservas__col-name">
                           <span className="reservas__name-text">{activity.title}</span>
-                          <Tag
-                            variant={activity.experienceType}
-                            label={EXPERIENCE_TYPE_LABELS[activity.experienceType]}
-                          />
                         </span>
                         <span className="reservas__col-dur">{activity.summary.duration}</span>
                         <span className="reservas__col-pax reservas__hide-sm">
                           {activity.summary.people}
                         </span>
                         <span className="reservas__col-level reservas__hide-md">
-                          {activity.levels.map((level) => (
+                          {sortLevels(activity.levels).map((level) => (
                             <Tag key={level} variant={level} label={LEVEL_LABELS[level]} />
                           ))}
                         </span>
@@ -112,7 +124,7 @@ export default function Reservas() {
                           onClick={() => toggle(activity.calSlug)}
                         >
                           <span className="reservas__expand-label">
-                            {isOpen ? 'Cerrar' : 'Conocer más'}
+                            {isOpen ? 'Cerrar' : 'Reservar'}
                           </span>
                           <IconChevronDown
                             className={`reservas__expand-chevron${isOpen ? ' reservas__expand-chevron--open' : ''}`}
