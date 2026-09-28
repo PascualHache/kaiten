@@ -110,34 +110,69 @@
   color: var(--color-sage);
 }
 
+/* Primary button — "Sombra suave" variant, scaled down to fit the
+   3.25rem navbar (a 56px button would overflow it) */
 .navbar__reserve-btn {
   display: inline-flex;
   align-items: center;
-  padding: 11px 24px;
-  background: var(--color-lime-light);
-  color: var(--color-black);
-  font-family: inherit;
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  border-radius: 6px;
-  text-decoration: none;
+  height: 40px;
+  padding: 0 22px;
   border: none;
+  border-radius: var(--ks-radius-button);
+  background: var(--ks-primary);
+  color: var(--ks-on-primary);
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
   cursor: pointer;
   white-space: nowrap;
-  box-shadow: 0 2px 0 rgba(29, 43, 0, 0.55), 0 6px 14px rgba(29, 43, 0, 0.22);
-  transition: box-shadow 0.2s, transform 0.2s;
+  box-shadow: var(--ks-shadow-button);
+  transition:
+    transform 140ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 140ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    background-color 140ms ease;
 }
 
-.navbar__reserve-btn:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 3px 0 rgba(29, 43, 0, 0.55), 0 10px 20px rgba(29, 43, 0, 0.26);
+/* Pointer devices only — on touch, :hover sticks after a tap */
+@media (hover: hover) {
+  .navbar__reserve-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--ks-shadow-button-hover);
+  }
 }
 
 .navbar__reserve-btn:active {
   transform: translateY(1px);
-  box-shadow: 0 1px 0 rgba(29, 43, 0, 0.55), 0 3px 8px rgba(29, 43, 0, 0.2);
+  background: var(--ks-primary-pressed);
+  box-shadow: var(--ks-shadow-button-pressed);
+  transition-duration: 60ms;
+}
+
+.navbar__reserve-btn:focus-visible {
+  outline: 2px solid var(--ks-on-primary);
+  outline-offset: 3px;
+}
+
+.navbar__reserve-btn:disabled,
+.navbar__reserve-btn[aria-disabled="true"] {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .navbar__reserve-btn {
+    transition: background-color 140ms ease, box-shadow 140ms ease;
+  }
+
+  .navbar__reserve-btn:hover,
+  .navbar__reserve-btn:active {
+    transform: none;
+  }
 }
 
 .navbar__menu-toggle {
