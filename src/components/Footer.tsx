@@ -11,7 +11,7 @@ const SPOTIFY_URL =
 const EXPERIENCES = [
   { label: "Clases Privadas", hash: "clases-particulares-en-baqueira" },
   { label: "Kids & Friends & Family", hash: "friends-family" },
-  { label: "Kaiten Programs", hash: "experiencia-kaiten-2.5" },
+  { label: "Kaiten 2.5", hash: "experiencia-kaiten-2.5" },
   { label: "Tardeo (-25%)", hash: "experiencia-de-tardeo-20" },
   { label: "Full Day · Safari · Freeride", hash: "" },
   {

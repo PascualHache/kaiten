@@ -8,7 +8,7 @@ import {
   type Level,
 } from '../data/activities'
 import { SERVICES } from '../data/services'
-import { TARIFFS } from '../data/tariffs'
+import { findTariff } from '../data/tariffs'
 import ExperienceDetail from '../components/ExperienceDetail'
 import Tag from '../components/Tag'
 import Navbar from '../components/Navbar'
@@ -16,7 +16,7 @@ import Footer from '../components/Footer'
 import './Reservas.css'
 
 function getActivityPrice(activity: (typeof ACTIVITIES)[number]) {
-  return TARIFFS.find((t) => t.slug === activity.calSlug)?.price ?? '—'
+  return findTariff(activity.calSlug)?.price ?? '—'
 }
 
 /* Same order as the Home carousel (SERVICES), laid out top-to-bottom.

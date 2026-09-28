@@ -467,7 +467,7 @@ export const ACTIVITIES: Activity[] = [
   {
     id: "kaiten-2-5",
     calSlug: "experiencia-kaiten-2.5",
-    title: "Kaiten Programs",
+    title: "Kaiten 2.5",
     subtitle: "Nuestros programas de mejora intensiva",
     color: "verde",
     experienceType: "programa",
@@ -476,18 +476,18 @@ export const ACTIVITIES: Activity[] = [
     features: [
       {
         emoji: "🎿",
-        title: "Mejora real, en menos tiempo",
-        desc: "Programas diseñados para que progreses más rápido con sesiones enfocadas y efectivas.",
+        title: "Aprovecha al máximo la nieve",
+        desc: "Este formato está pensado para quienes quieren aprovechar al máximo la nieve, evitando las primeras colas y disfrutando de una clase más completa a un precio más ajustado.",
       },
       {
         emoji: "🔁",
-        title: "Continuidad y método",
-        desc: "Diseñados para generar hábito técnico, confianza y control en cada descenso.",
+        title: "Empieza antes que el resto",
+        desc: "Empezar antes de que comiencen la mayoría de las clases. De esta manera, podemos aprovechar las pistas evitando las primeras colas.",
       },
       {
         emoji: "⭐",
-        title: "Experiencia Kaiten",
-        desc: "Más que horas: es nuestro método, nuestro enfoque y nuestra forma de entender la montaña.",
+        title: "Mejor relación calidad-precio",
+        desc: "Además, las 2 horas y media ofrecen una mejor relación calidad-precio.",
       },
     ],
     info: [

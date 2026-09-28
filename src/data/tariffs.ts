@@ -15,6 +15,19 @@ export interface Tariff {
   maxPeople: string;
 }
 
+/** First tariff row matching an activity's calSlug (rows share a slug when
+    one activity has several formats — the cheapest/shortest comes first). */
+export function findTariff(slug: string): Tariff | undefined {
+  return TARIFFS.find((t) => t.slug === slug);
+}
+
+/** "Desde 64€ / hora" — the entry price shown next to an activity. */
+export function formatFromPrice(slug: string): string {
+  const tariff = findTariff(slug);
+  if (!tariff) return "—";
+  return `Desde ${tariff.price}${tariff.priceNote ? ` ${tariff.priceNote}` : ""}`;
+}
+
 export const TARIFFS: Tariff[] = [
   {
     id: "clases-privadas",
