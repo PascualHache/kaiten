@@ -1,4 +1,5 @@
 import type { Activity } from '../data/activities'
+import { formatFromPrice } from '../data/tariffs'
 import InfoIcon from './InfoIcon'
 
 const CAL_USERNAME = 'aitor-bellver-abenoza-ofg9rm'
@@ -18,7 +19,9 @@ export default function ExperienceDetail({ activity }: Props) {
           )}
         </div>
         <div className="exp-detail__actions">
-          <span className="exp-detail__price">Desde XX €</span>
+          <span className="exp-detail__price">
+            {formatFromPrice(activity.calSlug)}
+          </span>
           <button
             type="button"
             className="exp-detail__reserve"

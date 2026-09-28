@@ -98,8 +98,7 @@
 
 .hero__text {
   margin: 0 0 clamp(1.5rem, 3vw, 2.25rem);
-  font-size: clamp(0.875rem, 1.1vw, 1rem);
-  font-weight: 600;
+  font-size: 12px;
   line-height: 1.5;
   letter-spacing: 0.02em;
   text-transform: uppercase;
@@ -123,18 +122,25 @@
   text-transform: uppercase;
   border-radius: 0.25rem;
   cursor: pointer;
-  transition: background-color 0.2s, color 0.2s, opacity 0.2s;
+  transition: background-color 0.2s, color 0.2s, box-shadow 0.2s, transform 0.2s;
 }
 
 .hero__btn--primary {
   background-color: var(--color-lime-light);
   color: var(--color-black);
-  border: 2px solid var(--color-black);
+  border: none;
+  box-shadow: 0 3px 0 rgba(29, 43, 0, 0.55), 0 8px 18px rgba(29, 43, 0, 0.24);
 }
 
 .hero__btn--primary:hover {
-  opacity: 0.85;
   color: var(--color-black);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 0 rgba(29, 43, 0, 0.55), 0 14px 26px rgba(29, 43, 0, 0.28);
+}
+
+.hero__btn--primary:active {
+  transform: translateY(1px);
+  box-shadow: 0 1px 0 rgba(29, 43, 0, 0.55), 0 4px 10px rgba(29, 43, 0, 0.2);
 }
 
 .hero__btn--secondary {

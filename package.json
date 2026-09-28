@@ -5,9 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "prebuild": "node scripts/check-cal-slugs.mjs",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "check:cal": "node scripts/check-cal-slugs.mjs"
   },
   "dependencies": {
     "@calcom/embed-react": "^1.5.3",

@@ -46,7 +46,7 @@ export const SERVICES: Service[] = [
   },
   {
     id: "kaiten-2-5",
-    title: "Kaiten Programs",
+    title: "Kaiten 2.5",
     tagline: "Nuestros programas de mejora intensiva",
     description:
       "El sello Kaiten en un formato de 2 horas y media. Una sesión intensiva para sacar el máximo partido a tu tiempo en la nieve con seguimiento personalizado.",
@@ -57,7 +57,7 @@ export const SERVICES: Service[] = [
   },
   {
     id: "tardeo",
-    title: "Tardeo (-15%)",
+    title: "Tardeo (-25%)",
     tagline: "Esquí de tarde, más por menos",
     description:
       "Disfruta de Baqueira Beret en horario de tarde, cuando la estación está más despejada y el ritmo es más relajado. Mejor luz, menos afluencia y una tarifa especial con un 15% de descuento.",

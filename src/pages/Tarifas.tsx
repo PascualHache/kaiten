@@ -1,20 +1,8 @@
+import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { TARIFFS } from "../data/tariffs";
-import { SERVICES } from "../data/services";
-import fallbackImage from "../assets/images/kaiten_bg.png";
-import halfDayImage from "../assets/images/historia_full.png";
 import "./Tarifas.css";
-
-const CAL_USERNAME = "aitor-bellver-abenoza-ofg9rm";
-
-function tariffImage(id: string, slug: string): string {
-  if (id === "full-day") return halfDayImage;
-  const service = SERVICES.find(
-    (s) => s.reservasPath.replace("/reservas/", "") === slug,
-  );
-  return service?.image ?? fallbackImage;
-}
 
 function Tarifas() {
   return (
@@ -28,54 +16,47 @@ function Tarifas() {
           Todas las experiencias incluyen: Instructor titulado · Seguro de RC ·
           Atención personalizada
         </p>
-        <section className="tarifas__grid">
-          {TARIFFS.map((t) => (
-            <article key={t.id} className="tariff-card">
-              <div className="tariff-card__media">
-                <img
-                  src={tariffImage(t.id, t.slug)}
-                  alt=""
-                  loading="lazy"
-                  decoding="async"
-                />
-              </div>
-              <div className="tariff-card__body">
-                <span className="tariff-card__number" aria-hidden="true">{t.number}</span>
-                <h3 className="tariff-card__title">
-                  {t.title}
-                  {t.subtitle && (
-                    <span className="tariff-card__subtitle">({t.subtitle})</span>
-                  )}
-                </h3>
-                <ul className="tariff-card__features">
-                  {t.features.map((f) => (
-                    <li key={f} className="tariff-card__feature">
-                      {f}
-                    </li>
-                  ))}
-                </ul>
-                <div className="tariff-card__footer">
-                  <p className="tariff-card__price">
-                    {t.price}
-                    {t.priceNote && (
-                      <span className="tariff-card__price-note">
-                        {t.priceNote}
-                      </span>
-                    )}
-                  </p>
-                  <button
-                    type="button"
-                    className="tariff-card__reserve"
-                    data-cal-namespace={t.slug}
-                    data-cal-link={`${CAL_USERNAME}/${t.slug}`}
-                    data-cal-config='{"theme":"light"}'
+
+        <section className="tarifas__table-section">
+          <div className="tarifas-table">
+            <div className="tarifas-table__row tarifas-table__row--head">
+              <span />
+              <span className="tarifas-table__col-label">Experiencia</span>
+              <span className="tarifas-table__col-label">Tarifa por persona</span>
+              <span className="tarifas-table__col-label">Extra / persona</span>
+            </div>
+            {TARIFFS.map((t) => (
+              <div key={t.id} className="tarifas-table__row">
+                <span className="tarifas-table__number" aria-hidden="true">
+                  {t.number}
+                </span>
+                <div className="tarifas-table__name">
+                  <Link
+                    className="tarifas-table__link"
+                    to={`/reservas#${t.slug}`}
                   >
-                    Reservar
-                  </button>
+                    {t.title}
+                  </Link>
+                </div>
+                <div className="tarifas-table__price">
+                  {t.price}
+                  {t.priceNote && (
+                    <span className="tarifas-table__price-note">
+                      {" "}
+                      {t.priceNote}
+                    </span>
+                  )}
+                </div>
+                <div className="tarifas-table__extra">
+                  {t.extra && <span>{t.extra}</span>}
+                  <span className="tarifas-table__max">{t.maxPeople}</span>
                 </div>
               </div>
-            </article>
-          ))}
+            ))}
+          </div>
+          <p className="tarifas__note">
+            *Consultar para grupos de más personas
+          </p>
         </section>
       </main>
       <Footer />

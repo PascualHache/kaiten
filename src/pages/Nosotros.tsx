@@ -9,8 +9,8 @@ import {
 } from "@tabler/icons-react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import aitorImage from "../assets/images/aitor.png";
-import historiaImage from "../assets/images/historia.png";
+import aitorImage from "../assets/images/aitor.jpg";
+import historiaImage from "../assets/images/historia.jpg";
 import naiaraImage from "../assets/images/naiara.png";
 import logoSquared from "../assets/logos/logo_squared.png";
 import "./Nosotros.css";

@@ -1,585 +1,591 @@
-export type Color = 'verde' | 'naranja'
+export type Color = "verde" | "naranja";
 
 export interface Feature {
-  emoji: string
-  title: string
-  desc: string | string[]
+  emoji: string;
+  title: string;
+  desc: string | string[];
 }
 
 export interface InfoItem {
-  emoji: string
-  label: string
-  content: string | string[]
+  emoji: string;
+  label: string;
+  content: string | string[];
 }
 
 export interface Format {
-  name: string
-  schedule: string
-  label: string
-  hours: string
-  featured?: boolean
-  note?: string
+  name: string;
+  schedule: string;
+  label: string;
+  hours: string;
+  featured?: boolean;
+  note?: string;
 }
 
-export type Level = 'principiante' | 'intermedio' | 'avanzado'
+export type Level = "principiante" | "intermedio" | "avanzado";
 
 export const LEVEL_LABELS: Record<Level, string> = {
-  principiante: 'Principiante',
-  intermedio: 'Intermedio',
-  avanzado: 'Avanzado',
-}
+  principiante: "Principiante",
+  intermedio: "Intermedio",
+  avanzado: "Avanzado",
+};
 
 export type ExperienceType =
-  | 'jornada'
-  | 'guiado'
-  | 'clase'
-  | 'fuera-pista'
-  | 'grupo'
-  | 'especial'
-  | 'programa'
-  | 'online'
+  | "jornada"
+  | "guiado"
+  | "clase"
+  | "fuera-pista"
+  | "grupo"
+  | "especial"
+  | "programa"
+  | "online";
 
 export const EXPERIENCE_TYPE_LABELS: Record<ExperienceType, string> = {
-  jornada: 'Jornada',
-  guiado: 'Guiado',
-  clase: 'Clase',
-  'fuera-pista': 'Fuera de pista',
-  grupo: 'En grupo',
-  especial: 'Especial',
-  programa: 'Programa',
-  online: 'Online',
-}
+  jornada: "Jornada",
+  guiado: "Guiado",
+  clase: "Clase",
+  "fuera-pista": "Fuera de pista",
+  grupo: "En grupo",
+  especial: "Especial",
+  programa: "Programa",
+  online: "Online",
+};
 
 export interface Activity {
-  id: string
-  calSlug: string
-  title: string
-  subtitle?: string
-  color: Color
-  experienceType: ExperienceType
-  levels: Level[]
+  id: string;
+  calSlug: string;
+  title: string;
+  subtitle?: string;
+  color: Color;
+  experienceType: ExperienceType;
+  levels: Level[];
   summary: {
-    duration: string
-    people: string
-  }
-  features: Feature[]
-  formats?: Format[]
-  info: InfoItem[]
+    duration: string;
+    people: string;
+  };
+  features: Feature[];
+  formats?: Format[];
+  info: InfoItem[];
   cta: {
-    headline: string
-    subline: string
-    buttonText: string
-  }
+    headline: string;
+    subline: string;
+    buttonText: string;
+  };
 }
 
 export const ACTIVITIES: Activity[] = [
   {
-    id: 'full-day',
-    calSlug: 'full-day-half-day-en-baqueira',
-    title: 'Full Day | Half Day',
-    color: 'verde',
-    experienceType: 'jornada',
-    levels: ['principiante', 'intermedio', 'avanzado'],
-    summary: { duration: 'Medio día · Día completo', people: '1 – 4' },
+    id: "full-day",
+    calSlug: "full-day-half-day-en-baqueira",
+    title: "Full Day | Half Day",
+    color: "verde",
+    experienceType: "jornada",
+    levels: ["principiante", "intermedio", "avanzado"],
+    summary: { duration: "Medio día · Día completo", people: "1 – 4" },
     features: [
       {
-        emoji: '🎿',
-        title: 'Un día completo para mejorar de verdad',
-        desc: 'Una experiencia de esquí intensiva en Baqueira Beret donde combinamos técnica, práctica y disfrute durante toda la jornada, siempre acompañado por un profesional.',
+        emoji: "🎿",
+        title: "Un día completo para mejorar de verdad",
+        desc: "Una experiencia de esquí intensiva en Baqueira Beret donde combinamos técnica, práctica y disfrute durante toda la jornada, siempre acompañado por un profesional.",
       },
       {
-        emoji: '🦅',
-        title: 'Evolución real en un solo día',
-        desc: 'El trabajo continuo y el feedback constante permiten una mejora mucho más rápida y sólida que en sesiones cortas.',
+        emoji: "🦅",
+        title: "Evolución real en un solo día",
+        desc: "El trabajo continuo y el feedback constante permiten una mejora mucho más rápida y sólida que en sesiones cortas.",
       },
       {
-        emoji: '⛰️',
-        title: 'Esquí, aprendizaje y recorrido de estación',
-        desc: 'No es una clase rígida. Es una experiencia dinámica donde alternamos técnica y exploración de diferentes zonas según condiciones y progresión.',
+        emoji: "⛰️",
+        title: "Esquí, aprendizaje y recorrido de estación",
+        desc: "No es una clase rígida. Es una experiencia dinámica donde alternamos técnica y exploración de diferentes zonas según condiciones y progresión.",
       },
     ],
     info: [
       {
-        emoji: '🎯',
-        label: 'Enfoque',
-        content: 'Mejora técnica + conocimiento de la estación durante una jornada completa.',
+        emoji: "🎯",
+        label: "Enfoque",
+        content:
+          "Mejora técnica + conocimiento de la estación durante una jornada completa.",
       },
       {
-        emoji: '⏱️',
-        label: 'Duración',
+        emoji: "⏱️",
+        label: "Duración",
         content: [
-          'Half Day: media jornada de esquí con enfoque técnico y práctico.',
-          'Full Day: día completo de esquí con progresión continua y adaptación al ritmo del cliente.',
+          "Half Day: media jornada de esquí con enfoque técnico y práctico.",
+          "Full Day: día completo de esquí con progresión continua y adaptación al ritmo del cliente.",
         ],
       },
       {
-        emoji: '🎿',
-        label: 'Nivel',
-        content: 'Todos los niveles. La experiencia se adapta completamente al nivel y objetivos del esquiador.',
+        emoji: "🎿",
+        label: "Nivel",
+        content:
+          "Todos los niveles. La experiencia se adapta completamente al nivel y objetivos del esquiador.",
       },
       {
-        emoji: '👥',
-        label: 'Participantes',
-        content: 'Desde 1 persona hasta pequeños grupos (recomendado máximo 4 personas para un trabajo más efectivo).',
+        emoji: "👥",
+        label: "Participantes",
+        content:
+          "Desde 1 persona hasta pequeños grupos (recomendado máximo 4 personas para un trabajo más efectivo).",
       },
       {
-        emoji: '🎓',
-        label: 'Qué lo diferencia del Safari',
+        emoji: "🎓",
+        label: "Qué lo diferencia del Safari",
         content: [
-          'Safari → descubrir la estación con posibilidad de juntar miembros de diferentes niveles',
-          'Full Day → mejorar tu esquí mientras la recorres',
+          "Safari → descubrir la estación con posibilidad de juntar miembros de diferentes niveles",
+          "Full Day → mejorar tu esquí mientras la recorres",
         ],
       },
       {
-        emoji: '🍽️',
-        label: 'Pausa comida',
-        content: 'Incluida en modalidad Full Day, con ritmo flexible según el grupo. (Comida no incluida)',
+        emoji: "🍽️",
+        label: "Pausa comida",
+        content:
+          "Incluida en modalidad Full Day, con ritmo flexible según el grupo. (Comida no incluida)",
       },
       {
-        emoji: '💡',
-        label: 'Ventaja del formato',
-        content: 'Más horas seguidas de práctica = evolución más rápida, estable y visible.',
+        emoji: "💡",
+        label: "Ventaja del formato",
+        content:
+          "Más horas seguidas de práctica = evolución más rápida, estable y visible.",
       },
     ],
     cta: {
-      headline: 'Un día para mejorar de verdad',
-      subline: 'Esquí, progresión y disfrute en una experiencia completamente personalizada en Baqueira.',
-      buttonText: 'Reservar',
+      headline: "Un día para mejorar de verdad",
+      subline:
+        "Esquí, progresión y disfrute en una experiencia completamente personalizada en Baqueira.",
+      buttonText: "Reservar",
     },
   },
   {
-    id: 'safari',
-    calSlug: 'safari-en-baqueira',
-    title: 'Safari',
-    color: 'verde',
-    experienceType: 'guiado',
-    levels: ['intermedio', 'avanzado'],
-    summary: { duration: '3 h · 6 h', people: '1 – 4' },
+    id: "safari",
+    calSlug: "safari-en-baqueira",
+    title: "Safari",
+    color: "verde",
+    experienceType: "guiado",
+    levels: ["intermedio", "avanzado"],
+    summary: { duration: "3 h · 6 h", people: "1 – 4" },
     features: [
       {
-        emoji: '⛰️',
-        title: 'Explora Baqueira como un local',
-        desc: 'Descubre los mejores rincones, pistas y recorridos de la estación acompañado por expertos que conocen Baqueira al detalle.',
+        emoji: "⛰️",
+        title: "Explora Baqueira como un local",
+        desc: "Descubre los mejores rincones, pistas y recorridos de la estación acompañado por expertos que conocen Baqueira al detalle.",
       },
       {
-        emoji: '🦅',
-        title: 'Más esquí, menos tiempo perdido',
-        desc: 'Aprovecha cada minuto en la nieve. Te guiamos por las mejores zonas según las condiciones del día, evitando colas y desplazamientos innecesarios.',
+        emoji: "🦅",
+        title: "Más esquí, menos tiempo perdido",
+        desc: "Aprovecha cada minuto en la nieve. Te guiamos por las mejores zonas según las condiciones del día, evitando colas y desplazamientos innecesarios.",
       },
       {
-        emoji: '✨',
-        title: 'Una experiencia diseñada para ti',
-        desc: 'Recorridos personalizados según tu nivel, ritmo e intereses. Tú solo te preocupas de disfrutar.',
+        emoji: "✨",
+        title: "Una experiencia diseñada para ti",
+        desc: "Recorridos personalizados según tu nivel, ritmo e intereses. Tú solo te preocupas de disfrutar.",
       },
     ],
     info: [
       {
-        emoji: '🎿',
-        label: 'Nivel mínimo',
-        content: 'Poder descender pistas azules con fluidez.',
+        emoji: "🎿",
+        label: "Nivel mínimo",
+        content: "Poder descender pistas azules con fluidez.",
       },
       {
-        emoji: '⏱️',
-        label: 'Duración',
+        emoji: "⏱️",
+        label: "Duración",
         content: [
-          '3 horas: descubrimiento de un sector (Beret o Bonaigua).',
-          '6 horas: recorrido general por gran parte de la estación.',
+          "3 horas: descubrimiento de un sector (Beret o Bonaigua).",
+          "6 horas: recorrido general por gran parte de la estación.",
         ],
       },
       {
-        emoji: '👥',
-        label: 'Participantes',
-        content: 'Desde 1 persona - Recomendado hasta 4 participantes por grupo.',
+        emoji: "👥",
+        label: "Participantes",
+        content:
+          "Desde 1 persona - Recomendado hasta 4 participantes por grupo.",
       },
       {
-        emoji: '🎓',
-        label: 'No es una clase de esquí',
-        content: 'Conoce la estación como un local, optimiza tu tiempo en la nieve y disfruta de una experiencia totalmente personalizada.',
+        emoji: "🎓",
+        label: "No es una clase de esquí",
+        content:
+          "Conoce la estación como un local, optimiza tu tiempo en la nieve y disfruta de una experiencia totalmente personalizada.",
       },
     ],
     cta: {
-      headline: 'Descubre Baqueira como un local',
-      subline: '',
-      buttonText: 'Reservar',
+      headline: "Descubre Baqueira como un local",
+      subline: "",
+      buttonText: "Reservar",
     },
   },
   {
-    id: 'clases-particulares',
-    calSlug: 'clases-particulares-en-baqueira',
-    title: 'Clases Privadas',
-    color: 'verde',
-    experienceType: 'clase',
-    levels: ['principiante', 'intermedio', 'avanzado'],
-    summary: { duration: 'Horas a tu medida', people: '1 – 4' },
+    id: "clases-particulares",
+    calSlug: "clases-particulares-en-baqueira",
+    title: "Clases Privadas",
+    color: "verde",
+    experienceType: "clase",
+    levels: ["principiante", "intermedio", "avanzado"],
+    summary: { duration: "Horas a tu medida", people: "1 – 4" },
     features: [
       {
-        emoji: '🎯',
-        title: 'Mejora tu esquí desde el primer minuto',
-        desc: 'Un servicio totalmente personalizado pensado para que progreses rápido y de forma eficaz. Analizamos tu nivel, detectamos lo que necesitas y trabajamos contigo en cada bajada.',
+        emoji: "🎯",
+        title: "Mejora tu esquí desde el primer minuto",
+        desc: "Un servicio totalmente personalizado pensado para que progreses rápido y de forma eficaz. Analizamos tu nivel, detectamos lo que necesitas y trabajamos contigo en cada bajada.",
       },
       {
-        emoji: '🦅',
-        title: 'Atención total, corrección constante',
-        desc: 'Todo gira en torno a ti. Recibes feedback continuo en tiempo real para corregir errores, ganar confianza y mejorar tu técnica de forma visible.',
+        emoji: "🦅",
+        title: "Atención total, corrección constante",
+        desc: "Todo gira en torno a ti. Recibes feedback continuo en tiempo real para corregir errores, ganar confianza y mejorar tu técnica de forma visible.",
       },
       {
-        emoji: '🚀',
-        title: 'La forma más rápida de evolucionar en la nieve',
-        desc: 'Es el formato con mayor capacidad de mejora: más control, más seguridad y más disfrute en pista desde el primer día.',
+        emoji: "🚀",
+        title: "La forma más rápida de evolucionar en la nieve",
+        desc: "Es el formato con mayor capacidad de mejora: más control, más seguridad y más disfrute en pista desde el primer día.",
       },
     ],
     info: [
       {
-        emoji: '🎿',
-        label: 'Nivel y edad',
-        content: 'Sin mínimo ni máximo. Desde principiantes hasta esquiadores avanzados de cualquier edad.',
+        emoji: "🎿",
+        label: "Nivel y edad",
+        content:
+          "Sin mínimo ni máximo. Desde principiantes hasta esquiadores avanzados de cualquier edad.",
       },
       {
-        emoji: '👥',
-        label: 'Participantes',
+        emoji: "👥",
+        label: "Participantes",
         content: [
-          'Desde 1 persona hasta 4 por grupo (consultar para más personas).',
-          'Lo importante es que el nivel sea homogéneo para garantizar una progresión efectiva.',
+          "Desde 1 persona hasta 4 por grupo (consultar para más personas).",
+          "Lo importante es que el nivel sea homogéneo para garantizar una progresión efectiva.",
         ],
       },
       {
-        emoji: '⏱️',
-        label: 'Duración',
+        emoji: "⏱️",
+        label: "Duración",
         content: [
-          'Sin mínimo ni máximo de horas.',
-          'Recomendación: sesiones de al menos 2 horas y en varios días consecutivos para maximizar la evolución.',
+          "Sin mínimo ni máximo de horas.",
+          "Recomendación: sesiones de al menos 2 horas y en varios días consecutivos para maximizar la evolución.",
         ],
       },
     ],
     cta: {
-      headline: 'Aprende más en menos tiempo',
-      subline: 'Más confianza, más control y una evolución real en cada sesión.',
-      buttonText: 'Reservar',
+      headline: "Aprende más en menos tiempo",
+      subline:
+        "Más confianza, más control y una evolución real en cada sesión.",
+      buttonText: "Reservar",
     },
   },
   {
-    id: 'freeride',
-    calSlug: 'freeride-en-baqueira',
-    title: 'Freeride',
-    color: 'naranja',
-    experienceType: 'fuera-pista',
-    levels: ['intermedio', 'avanzado'],
-    summary: { duration: '4 h · Día completo', people: '1 – 4' },
+    id: "freeride",
+    calSlug: "freeride-en-baqueira",
+    title: "Freeride",
+    color: "naranja",
+    experienceType: "fuera-pista",
+    levels: ["intermedio", "avanzado"],
+    summary: { duration: "4 h · Día completo", people: "1 – 4" },
     features: [
       {
-        emoji: '❄️',
-        title: 'Explora la montaña en su estado más puro',
-        desc: 'Descubre Baqueira Beret más allá de las pistas. Una experiencia fuera de pista, donde cada bajada es un desafío.',
+        emoji: "❄️",
+        title: "Explora la montaña en su estado más puro",
+        desc: "Descubre Baqueira Beret más allá de las pistas. Una experiencia fuera de pista, donde cada bajada es un desafío.",
       },
       {
-        emoji: '🦅',
-        title: 'Más libertad, más control, más montaña',
-        desc: 'Te guiamos por zonas junto a pista e itinerarios de freeride adaptados a tu nivel, combinando seguridad, progresión y disfrute en cada descenso.',
+        emoji: "🦅",
+        title: "Más libertad, más control, más montaña",
+        desc: "Te guiamos por zonas junto a pista e itinerarios de freeride adaptados a tu nivel, combinando seguridad, progresión y disfrute en cada descenso.",
       },
       {
-        emoji: '⛰️',
-        title: 'Una experiencia para progresar en el fuera de pista',
-        desc: 'Aprenderás a leer la montaña, elegir líneas y moverte con criterio en nieve no pisada, siempre acompañado por profesionales.',
+        emoji: "⛰️",
+        title: "Una experiencia para progresar en el fuera de pista",
+        desc: "Aprenderás a leer la montaña, elegir líneas y moverte con criterio en nieve no pisada, siempre acompañado por profesionales.",
       },
     ],
     info: [
       {
-        emoji: '🎿',
-        label: 'Nivel mínimo',
-        content: 'Nivel intermedio-alto en pista (control en pistas rojas), no importa que sea tu primera vez haciendo freeride.',
+        emoji: "🎿",
+        label: "Nivel mínimo",
+        content:
+          "Nivel intermedio-alto en pista (control en pistas rojas), no importa que sea tu primera vez haciendo freeride.",
       },
       {
-        emoji: '⏱️',
-        label: 'Duración',
+        emoji: "⏱️",
+        label: "Duración",
         content: [
-          '4 horas mínimo: iniciación o progresión en freeride en zonas controladas.',
-          'Día completo: experiencia más completa con mayor recorrido y variedad de terrenos.',
+          "4 horas mínimo: iniciación o progresión en freeride en zonas controladas.",
+          "Día completo: experiencia más completa con mayor recorrido y variedad de terrenos.",
         ],
       },
       {
-        emoji: '👥',
-        label: 'Participantes',
-        content: 'Desde 1 persona hasta 4 (consultar para más personas).',
+        emoji: "👥",
+        label: "Participantes",
+        content: "Desde 1 persona hasta 4 (consultar para más personas).",
       },
       {
-        emoji: '🎓',
-        label: 'Qué es esta experiencia',
-        content: 'No es solo esquiar fuera de pista: es aprender a moverse en montaña, leer el terreno y tomar decisiones en nieve no pisada.',
+        emoji: "🎓",
+        label: "Qué es esta experiencia",
+        content:
+          "No es solo esquiar fuera de pista: es aprender a moverse en montaña, leer el terreno y tomar decisiones en nieve no pisada.",
       },
       {
-        emoji: '❌',
-        label: 'No incluye',
-        content: 'Desplazamientos, material de seguridad (ARVA, pala y sonda).',
+        emoji: "❌",
+        label: "No incluye",
+        content: "Desplazamientos, material de seguridad (ARVA, pala y sonda).",
       },
     ],
     cta: {
-      headline: 'Vive la montaña de otra forma',
-      subline: 'Sensación de libertad, líneas únicas y la experiencia de esquiar la nieve más pura de Baqueira Beret.',
-      buttonText: 'Reservar',
+      headline: "Vive la montaña de otra forma",
+      subline:
+        "Sensación de libertad, líneas únicas y la experiencia de esquiar la nieve más pura de Baqueira Beret.",
+      buttonText: "Reservar",
     },
   },
   {
-    id: 'friends-family',
-    calSlug: 'friends-family',
-    title: 'Kids & Friends & Family',
-    color: 'verde',
-    experienceType: 'grupo',
-    levels: ['principiante', 'intermedio', 'avanzado'],
-    summary: { duration: 'Horas a tu medida', people: '1 – 4' },
+    id: "friends-family",
+    calSlug: "friends-family",
+    title: "Kids & Friends & Family",
+    color: "verde",
+    experienceType: "grupo",
+    levels: ["principiante", "intermedio", "avanzado"],
+    summary: { duration: "Horas a tu medida", people: "1 – 4" },
     features: [
       {
-        emoji: '🎿',
-        title: 'Aprende y disfruta con los tuyos',
-        desc: 'Una experiencia de esquí en grupo pensada para amigos o familia, donde combinas aprendizaje, diversión y la comodidad de estar acompañado por los tuyos.',
+        emoji: "🎿",
+        title: "Aprende y disfruta con los tuyos",
+        desc: "Una experiencia de esquí en grupo pensada para amigos o familia, donde combinas aprendizaje, diversión y la comodidad de estar acompañado por los tuyos.",
       },
       {
-        emoji: '🦅',
-        title: 'Progresión sin perder la parte social',
+        emoji: "🦅",
+        title: "Progresión sin perder la parte social",
         desc: [
-          'Cada persona progresa a su ritmo dentro de una dinámica flexible, adaptando la clase para que todos sumen, disfruten y evolucionen.',
-          'Nivel iniciación → primeros pasos en la nieve',
-          'Nivel intermedio → evolución y control',
-          'Nivel avanzado → perfeccionamiento',
+          "Cada persona progresa a su ritmo dentro de una dinámica flexible, adaptando la clase para que todos sumen, disfruten y evolucionen.",
+          "Nivel iniciación → primeros pasos en la nieve",
+          "Nivel intermedio → evolución y control",
+          "Nivel avanzado → perfeccionamiento",
         ],
       },
       {
-        emoji: '⛰️',
-        title: 'Un equilibrio perfecto entre aprendizaje y diversión',
-        desc: 'Un formato que combina evolución técnica real con un ambiente relajado y cercano en la nieve.',
+        emoji: "⛰️",
+        title: "Un equilibrio perfecto entre aprendizaje y diversión",
+        desc: "Un formato que combina evolución técnica real con un ambiente relajado y cercano en la nieve.",
       },
     ],
     info: [
       {
-        emoji: '👥',
-        label: 'Tipo de grupo',
-        content: 'Grupos cerrados (no clases abiertas). Vas siempre con tu propio grupo de amigos o familia.',
+        emoji: "👥",
+        label: "Tipo de grupo",
+        content:
+          "Grupos cerrados (no clases abiertas). Vas siempre con tu propio grupo de amigos o familia.",
       },
       {
-        emoji: '🎿',
-        label: 'Niveles',
+        emoji: "🎿",
+        label: "Niveles",
         content: [
-          'Iniciación, intermedio y avanzado.',
-          'Es posible mezclar niveles, aunque se recomienda que sean lo más homogéneos posible para una mejor progresión.',
+          "Iniciación, intermedio y avanzado.",
+          "Es posible mezclar niveles, aunque se recomienda que sean lo más homogéneos posible para una mejor progresión.",
         ],
       },
       {
-        emoji: '⏱️',
-        label: 'Duración',
+        emoji: "⏱️",
+        label: "Duración",
         content: [
-          'Sin mínimo ni máximo de horas.',
-          'Recomendación: sesiones de al menos 2 horas y en varios días consecutivos para maximizar la evolución.',
-          'Cuanto más tiempo en pista, mayor será la evolución y el aprovechamiento.',
+          "Sin mínimo ni máximo de horas.",
+          "Recomendación: sesiones de al menos 2 horas y en varios días consecutivos para maximizar la evolución.",
+          "Cuanto más tiempo en pista, mayor será la evolución y el aprovechamiento.",
         ],
       },
       {
-        emoji: '👥',
-        label: 'Participantes',
-        content: 'Máximo 4 personas por grupo (consultar para más personas).',
+        emoji: "👥",
+        label: "Participantes",
+        content: "Máximo 4 personas por grupo (consultar para más personas).",
       },
       {
-        emoji: '🎓',
-        label: 'Qué es este formato',
-        content: 'No es una clase colectiva abierta. Es un grupo privado donde se adapta la enseñanza al nivel y dinámica de tu propio grupo.',
+        emoji: "🎓",
+        label: "Qué es este formato",
+        content:
+          "No es una clase colectiva abierta. Es un grupo privado donde se adapta la enseñanza al nivel y dinámica de tu propio grupo.",
       },
     ],
     cta: {
-      headline: 'Comparte la nieve con los tuyos',
-      subline: 'Aprende, mejora y disfruta en grupo con una experiencia flexible, divertida y totalmente adaptada.',
-      buttonText: 'Reservar',
+      headline: "Comparte la nieve con los tuyos",
+      subline:
+        "Aprende, mejora y disfruta en grupo con una experiencia flexible, divertida y totalmente adaptada.",
+      buttonText: "Reservar",
     },
   },
   {
-    id: 'tardeo',
-    calSlug: 'experiencia-de-tardeo-20',
-    title: 'Tardeo (-15%)',
-    color: 'verde',
-    experienceType: 'especial',
-    levels: ['principiante', 'intermedio', 'avanzado'],
-    summary: { duration: 'Desde las 14:00', people: '1 – 4' },
+    id: "tardeo",
+    calSlug: "experiencia-de-tardeo-20",
+    title: "Tardeo (-25%)",
+    color: "verde",
+    experienceType: "especial",
+    levels: ["principiante", "intermedio", "avanzado"],
+    summary: { duration: "Desde las 14:00", people: "1 – 4" },
     features: [
       {
-        emoji: '🎿',
-        title: 'Esquí más tranquilo, fluido y agradable',
-        desc: 'Una experiencia pensada para disfrutar de Baqueira Beret en horario de tarde, cuando la estación está más despejada y el ritmo es más relajado.',
+        emoji: "🎿",
+        title: "Esquí más tranquilo, fluido y agradable",
+        desc: "Una experiencia pensada para disfrutar de Baqueira Beret en horario de tarde, cuando la estación está más despejada y el ritmo es más relajado.",
       },
       {
-        emoji: '📷',
-        title: 'Mejor luz y menos afluencia',
-        desc: 'Esquía con pistas más vacías y aprovecha una luz perfecta para disfrutar del paisaje y hacer fotos en un entorno más bonito y tranquilo.',
+        emoji: "📷",
+        title: "Mejor luz y menos afluencia",
+        desc: "Esquía con pistas más vacías y aprovecha una luz perfecta para disfrutar del paisaje y hacer fotos en un entorno más bonito y tranquilo.",
       },
       {
-        emoji: '💰',
-        title: 'Tarifa especial con 15% de descuento',
-        desc: 'Disfruta de esta experiencia en horario de tarde con un precio reducido del 15% respecto al horario habitual.',
+        emoji: "💰",
+        title: "Tarifa especial con 15% de descuento",
+        desc: "Disfruta de esta experiencia en horario de tarde con un precio reducido del 15% respecto al horario habitual.",
       },
     ],
     info: [
       {
-        emoji: '🎿',
-        label: 'Nivel',
-        content: 'Sin mínimo ni máximo. Desde principiantes hasta esquiadores avanzados de cualquier edad.',
+        emoji: "🎿",
+        label: "Nivel",
+        content:
+          "Sin mínimo ni máximo. Desde principiantes hasta esquiadores avanzados de cualquier edad.",
       },
       {
-        emoji: '👥',
-        label: 'Participantes',
+        emoji: "👥",
+        label: "Participantes",
         content: [
-          'Desde 1 persona hasta 4 por grupo (consultar para más personas).',
-          'Lo importante es que el nivel sea homogéneo para garantizar una progresión efectiva.',
+          "Desde 1 persona hasta 4 por grupo (consultar para más personas).",
+          "Lo importante es que el nivel sea homogéneo para garantizar una progresión efectiva.",
         ],
       },
       {
-        emoji: '⏱️',
-        label: 'Duración',
-        content: 'Sin mínimo ni máximo de horas. Experiencia en horario de tarde (desde las 2pm).',
+        emoji: "⏱️",
+        label: "Duración",
+        content:
+          "Sin mínimo ni máximo de horas. Experiencia en horario de tarde (desde las 2pm).",
       },
       {
-        emoji: '🎓',
-        label: 'Qué es esta experiencia',
-        content: 'No es un producto técnico específico, sino una forma optimizada de esquiar en la estación en el mejor momento del día.',
+        emoji: "🎓",
+        label: "Qué es esta experiencia",
+        content:
+          "No es un producto técnico específico, sino una forma optimizada de esquiar en la estación en el mejor momento del día.",
       },
     ],
     cta: {
-      headline: 'Esquí con más calma y mejores sensaciones',
-      subline: 'Menos colas, más fluidez y una experiencia más relajada en Baqueira Beret.',
-      buttonText: 'Reservar',
+      headline: "Esquí con más calma y mejores sensaciones",
+      subline:
+        "Menos colas, más fluidez y una experiencia más relajada en Baqueira Beret.",
+      buttonText: "Reservar",
     },
   },
   {
-    id: 'kaiten-2-5',
-    calSlug: 'experiencia-kaiten-2.5',
-    title: 'Kaiten Programs',
-    subtitle: 'Nuestros programas de mejora intensiva',
-    color: 'verde',
-    experienceType: 'programa',
-    levels: ['principiante', 'intermedio', 'avanzado'],
-    summary: { duration: '2 – 3 días', people: '1 – 4' },
+    id: "kaiten-2-5",
+    calSlug: "experiencia-kaiten-2.5",
+    title: "Kaiten 2.5",
+    subtitle: "Nuestros programas de mejora intensiva",
+    color: "verde",
+    experienceType: "programa",
+    levels: ["principiante", "intermedio", "avanzado"],
+    summary: { duration: "2 – 3 días", people: "1 – 4" },
     features: [
       {
-        emoji: '🎿',
-        title: 'Mejora real, en menos tiempo',
-        desc: 'Programas diseñados para que progreses más rápido con sesiones enfocadas y efectivas.',
+        emoji: "🎿",
+        title: "Aprovecha al máximo la nieve",
+        desc: "Este formato está pensado para quienes quieren aprovechar al máximo la nieve, evitando las primeras colas y disfrutando de una clase más completa a un precio más ajustado.",
       },
       {
-        emoji: '🔁',
-        title: 'Continuidad y método',
-        desc: 'Diseñados para generar hábito técnico, confianza y control en cada descenso.',
+        emoji: "🔁",
+        title: "Empieza antes que el resto",
+        desc: "Empezar antes de que comiencen la mayoría de las clases. De esta manera, podemos aprovechar las pistas evitando las primeras colas.",
       },
       {
-        emoji: '⭐',
-        title: 'Experiencia Kaiten',
-        desc: 'Más que horas: es nuestro método, nuestro enfoque y nuestra forma de entender la montaña.',
-      },
-    ],
-    formats: [
-      {
-        name: 'Kaiten 2.3',
-        schedule: '2 días · 3 h/día',
-        label: 'Fin de semana intenso',
-        hours: '6 horas',
-      },
-      {
-        name: 'Kaiten 3.2',
-        schedule: '3 días · 2 h/día',
-        label: 'Progresión inteligente',
-        hours: '6 horas',
-        featured: true,
-      },
-      {
-        name: 'Kaiten 3.3',
-        schedule: '3 días · 3 h/día',
-        label: 'Intensivo total',
-        hours: '9 horas',
+        emoji: "⭐",
+        title: "Mejor relación calidad-precio",
+        desc: "Además, las 2 horas y media ofrecen una mejor relación calidad-precio.",
       },
     ],
     info: [
       {
-        emoji: '👥',
-        label: 'Participantes',
-        content: 'Desde 1 persona hasta 4 (consultar para más personas).',
+        emoji: "👥",
+        label: "Participantes",
+        content: "Desde 1 persona hasta 4 (consultar para más personas).",
       },
       {
-        emoji: '🎿',
-        label: 'Nivel y edad',
-        content: 'Todos los niveles. Adaptamos el programa a tus objetivos.',
+        emoji: "🎿",
+        label: "Nivel y edad",
+        content: "Todos los niveles. Adaptamos el programa a tus objetivos.",
       },
       {
-        emoji: '⏱️',
-        label: 'Duración',
-        content: 'Según el formato elegido. Horarios flexibles dentro de la franja disponible.',
+        emoji: "⏱️",
+        label: "Duración",
+        content:
+          "Según el formato elegido. Horarios flexibles dentro de la franja disponible.",
       },
       {
-        emoji: '🎓',
-        label: 'Qué incluye',
-        content: 'Profesor experto, seguimiento técnico, consejos personalizados y mucho más.',
+        emoji: "🎓",
+        label: "Qué incluye",
+        content:
+          "Profesor experto, seguimiento técnico, consejos personalizados y mucho más.",
       },
       {
-        emoji: '🏆',
-        label: 'Ventaja Kaiten',
-        content: 'Método propio, progreso real y disfrute asegurado en cada sesión.',
+        emoji: "🏆",
+        label: "Ventaja Kaiten",
+        content:
+          "Método propio, progreso real y disfrute asegurado en cada sesión.",
       },
     ],
     cta: {
-      headline: 'Elige tu programa Kaiten',
-      subline: 'Progreso real con nuestro método de mejora intensiva.',
-      buttonText: 'Reservar',
+      headline: "Elige tu programa Kaiten",
+      subline: "Progreso real con nuestro método de mejora intensiva.",
+      buttonText: "Reservar",
     },
   },
   {
-    id: 'equipment-consultancy',
-    calSlug: 'asesoramiento-compra-material-ski',
-    title: 'Asesoramiento de Material',
-    color: 'verde',
-    experienceType: 'online',
-    levels: ['principiante', 'intermedio', 'avanzado'],
-    summary: { duration: 'Online', people: 'Individual' },
+    id: "equipment-consultancy",
+    calSlug: "asesoramiento-compra-material-ski",
+    title: "Asesoramiento de Material",
+    color: "verde",
+    experienceType: "online",
+    levels: ["principiante", "intermedio", "avanzado"],
+    summary: { duration: "Online", people: "Individual" },
     features: [
       {
-        emoji: '🎯',
-        title: 'Encuentra el material que realmente necesitas',
-        desc: 'Te ayudamos a elegir el material de ski que mejor se adapta a tu nivel, estilo, objetivos y presupuesto. Sin marcas impuestas, solo lo que realmente necesitas.',
+        emoji: "🎯",
+        title: "Encuentra el material que realmente necesitas",
+        desc: "Te ayudamos a elegir el material de ski que mejor se adapta a tu nivel, estilo, objetivos y presupuesto. Sin marcas impuestas, solo lo que realmente necesitas.",
       },
       {
-        emoji: '🔍',
-        title: 'Buscamos y comparamos por ti',
-        desc: 'Analizamos las mejores opciones disponibles en tiendas online especializadas para encontrar la mejor relación calidad-precio.',
+        emoji: "🔍",
+        title: "Buscamos y comparamos por ti",
+        desc: "Analizamos las mejores opciones disponibles en tiendas online especializadas para encontrar la mejor relación calidad-precio.",
       },
       {
-        emoji: '🛒',
-        title: 'Te recomendamos dónde comprar y qué necesitas',
-        desc: 'Recibes una selección personalizada con enlaces directos, precios actualizados y nuestra recomendación clara de dónde comprar cada producto.',
+        emoji: "🛒",
+        title: "Te recomendamos dónde comprar y qué necesitas",
+        desc: "Recibes una selección personalizada con enlaces directos, precios actualizados y nuestra recomendación clara de dónde comprar cada producto.",
       },
       {
-        emoji: '⏱️',
-        title: 'Ahorra tiempo, dinero y evita errores',
-        desc: 'Evita compras poco acertadas y equípate con confianza con el asesoramiento de expertos que conocen el material y el mercado.',
+        emoji: "⏱️",
+        title: "Ahorra tiempo, dinero y evita errores",
+        desc: "Evita compras poco acertadas y equípate con confianza con el asesoramiento de expertos que conocen el material y el mercado.",
       },
     ],
     info: [
       {
-        emoji: '📋',
-        label: 'Qué incluye',
-        content: 'Asesoramiento personalizado online para recomendarte el material de ski que necesitas según tu perfil y objetivos.',
+        emoji: "📋",
+        label: "Qué incluye",
+        content:
+          "Asesoramiento personalizado online para recomendarte el material de ski que necesitas según tu perfil y objetivos.",
       },
       {
-        emoji: '⚙️',
-        label: 'Cómo funciona',
-        content: 'Respondes a un breve cuestionario sobre tu nivel, estilo, objetivos y presupuesto. Analizamos opciones en tiendas online y te enviamos nuestras recomendaciones con enlaces y precios.',
+        emoji: "⚙️",
+        label: "Cómo funciona",
+        content:
+          "Respondes a un breve cuestionario sobre tu nivel, estilo, objetivos y presupuesto. Analizamos opciones en tiendas online y te enviamos nuestras recomendaciones con enlaces y precios.",
       },
       {
-        emoji: '👥',
-        label: 'Para quién es',
-        content: 'Esquiadores de todos los niveles que quieren comprar material nuevo o renovar su equipo con la mejor elección.',
+        emoji: "👥",
+        label: "Para quién es",
+        content:
+          "Esquiadores de todos los niveles que quieren comprar material nuevo o renovar su equipo con la mejor elección.",
       },
       {
-        emoji: '💶',
-        label: 'Precio',
-        content: 'Asesoramiento: 20€ · Asesoramiento y compra: 30€.',
+        emoji: "💶",
+        label: "Precio",
+        content: "Asesoramiento: 20€ · Asesoramiento y compra: 30€.",
       },
     ],
     cta: {
-      headline: 'Equípate con las mejores decisiones',
-      subline: 'Asesoramiento experto para comprar el material de ski que realmente necesitas.',
-      buttonText: 'Reservar',
+      headline: "Equípate con las mejores decisiones",
+      subline:
+        "Asesoramiento experto para comprar el material de ski que realmente necesitas.",
+      buttonText: "Reservar",
     },
   },
-]
+];

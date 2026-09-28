@@ -11,11 +11,9 @@ function Niveles() {
       <Navbar />
 
       <main className="tarifas__sheet">
+        <p className="tarifas__eyebrow">Referencia en Baqueira Beret</p>
+        <h1 className="tarifas__page-title">Niveles</h1>
         <section className="tarifas__niveles tarifas__niveles--page">
-          <header className="tarifas__niveles-head">
-            <h1 className="tarifas__niveles-title">Niveles</h1>
-            <p className="tarifas__niveles-sub">Referencia en Baqueira Beret</p>
-          </header>
           <div className="niveles-table">
             <div className="niveles-table__row niveles-table__row--head niveles-table__row--4col">
               <span />
