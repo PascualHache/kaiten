@@ -160,7 +160,7 @@ export const ACTIVITIES: Activity[] = [
     color: "verde",
     experienceType: "guiado",
     levels: ["intermedio", "avanzado"],
-    summary: { duration: "3 h · 6 h", people: "1 – 4" },
+    summary: { duration: "3 h · 6 h", people: "1 – 6" },
     features: [
       {
         emoji: "⛰️",
@@ -338,7 +338,7 @@ export const ACTIVITIES: Activity[] = [
     color: "verde",
     experienceType: "grupo",
     levels: ["principiante", "intermedio", "avanzado"],
-    summary: { duration: "Horas a tu medida", people: "1 – 4" },
+    summary: { duration: "Horas a tu medida", people: "1 – 6" },
     features: [
       {
         emoji: "🎿",

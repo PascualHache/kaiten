@@ -14,22 +14,6 @@
   padding: clamp(3rem, 8vw, 6rem) clamp(1.5rem, 5vw, 5rem);
 }
 
-.aviso-legal__eyebrow {
-  margin: 0 0 0.75rem;
-  font-size: 0.75rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: rgba(17, 17, 17, 0.5);
-}
-
-.aviso-legal__title {
-  margin: 0 0 3.5rem;
-  font-size: clamp(2rem, 5vw, 3rem);
-  font-weight: 700;
-  line-height: 1.02;
-  letter-spacing: -0.02em;
-}
-
 .aviso-legal__content {
   display: flex;
   flex-direction: column;

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { IconChevronDown, IconArrowRight } from "@tabler/icons-react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import PageTitle from "../components/PageTitle";
 import "./FAQ.css";
 
 interface FAQItem {
@@ -83,8 +84,9 @@ export default function FAQ() {
     <div className="faq">
       <Navbar />
       <main className="faq__main">
-        <p className="faq__eyebrow">Preguntas frecuentes</p>
-        <h1 className="faq__title">Todo lo que necesitas saber</h1>
+        <PageTitle eyebrow="Preguntas frecuentes">
+          Todo lo que necesitas saber
+        </PageTitle>
         <p className="faq__lead">
           ¿Tienes alguna duda más? Escríbenos por{" "}
           <a

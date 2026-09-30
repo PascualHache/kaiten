@@ -29,7 +29,7 @@ function PromoBanner() {
       aria-label="Contactar por WhatsApp para descuentos exclusivos"
     >
       <span className="promo-banner__icon" aria-hidden="true">
-        <IconBrandWhatsapp size={16} stroke={1.5} />
+        <IconBrandWhatsapp size={22} stroke={1.5} />
       </span>
       <span className="promo-banner__text">
         Escribe <strong>DESCUENTOS EXCLUSIVOS</strong> y accede a ofertas

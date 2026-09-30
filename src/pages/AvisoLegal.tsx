@@ -1,5 +1,6 @@
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import PageTitle from "../components/PageTitle";
 import "./AvisoLegal.css";
 
 const SECTIONS = [
@@ -102,8 +103,7 @@ function AvisoLegal() {
 
       <main className="aviso-legal__main">
         <header className="aviso-legal__header">
-          <p className="aviso-legal__eyebrow">Legal</p>
-          <h1 className="aviso-legal__title">Aviso legal</h1>
+          <PageTitle eyebrow="Legal" spacing="loose">Aviso legal</PageTitle>
         </header>
 
         <article className="aviso-legal__content">

@@ -66,7 +66,7 @@ Todo lo demás del audit sigue aplicando.
 9. **Página Tarifas**
    - Igualar alturas de tarjeta entre las dos columnas ("Privadas" /
      "Especiales") con la misma cuadrícula.
-   - Sacar "Instructor titulado · Seguro de RC · Atención personalizada" de
+   - Sacar "Instructor titulado · Atención personalizada" de
      cada tarjeta a una línea común arriba ("Todas las experiencias
      incluyen…").
    - Añadir botón "Reservar" en cada tarjeta → Cal.com.

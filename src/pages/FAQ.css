@@ -5,27 +5,13 @@
   background-color: var(--color-cream);
 }
 
+/* Same sheet frame as /tarifas and /niveles */
 .faq__main {
   flex: 1;
-  width: min(52rem, 100% - clamp(3rem, 10vw, 10rem) * 2);
-  margin: 0 auto;
-  padding: clamp(2.5rem, 6vw, 4rem) 0 clamp(3rem, 8vw, 6rem);
-}
-
-.faq__eyebrow {
-  margin: 0 0 0.75rem;
-  font-size: 0.75rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--color-lavender);
-}
-
-.faq__title {
-  margin: 0 0 1rem;
-  font-size: clamp(1.75rem, 4vw, 2.75rem);
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  color: var(--color-forest);
+  width: min(var(--content-max-width), 100% - clamp(2rem, 6vw, 5rem) * 2);
+  margin: clamp(1rem, 3vw, 2.5rem) auto;
+  padding: clamp(0.75rem, 2vw, 1.25rem) clamp(1.5rem, 4vw, 3rem)
+    clamp(1.5rem, 4vw, 3rem);
 }
 
 .faq__lead {

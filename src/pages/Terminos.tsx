@@ -1,5 +1,6 @@
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import PageTitle from "../components/PageTitle";
 import { MAIN_SECTIONS, ANNEX_SECTIONS, GUIDE_SECTION } from "../data/terminos";
 import type { Block, LegalSection } from "../data/terminos";
 import "./Terminos.css";
@@ -41,8 +42,9 @@ function Terminos() {
 
       <main className="terminos__main">
         <header className="terminos__header">
-          <p className="terminos__eyebrow">Legal</p>
-          <h1 className="terminos__title">Condiciones generales de contratación</h1>
+          <PageTitle eyebrow="Legal" spacing="loose">
+            Condiciones generales de contratación
+          </PageTitle>
         </header>
 
         <article className="terminos__content">

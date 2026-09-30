@@ -167,6 +167,7 @@ a.footer__contact-item:hover {
 .footer__social-pill {
   display: inline-flex;
   align-items: center;
+  gap: 0.4rem;
   padding: 0.35rem 0.85rem;
   border: 1px solid rgba(230, 229, 225, 0.22);
   border-radius: 2rem;
@@ -176,6 +177,11 @@ a.footer__contact-item:hover {
   color: var(--color-cream);
   text-decoration: none;
   transition: border-color 0.2s, background-color 0.2s;
+}
+
+/* Icon-only pills: square padding so the logo sits centred */
+.footer__social-pill--icon {
+  padding: 0.55rem;
 }
 
 a.footer__social-pill:hover {

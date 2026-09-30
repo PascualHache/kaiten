@@ -1,5 +1,6 @@
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import PageTitle from "../components/PageTitle";
 import { PRIVACIDAD_SECTIONS } from "../data/privacidad";
 import type { Block } from "../data/terminos";
 import "./Privacidad.css";
@@ -32,8 +33,9 @@ function Privacidad() {
 
       <main className="privacidad__main">
         <header className="privacidad__header">
-          <p className="privacidad__eyebrow">Legal · Última actualización: julio 2026</p>
-          <h1 className="privacidad__title">Política de privacidad</h1>
+          <PageTitle eyebrow="Legal · Última actualización: julio 2026" spacing="loose">
+            Política de privacidad
+          </PageTitle>
         </header>
 
         <article className="privacidad__content">

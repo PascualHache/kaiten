@@ -26,23 +26,6 @@
   color: rgba(29, 43, 0, 0.55);
 }
 
-/* Page heading */
-.tarifas__eyebrow {
-  margin: 0 0 0.5rem;
-  font-size: 0.75rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--color-lavender-dark);
-}
-
-.tarifas__page-title {
-  margin: 0 0 1.5rem;
-  font-size: clamp(1.75rem, 4vw, 2.75rem);
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  color: var(--color-forest);
-}
-
 /* Common includes line */
 .tarifas__includes {
   margin: 0 0 1.5rem;
@@ -128,9 +111,17 @@
   color: var(--color-lavender-dark);
 }
 
+/* Centred in its track so the header label and both lines sit in the
+   middle of the column instead of hugging the price column */
+.tarifas-table__col-label--extra {
+  text-align: center;
+}
+
 .tarifas-table__extra {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  text-align: center;
   gap: 0.15rem;
   font-size: 0.8rem;
   color: rgba(29, 43, 0, 0.75);
@@ -258,6 +249,12 @@
 
   .tarifas-table__extra {
     grid-column: 2 / -1;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .tarifas-table__col-label--extra {
+    text-align: left;
   }
 
   .tarifas-table__row--head {

@@ -1,6 +1,7 @@
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Tag from "../components/Tag";
+import PageTitle from "../components/PageTitle";
 import { LEVEL_LABELS } from "../data/activities";
 import { LEVELS } from "../data/levels";
 import "./Tarifas.css";
@@ -11,8 +12,7 @@ function Niveles() {
       <Navbar />
 
       <main className="tarifas__sheet">
-        <p className="tarifas__eyebrow">Referencia en Baqueira Beret</p>
-        <h1 className="tarifas__page-title">Niveles</h1>
+        <PageTitle eyebrow="Referencia en Baqueira Beret">Niveles</PageTitle>
         <section className="tarifas__niveles tarifas__niveles--page">
           <div className="niveles-table">
             <div className="niveles-table__row niveles-table__row--head niveles-table__row--4col">

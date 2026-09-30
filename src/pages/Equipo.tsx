@@ -1,5 +1,6 @@
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import PageTitle from "../components/PageTitle";
 import { Link } from 'react-router-dom'
 import { IconInfoCircle } from '@tabler/icons-react'
 import { TEAM } from '../data/team'
@@ -12,8 +13,7 @@ function Equipo() {
       <Navbar />
 
       <header className="equipo__header">
-        <p className="equipo__eyebrow">Nuestro equipo</p>
-        <h1 className="equipo__title">Los que hacen posible Kaiten</h1>
+        <PageTitle eyebrow="Nuestro equipo">Los que hacen posible Kaiten</PageTitle>
       </header>
       <section className="equipo__grid">
         {TEAM.map((m) => (

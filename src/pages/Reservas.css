@@ -11,22 +11,6 @@
   padding: clamp(2.5rem, 6vw, 4rem) clamp(1.5rem, 5vw, 5rem);
 }
 
-.reservas__eyebrow {
-  margin: 0 0 0.75rem;
-  font-size: 0.75rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--color-lavender-dark);
-}
-
-.reservas__titulo {
-  margin: 0 0 2.5rem;
-  font-size: clamp(2rem, 5vw, 3.25rem);
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  color: var(--color-lavender);
-}
-
 /* ─── Table shell ─────────────────────────────────────────── */
 
 .reservas__table-wrap {
@@ -144,13 +128,44 @@ tbody tr:first-child .reservas__outer-cell {
 }
 
 /* "Reservar" button */
+/* Two stacked actions: book straight away, or open the detail */
+.reservas__actions {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.4rem;
+  justify-self: end;
+  width: 100%;
+  padding: 0.75rem 1rem 0.75rem 0;
+}
+
+/* Filled lavender: the primary of the same family as the "Más info" pill */
+.reservas__book-btn {
+  padding: 0.5rem 0.9rem;
+  background-color: var(--color-lavender);
+  color: var(--color-cream);
+  border: 1px solid var(--color-lavender);
+  border-radius: 2rem;
+  font-family: inherit;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.reservas__book-btn:hover {
+  background-color: var(--color-lavender-dark);
+  border-color: var(--color-lavender-dark);
+}
+
 .reservas__expand-btn {
   display: flex;
   align-items: center;
-  justify-self: end;
+  justify-content: center;
   gap: 0.4rem;
-  padding: 0.5rem 1.1rem 0.5rem 0.9rem;
-  margin: 0.75rem 1rem 0.75rem 0;
+  padding: 0.45rem 0.9rem;
   background-color: transparent;
   border: 1px solid rgba(133, 127, 157, 0.4);
   border-radius: 2rem;
@@ -235,7 +250,7 @@ tbody tr:first-child .reservas__outer-cell {
 @media (max-width: 640px) {
   .reservas__table {
     /* Personas column also hidden: name, duración, precio, botón */
-    --reservas-cols: minmax(0, 1.4fr) minmax(0, 1fr) 7rem 3.5rem;
+    --reservas-cols: minmax(0, 1.4fr) minmax(0, 1fr) 6rem 5.5rem;
   }
 
   .reservas__hide-sm,
@@ -252,7 +267,13 @@ tbody tr:first-child .reservas__outer-cell {
   }
 
   .reservas__expand-btn {
-    padding: 0.5rem 0.65rem;
-    border-radius: 50%;
+    padding: 0.45rem;
+    border-radius: 2rem;
+  }
+
+  .reservas__book-btn {
+    padding: 0.45rem 0.35rem;
+    font-size: 0.62rem;
+    letter-spacing: 0.04em;
   }
 }

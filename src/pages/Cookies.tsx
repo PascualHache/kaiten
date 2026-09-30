@@ -1,5 +1,6 @@
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import PageTitle from "../components/PageTitle";
 import { COOKIES_SECTIONS } from "../data/cookies";
 import type { Block } from "../data/terminos";
 import "./Cookies.css";
@@ -32,8 +33,9 @@ function Cookies() {
 
       <main className="cookies__main">
         <header className="cookies__header">
-          <p className="cookies__eyebrow">Legal · Última actualización: julio 2026</p>
-          <h1 className="cookies__title">Política de cookies</h1>
+          <PageTitle eyebrow="Legal · Última actualización: julio 2026" spacing="loose">
+            Política de cookies
+          </PageTitle>
         </header>
 
         <article className="cookies__content">

@@ -116,68 +116,26 @@
   align-items: center;
   gap: 0.75rem;
   height: 56px;
-  padding: 0 36px;
+  padding: 0 1.5rem;
   font-family: var(--font-body);
   font-size: 16px;
   font-weight: 700;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  border-radius: var(--ks-radius-button);
+  border-radius: 0.25rem;
   cursor: pointer;
-  transition: background-color 0.2s, color 0.2s, box-shadow 0.2s, transform 0.2s;
+  transition: background-color 0.2s, color 0.2s, opacity 0.2s;
 }
 
-/* Primary button — "Sombra suave" variant: no border in any state, depth
-   comes from the two green-tinted shadows */
 .hero__btn--primary {
-  border: none;
-  background: var(--ks-primary);
-  color: var(--ks-on-primary);
-  box-shadow: var(--ks-shadow-button);
-  transition:
-    transform 140ms cubic-bezier(0.2, 0.8, 0.2, 1),
-    box-shadow 140ms cubic-bezier(0.2, 0.8, 0.2, 1),
-    background-color 140ms ease;
+  background-color: var(--color-lime-light);
+  color: var(--color-black);
+  border: 2px solid var(--color-black);
 }
 
-/* Pointer devices only — on touch, :hover sticks after a tap */
-@media (hover: hover) {
-  .hero__btn--primary:hover {
-    color: var(--ks-on-primary);
-    transform: translateY(-1px);
-    box-shadow: var(--ks-shadow-button-hover);
-  }
-}
-
-.hero__btn--primary:active {
-  transform: translateY(1px);
-  background: var(--ks-primary-pressed);
-  box-shadow: var(--ks-shadow-button-pressed);
-  transition-duration: 60ms;
-}
-
-.hero__btn--primary:focus-visible {
-  outline: 2px solid var(--ks-on-primary);
-  outline-offset: 3px;
-}
-
-.hero__btn--primary:disabled,
-.hero__btn--primary[aria-disabled="true"] {
-  opacity: 0.5;
-  cursor: not-allowed;
-  transform: none;
-  box-shadow: none;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hero__btn--primary {
-    transition: background-color 140ms ease, box-shadow 140ms ease;
-  }
-
-  .hero__btn--primary:hover,
-  .hero__btn--primary:active {
-    transform: none;
-  }
+.hero__btn--primary:hover {
+  opacity: 0.85;
+  color: var(--color-black);
 }
 
 .hero__btn--secondary {
