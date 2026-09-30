@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { getCalApi } from '@calcom/embed-react'
 import { IconChevronDown } from '@tabler/icons-react'
 import {
@@ -13,7 +13,10 @@ import ExperienceDetail from '../components/ExperienceDetail'
 import Tag from '../components/Tag'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import PageTitle from '../components/PageTitle'
 import './Reservas.css'
+
+const CAL_USERNAME = 'aitor-bellver-abenoza-ofg9rm'
 
 function getActivityPrice(activity: (typeof ACTIVITIES)[number]) {
   return findTariff(activity.calSlug)?.price ?? '—'
@@ -34,19 +37,47 @@ const LEVEL_ORDER: Level[] = ['principiante', 'intermedio', 'avanzado']
 const sortLevels = (levels: Level[]) =>
   [...levels].sort((a, b) => LEVEL_ORDER.indexOf(a) - LEVEL_ORDER.indexOf(b))
 
+/** "Kids & Friends & Family" → "kids-friends-family" */
+const slugifyTitle = (title: string) =>
+  title
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+
+/* The URL hash may name an activity by its Cal.com slug, its id, or its
+   title ("/reservas#safari", "#clases-privadas"). Anything else is ignored
+   so a stale link just lands on the page with every row closed. */
+function resolveHash(hash: string): string | null {
+  if (!hash) return null
+  const wanted = slugifyTitle(decodeURIComponent(hash.replace(/^#/, '')))
+  if (!wanted) return null
+  const match = ACTIVITIES.find(
+    (a) =>
+      slugifyTitle(a.calSlug) === wanted ||
+      slugifyTitle(a.id) === wanted ||
+      slugifyTitle(a.title) === wanted,
+  )
+  return match?.calSlug ?? null
+}
+
 export default function Reservas() {
   const location = useLocation()
-  const [openSlug, setOpenSlug] = useState<string | null>(
-    location.hash ? location.hash.slice(1) : null,
+  const navigate = useNavigate()
+  const [openSlug, setOpenSlug] = useState<string | null>(() =>
+    resolveHash(location.hash),
   )
 
   useEffect(() => {
-    if (location.hash) setOpenSlug(location.hash.slice(1))
+    const fromHash = resolveHash(location.hash)
+    if (fromHash) setOpenSlug(fromHash)
   }, [location.hash])
 
   const openActivity = ACTIVITIES.find((a) => a.calSlug === openSlug) ?? null
 
   const rowRefs = useRef<Record<string, HTMLTableRowElement | null>>({})
+  const btnRefs = useRef<Record<string, HTMLButtonElement | null>>({})
 
   useEffect(() => {
     if (!openActivity) return
@@ -58,21 +89,43 @@ export default function Reservas() {
 
   useEffect(() => {
     if (!openSlug) return
+    /* Focus first (without scrolling: the browser would jump), then run our
+       own smooth scroll. Keyboard and screen-reader users arriving from a
+       hash link land on the row's toggle, which carries aria-expanded. */
+    btnRefs.current[openSlug]?.focus({ preventScroll: true })
     rowRefs.current[openSlug]?.scrollIntoView({
       behavior: 'smooth',
       block: 'start',
     })
   }, [openSlug])
 
-  const toggle = (slug: string) =>
-    setOpenSlug((prev) => (prev === slug ? null : slug))
+  /* The open row is reflected in the URL so the link can be copied and
+     shared. replace(), not push(): otherwise every toggle adds a history
+     entry and Back walks row by row instead of leaving the page. */
+  const toggle = (slug: string) => {
+    const next = openSlug === slug ? null : slug
+    setOpenSlug(next)
+    navigate(next ? `${location.pathname}#${next}` : location.pathname, {
+      replace: true,
+    })
+  }
+
+  /* Cal.com is initialised per activity, only once its button is pressed —
+     never for the whole table at page load. */
+  const openCal = async (slug: string) => {
+    const cal = await getCalApi({ namespace: slug })
+    cal('ui', { theme: 'light' })
+    cal('modal', {
+      calLink: `${CAL_USERNAME}/${slug}`,
+      config: { layout: 'month_view' },
+    })
+  }
 
   return (
     <div className="reservas">
       <Navbar />
       <main className="reservas__main">
-        <p className="reservas__eyebrow">Baqueira Beret</p>
-        <h1 className="reservas__titulo">Elige tu experiencia</h1>
+        <PageTitle eyebrow="Baqueira Beret">Elige tu experiencia</PageTitle>
 
         <div className="reservas__table-wrap">
           <table className="reservas__table" aria-label="Experiencias disponibles">
@@ -117,21 +170,33 @@ export default function Reservas() {
                         <span className="reservas__col-price">
                           {price !== '—' ? `Desde ${price}` : '—'}
                         </span>
-                        <button
-                          type="button"
-                          className="reservas__expand-btn"
-                          aria-expanded={isOpen}
-                          onClick={() => toggle(activity.calSlug)}
-                        >
-                          <span className="reservas__expand-label">
-                            {isOpen ? 'Cerrar' : 'Reservar'}
-                          </span>
-                          <IconChevronDown
-                            className={`reservas__expand-chevron${isOpen ? ' reservas__expand-chevron--open' : ''}`}
-                            size={16}
-                            stroke={2}
-                          />
-                        </button>
+                        <div className="reservas__actions">
+                          <button
+                            type="button"
+                            className="reservas__book-btn"
+                            onClick={() => openCal(activity.calSlug)}
+                          >
+                            Reservar
+                          </button>
+                          <button
+                            type="button"
+                            ref={(el) => {
+                              btnRefs.current[activity.calSlug] = el
+                            }}
+                            className="reservas__expand-btn"
+                            aria-expanded={isOpen}
+                            onClick={() => toggle(activity.calSlug)}
+                          >
+                            <span className="reservas__expand-label">
+                              {isOpen ? 'Cerrar' : 'Más info'}
+                            </span>
+                            <IconChevronDown
+                              className={`reservas__expand-chevron${isOpen ? ' reservas__expand-chevron--open' : ''}`}
+                              size={16}
+                              stroke={2}
+                            />
+                          </button>
+                        </div>
                       </div>
 
                       {/* Inline detail */}

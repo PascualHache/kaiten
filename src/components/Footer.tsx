@@ -1,5 +1,10 @@
 import { Link } from "react-router-dom";
-import { IconArrowRight } from "@tabler/icons-react";
+import {
+  IconArrowRight,
+  IconBrandGoogle,
+  IconBrandInstagram,
+  IconBrandWhatsapp,
+} from "@tabler/icons-react";
 import logoText from "../assets/logos/logo_text.png";
 import "./Footer.css";
 
@@ -82,27 +87,28 @@ function Footer() {
           <div className="footer__socials">
             <a
               href="https://instagram.com/kaiten"
-              className="footer__social-pill"
+              className="footer__social-pill footer__social-pill--icon"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Instagram"
             >
-              IG
+              <IconBrandInstagram size={24} stroke={1.5} aria-hidden="true" />
             </a>
             <a
               href="https://wa.me/34699820954"
-              className="footer__social-pill"
+              className="footer__social-pill footer__social-pill--icon"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="WhatsApp"
             >
-              WA
+              <IconBrandWhatsapp size={24} stroke={1.5} aria-hidden="true" />
             </a>
             <span
               className="footer__social-pill"
               aria-label="Valoración 5 de 5 en Google"
             >
-              ★ 5.0
+              <IconBrandGoogle size={20} stroke={1.5} aria-hidden="true" />
+              <span aria-hidden="true">★ 5.0</span>
             </span>
           </div>
         </div>

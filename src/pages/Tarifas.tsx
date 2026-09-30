@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import PageTitle from "../components/PageTitle";
 import { TARIFFS } from "../data/tariffs";
 import "./Tarifas.css";
 
@@ -10,11 +11,10 @@ function Tarifas() {
       <Navbar />
 
       <main className="tarifas__sheet">
-        <p className="tarifas__eyebrow">Baqueira Beret</p>
-        <h1 className="tarifas__page-title">Tarifas</h1>
+        <PageTitle eyebrow="Baqueira Beret">Tarifas</PageTitle>
         <p className="tarifas__includes">
-          Todas las experiencias incluyen: Instructor titulado · Seguro de RC ·
-          Atención personalizada
+          Todas las experiencias incluyen: Instructor titulado · Atención
+          personalizada
         </p>
 
         <section className="tarifas__table-section">
@@ -22,8 +22,12 @@ function Tarifas() {
             <div className="tarifas-table__row tarifas-table__row--head">
               <span />
               <span className="tarifas-table__col-label">Experiencia</span>
-              <span className="tarifas-table__col-label">Tarifa por persona</span>
-              <span className="tarifas-table__col-label">Extra / persona</span>
+              <span className="tarifas-table__col-label">
+                Tarifa por persona
+              </span>
+              <span className="tarifas-table__col-label tarifas-table__col-label--extra">
+                Extra / persona
+              </span>
             </div>
             {TARIFFS.map((t) => (
               <div key={t.id} className="tarifas-table__row">
