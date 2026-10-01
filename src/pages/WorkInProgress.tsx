@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import logoSquared from '../assets/logos/logo_squared.png'
 import './WorkInProgress.css'
 
-const LAUNCH_DATE = new Date('2026-10-01T00:00:00+02:00')
+const LAUNCH_DATE = new Date('2026-11-01T00:00:00+01:00')
 
 interface Countdown {
   days: number
@@ -58,7 +58,7 @@ function WorkInProgress() {
           ))}
         </div>
 
-        <p className="wip__date">Apertura · 1 de octubre de 2026</p>
+        <p className="wip__date">Apertura · 1 de noviembre de 2026</p>
       </div>
     </div>
   )
