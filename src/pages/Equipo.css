@@ -140,7 +140,7 @@
   margin: 0 0 1.5rem;
   font-size: 0.85rem;
   line-height: 1.6;
-  color: rgba(29, 43, 0, 0.75);
+  color: rgba(0, 0, 0, 0.75);
 }
 
 .member__tags {
@@ -165,7 +165,7 @@
   letter-spacing: 0.1em;
   text-transform: uppercase;
   text-align: center;
-  color: rgba(29, 43, 0, 0.55);
+  color: rgba(0, 0, 0, 0.55);
 }
 
 .member__tags--pillars {

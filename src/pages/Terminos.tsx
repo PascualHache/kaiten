@@ -1,4 +1,3 @@
-import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import PageTitle from "../components/PageTitle";
 import { MAIN_SECTIONS, ANNEX_SECTIONS, GUIDE_SECTION } from "../data/terminos";
@@ -38,8 +37,6 @@ function Section({ section }: { section: LegalSection }) {
 function Terminos() {
   return (
     <div className="terminos">
-      <Navbar />
-
       <main className="terminos__main">
         <header className="terminos__header">
           <PageTitle eyebrow="Legal" spacing="loose">

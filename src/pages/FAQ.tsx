@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { IconChevronDown, IconArrowRight } from "@tabler/icons-react";
-import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import PageTitle from "../components/PageTitle";
+import { refreshScrollTriggers } from "../hooks/useScrollAnimations";
 import "./FAQ.css";
 
 interface FAQItem {
@@ -36,7 +36,7 @@ const FAQS: FAQItem[] = [
   {
     q: "¿Cuál es la política de cancelación y reembolso?",
     a: [
-      "Cancelación con más de 48h de antelación: reembolso completo.",
+      "Cancelación con más de 7 días de antelación: reembolso completo.",
       "Cancelación entre 24h y 48h: reembolso del 50%.",
       "Cancelación con menos de 24h: sin reembolso (salvo causa de fuerza mayor o mal tiempo declarado por la estación).",
       "Cancelación por nuestra parte (mal tiempo, enfermedad): reembolso completo o reprogramación.",
@@ -62,7 +62,7 @@ const FAQS: FAQItem[] = [
     q: "¿Cómo se realiza el pago?",
     a: [
       "El pago se realiza directamente a través de Cal.com en el momento de la reserva, mediante tarjeta de crédito o débito.",
-      "También aceptamos pago por transferencia bancaria previa reserva. Consúltanos por WhatsApp.",
+      "Si prefieres otro método consúltanos por WhatsApp.",
     ],
   },
   {
@@ -82,7 +82,6 @@ export default function FAQ() {
 
   return (
     <div className="faq">
-      <Navbar />
       <main className="faq__main">
         <PageTitle eyebrow="Preguntas frecuentes">
           Todo lo que necesitas saber
@@ -111,12 +110,16 @@ export default function FAQ() {
               <li
                 key={i}
                 className={`faq__item${isOpen ? " faq__item--open" : ""}`}
+                data-reveal=""
               >
                 <button
                   type="button"
                   className="faq__row"
                   aria-expanded={isOpen}
-                  onClick={() => setOpen(isOpen ? null : i)}
+                  onClick={() => {
+                    setOpen(isOpen ? null : i);
+                    window.setTimeout(refreshScrollTriggers, 550);
+                  }}
                 >
                   <span className="faq__question">{item.q}</span>
                   <IconChevronDown

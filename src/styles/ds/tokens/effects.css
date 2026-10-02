@@ -1,0 +1,24 @@
+:root {
+  --shadow-menu: 0 16px 32px rgba(0, 0, 0, 0.18);
+  --shadow-lift: 0 16px 40px rgba(0, 0, 0, 0.1);
+  --shadow-navbar: 0 1px 12px rgba(0, 0, 0, 0.07);
+
+  /* Botón CTA "sombra suave" — las sombras van tintadas de verde a propósito,
+     no en gris neutro: leen como el botón despegándose del papel crema. */
+  --shadow-button: 0 1px 2px rgba(30, 45, 10, 0.14), 0 6px 16px rgba(60, 90, 15, 0.16);
+  --shadow-button-hover: 0 2px 4px rgba(30, 45, 10, 0.14), 0 12px 28px rgba(60, 90, 15, 0.22);
+  --shadow-button-pressed: 0 1px 2px rgba(30, 45, 10, 0.18);
+  --ease-button: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --duration-button: 140ms;
+
+  --blur-glass: 10px;
+
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --duration-fast: 0.2s;
+  --duration-base: 0.35s;
+  --duration-slow: 0.5s;
+
+  --hover-opacity: 0.85;
+  --border-hairline: 1px;
+  --border-rule: 2px;
+}

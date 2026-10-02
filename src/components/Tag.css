@@ -16,12 +16,12 @@
 
 .tag--jornada {
   background-color: rgba(153, 162, 143, 0.3);
-  color: var(--color-forest);
+  color: var(--color-black);
 }
 
 .tag--guiado {
   background-color: var(--color-sage);
-  color: var(--color-forest);
+  color: var(--color-black);
 }
 
 .tag--clase {
@@ -30,7 +30,7 @@
 }
 
 .tag--fuera-pista {
-  background-color: var(--color-forest);
+  background-color: var(--color-black);
   color: var(--color-cream);
 }
 
@@ -40,8 +40,8 @@
 }
 
 .tag--especial {
-  background-color: rgba(29, 43, 0, 0.1);
-  color: var(--color-forest);
+  background-color: rgba(0, 0, 0, 0.1);
+  color: var(--color-black);
 }
 
 .tag--programa {
@@ -51,14 +51,14 @@
 
 .tag--online {
   border-color: var(--color-sage);
-  color: var(--color-forest);
+  color: var(--color-black);
 }
 
 /* ─── Niveles — progresión de claro a oscuro ──────────────── */
 
 .tag--principiante {
   background-color: rgba(153, 162, 143, 0.3);
-  color: var(--color-forest);
+  color: var(--color-black);
 }
 
 .tag--intermedio {
@@ -67,6 +67,6 @@
 }
 
 .tag--avanzado {
-  background-color: var(--color-forest);
+  background-color: var(--color-black);
   color: var(--color-cream);
 }

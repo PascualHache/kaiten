@@ -1,0 +1,121 @@
+/* Kaiten — color. Paleta base (--k-*) + capa semántica (--color-*).
+   Usa siempre la capa semántica; la paleta base es privada.
+   Bosque #1D2B00 retirado (oct 2026): ni tinta, ni superficie oscura, ni velo
+   sobre foto. Todo eso es negro; los grises, alfa sobre negro. */
+:root {
+  --k-cream: #E6E5E1;
+  --k-paper: #F8F6F2;
+  --k-lavender: #857F9D;
+  --k-lavender-300: #ADA8C2;
+  --k-lavender-700: #4E4966;
+  --k-lavender-800: #3D3952;
+  --k-sage: #99A28F;
+  --k-lime: #A5D900;
+  --k-lime-200: #DAFE99;
+  --k-black: #000000;
+  --k-black-800: #141414;
+  --k-white: #FFFFFF;
+
+  /* Superficies */
+  --color-surface: var(--k-cream);
+  --color-surface-raised: var(--k-paper);
+  --color-surface-sunken: rgba(133, 127, 157, 0.08);
+  --color-surface-inverse: var(--k-black);
+  --color-surface-glass: rgba(230, 229, 225, 0.88);
+  --color-surface-glass-scrolled: rgba(212, 211, 207, 0.94);
+
+  /* Texto — tinta principal: negro (decisión 2026-10) */
+  --color-text: var(--k-black);
+  --color-text-muted: rgba(0, 0, 0, 0.65);
+  --color-text-subtle: rgba(0, 0, 0, 0.55);
+  --color-text-accent: var(--k-lavender-700);
+  --color-text-inverse: var(--k-cream);
+  --color-text-on-photo: var(--k-cream);
+
+  /* Bordes */
+  --color-border: rgba(0, 0, 0, 0.12);
+  --color-border-soft: rgba(0, 0, 0, 0.07);
+  --color-border-strong: var(--k-black);
+  --color-border-accent: rgba(133, 127, 157, 0.45);
+
+  /* CTA de reserva (hero, navbar y tira del footer) — variante "sombra
+     suave": sin borde en ningún estado, la profundidad la dan las sombras
+     verdosas de effects.css */
+  --color-cta-solid: #D5F48B;
+  --color-cta-pressed: #C9EE78;
+  --color-on-cta: #141414;
+
+  /* Acción principal (resto de la web) — lavanda oscura para AA con texto crema */
+  --color-action-solid: var(--k-lavender-700);
+  --color-action-hover: var(--k-lavender-800);
+  --color-on-action: var(--k-cream);
+
+  /* Acento decorativo — nunca texto pequeño */
+  --color-accent: var(--k-lavender);
+
+  /* Tintes */
+  --color-tint-lavender: rgba(133, 127, 157, 0.16);
+  --color-tint-sage: rgba(153, 162, 143, 0.3);
+  --color-tint-neutral: rgba(0, 0, 0, 0.06);
+
+  /* Niveles de esquí */
+  --color-level-beginner-bg: rgba(153, 162, 143, 0.35);
+  --color-level-beginner-fg: var(--k-black);
+  --color-level-intermediate-bg: var(--k-lavender-700);
+  --color-level-intermediate-fg: var(--k-cream);
+  --color-level-advanced-bg: var(--k-black);
+  --color-level-advanced-fg: var(--k-cream);
+
+  /* Promo / en directo */
+  --color-promo-solid: var(--k-lime);
+  --color-promo-hover: #B6F352;
+  --color-on-promo: var(--k-black);
+  --color-live: var(--k-lime);
+
+  --color-rating: var(--color-text);
+  --color-focus: var(--k-lavender-700);
+
+  --gradient-photo-scrim: linear-gradient(to top, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.15) 45%, rgba(0, 0, 0, 0) 75%);
+  --gradient-hero-scrim: linear-gradient(115deg, rgba(230, 229, 225, 0.8) 0%, rgba(230, 229, 225, 0.45) 40%, rgba(230, 229, 225, 0) 65%);
+}
+
+/* Modo oscuro — superficie negra, heredada del Footer */
+[data-theme="dark"] {
+  --color-surface: var(--k-black);
+  --color-surface-raised: var(--k-black-800);
+  --color-surface-sunken: rgba(230, 229, 225, 0.04);
+  --color-surface-inverse: var(--k-cream);
+  --color-surface-glass: rgba(0, 0, 0, 0.88);
+  --color-surface-glass-scrolled: rgba(0, 0, 0, 0.94);
+
+  --color-text: var(--k-cream);
+  --color-text-muted: rgba(230, 229, 225, 0.72);
+  --color-text-subtle: rgba(230, 229, 225, 0.6);
+  --color-text-accent: var(--k-lavender-300);
+  --color-text-inverse: var(--k-black);
+
+  --color-border: rgba(230, 229, 225, 0.14);
+  --color-border-soft: rgba(230, 229, 225, 0.08);
+  --color-border-strong: var(--k-cream);
+  --color-border-accent: rgba(173, 168, 194, 0.4);
+
+  --color-action-solid: var(--k-lavender-300);
+  --color-action-hover: #C4C0D6;
+  --color-on-action: var(--k-black);
+
+  --color-accent: var(--k-lavender-300);
+
+  --color-tint-lavender: rgba(173, 168, 194, 0.16);
+  --color-tint-sage: rgba(153, 162, 143, 0.22);
+  --color-tint-neutral: rgba(230, 229, 225, 0.08);
+
+  --color-level-beginner-bg: rgba(153, 162, 143, 0.32);
+  --color-level-beginner-fg: var(--k-cream);
+  --color-level-intermediate-bg: var(--k-lavender-300);
+  --color-level-intermediate-fg: var(--k-black);
+  --color-level-advanced-bg: var(--k-cream);
+  --color-level-advanced-fg: var(--k-black);
+
+  --color-focus: var(--k-lavender-300);
+  --gradient-hero-scrim: linear-gradient(115deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.45) 40%, rgba(0, 0, 0, 0) 65%);
+}

@@ -1,34 +1,35 @@
-import { useState, useRef, useEffect } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { getCalApi } from '@calcom/embed-react'
-import { IconArrowRight, IconArrowLeft } from '@tabler/icons-react'
-import { SERVICES, type Service } from '../data/services'
+import { IconChevronDown } from '@tabler/icons-react'
+import { SERVICES } from '../data/services'
 import { ACTIVITIES } from '../data/activities'
 import ExperienceDetail from './ExperienceDetail'
 import './Experiences.css'
 
-const PAGE_SIZE = 5
-const MAX_START = Math.max(0, SERVICES.length - PAGE_SIZE)
+/* Carrusel horizontal de experiencias.
+ *
+ * El track es un scroller horizontal nativo con scroll-snap, a cualquier
+ * ancho. No hay pin ni scrub: anclar la sección y conducir el track con GSAP
+ * secuestraba el scroll vertical de la página al llegar aquí.
+ *
+ * Al pulsar una tarjeta se despliega debajo su ficha completa
+ * (ExperienceDetail), la misma que usa /reservas. Cal.com se inicializa solo
+ * para la actividad abierta, nunca para las ocho de golpe.
+ */
+
+// Tiempo que la ficha sigue montada tras cerrarse, para que le dé tiempo a
+// animar la salida en lugar de desaparecer de golpe.
 const DETAIL_EXIT_MS = 200
 
-interface Slide {
-  items: Service[]
-  dir: 1 | -1
-}
-
 function Experiences() {
-  const [start, setStart] = useState(0)
-  const [slide, setSlide] = useState<Slide | null>(null)
-  const [shifted, setShifted] = useState(false)
-  const [noTransition, setNoTransition] = useState(false)
-  const [lockCardTransition, setLockCardTransition] = useState(false)
-  const [activeIndex, setActiveIndex] = useState<number | null>(null)
-  const [detailActivity, setDetailActivity] = useState<
-    (typeof ACTIVITIES)[number] | null
-  >(null)
+  const trackRef = useRef<HTMLDivElement>(null)
+  const progressRef = useRef<HTMLSpanElement>(null)
+  const detailRef = useRef<HTMLDivElement>(null)
+  const [activeId, setActiveId] = useState<string | null>(null)
+  const [detailSlug, setDetailSlug] = useState<string | null>(null)
   const [detailClosing, setDetailClosing] = useState(false)
-  const rowRef = useRef<HTMLDivElement>(null)
 
-  const activeService = activeIndex !== null ? SERVICES[activeIndex] : null
+  const activeService = SERVICES.find((s) => s.id === activeId) ?? null
   const activeActivity = activeService
     ? (ACTIVITIES.find(
         (a) =>
@@ -36,6 +37,29 @@ function Experiences() {
       ) ?? null)
     : null
 
+  // La barra de progreso sigue al scroll del track.
+  useEffect(() => {
+    const track = trackRef.current
+    const bar = progressRef.current
+    if (!track || !bar) return
+
+    function update() {
+      if (!track || !bar) return
+      const max = track.scrollWidth - track.clientWidth
+      const p = max > 0 ? track.scrollLeft / max : 0
+      bar.style.transform = `scaleX(${p})`
+    }
+
+    update()
+    track.addEventListener('scroll', update, { passive: true })
+    window.addEventListener('resize', update)
+    return () => {
+      track.removeEventListener('scroll', update)
+      window.removeEventListener('resize', update)
+    }
+  }, [])
+
+  // Cal.com, solo para la actividad abierta.
   useEffect(() => {
     if (!activeActivity) return
     ;(async () => {
@@ -44,165 +68,66 @@ function Experiences() {
     })()
   }, [activeActivity])
 
-  // Keep the detail panel mounted for a moment after it's deselected so its
-  // exit animation can play instead of the panel just vanishing.
+  // Mantiene la ficha montada mientras dura la animación de salida.
   useEffect(() => {
     if (activeActivity) {
-      setDetailActivity(activeActivity)
+      setDetailSlug(activeActivity.calSlug)
       setDetailClosing(false)
       return
     }
+    if (!detailSlug) return
     setDetailClosing(true)
     const t = window.setTimeout(() => {
-      setDetailActivity(null)
+      setDetailSlug(null)
       setDetailClosing(false)
     }, DETAIL_EXIT_MS)
     return () => window.clearTimeout(t)
-  }, [activeActivity])
+  }, [activeActivity, detailSlug])
 
-  const select = (i: number) => {
-    if (i === activeIndex) {
-      setActiveIndex(null)
-      return
-    }
-    setActiveIndex(i)
-    rowRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-  }
+  const detailActivity = detailSlug
+    ? (ACTIVITIES.find((a) => a.calSlug === detailSlug) ?? null)
+    : null
 
-  const isPrevDisabled = start <= 0
-  const isNextDisabled = start >= MAX_START
-  const isSliding = slide !== null
-
-  // Minimalist carousel shift by exactly one card: a 6th card (the one
-  // entering or leaving) is rendered alongside the usual 5, then the whole
-  // row eases across by one card's width — nothing is unmounted or faded
-  // out mid-shift, it only ever slides.
-  const shift = (dir: 1 | -1) => {
-    if (isSliding) return
-    if (dir < 0 && isPrevDisabled) return
-    if (dir > 0 && isNextDisabled) return
-    setActiveIndex(null)
-    setLockCardTransition(true)
-
-    if (dir > 0) {
-      // Append the incoming card at the end; the row starts at its resting
-      // position (no visual change yet) and eases left by one slot.
-      setSlide({ items: SERVICES.slice(start, start + PAGE_SIZE + 1), dir })
-      setNoTransition(false)
-      setShifted(false)
-      requestAnimationFrame(() => requestAnimationFrame(() => setShifted(true)))
-    } else {
-      // Prepend the incoming card, pre-shift the row left by one slot
-      // instantly (so the visible cards don't jump), then ease back to 0 —
-      // which reveals the new card from the left.
-      setSlide({ items: SERVICES.slice(start - 1, start + PAGE_SIZE), dir })
-      setNoTransition(true)
-      setShifted(true)
-      requestAnimationFrame(() => {
-        rowRef.current?.getBoundingClientRect()
-        requestAnimationFrame(() => {
-          setNoTransition(false)
-          setShifted(false)
-        })
-      })
-    }
-  }
-
-  const handleRowTransitionEnd = (e: React.TransitionEvent<HTMLDivElement>) => {
-    if (e.target !== rowRef.current || e.propertyName !== 'transform') return
-    if (!slide) return
-    // Dropping the 6-card list back to the plain 5-card one also resets the
-    // transform value (shifted -> 0), which lands on an identical visual —
-    // but only if it happens instantly. With the row's transition still
-    // enabled that reset would itself animate as an unwanted second slide,
-    // so it's snapped in with transitions locked, then released once
-    // everything has settled.
-    setStart((s) => s + slide.dir)
-    setSlide(null)
-    setShifted(false)
-    setNoTransition(true)
+  function select(id: string) {
+    const opening = id !== activeId
+    setActiveId(opening ? id : null)
+    if (!opening) return
+    // La ficha se monta en el mismo frame que el cambio de estado, así que
+    // el desplazamiento espera al siguiente para encontrarla ya en el DOM.
     requestAnimationFrame(() => {
-      rowRef.current?.getBoundingClientRect()
-      requestAnimationFrame(() => {
-        setNoTransition(false)
-        setLockCardTransition(false)
-      })
+      detailRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' })
     })
   }
 
-  const visible = slide ? slide.items : SERVICES.slice(start, start + PAGE_SIZE)
-  const baseIndex = slide ? (slide.dir > 0 ? start : start - 1) : start
-  const rowClassName = [
-    'experiences__row',
-    isSliding && 'experiences__row--sliding',
-    shifted && 'experiences__row--shifted',
-    noTransition && 'experiences__row--no-transition',
-    lockCardTransition && 'experiences__row--lock-card-transition',
-  ]
-    .filter(Boolean)
-    .join(' ')
-
   return (
-    <section className="experiences">
-      <header className="experiences__header">
+    <section className="experiences" id="experiencias">
+      <header className="experiences__header" data-reveal="">
         <div className="experiences__heading">
           <p className="experiences__eyebrow">Experiencias</p>
           <h2 className="experiences__title">Elige tu experiencia</h2>
         </div>
-        <div className="experiences__aside">
-          <p className="experiences__lead">
-            Vivencias diseñadas para cada tipo de esquiador. Elige la tuya y
-            empieza.
-          </p>
-          <div className="experiences__nav">
-            <button
-              type="button"
-              className="experiences__nav-btn"
-              aria-label="Actividad anterior"
-              onClick={() => shift(-1)}
-              disabled={isPrevDisabled || isSliding}
-            >
-              <IconArrowLeft size={20} stroke={2} />
-            </button>
-            <button
-              type="button"
-              className="experiences__nav-btn experiences__nav-btn--primary"
-              aria-label="Siguiente actividad"
-              onClick={() => shift(1)}
-              disabled={isNextDisabled || isSliding}
-            >
-              <IconArrowRight size={20} stroke={2} />
-            </button>
-          </div>
-        </div>
+        <p className="experiences__lead">
+          Ocho formas de vivir Baqueira, todas con instructor titulado y
+          atención personalizada
+        </p>
       </header>
 
-      <div className="experiences__row-wrap">
-      <div
-        className={rowClassName}
-        ref={rowRef}
-        onTransitionEnd={handleRowTransitionEnd}
-      >
-        {visible.map((service, localIndex) => {
-          const i = baseIndex + localIndex
-          const isActive = i === activeIndex
+      <div className="experiences__track" data-exp-track="" ref={trackRef}>
+        {SERVICES.map((service, i) => {
+          const isActive = service.id === activeId
           return (
-            <article
+            <button
               key={service.id}
-              className={`experience-card${isActive ? ' experience-card--active' : ''}`}
-              onClick={() => select(i)}
-              role="button"
-              tabIndex={0}
+              type="button"
+              className={`experiences__tile${
+                isActive ? ' experiences__tile--active' : ''
+              }`}
+              data-exp-tile=""
               aria-expanded={isActive}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                  e.preventDefault()
-                  select(i)
-                }
-              }}
+              onClick={() => select(service.id)}
             >
               <img
-                className="experience-card__img"
+                className="experiences__tile-img"
                 src={service.image}
                 alt=""
                 loading="lazy"
@@ -213,28 +138,35 @@ function Experiences() {
                     : undefined
                 }
               />
-              <span className="experience-card__number" aria-hidden="true">
+              <span className="experiences__tile-num" aria-hidden="true">
                 {String(i + 1).padStart(2, '0')}
               </span>
-              <div className="experience-card__body">
-                <h3 className="experience-card__title">{service.title}</h3>
-                <p className="experience-card__tagline">{service.tagline}</p>
-                <div className="experience-card__reveal">
-                  <p className="experience-card__summary">
-                    {service.description}
-                  </p>
-                </div>
-              </div>
-            </article>
+              <span className="experiences__tile-body">
+                <span className="experiences__tile-title">{service.title}</span>
+                <span className="experiences__tile-tagline">
+                  {service.tagline}
+                </span>
+                <span className="experiences__tile-more">
+                  {isActive ? 'Cerrar' : 'Ver experiencia'}
+                  <IconChevronDown size={16} stroke={2} aria-hidden="true" />
+                </span>
+              </span>
+            </button>
           )
         })}
       </div>
+
+      <div className="experiences__progress" aria-hidden="true">
+        <span data-exp-progress="" ref={progressRef} />
       </div>
 
       {detailActivity && (
         <div
-          className={`experiences__detail${detailClosing ? ' experiences__detail--closing' : ''}`}
           key={detailActivity.calSlug}
+          ref={detailRef}
+          className={`experiences__detail${
+            detailClosing ? ' experiences__detail--closing' : ''
+          }`}
         >
           <ExperienceDetail activity={detailActivity} />
         </div>

@@ -1,3 +1,4 @@
+import { useRef, type ReactNode } from "react";
 import { Link } from "react-router-dom";
 import {
   IconArrowRight,
@@ -7,23 +8,40 @@ import {
   IconPencil,
   IconAsterisk,
 } from "@tabler/icons-react";
-import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import aitorImage from "../assets/images/aitor.jpg";
+import { useNosotrosMotion } from "../hooks/useNosotrosMotion";
 import historiaImage from "../assets/images/historia.jpg";
+import aitorImage from "../assets/images/aitor.jpg";
 import naiaraImage from "../assets/images/naiara.png";
+import valoresImage from "../assets/images/valores.png";
 import logoSquared from "../assets/logos/logo_squared.png";
 import "./Nosotros.css";
 
-interface StoryChapter {
+/* La Navbar la monta el Shell de App.tsx, no la página.
+ *
+ * Los `data-nos-*` son propios de esta página: el hook global
+ * useScrollAnimations ya se engancha a [data-line], [data-reveal] y
+ * [data-parallax] en todo el árbol, y compartir nombres haría que cada
+ * elemento se animara dos veces. */
+
+const INTRO =
+  "Es el estado mental en el que la técnica deja de ser pensamiento para convertirse en intuición. La montaña deja de ser un lugar por el que desciendes para convertirse en un lenguaje que entiendes.";
+
+interface Chapter {
   id: string;
+  num: string;
+  meta: string;
   heading: string;
-  paragraphs: React.ReactNode[];
+  display?: string[];
+  image?: { src: string; alt: string };
+  paragraphs: ReactNode[];
 }
 
-const STORY: StoryChapter[] = [
+const STORY: Chapter[] = [
   {
     id: "eleccion",
+    num: "01",
+    meta: "2020",
     heading: "Todo comenzó con una elección",
     paragraphs: [
       "Decidí dejar atrás la vida en la ciudad, la rutina, los horarios y esa sensación de que el tiempo se escapa.",
@@ -40,15 +58,11 @@ const STORY: StoryChapter[] = [
   },
   {
     id: "evolucion",
+    num: "02",
+    meta: "Seis años",
     heading: "Seis años de evolución",
+    display: ["Aprender.", "Crecer.", "Evolucionar."],
     paragraphs: [
-      <strong className="nosotros__story-label">
-        APRENDER.
-        <br />
-        CRECER.
-        <br />
-        EVOLUCIONAR.
-      </strong>,
       "Durante estos años completé mi formación de Esquí Alpino, seguí aprendiendo temporada tras temporada y descubrí una forma diferente de entender el trabajo, la montaña y la vida.",
       "Dejé atrás una rueda que nunca se detenía para empezar a construir algo con propósito.",
       <strong>
@@ -59,9 +73,11 @@ const STORY: StoryChapter[] = [
   },
   {
     id: "kaiten",
+    num: "03",
+    meta: "Japón",
     heading: "Una palabra cambió todo",
+    display: ["Kaiten."],
     paragraphs: [
-      <strong className="nosotros__story-label">KAITEN.</strong>,
       "En Japón encontré una palabra que resumía exactamente lo que llevaba años viviendo.",
       <>
         KAITEN habla de <strong>cambio, transformación y evolución.</strong>
@@ -79,7 +95,13 @@ const STORY: StoryChapter[] = [
   },
   {
     id: "naiara",
+    num: "04",
+    meta: "Naiara",
     heading: "Pero nada de esto existiría sin Naiara",
+    image: {
+      src: naiaraImage,
+      alt: "Naiara contemplando las montañas del Valle de Arán",
+    },
     paragraphs: [
       "Ella está detrás de gran parte de lo que no se ve.",
       "Naiara ha sido mi compañera durante todo este viaje. La persona que sostiene lo esencial y que está detrás de cada detalle, cada decisión y cada paso que nos ha traído hasta aquí.",
@@ -97,7 +119,6 @@ const VALUES = [
   {
     id: "curiosidad",
     Icon: IconMountain,
-    bg: "#D8D5DA",
     title: "Curiosidad",
     tagline: "Nunca dejamos de explorar",
     body: "Seguimos preguntando. Seguimos aprendiendo. La montaña siempre enseña.",
@@ -105,7 +126,6 @@ const VALUES = [
   {
     id: "precision",
     Icon: IconWaveSine,
-    bg: "#D1D5CC",
     title: "Precisión",
     tagline: "Nos importa cada detalle",
     body: "Pequeños ajustes. Grandes diferencias. Mejor cada día.",
@@ -113,7 +133,6 @@ const VALUES = [
   {
     id: "respeto",
     Icon: IconCircle,
-    bg: "#F6F5F3",
     title: "Respeto",
     tagline: "Por la montaña. Por las personas. Por el momento",
     body: "Cuidamos lo que amamos para que las futuras generaciones también puedan disfrutarlo.",
@@ -121,7 +140,6 @@ const VALUES = [
   {
     id: "estilo",
     Icon: IconPencil,
-    bg: "#CFCCD4",
     title: "Estilo",
     tagline: "Menos ruido. Más intención",
     body: "Valoramos la simplicidad, la función y el buen gusto en todo lo que hacemos.",
@@ -129,7 +147,6 @@ const VALUES = [
   {
     id: "comunidad",
     Icon: IconAsterisk,
-    bg: "#F6F5F3",
     title: "Comunidad",
     tagline: "Subimos juntos",
     body: "No somos clientes. No somos profesores. Somos personas que comparten la misma pasión.",
@@ -137,156 +154,175 @@ const VALUES = [
 ];
 
 function Nosotros() {
+  const root = useRef<HTMLDivElement>(null);
+  useNosotrosMotion(root);
+
   return (
-    <div className="nosotros">
-      <Navbar />
-
-      {/* ─── Origin composition ───────────────────────────── */}
-      <section className="nosotros__origin">
-        <div className="nosotros__origin-head">
-          <p className="nosotros__eyebrow">Nuestra Historia</p>
-          <div className="nosotros__intro">
-            <p className="nosotros__intro-p">
-              Es el estado mental en el que la técnica deja de ser pensamiento
-              para convertirse en intuición.
-            </p>
-            <p className="nosotros__intro-p">
-              La montaña deja de ser un lugar por el que desciendes para
-              convertirse en un lenguaje que entiendes.
-            </p>
-            <p className="nosotros__intro-p nosotros__intro-p--slogan">
-              We call it The KAITEN Line.
-            </p>
-          </div>
+    <div className="nos" data-ds="" ref={root}>
+      <section className="nos__wrap nos__open">
+        <div className="nos__open-text">
+          <p className="k-eyebrow" data-nos-fade="">
+            Nuestra historia
+          </p>
+          <h1 className="nos__display">
+            <span className="nos__line">
+              <span data-nos-line="">El origen</span>
+            </span>
+            <span className="nos__line">
+              <span data-nos-line="">de Kaiten</span>
+            </span>
+          </h1>
+          <span className="k-rule" data-nos-rule="" />
+          <p className="nos__subtitle" data-nos-fade="">
+            No nacimos para crear otra escuela de esquí
+          </p>
+          <p className="nos__lead" data-nos-fade="">
+            Nacimos porque creíamos que existía una forma mejor de enseñar.
+          </p>
         </div>
-
-        {/* 3-column layout: [photo+text] | [dark card] | [photo overlay] */}
-        <div className="nosotros__composition">
-          {/* Left column: photo on top, text below */}
-          <div className="nosotros__col-left">
-            <div className="nosotros__card nosotros__card--photo">
-              <img
-                src={historiaImage}
-                alt="Señales de montaña en Baqueira"
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
-            <div className="nosotros__origin-body">
-              <h1 className="nosotros__title">
-                El origen
-                <br />
-                de KAITEN
-              </h1>
-              <p className="nosotros__subtitle">
-                No nacimos para crear otra escuela de esquí
-              </p>
-              <p className="nosotros__lead">
-                Nacimos porque creíamos que existía una forma mejor de enseñar
-              </p>
-            </div>
-          </div>
-
-          {/* Center: dark text card — full height */}
-          <div className="nosotros__card nosotros__card--dark">
-            <h2 className="nosotros__card-heading">
-              Todo comenzó en el Valle de Arán
-            </h2>
-          </div>
-
-          {/* Right: Aitor photo with overlay quote — full height */}
-          <div className="nosotros__card nosotros__card--overlay">
-            <img
-              src={aitorImage}
-              alt="Aitor Bellver, fundador de Kaiten"
-              loading="lazy"
-              decoding="async"
-            />
-            <div className="nosotros__card-gradient">
-              <p className="nosotros__card-quote">
-                Aitor Bellver quería una escuela de esquí que brindara una
-                experiencia totalmente nueva
-              </p>
-              <span className="nosotros__card-role">
-                Técnico Deportivo Superior en Esquí Alpino (TD3) ROPEC 052315
-              </span>
-            </div>
+        <div
+          className="nos__media nos__media--tall nos__media--hero"
+          data-nos-fade=""
+        >
+          <img
+            data-nos-parallax=""
+            src={historiaImage}
+            alt="Montañas nevadas del Valle de Arán"
+          />
+          <div className="nos__media-caption">
+            <span className="k-rule" />
+            <h2>Todo comenzó en el Valle de Arán</h2>
           </div>
         </div>
       </section>
 
-      {/* ─── Story: la historia de Aitor y Naiara ────────── */}
-      <section className="nosotros__story">
-        <div className="nosotros__story-text">
-          {STORY.map((chapter) => (
-            <div key={chapter.id} className="nosotros__story-chapter">
-              <h2 className="nosotros__story-heading">{chapter.heading}</h2>
-              {chapter.paragraphs.map((p, i) => (
-                <p key={i} className="nosotros__story-p">
-                  {p}
-                </p>
-              ))}
-            </div>
-          ))}
+      <section className="nos__statement">
+        <div className="nos__statement-inner" data-nos-words="">
+          <p className="nos__statement-text">
+            {INTRO.split(" ").map((w, i) => (
+              <span key={i} data-nos-word="">
+                {w}{" "}
+              </span>
+            ))}
+          </p>
+          <p className="nos__slogan">We call it The KAITEN Line</p>
         </div>
-        <div className="nosotros__story-media">
+      </section>
+
+      <section className="nos__wrap nos__founder">
+        <div className="nos__media nos__media--tall" data-nos-reveal="">
           <img
-            src={naiaraImage}
-            alt="Naiara contemplando las montañas del Valle de Arán"
+            data-nos-parallax=""
+            src={aitorImage}
+            alt="Aitor Bellver, fundador de Kaiten"
             loading="lazy"
             decoding="async"
           />
         </div>
-      </section>
-
-      {/* ─── Values ──────────────────────────────────────── */}
-      <section className="nosotros__values">
-        <header className="nosotros__values-header">
-          <p className="nosotros__eyebrow">Nuestros valores</p>
-          <h2 className="nosotros__values-title">
-            Lo que
-            <br />
-            nos guía
-          </h2>
-        </header>
-        <div className="nosotros__values-grid">
-          {VALUES.map((v) => (
-            <div
-              key={v.id}
-              className="nosotros__value"
-              style={{ backgroundColor: v.bg }}
-            >
-              <v.Icon
-                className="nosotros__value-icon"
-                size={20}
-                stroke={1.5}
-                aria-hidden="true"
-              />
-              <p className="nosotros__value-name">{v.title}</p>
-              <p className="nosotros__value-tagline">{v.tagline}</p>
-              <p className="nosotros__value-body">{v.body}</p>
-            </div>
-          ))}
+        <div className="nos__founder-text" data-nos-reveal="">
+          <p className="k-eyebrow">Fundador</p>
+          <blockquote className="nos__quote">
+            Aitor Bellver quería una escuela de esquí que brindara una
+            experiencia totalmente nueva.
+          </blockquote>
+          <div className="nos__credential">
+            <span className="k-rule" />
+            <p>
+              Técnico Deportivo Superior en Esquí Alpino (TD3) · ROPEC 052315
+            </p>
+          </div>
         </div>
       </section>
 
-      {/* ─── Manifesto ───────────────────────────────────── */}
-      <section className="nosotros__manifesto">
-        <img
-          src={logoSquared}
-          alt=""
-          aria-hidden="true"
-          className="nosotros__manifesto-mark"
-          loading="lazy"
-          decoding="async"
-        />
-        <blockquote className="nosotros__quote">
+      <section className="nos__wrap nos__story">
+        {STORY.map((c) => (
+          <div key={c.id}>
+            {c.image && (
+              <div className="nos__media nos__media--band" data-nos-reveal="">
+                <img
+                  data-nos-parallax=""
+                  src={c.image.src}
+                  alt={c.image.alt}
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+            )}
+            <article className="nos__chapter">
+              <div>
+                <div className="nos__chapter-head" data-nos-reveal="">
+                  <span className="nos__chapter-meta">
+                    <span className="nos__num" aria-hidden="true">
+                      {c.num}
+                    </span>
+                    <span className="k-eyebrow">{c.meta}</span>
+                  </span>
+                  <h2>{c.heading}</h2>
+                </div>
+              </div>
+              <div className="nos__chapter-body">
+                {c.display && (
+                  <p className="nos__chapter-display" data-nos-reveal="">
+                    {c.display.map((l) => (
+                      <span key={l}>{l}</span>
+                    ))}
+                  </p>
+                )}
+                {c.paragraphs.map((p, i) => (
+                  <p key={i} data-nos-reveal="">
+                    {p}
+                  </p>
+                ))}
+              </div>
+            </article>
+          </div>
+        ))}
+      </section>
+
+      <section className="nos__values">
+        <div className="nos__values-inner">
+          <div>
+            <div className="nos__values-head" data-nos-reveal="">
+              <header className="k-section-header">
+                <p className="k-eyebrow">Nuestros valores</p>
+                <h2 className="k-section-header__title">Lo que nos guía</h2>
+              </header>
+              <div className="nos__values-photo">
+                <img
+                  src={valoresImage}
+                  alt="Instructores de Kaiten chocando los puños sobre la nieve"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+            </div>
+          </div>
+          <div>
+            {VALUES.map(({ id, Icon, title, tagline, body }) => (
+              <div key={id} className="nos__value" data-nos-reveal="">
+                <span className="nos__value-icon">
+                  <Icon size={22} stroke={1.5} aria-hidden="true" />
+                </span>
+                <div>
+                  <p className="k-eyebrow">{title}</p>
+                  <h3>{tagline}</h3>
+                  <p className="nos__value-body">{body}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="nos__manifesto" data-nos-reveal="">
+        <img src={logoSquared} alt="" aria-hidden="true" loading="lazy" />
+        <blockquote>
           No creemos en vender clases. Creemos en cambiar la manera de vivir la
           montaña.
         </blockquote>
-        <Link to="/reservas" className="nosotros__manifesto-link">
-          Ver experiencias
-          <IconArrowRight size={15} stroke={2} />
+        <Link to="/reservas" className="k-btn k-btn--secondary">
+          <span>Ver experiencias</span>
+          <IconArrowRight size={18} stroke={2} aria-hidden="true" />
         </Link>
       </section>
 

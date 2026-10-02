@@ -1,0 +1,7 @@
+/* Webfonts: Inter + Poppins (incluida la itálica 600) ya se cargan con <link>
+ * desde index.html, con preconnect. No se repite el @import aquí para no
+ * añadir una petición bloqueante extra.
+ *
+ * Iconos: este repo usa @tabler/icons-react (componentes SVG), no el webfont
+ * de Tabler, así que tampoco se importa.
+ */

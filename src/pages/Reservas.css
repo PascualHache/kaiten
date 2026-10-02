@@ -93,7 +93,7 @@ tbody tr:first-child .reservas__outer-cell {
   min-width: 0;
   padding: 1.1rem 1.25rem;
   font-size: 0.875rem;
-  color: var(--color-forest);
+  color: var(--color-black);
   line-height: 1.4;
 }
 
@@ -115,6 +115,14 @@ tbody tr:first-child .reservas__outer-cell {
   text-align: left;
 }
 
+/* Nivel abre más calle por la izquierda para despegarse de "Personas": las
+   etiquetas de nivel quedaban pegadas a la cifra de la columna anterior. La
+   cabecera lleva la misma sangría para no desalinearse. */
+.reservas__col-level,
+.reservas__th--hide-md {
+  padding-left: 2.75rem;
+}
+
 .reservas__col-level {
   display: flex;
   flex-direction: column;
@@ -122,9 +130,15 @@ tbody tr:first-child .reservas__outer-cell {
   gap: 0.3rem;
 }
 
+/* "Desde" en regular y el importe en negrita: el peso marca la cifra, no la
+   etiqueta que la introduce. */
 .reservas__col-price {
+  font-weight: 400;
+  color: var(--color-black);
+}
+
+.reservas__price-value {
   font-weight: 700;
-  color: var(--color-lavender-dark);
 }
 
 /* "Reservar" button */

@@ -1,4 +1,3 @@
-import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import PageTitle from "../components/PageTitle";
 import { PRIVACIDAD_SECTIONS } from "../data/privacidad";
@@ -29,8 +28,6 @@ function renderBlocks(blocks: Block[]) {
 function Privacidad() {
   return (
     <div className="privacidad">
-      <Navbar />
-
       <main className="privacidad__main">
         <header className="privacidad__header">
           <PageTitle eyebrow="Legal · Última actualización: julio 2026" spacing="loose">

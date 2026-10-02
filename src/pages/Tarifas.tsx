@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import PageTitle from "../components/PageTitle";
 import { TARIFFS } from "../data/tariffs";
@@ -8,8 +7,6 @@ import "./Tarifas.css";
 function Tarifas() {
   return (
     <div className="tarifas">
-      <Navbar />
-
       <main className="tarifas__sheet">
         <PageTitle eyebrow="Baqueira Beret">Tarifas</PageTitle>
         <p className="tarifas__includes">
@@ -30,7 +27,7 @@ function Tarifas() {
               </span>
             </div>
             {TARIFFS.map((t) => (
-              <div key={t.id} className="tarifas-table__row">
+              <div key={t.id} className="tarifas-table__row" data-reveal="">
                 <span className="tarifas-table__number" aria-hidden="true">
                   {t.number}
                 </span>

@@ -23,7 +23,7 @@
   font-size: 0.75rem;
   letter-spacing: 0.35em;
   text-transform: uppercase;
-  color: rgba(29, 43, 0, 0.55);
+  color: rgba(0, 0, 0, 0.55);
 }
 
 /* Common includes line */
@@ -57,7 +57,7 @@
   align-items: center;
   gap: 1.5rem;
   padding: 0.95rem 0;
-  border-top: 1px solid rgba(29, 43, 0, 0.1);
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .tarifas-table__row--head {
@@ -76,7 +76,7 @@
   font-size: 0.8rem;
   font-weight: 700;
   letter-spacing: 0.08em;
-  color: rgba(29, 43, 0, 0.45);
+  color: rgba(0, 0, 0, 0.45);
 }
 
 .tarifas-table__name {
@@ -85,7 +85,7 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.02em;
-  color: var(--color-forest);
+  color: var(--color-black);
 }
 
 .tarifas-table__link {
@@ -102,7 +102,7 @@
 .tarifas-table__price {
   font-size: 0.95rem;
   font-weight: 700;
-  color: var(--color-forest);
+  color: var(--color-black);
 }
 
 .tarifas-table__price-note {
@@ -124,7 +124,7 @@
   text-align: center;
   gap: 0.15rem;
   font-size: 0.8rem;
-  color: rgba(29, 43, 0, 0.75);
+  color: rgba(0, 0, 0, 0.75);
 }
 
 .tarifas-table__max {
@@ -134,7 +134,7 @@
 .tarifas__note {
   margin: 1.25rem 0 0;
   padding-top: 1rem;
-  border-top: 1px solid rgba(29, 43, 0, 0.1);
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
   font-size: 0.8rem;
   color: var(--color-lavender-dark);
 }
@@ -142,7 +142,7 @@
 /* Niveles */
 .tarifas__niveles {
   padding: clamp(1.5rem, 4vw, 2.5rem) 0 0;
-  border-top: 1px solid rgba(29, 43, 0, 0.1);
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 /* Standalone /niveles page: no divider above */
@@ -162,7 +162,7 @@
   align-items: center;
   gap: 1.5rem;
   padding: 0.85rem 0;
-  border-top: 1px solid rgba(29, 43, 0, 0.1);
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .niveles-table__row--head {
@@ -194,20 +194,20 @@
 }
 
 .niveles-table__level--avanzado {
-  border-left-color: var(--color-forest);
+  border-left-color: var(--color-black);
 }
 
 .niveles-table__level-label {
   font-size: 0.6rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: rgba(29, 43, 0, 0.5);
+  color: rgba(0, 0, 0, 0.5);
 }
 
 .niveles-table__level-code {
   font-size: 1.35rem;
   font-weight: 700;
-  color: var(--color-forest);
+  color: var(--color-black);
 }
 
 .niveles-table__desc {
@@ -219,14 +219,14 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.02em;
-  color: var(--color-forest);
+  color: var(--color-black);
 }
 
 .niveles-table__ref {
   font-size: 0.8rem;
   text-transform: uppercase;
   letter-spacing: 0.02em;
-  color: rgba(29, 43, 0, 0.65);
+  color: rgba(0, 0, 0, 0.65);
 }
 
 /* 4-column layout for the Niveles page.

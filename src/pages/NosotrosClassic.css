@@ -1,0 +1,477 @@
+.nosotros {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: var(--color-cream);
+  font-family: var(--font-heading);
+}
+
+.nosotros__eyebrow {
+  margin: 0 0 0.75rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-lavender-dark);
+}
+
+/* ─── Origin section ────────────────────────────────── */
+
+.nosotros__origin {
+  padding-top: clamp(1.75rem, 3.5vw, 2.5rem);
+}
+
+.nosotros__origin-head {
+  padding: 0 clamp(1.5rem, 5vw, 5rem) clamp(1.25rem, 2.5vw, 2rem);
+}
+
+/* Intro: media página a la izquierda, letra negra (el cliente duda
+   entre negro y el verde forest — de momento, negro) */
+.nosotros__intro {
+  max-width: 20rem;
+}
+
+.nosotros__intro-p {
+  margin: 0 0 0.85rem;
+  font-size: clamp(0.85rem, 1.2vw, 0.95rem);
+  line-height: 1.7;
+  color: #111;
+  text-align: justify;
+}
+
+.nosotros__intro-p:last-child {
+  margin-bottom: 0;
+}
+
+.nosotros__intro-p--slogan {
+  font-style: italic;
+  font-weight: 600;
+}
+
+/* ─── Composition: collage escalonado ───────────────────
+   [foto nieve + texto debajo] [tarjeta oscura solapada,
+   más baja] [foto Aitor, aún más baja]. Esquinas rectas. */
+
+.nosotros__composition {
+  /* anchura del solape entre la foto y la tarjeta oscura */
+  --overlap: clamp(2.5rem, 5vw, 6rem);
+  display: flex;
+  align-items: flex-start;
+  padding: 0 clamp(1.5rem, 5vw, 5rem) clamp(2.5rem, 5vw, 4rem);
+}
+
+/* Left column: photo on top, origin text below */
+.nosotros__col-left {
+  flex: 1.5;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  min-width: 0;
+}
+
+/* ─── Cards (shared) ────────────────────────────────── */
+
+.nosotros__card {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Photo card — apaisada, arriba de la columna izquierda */
+.nosotros__card--photo {
+  aspect-ratio: 1.85 / 1;
+  z-index: 10;
+}
+
+.nosotros__card--photo img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Dark center card — arranca más abajo y se solapa sobre la foto */
+.nosotros__card--dark {
+  flex: 0.6;
+  z-index: 2;
+  margin-top: clamp(2rem, 4vw, 3.5rem);
+  margin-left: calc(-1 * var(--overlap));
+  min-height: clamp(24rem, 52vh, 30rem);
+  background-color: var(--color-black);
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  padding: clamp(1.5rem, 2.8vw, 2.25rem);
+  /* La foto (z-index mayor) tapa la franja solapada: este padding
+     desplaza el contenido a la zona siempre visible */
+  padding-left: calc(var(--overlap) + clamp(1.5rem, 2.8vw, 2.25rem));
+}
+
+.nosotros__card-heading {
+  margin: 0;
+  font-size: clamp(1.05rem, 1.9vw, 1.5rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--color-cream);
+}
+
+.nosotros__card-body {
+  margin-top: auto;
+  padding-top: 1.5rem;
+}
+
+
+/* Overlay card — la más baja del escalonado */
+.nosotros__card--overlay {
+  flex: 0.85;
+  margin-top: clamp(2rem, 4vw, 3.5rem);
+  margin-left: 0.75rem;
+  min-height: clamp(26rem, 58vh, 33rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.nosotros__card--overlay img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+
+.nosotros__card-gradient {
+  position: relative;
+  z-index: 1;
+  padding: clamp(1.25rem, 2.5vw, 2rem);
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.9) 0%,
+    rgba(0, 0, 0, 0.55) 50%,
+    rgba(0, 0, 0, 0) 100%
+  );
+}
+
+.nosotros__card-quote {
+  margin: 0 0 0.6rem;
+  font-size: clamp(0.85rem, 1.3vw, 1.05rem);
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--color-cream);
+}
+
+.nosotros__card-role {
+  font-size: 0.72rem;
+  letter-spacing: 0.02em;
+  color: rgba(230, 229, 225, 0.62);
+}
+
+/* ─── Origin body text (bottom of left column) ──────── */
+
+.nosotros__origin-body {
+  padding: 0;
+}
+
+.nosotros__title {
+  margin: 0 0 0.5rem;
+  font-size: clamp(1.75rem, 4.5vw, 3.5rem);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 0.97;
+  color: #111;
+}
+
+.nosotros__subtitle {
+  margin: 0 0 0.65rem;
+  font-size: clamp(0.9rem, 1.6vw, 1.1rem);
+  font-weight: 600;
+  color: rgba(17, 17, 17, 0.72);
+}
+
+.nosotros__lead {
+  margin: 0;
+  font-size: clamp(0.82rem, 1.3vw, 0.95rem);
+  line-height: 1.7;
+  color: rgba(17, 17, 17, 0.6);
+}
+
+/* ─── Story: la historia de Aitor y Naiara ──────────── */
+
+.nosotros__story {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.85fr);
+  gap: clamp(2.5rem, 6vw, 6rem);
+  align-items: start;
+  padding: clamp(3rem, 6vw, 5rem) clamp(1.5rem, 5vw, 5rem);
+}
+
+.nosotros__story-text {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(2rem, 3.5vw, 2.75rem);
+  justify-self: end;
+}
+
+/* Todos los textos de la sección en negro (petición del cliente) */
+.nosotros__story-heading {
+  margin: 0 0 1.15rem;
+  font-size: clamp(1rem, 1.5vw, 1.2rem);
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #111;
+}
+
+.nosotros__story-p {
+  margin: 0 0 1rem;
+  font-size: clamp(0.85rem, 1.2vw, 0.95rem);
+  line-height: 1.6;
+  color: #111;
+  text-align: justify;
+}
+
+.nosotros__story-p:last-child {
+  margin-bottom: 0;
+}
+
+.nosotros__story-p strong {
+  font-weight: 700;
+}
+
+/* Standalone label lines (e.g. "KAITEN.") that open a chapter — styled as
+   a subtitle rather than a plain bold paragraph */
+.nosotros__story-label {
+  display: block;
+  font-size: clamp(1.15rem, 2.2vw, 1.5rem);
+  letter-spacing: 0.03em;
+  line-height: 1.35;
+  text-align: left;
+}
+
+/* Foto de Naiara: alta, esquinas rectas, fija mientras se lee */
+.nosotros__story-media {
+  height: calc(100vh - var(--navbar-height) - 3rem);
+  /* Recorta el sobreancho de la foto durante el parallax. */
+  overflow: hidden;
+}
+
+/* La imagen desborda un 16% y arranca desplazada -8%: así puede moverse
+   verticalmente sin que asome el fondo por ningún borde. */
+.nosotros__story-media img {
+  position: relative;
+  top: -8%;
+  width: 100%;
+  height: 116%;
+  object-fit: cover;
+}
+
+/* ─── Values ────────────────────────────────────────── */
+
+.nosotros__values {
+  display: grid;
+  grid-template-columns: minmax(9rem, 0.45fr) 1fr;
+  gap: clamp(2rem, 4vw, 4rem);
+  align-items: start;
+  padding: clamp(2.5rem, 5vw, 4rem) clamp(1.5rem, 5vw, 5rem);
+  background-color: rgba(133, 127, 157, 0.06);
+}
+
+.nosotros__values-header {
+  position: sticky;
+  top: 5rem;
+}
+
+.nosotros__values-title {
+  margin: 0;
+  font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  color: var(--color-black);
+}
+
+/* Single-row 5-column card grid */
+.nosotros__values-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.75rem;
+}
+
+.nosotros__value {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding: 1.15rem;
+  border-radius: 0.75rem;
+  border: none;
+  transition: filter 0.22s ease;
+}
+
+.nosotros__value:hover {
+  filter: brightness(0.94);
+}
+
+.nosotros__value-icon {
+  color: var(--color-black);
+  margin-bottom: 0.5rem;
+  flex-shrink: 0;
+  transition: transform 0.25s ease;
+}
+
+.nosotros__value:hover .nosotros__value-icon {
+  transform: translateY(-4px);
+}
+
+.nosotros__value-name {
+  margin: 0;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #111;
+}
+
+.nosotros__value-tagline {
+  margin: 0 0 0.2rem;
+  font-size: clamp(0.88rem, 1.4vw, 1rem);
+  font-weight: 700;
+  line-height: 1.25;
+  color: #111;
+}
+
+.nosotros__value-body {
+  margin: 0;
+  font-size: 0.82rem;
+  line-height: 1.55;
+  color: #111;
+}
+
+/* ─── Manifesto ─────────────────────────────────────── */
+
+.nosotros__manifesto {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  padding: clamp(3rem, 6vw, 5rem) clamp(1.5rem, 5vw, 5rem);
+  text-align: center;
+}
+
+.nosotros__manifesto-mark {
+  width: 2.75rem;
+  height: 2.75rem;
+  opacity: 0.3;
+}
+
+.nosotros__quote {
+  max-width: 36rem;
+  margin: 0;
+  font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+  font-style: bold;
+  font-weight: 700;
+  line-height: 1.5;
+  color: var(--color-black);
+}
+
+.nosotros__manifesto-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--color-black);
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.nosotros__manifesto-link:hover {
+  opacity: 0.65;
+  color: var(--color-black);
+}
+
+/* ─── Responsive ────────────────────────────────────── */
+
+@media (max-width: 1024px) {
+  .nosotros__composition {
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .nosotros__col-left {
+    flex: 1 1 100%;
+  }
+
+  .nosotros__card--dark {
+    flex: 1 1 45%;
+    margin: 0;
+    min-height: 20rem;
+    padding-left: clamp(1.5rem, 2.8vw, 2.25rem);
+  }
+
+  .nosotros__card--overlay {
+    flex: 1 1 45%;
+    margin: 0;
+    min-height: 24rem;
+  }
+
+  .nosotros__story {
+    grid-template-columns: 1fr;
+  }
+
+  .nosotros__story-text {
+    max-width: none;
+    justify-self: stretch;
+  }
+
+  .nosotros__story-media {
+    position: static;
+    height: clamp(24rem, 80vw, 32rem);
+  }
+
+  .nosotros__values {
+    grid-template-columns: 1fr;
+  }
+
+  .nosotros__values-header {
+    position: static;
+  }
+
+  .nosotros__values-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .nosotros__composition {
+    flex-direction: column;
+  }
+
+  .nosotros__col-left {
+    flex: unset;
+  }
+
+  .nosotros__card--photo {
+    aspect-ratio: 4 / 3;
+    min-height: 14rem;
+  }
+
+  .nosotros__card--dark {
+    flex: unset;
+    min-height: 22rem;
+  }
+
+  .nosotros__card--overlay {
+    flex: unset;
+    aspect-ratio: 4 / 3;
+    min-height: 0;
+  }
+
+  .nosotros__values-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

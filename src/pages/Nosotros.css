@@ -1,471 +1,79 @@
-.nosotros {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  background-color: var(--color-cream);
-  font-family: var(--font-heading);
-}
-
-.nosotros__eyebrow {
-  margin: 0 0 0.75rem;
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--color-lavender-dark);
-}
-
-/* ─── Origin section ────────────────────────────────── */
-
-.nosotros__origin {
-  padding-top: clamp(1.75rem, 3.5vw, 2.5rem);
-}
-
-.nosotros__origin-head {
-  padding: 0 clamp(1.5rem, 5vw, 5rem) clamp(1.25rem, 2.5vw, 2rem);
-}
-
-/* Intro: media página a la izquierda, letra negra (el cliente duda
-   entre negro y el verde forest — de momento, negro) */
-.nosotros__intro {
-  max-width: 20rem;
-}
-
-.nosotros__intro-p {
-  margin: 0 0 0.85rem;
-  font-size: clamp(0.85rem, 1.2vw, 0.95rem);
-  line-height: 1.7;
-  color: #111;
-  text-align: justify;
-}
-
-.nosotros__intro-p:last-child {
-  margin-bottom: 0;
-}
-
-.nosotros__intro-p--slogan {
-  font-style: italic;
-  font-weight: 600;
-}
-
-/* ─── Composition: collage escalonado ───────────────────
-   [foto nieve + texto debajo] [tarjeta oscura solapada,
-   más baja] [foto Aitor, aún más baja]. Esquinas rectas. */
-
-.nosotros__composition {
-  /* anchura del solape entre la foto y la tarjeta oscura */
-  --overlap: clamp(2.5rem, 5vw, 6rem);
-  display: flex;
-  align-items: flex-start;
-  padding: 0 clamp(1.5rem, 5vw, 5rem) clamp(2.5rem, 5vw, 4rem);
-}
-
-/* Left column: photo on top, origin text below */
-.nosotros__col-left {
-  flex: 1.5;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  min-width: 0;
-}
-
-/* ─── Cards (shared) ────────────────────────────────── */
-
-.nosotros__card {
-  position: relative;
-  overflow: hidden;
-}
-
-/* Photo card — apaisada, arriba de la columna izquierda */
-.nosotros__card--photo {
-  aspect-ratio: 1.85 / 1;
-  z-index: 10;
-}
-
-.nosotros__card--photo img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-}
-
-/* Dark center card — arranca más abajo y se solapa sobre la foto */
-.nosotros__card--dark {
-  flex: 0.6;
-  z-index: 2;
-  margin-top: clamp(2rem, 4vw, 3.5rem);
-  margin-left: calc(-1 * var(--overlap));
-  min-height: clamp(24rem, 52vh, 30rem);
-  background-color: var(--color-black);
-  display: flex;
-  flex-direction: column;
-  justify-content: end;
-  padding: clamp(1.5rem, 2.8vw, 2.25rem);
-  /* La foto (z-index mayor) tapa la franja solapada: este padding
-     desplaza el contenido a la zona siempre visible */
-  padding-left: calc(var(--overlap) + clamp(1.5rem, 2.8vw, 2.25rem));
-}
-
-.nosotros__card-heading {
-  margin: 0;
-  font-size: clamp(1.05rem, 1.9vw, 1.5rem);
-  font-weight: 700;
-  line-height: 1.1;
-  letter-spacing: -0.02em;
-  color: var(--color-cream);
-}
-
-.nosotros__card-body {
-  margin-top: auto;
-  padding-top: 1.5rem;
-}
-
-
-/* Overlay card — la más baja del escalonado */
-.nosotros__card--overlay {
-  flex: 0.85;
-  margin-top: clamp(2rem, 4vw, 3.5rem);
-  margin-left: 0.75rem;
-  min-height: clamp(26rem, 58vh, 33rem);
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-}
-
-.nosotros__card--overlay img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: top center;
-}
-
-.nosotros__card-gradient {
-  position: relative;
-  z-index: 1;
-  padding: clamp(1.25rem, 2.5vw, 2rem);
-  background: linear-gradient(
-    to top,
-    rgba(29, 43, 0, 0.9) 0%,
-    rgba(29, 43, 0, 0.55) 50%,
-    rgba(29, 43, 0, 0) 100%
-  );
-}
-
-.nosotros__card-quote {
-  margin: 0 0 0.6rem;
-  font-size: clamp(0.85rem, 1.3vw, 1.05rem);
-  font-weight: 700;
-  line-height: 1.25;
-  color: var(--color-cream);
-}
-
-.nosotros__card-role {
-  font-size: 0.72rem;
-  letter-spacing: 0.02em;
-  color: rgba(230, 229, 225, 0.62);
-}
-
-/* ─── Origin body text (bottom of left column) ──────── */
-
-.nosotros__origin-body {
-  padding: 0;
-}
-
-.nosotros__title {
-  margin: 0 0 0.5rem;
-  font-size: clamp(1.75rem, 4.5vw, 3.5rem);
-  font-weight: 700;
-  letter-spacing: -0.025em;
-  line-height: 0.97;
-  color: #111;
-}
-
-.nosotros__subtitle {
-  margin: 0 0 0.65rem;
-  font-size: clamp(0.9rem, 1.6vw, 1.1rem);
-  font-weight: 600;
-  color: rgba(17, 17, 17, 0.72);
-}
-
-.nosotros__lead {
-  margin: 0;
-  font-size: clamp(0.82rem, 1.3vw, 0.95rem);
-  line-height: 1.7;
-  color: rgba(17, 17, 17, 0.6);
-}
-
-/* ─── Story: la historia de Aitor y Naiara ──────────── */
-
-.nosotros__story {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 0.85fr);
-  gap: clamp(2.5rem, 6vw, 6rem);
-  align-items: start;
-  padding: clamp(3rem, 6vw, 5rem) clamp(1.5rem, 5vw, 5rem);
-}
-
-.nosotros__story-text {
-  display: flex;
-  flex-direction: column;
-  gap: clamp(2rem, 3.5vw, 2.75rem);
-  justify-self: end;
-}
-
-/* Todos los textos de la sección en negro (petición del cliente) */
-.nosotros__story-heading {
-  margin: 0 0 1.15rem;
-  font-size: clamp(1rem, 1.5vw, 1.2rem);
-  font-weight: 700;
-  line-height: 1.3;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
-  color: #111;
-}
-
-.nosotros__story-p {
-  margin: 0 0 1rem;
-  font-size: clamp(0.85rem, 1.2vw, 0.95rem);
-  line-height: 1.6;
-  color: #111;
-  text-align: justify;
-}
-
-.nosotros__story-p:last-child {
-  margin-bottom: 0;
-}
-
-.nosotros__story-p strong {
-  font-weight: 700;
-}
-
-/* Standalone label lines (e.g. "KAITEN.") that open a chapter — styled as
-   a subtitle rather than a plain bold paragraph */
-.nosotros__story-label {
-  display: block;
-  font-size: clamp(1.15rem, 2.2vw, 1.5rem);
-  letter-spacing: 0.03em;
-  line-height: 1.35;
-  text-align: left;
-}
-
-/* Foto de Naiara: alta, esquinas rectas, fija mientras se lee */
-.nosotros__story-media {
-  height: calc(100vh - var(--navbar-height) - 3rem);
-}
-
-.nosotros__story-media img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* ─── Values ────────────────────────────────────────── */
-
-.nosotros__values {
-  display: grid;
-  grid-template-columns: minmax(9rem, 0.45fr) 1fr;
-  gap: clamp(2rem, 4vw, 4rem);
-  align-items: start;
-  padding: clamp(2.5rem, 5vw, 4rem) clamp(1.5rem, 5vw, 5rem);
-  background-color: rgba(133, 127, 157, 0.06);
-}
-
-.nosotros__values-header {
-  position: sticky;
-  top: 5rem;
-}
-
-.nosotros__values-title {
-  margin: 0;
-  font-size: clamp(1.75rem, 3.5vw, 2.75rem);
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  line-height: 1.05;
-  color: var(--color-forest);
-}
-
-/* Single-row 5-column card grid */
-.nosotros__values-grid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 0.75rem;
-}
-
-.nosotros__value {
-  display: flex;
-  flex-direction: column;
-  gap: 0.3rem;
-  padding: 1.15rem;
-  border-radius: 0.75rem;
-  border: none;
-  transition: filter 0.22s ease;
-}
-
-.nosotros__value:hover {
-  filter: brightness(0.94);
-}
-
-.nosotros__value-icon {
-  color: var(--color-forest);
-  margin-bottom: 0.5rem;
-  flex-shrink: 0;
-  transition: transform 0.25s ease;
-}
-
-.nosotros__value:hover .nosotros__value-icon {
-  transform: translateY(-4px);
-}
-
-.nosotros__value-name {
-  margin: 0;
-  font-size: 0.68rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: #111;
-}
-
-.nosotros__value-tagline {
-  margin: 0 0 0.2rem;
-  font-size: clamp(0.88rem, 1.4vw, 1rem);
-  font-weight: 700;
-  line-height: 1.25;
-  color: #111;
-}
-
-.nosotros__value-body {
-  margin: 0;
-  font-size: 0.82rem;
-  line-height: 1.55;
-  color: #111;
-}
-
-/* ─── Manifesto ─────────────────────────────────────── */
-
-.nosotros__manifesto {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.25rem;
-  padding: clamp(3rem, 6vw, 5rem) clamp(1.5rem, 5vw, 5rem);
-  text-align: center;
-}
-
-.nosotros__manifesto-mark {
-  width: 2.75rem;
-  height: 2.75rem;
-  opacity: 0.3;
-}
-
-.nosotros__quote {
-  max-width: 36rem;
-  margin: 0;
-  font-size: clamp(1.1rem, 2.5vw, 1.5rem);
-  font-style: bold;
-  font-weight: 700;
-  line-height: 1.5;
-  color: var(--color-forest);
-}
-
-.nosotros__manifesto-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  font-size: 0.85rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  color: var(--color-forest);
-  text-decoration: none;
-  transition: opacity 0.2s;
-}
-
-.nosotros__manifesto-link:hover {
-  opacity: 0.65;
-  color: var(--color-forest);
-}
-
-/* ─── Responsive ────────────────────────────────────── */
-
-@media (max-width: 1024px) {
-  .nosotros__composition {
-    flex-wrap: wrap;
-    gap: 0.75rem;
-  }
-
-  .nosotros__col-left {
-    flex: 1 1 100%;
-  }
-
-  .nosotros__card--dark {
-    flex: 1 1 45%;
-    margin: 0;
-    min-height: 20rem;
-    padding-left: clamp(1.5rem, 2.8vw, 2.25rem);
-  }
-
-  .nosotros__card--overlay {
-    flex: 1 1 45%;
-    margin: 0;
-    min-height: 24rem;
-  }
-
-  .nosotros__story {
-    grid-template-columns: 1fr;
-  }
-
-  .nosotros__story-text {
-    max-width: none;
-    justify-self: stretch;
-  }
-
-  .nosotros__story-media {
-    position: static;
-    height: clamp(24rem, 80vw, 32rem);
-  }
-
-  .nosotros__values {
-    grid-template-columns: 1fr;
-  }
-
-  .nosotros__values-header {
-    position: static;
-  }
-
-  .nosotros__values-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
+/* Nosotros — requiere los tokens del DS Kaiten (ds/styles.css) */
+.nos { background: var(--color-surface); color: var(--color-text); }
+.nos__wrap { max-width: calc(var(--content-max) + 2 * var(--gutter)); margin: 0 auto; padding: 0 var(--gutter) var(--section-y); }
+
+/* Apertura */
+.nos__open { padding-top: clamp(2rem, 5vw, 4rem); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 24rem), 1fr)); gap: clamp(2rem, 5vw, 5rem); align-items: start; }
+.nos__open-text { display: flex; flex-direction: column; gap: var(--space-5); }
+.nos__display { font-size: var(--text-display); line-height: var(--leading-tight); }
+/* La máscara del reveal recorta por abajo, y con line-height 0.98 se comía
+ * las colas de la 'g' y la 'j'. El padding le da aire y el margen negativo lo
+ * descuenta, así el interlineado no cambia. La línea sigue oculta antes de
+ * animar: yPercent 110 la baja ~1.08em, muy por debajo del borde. */
+.nos__line { display: block; overflow: hidden; padding-bottom: 0.2em; margin-bottom: -0.16em; }
+.nos__line > span { display: block; }
+.nos__subtitle { font-family: var(--font-heading); font-weight: var(--weight-semibold); font-size: clamp(1.15rem, 2vw, 1.5rem); line-height: 1.3; letter-spacing: -0.01em; max-width: 24ch; text-wrap: balance; }
+.nos__lead { font-size: var(--text-lg); line-height: 1.6; color: var(--color-text-muted); max-width: 30rem; }
+
+/* Medios con parallax */
+.nos__media { position: relative; overflow: hidden; background: var(--color-surface-inverse); }
+.nos__media > img { position: absolute; left: 0; top: -8%; width: 100%; height: 116%; object-fit: cover; }
+.nos__media--tall { aspect-ratio: 4 / 5; max-height: 80vh; border-radius: var(--radius-card); }
+.nos__media--hero { border-radius: var(--radius-hero); max-height: 82vh; }
+.nos__media--band { height: clamp(18rem, 46vw, 34rem); border-radius: var(--radius-hero); margin: var(--space-4) 0 clamp(2rem, 4vw, 3rem); }
+.nos__media--band > img { object-position: center top; }
+.nos__media-caption { position: absolute; left: 0; right: 0; bottom: 0; padding: clamp(1.5rem, 3.5vw, 2.5rem); display: flex; flex-direction: column; gap: var(--space-3); }
+.nos__media-caption .k-rule { background: #000; }
+.nos__media-caption h2 { font-size: clamp(1.5rem, 3vw, 2.25rem); line-height: 1.08; max-width: 14ch; color: #000; text-wrap: balance; }
+
+/* Declaración */
+.nos__statement { padding: var(--section-y) var(--gutter); border-top: var(--border-hairline) solid var(--color-border); }
+.nos__statement-inner { max-width: 62rem; margin: 0 auto; display: flex; flex-direction: column; gap: clamp(1.5rem, 3vw, 2.5rem); }
+.nos__statement-text { font-family: var(--font-heading); font-weight: var(--weight-bold); font-size: clamp(1.6rem, 3.8vw, 3.1rem); line-height: 1.14; letter-spacing: var(--tracking-heading); text-wrap: pretty; }
+.nos__slogan { font-family: var(--font-heading); font-style: italic; font-weight: var(--weight-semibold); font-size: clamp(1.1rem, 2vw, 1.4rem); color: var(--color-text-accent); }
+
+/* Fundador */
+.nos__founder { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr)); gap: clamp(2rem, 5vw, 5rem); align-items: center; }
+.nos__founder .nos__media--tall { max-height: 78vh; }
+.nos__founder-text { display: flex; flex-direction: column; gap: var(--space-6); }
+.nos__quote { margin: 0; font-family: var(--font-heading); font-weight: var(--weight-bold); font-size: clamp(1.6rem, 3.4vw, 2.75rem); line-height: 1.12; letter-spacing: var(--tracking-heading); text-wrap: balance; }
+.nos__credential { display: flex; align-items: center; gap: var(--space-4); }
+.nos__credential .k-rule { flex-shrink: 0; }
+.nos__credential p { font-size: var(--text-sm); line-height: 1.5; color: var(--color-text-muted); }
+
+/* Historia */
+.nos__chapter { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr)); gap: var(--space-6) clamp(2rem, 5vw, 5rem); padding: clamp(2rem, 4vw, 3.5rem) 0; border-top: var(--border-hairline) solid var(--color-border); }
+.nos__chapter-head { position: sticky; top: calc(var(--navbar-h) + 2rem); display: flex; flex-direction: column; gap: var(--space-3); }
+.nos__chapter-head h2 { font-size: var(--text-h2); line-height: 1.08; max-width: 16ch; text-wrap: balance; }
+.nos__chapter-meta { display: flex; gap: var(--space-3); align-items: baseline; }
+.nos__num { font-size: var(--text-sm); font-weight: var(--weight-bold); letter-spacing: 0.08em; color: var(--color-text-subtle); }
+.nos__chapter-body { display: flex; flex-direction: column; gap: var(--space-4); max-width: 36rem; }
+.nos__chapter-body > p { font-size: var(--text-lg); line-height: 1.7; text-wrap: pretty; }
+.nos__chapter-display { margin-bottom: var(--space-2); font-family: var(--font-heading); font-weight: var(--weight-bold); font-size: clamp(2rem, 4.5vw, 3.5rem) !important; line-height: 1 !important; letter-spacing: var(--tracking-heading); color: var(--color-text-accent); }
+.nos__chapter-display span { display: block; }
+
+/* Valores */
+.nos__values { background: var(--color-surface-raised); padding: var(--section-y) var(--gutter); }
+.nos__values-inner { max-width: var(--content-max); margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr)); gap: clamp(2rem, 5vw, 5rem); }
+.nos__values-head { position: sticky; top: calc(var(--navbar-h) + 2rem); display: flex; flex-direction: column; gap: var(--space-5); }
+.nos__values-head .k-section-header__title { font-size: var(--text-h1); }
+.nos__values-photo { overflow: hidden; border-radius: var(--radius-card); aspect-ratio: 8 / 7; }
+.nos__values-photo img { width: 100%; height: 100%; object-fit: cover; }
+.nos__value { display: grid; grid-template-columns: 3rem minmax(0, 1fr); gap: var(--space-5); padding: clamp(1.5rem, 3vw, 2.25rem) 0; border-top: var(--border-hairline) solid var(--color-border); }
+.nos__value > div { display: flex; flex-direction: column; gap: var(--space-2); }
+.nos__value h3 { font-size: clamp(1.25rem, 2.2vw, 1.65rem); line-height: 1.15; text-wrap: balance; }
+.nos__value-icon { width: 3rem; height: 3rem; border-radius: 50%; background: var(--color-tint-lavender); color: var(--color-text-accent); display: flex; align-items: center; justify-content: center; }
+.nos__value-body { font-size: var(--text-body); line-height: 1.6; color: var(--color-text-muted); max-width: 30rem; }
+
+/* Cierre */
+.nos__manifesto { padding: clamp(4rem, 10vw, 8rem) var(--gutter); display: flex; flex-direction: column; align-items: center; text-align: center; gap: var(--space-8); }
+.nos__manifesto img { width: 56px; opacity: 0.7; }
+.nos__manifesto blockquote { margin: 0; font-family: var(--font-heading); font-weight: var(--weight-bold); font-size: clamp(1.9rem, 4.8vw, 3.75rem); line-height: 1.08; letter-spacing: var(--tracking-heading); max-width: 20ch; text-wrap: balance; }
+
+/* El scroller de .nos__values-head / .nos__chapter-head se pega bajo la navbar,
+ * pero solo tiene sentido con dos columnas: a una sola el contenedor mide lo
+ * mismo que su contenido y el sticky no llega a actuar. */
 @media (max-width: 768px) {
-  .nosotros__composition {
-    flex-direction: column;
-  }
-
-  .nosotros__col-left {
-    flex: unset;
-  }
-
-  .nosotros__card--photo {
-    aspect-ratio: 4 / 3;
-    min-height: 14rem;
-  }
-
-  .nosotros__card--dark {
-    flex: unset;
-    min-height: 22rem;
-  }
-
-  .nosotros__card--overlay {
-    flex: unset;
-    aspect-ratio: 4 / 3;
-    min-height: 0;
-  }
-
-  .nosotros__values-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+  .nos__chapter-head,
+  .nos__values-head { position: static; }
 }

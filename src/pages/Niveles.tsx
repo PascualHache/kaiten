@@ -1,4 +1,3 @@
-import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Tag from "../components/Tag";
 import PageTitle from "../components/PageTitle";
@@ -9,8 +8,6 @@ import "./Tarifas.css";
 function Niveles() {
   return (
     <div className="tarifas">
-      <Navbar />
-
       <main className="tarifas__sheet">
         <PageTitle eyebrow="Referencia en Baqueira Beret">Niveles</PageTitle>
         <section className="tarifas__niveles tarifas__niveles--page">
@@ -24,7 +21,11 @@ function Niveles() {
               <span className="niveles-table__col-label">Nivel</span>
             </div>
             {LEVELS.map((l) => (
-              <div key={l.code} className="niveles-table__row niveles-table__row--4col">
+              <div
+                key={l.code}
+                className="niveles-table__row niveles-table__row--4col"
+                data-reveal=""
+              >
                 <div className={`niveles-table__level niveles-table__level--${l.tier}`}>
                   <span className="niveles-table__level-label">Nivel</span>
                   <span className="niveles-table__level-code">{l.code}</span>

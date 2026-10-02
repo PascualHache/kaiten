@@ -1,4 +1,3 @@
-import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { Link } from "react-router-dom";
 import { IconArrowRight } from "@tabler/icons-react";
@@ -225,8 +224,6 @@ const DIFFERENCE = [
 function Valores() {
   return (
     <div className="valores">
-      <Navbar />
-
       {/* Values cards */}
       <section className="valores__section valores__intro">
         <div className="valores__intro-heading">

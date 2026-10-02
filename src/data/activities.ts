@@ -425,8 +425,8 @@ export const ACTIVITIES: Activity[] = [
       },
       {
         emoji: "💰",
-        title: "Tarifa especial con 15% de descuento",
-        desc: "Disfruta de esta experiencia en horario de tarde con un precio reducido del 15% respecto al horario habitual.",
+        title: "Tarifa especial con 25% de descuento",
+        desc: "Disfruta de esta experiencia en horario de tarde con un precio reducido del 25% respecto al horario habitual.",
       },
     ],
     info: [
@@ -467,7 +467,7 @@ export const ACTIVITIES: Activity[] = [
   {
     id: "kaiten-2-5",
     calSlug: "experiencia-kaiten-2.5",
-    title: "Kaiten 2.5",
+    title: "Kaiten Programs",
     subtitle: "Nuestros programas de mejora intensiva",
     color: "verde",
     experienceType: "programa",
