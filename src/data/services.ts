@@ -46,12 +46,12 @@ export const SERVICES: Service[] = [
   },
   {
     id: "kaiten-2-5",
-    title: "Kaiten 2.5",
+    title: "Kaiten Programs",
     tagline: "Nuestros programas de mejora intensiva",
     description:
       "El sello Kaiten en un formato de 2 horas y media. Una sesión intensiva para sacar el máximo partido a tu tiempo en la nieve con seguimiento personalizado.",
     image: clasesKaiten25,
-    backgroundColor: "var(--color-forest)",
+    backgroundColor: "var(--color-black)",
     textColor: "var(--color-magenta)",
     reservasPath: "/reservas/experiencia-kaiten-2.5",
   },
@@ -60,7 +60,7 @@ export const SERVICES: Service[] = [
     title: "Tardeo (-25%)",
     tagline: "Esquí de tarde, más por menos",
     description:
-      "Disfruta de Baqueira Beret en horario de tarde, cuando la estación está más despejada y el ritmo es más relajado. Mejor luz, menos afluencia y una tarifa especial con un 15% de descuento.",
+      "Disfruta de Baqueira Beret en horario de tarde, cuando la estación está más despejada y el ritmo es más relajado. Mejor luz, menos afluencia y una tarifa especial con un 25% de descuento.",
     image: clasesTardeo,
     backgroundColor: "var(--color-cream)",
     textColor: "#333",

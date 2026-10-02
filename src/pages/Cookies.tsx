@@ -1,4 +1,3 @@
-import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import PageTitle from "../components/PageTitle";
 import { COOKIES_SECTIONS } from "../data/cookies";
@@ -29,8 +28,6 @@ function renderBlocks(blocks: Block[]) {
 function Cookies() {
   return (
     <div className="cookies">
-      <Navbar />
-
       <main className="cookies__main">
         <header className="cookies__header">
           <PageTitle eyebrow="Legal · Última actualización: julio 2026" spacing="loose">

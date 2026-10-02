@@ -6,9 +6,12 @@ import {
   IconBrandWhatsapp,
 } from "@tabler/icons-react";
 import logoText from "../assets/logos/logo_text.png";
+import logoK from "../assets/logos/logo_k.png";
 import "./Footer.css";
 
 const LIVE_CAMS_URL = "https://www.baqueira.es/en/webcams";
+
+const WHATSAPP_URL = "https://wa.me/34699820954";
 
 const SPOTIFY_URL =
   "https://open.spotify.com/playlist/07BMCGGFCarURRFnUIOlbx?si=BqZCksIdT6OFuF5yvjs42A";
@@ -16,7 +19,7 @@ const SPOTIFY_URL =
 const EXPERIENCES = [
   { label: "Clases Privadas", hash: "clases-particulares-en-baqueira" },
   { label: "Kids & Friends & Family", hash: "friends-family" },
-  { label: "Kaiten 2.5", hash: "experiencia-kaiten-2.5" },
+  { label: "Kaiten Programs", hash: "experiencia-kaiten-2.5" },
   { label: "Tardeo (-25%)", hash: "experiencia-de-tardeo-20" },
   { label: "Full Day · Safari · Freeride", hash: "" },
   {
@@ -37,11 +40,14 @@ function Footer() {
   return (
     <footer className="footer">
       {/* ─── CTA strip ─────────────────────────────────────── */}
-      <div className="footer__cta">
+      <div className="footer__cta" data-reveal="">
         <div className="footer__cta-left">
           <p className="footer__cta-eyebrow">Temporada 2026 · 27</p>
-          <h2 className="footer__cta-heading">Listo para empezar?</h2>
-          <p className="footer__cta-sub">We call it The Kaiten Line.</p>
+          <h2 className="footer__cta-heading">¿Listo para empezar?</h2>
+          <p className="footer__cta-sub">
+            La primera escuela de Baqueira Beret donde eliges a tu profesor
+            antes de reservar
+          </p>
         </div>
         <div className="footer__cta-actions">
           <Link
@@ -52,10 +58,13 @@ function Footer() {
             <IconArrowRight size={16} stroke={2} />
           </Link>
           <a
-            href="tel:+34699820954"
+            href={WHATSAPP_URL}
             className="footer__cta-btn footer__cta-btn--outline"
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            Llámanos
+            <IconBrandWhatsapp size={16} stroke={2} aria-hidden="true" />
+            WhatsApp
           </a>
         </div>
       </div>
@@ -69,10 +78,7 @@ function Footer() {
           <Link to="/" className="footer__brand-name">
             <img src={logoText} alt="Kaiten" loading="lazy" decoding="async" />
           </Link>
-          <p className="footer__brand-desc">
-            La primera escuela de Baqueira Beret donde eliges a tu profesor
-            antes de reservar.
-          </p>
+          <p className="footer__brand-desc"></p>
           <div className="footer__contact">
             <a href="tel:+34699820954" className="footer__contact-item">
               +34 699 820 954
@@ -95,7 +101,7 @@ function Footer() {
               <IconBrandInstagram size={24} stroke={1.5} aria-hidden="true" />
             </a>
             <a
-              href="https://wa.me/34699820954"
+              href={WHATSAPP_URL}
               className="footer__social-pill footer__social-pill--icon"
               target="_blank"
               rel="noopener noreferrer"
@@ -160,6 +166,10 @@ function Footer() {
             <span className="footer__live-dot" aria-hidden="true" />
             Baqueira Live Cams
           </a>
+
+          <div className="footer__watermark" aria-hidden="true">
+            <img src={logoK} alt="" loading="lazy" decoding="async" />
+          </div>
         </div>
       </div>
 
@@ -172,11 +182,6 @@ function Footer() {
           <Link to="/aviso-legal">Aviso legal</Link>
           <Link to="/cookies">Cookies</Link>
         </div>
-      </div>
-
-      {/* ─── Watermark ─────────────────────────────────────── */}
-      <div className="footer__watermark" aria-hidden="true">
-        <img src={logoText} alt="" loading="lazy" decoding="async" />
       </div>
     </footer>
   );

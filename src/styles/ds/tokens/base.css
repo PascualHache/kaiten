@@ -1,0 +1,34 @@
+/* Base del DS Kaiten.
+ *
+ * Adaptación para este repo:
+ *
+ * 1. El reset global ya vive en src/index.css, y la tipografía base del DS
+ *    (0.9rem / 1.6) encogería el texto de todas las páginas existentes. Por eso
+ *    solo se aplica dentro de [data-ds], que se ponen las páginas rediseñadas.
+ * 2. Esas reglas van envueltas en :where() para que su especificidad sea 0:
+ *    son un reset, y cualquier clase de componente (el Footer, por ejemplo,
+ *    que vive dentro de la página) debe poder ganarles sin pelear.
+ */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; }
+body { margin: 0; min-width: 320px; }
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; height: auto; display: block; }
+:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 3px; border-radius: 3px; }
+:focus:not(:focus-visible) { outline: none; }
+
+:where([data-ds]) {
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+}
+:where([data-ds]) :where(h1, h2, h3, h4, h5, h6) {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-heading);
+}
+:where([data-ds]) :where(p) { margin: 0; }
+:where([data-theme]) { color: var(--color-text); }

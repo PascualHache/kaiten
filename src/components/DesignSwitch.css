@@ -1,0 +1,70 @@
+/* Herramienta interna de comparación: flota abajo y centrada. Arriba chocaba
+ * con el logo y con el botón de reservar de la navbar, y además la navbar baja
+ * cuando el PromoBanner está visible. */
+.design-switch {
+  position: fixed;
+  z-index: 90;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  max-width: calc(100% - 2rem);
+  padding: 0.375rem 0.375rem 0.375rem 0.875rem;
+  border-radius: 999px;
+  background-color: rgba(0, 0, 0, 0.88);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+.design-switch__legend {
+  flex-shrink: 0;
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(230, 229, 225, 0.7);
+}
+
+.design-switch__track {
+  display: flex;
+  gap: 0.25rem;
+  padding: 0.1875rem;
+  border-radius: 999px;
+  background-color: rgba(230, 229, 225, 0.12);
+}
+
+.design-switch__option {
+  border: 0;
+  border-radius: 999px;
+  padding: 0.375rem 0.875rem;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-cream);
+  background-color: transparent;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.design-switch__option[aria-pressed="true"] {
+  background-color: var(--ks-primary);
+  color: var(--ks-on-primary);
+}
+
+@media (hover: hover) {
+  .design-switch__option:not([aria-pressed="true"]):hover {
+    background-color: rgba(230, 229, 225, 0.18);
+  }
+}
+
+@media (max-width: 480px) {
+  .design-switch__legend { display: none; }
+  .design-switch { padding: 0.375rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .design-switch__option { transition: none; }
+}

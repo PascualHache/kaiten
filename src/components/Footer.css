@@ -1,6 +1,6 @@
 .footer {
   position: relative;
-  background-color: var(--color-forest);
+  background-color: var(--color-black);
   color: var(--color-cream);
   font-family: var(--font-heading);
   overflow: hidden;
@@ -54,38 +54,78 @@
   flex-shrink: 0;
 }
 
+/* Caja compartida por los dos botones de la tira — mismas medidas que el
+   "Reservar" de la navbar, para que primario y contorno midan igual. El borde
+   de 1px del contorno no cambia la altura: box-sizing es border-box global. */
 .footer__cta-btn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
-  padding: 0.9rem 1.75rem;
-  font-size: 0.78rem;
+  height: 40px;
+  padding: 0 22px;
+  font-size: 13px;
   font-weight: 700;
   font-family: inherit;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  border-radius: 0.35rem;
+  border: 1px solid transparent;
+  border-radius: var(--ks-radius-button);
   text-decoration: none;
   white-space: nowrap;
   cursor: pointer;
   transition: opacity 0.2s, background-color 0.2s, border-color 0.2s;
 }
 
+/* Mismo botón primario que el de la navbar ("Sombra suave"): sin borde,
+   relleno lima claro y profundidad por las dos sombras verdosas. */
 .footer__cta-btn--primary {
-  background-color: var(--color-lime);
-  color: var(--color-forest);
-  border: 1px solid var(--color-lime);
+  border-color: transparent;
+  background: var(--ks-primary);
+  color: var(--ks-on-primary);
+  box-shadow: var(--ks-shadow-button);
+  transition:
+    transform 140ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 140ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    background-color 140ms ease;
 }
 
-.footer__cta-btn--primary:hover {
-  opacity: 0.88;
-  color: var(--color-forest);
+/* Solo en dispositivos con puntero: en táctil el :hover se queda pegado. */
+@media (hover: hover) {
+  .footer__cta-btn--primary:hover {
+    color: var(--ks-on-primary);
+    transform: translateY(-1px);
+    box-shadow: var(--ks-shadow-button-hover);
+  }
+}
+
+.footer__cta-btn--primary:active {
+  transform: translateY(1px);
+  background: var(--ks-primary-pressed);
+  box-shadow: var(--ks-shadow-button-pressed);
+  transition-duration: 60ms;
+}
+
+.footer__cta-btn--primary:focus-visible {
+  outline: 2px solid var(--ks-primary);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .footer__cta-btn--primary {
+    transition: background-color 140ms ease, box-shadow 140ms ease;
+  }
+
+  .footer__cta-btn--primary:hover,
+  .footer__cta-btn--primary:active {
+    transform: none;
+  }
 }
 
 .footer__cta-btn--outline {
   background-color: transparent;
   color: var(--color-cream);
-  border: 1px solid rgba(230, 229, 225, 0.35);
+  border-color: rgba(230, 229, 225, 0.35);
 }
 
 .footer__cta-btn--outline:hover {
@@ -299,20 +339,22 @@ a.footer__social-pill:hover {
 
 /* ─── Watermark ──────────────────────────────────────── */
 
+/* Vive dentro de .footer__live, justo debajo del botón de las cámaras: ya no
+   es una marca de agua centrada a lo ancho del footer, sino un remate de esa
+   columna. */
 .footer__watermark {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
+  /* Sin centrar en la columna: un margen fijo la deja a ojo bajo el centro de
+     .footer__live-btn, que mide ~15rem de ancho. */
+  margin-top: 0.5rem;
+  margin-left: 4rem;
   line-height: 0;
   pointer-events: none;
   user-select: none;
-  z-index: 0;
 }
 
 .footer__watermark img {
-  width: min(70rem, 90vw);
-  opacity: 0.04;
+  width: clamp(4.5rem, 7vw, 6.5rem);
+  opacity: 0.12;
   filter: brightness(0) invert(1);
 }
 

@@ -18,7 +18,7 @@
   margin: 0 0 2.5rem;
   font-size: 0.95rem;
   line-height: 1.6;
-  color: rgba(29, 43, 0, 0.7);
+  color: rgba(0, 0, 0, 0.7);
 }
 
 .faq__wa {
@@ -34,11 +34,11 @@
 }
 
 .faq__item {
-  border-top: 1px solid rgba(29, 43, 0, 0.12);
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
 }
 
 .faq__item:last-child {
-  border-bottom: 1px solid rgba(29, 43, 0, 0.12);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
 }
 
 .faq__row {
@@ -63,7 +63,7 @@
 .faq__question {
   font-size: 1rem;
   font-weight: 600;
-  color: var(--color-forest);
+  color: var(--color-black);
   flex: 1;
 }
 
@@ -104,7 +104,7 @@
   margin: 0;
   font-size: 0.9rem;
   line-height: 1.65;
-  color: rgba(29, 43, 0, 0.75);
+  color: rgba(0, 0, 0, 0.75);
 }
 
 .faq__answer-list {
@@ -121,7 +121,7 @@
   padding-left: 1rem;
   font-size: 0.9rem;
   line-height: 1.65;
-  color: rgba(29, 43, 0, 0.75);
+  color: rgba(0, 0, 0, 0.75);
 }
 
 .faq__answer-line::before {
@@ -147,7 +147,7 @@
   margin: 0;
   font-size: 1.1rem;
   font-weight: 700;
-  color: var(--color-forest);
+  color: var(--color-black);
 }
 
 .faq__cta-btn {

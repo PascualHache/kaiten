@@ -1,4 +1,3 @@
-import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import PageTitle from "../components/PageTitle";
 import { Link } from 'react-router-dom'
@@ -10,14 +9,12 @@ import './Equipo.css'
 function Equipo() {
   return (
     <div className="equipo">
-      <Navbar />
-
       <header className="equipo__header">
         <PageTitle eyebrow="Nuestro equipo">Los que hacen posible Kaiten</PageTitle>
       </header>
       <section className="equipo__grid">
         {TEAM.map((m) => (
-          <article key={m.id} className="member">
+          <article key={m.id} className="member" data-reveal="">
             <div className="member__card member__profile">
               <div className="member__header">
                 <span className="member__role">{m.role}</span>

@@ -1,15 +1,18 @@
 import { useEffect, useState } from "react";
-import { Link, NavLink, useLocation } from "react-router-dom";
-import { IconMenu2, IconX } from "@tabler/icons-react";
+import { Link, useLocation } from "react-router-dom";
+import { IconMenu2 } from "@tabler/icons-react";
+import NavMenu, { type NavMenuLink } from "./NavMenu";
 import PromoBanner from "./PromoBanner";
 import logoKaiten from "../assets/logos/logo_text.png";
 import "./Navbar.css";
 
-const NAV_LINKS = [
+const NAV_LINKS: NavMenuLink[] = [
+  { to: "/", label: "Inicio" },
   { to: "/nosotros", label: "Nosotros" },
+  { to: "/reservas", label: "Reservas" },
   { to: "/tarifas", label: "Tarifas" },
   { to: "/niveles", label: "Niveles" },
-  { to: "/faq", label: "FAQs" },
+  { to: "/faq", label: "Preguntas frecuentes" },
 ];
 
 const SCROLL_THRESHOLD = 40;
@@ -19,7 +22,9 @@ function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const { pathname } = useLocation();
 
-  // Navbar flota transparente sobre el Hero de Home hasta que se hace scroll
+  // Dos usos del mismo flag: en Home la navbar flota transparente sobre el Hero
+  // hasta que se hace scroll, y en todas las vistas el fondo se oscurece un
+  // punto al separarse del inicio de la página.
   useEffect(() => {
     function onScroll() {
       setScrolled(window.scrollY > SCROLL_THRESHOLD);
@@ -32,7 +37,12 @@ function Navbar() {
   const transparent = pathname === "/" && !scrolled;
 
   return (
-    <header className={`navbar${transparent ? " navbar--transparent" : ""}`}>
+    <header
+      className={`navbar${transparent ? " navbar--transparent" : ""}${
+        scrolled ? " navbar--scrolled" : ""
+      }`}
+      data-nav=""
+    >
       <PromoBanner />
       <div className="navbar__inner">
         {/* Left: menu toggle */}
@@ -40,33 +50,12 @@ function Navbar() {
           <button
             type="button"
             className="navbar__menu-toggle"
-            aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"}
-            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label="Abrir menú"
+            aria-expanded={menuOpen}
+            onClick={() => setMenuOpen(true)}
           >
-            {menuOpen ? (
-              <IconX size={26} stroke={2} />
-            ) : (
-              <IconMenu2 size={26} stroke={2} />
-            )}
+            <IconMenu2 size={26} stroke={2} />
           </button>
-
-          {/* Dropdown menu */}
-          {menuOpen && (
-            <div className="navbar__menu">
-              {NAV_LINKS.map(({ to, label }) => (
-                <NavLink
-                  key={to}
-                  to={to}
-                  className={({ isActive }) =>
-                    `navbar__menu-item${isActive ? " navbar__menu-item--active" : ""}`
-                  }
-                  onClick={() => setMenuOpen(false)}
-                >
-                  {label}
-                </NavLink>
-              ))}
-            </div>
-          )}
         </div>
 
         {/* Center: wordmark */}
@@ -107,6 +96,10 @@ function Navbar() {
           </Link>
         </div>
       </div>
+
+      {menuOpen && (
+        <NavMenu links={NAV_LINKS} onClose={() => setMenuOpen(false)} />
+      )}
     </header>
   );
 }

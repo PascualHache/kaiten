@@ -67,19 +67,32 @@
 }
 
 /* ─── Text overlay ─── */
+/* El padding vertical es simétrico a propósito: el centro de la caja de
+   contenido coincide así con el centro de .hero, que es donde se ancla
+   .hero__side--left (top: 50%). */
 .hero__content {
   position: absolute;
   inset: 0;
   z-index: 2;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
+  display: grid;
+  /* Una sola columna explícita: sin esto, los hijos de las filas 2-4 no caben
+     junto al titular (que ocupa 1 / -1) y el navegador les crea una columna
+     implícita a la derecha. */
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: 1fr auto auto auto;
   padding: clamp(1.75rem, 3.5vw, 3rem) clamp(1.5rem, 4vw, 4rem);
   padding-left: clamp(2.5rem, 5vw, 5rem);
   border-radius: 0 0 1.75rem 1.75rem;
 }
 
+/* El titular ocupa toda la rejilla y se centra en ella, de modo que su
+   centro óptico queda a la altura de las etiquetas verticales laterales.
+   El resto del bloque (regla, claim y botones) sigue anclado abajo en las
+   filas auto. */
 .hero__title {
+  grid-row: 1 / -1;
+  grid-column: 1;
+  align-self: center;
   margin: 0;
   font-size: clamp(2.5rem, 5.5vw, 4.75rem);
   font-weight: 700;
@@ -88,7 +101,23 @@
   color: var(--color-black);
 }
 
+/* Cada línea del titular vive dentro de un recorte propio, de modo que la
+   animación de entrada puede desplazarla desde fuera sin que asome por
+   encima de la línea anterior. padding-bottom deja aire a los descendentes
+   (la "j" de "esquiar") para que el overflow no los recorte. */
+.hero__line-mask {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.04em;
+}
+
+.hero__line {
+  display: block;
+}
+
 .hero__rule {
+  grid-row: 2;
+  grid-column: 1;
   display: block;
   width: 3rem;
   height: 2px;
@@ -97,6 +126,8 @@
 }
 
 .hero__text {
+  grid-row: 3;
+  grid-column: 1;
   margin: 0 0 clamp(1.5rem, 3vw, 2.25rem);
   font-size: 12px;
   line-height: 1.5;
@@ -106,6 +137,9 @@
 }
 
 .hero__actions {
+  grid-row: 4;
+  grid-column: 1;
+  justify-self: start;
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
@@ -116,36 +150,78 @@
   align-items: center;
   gap: 0.75rem;
   height: 56px;
-  padding: 0 1.5rem;
+  padding: 0 36px;
   font-family: var(--font-body);
   font-size: 16px;
   font-weight: 700;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  border-radius: 0.25rem;
+  border-radius: var(--ks-radius-button);
   cursor: pointer;
-  transition: background-color 0.2s, color 0.2s, opacity 0.2s;
+  transition: background-color 0.2s, color 0.2s, box-shadow 0.2s, transform 0.2s;
 }
 
+/* Primary button — "Sombra suave" variant: no border in any state, depth
+   comes from the two green-tinted shadows */
 .hero__btn--primary {
-  background-color: var(--color-lime-light);
-  color: var(--color-black);
-  border: 2px solid var(--color-black);
+  border: none;
+  background: var(--ks-primary);
+  color: var(--ks-on-primary);
+  box-shadow: var(--ks-shadow-button);
+  transition:
+    transform 140ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 140ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    background-color 140ms ease;
 }
 
-.hero__btn--primary:hover {
-  opacity: 0.85;
-  color: var(--color-black);
+/* Pointer devices only — on touch, :hover sticks after a tap */
+@media (hover: hover) {
+  .hero__btn--primary:hover {
+    color: var(--ks-on-primary);
+    transform: translateY(-1px);
+    box-shadow: var(--ks-shadow-button-hover);
+  }
+}
+
+.hero__btn--primary:active {
+  transform: translateY(1px);
+  background: var(--ks-primary-pressed);
+  box-shadow: var(--ks-shadow-button-pressed);
+  transition-duration: 60ms;
+}
+
+.hero__btn--primary:focus-visible {
+  outline: 2px solid var(--ks-on-primary);
+  outline-offset: 3px;
+}
+
+.hero__btn--primary:disabled,
+.hero__btn--primary[aria-disabled="true"] {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__btn--primary {
+    transition: background-color 140ms ease, box-shadow 140ms ease;
+  }
+
+  .hero__btn--primary:hover,
+  .hero__btn--primary:active {
+    transform: none;
+  }
 }
 
 .hero__btn--secondary {
   background-color: transparent;
-  color: var(--color-forest);
-  border: 1px solid var(--color-forest);
+  color: var(--color-black);
+  border: 1px solid var(--color-black);
 }
 
 .hero__btn--secondary:hover {
-  background-color: var(--color-forest);
+  background-color: var(--color-black);
   color: var(--color-cream);
 }
 
@@ -180,9 +256,18 @@
     border-radius: 0 0 1.25rem 1.25rem;
   }
 
+  /* Sin etiquetas laterales en móvil no hay nada con lo que alinear el
+     titular: vuelve al bloque compacto anclado abajo. */
   .hero__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
     padding: 1.5rem 1.5rem 1.5rem 2rem;
     border-radius: 0 0 1.25rem 1.25rem;
+  }
+
+  .hero__title {
+    align-self: auto;
   }
 
   .hero__side {

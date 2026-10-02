@@ -46,7 +46,7 @@ function Stars({ count }: { count: number }) {
 function Reviews() {
   return (
     <section className="reviews">
-      <header className="reviews__header">
+      <header className="reviews__header" data-reveal="">
         <div className="reviews__heading">
           <p className="reviews__eyebrow">Reseñas verificadas</p>
           <h2 className="reviews__title">Lo que dicen nuestros clientes</h2>
@@ -62,7 +62,7 @@ function Reviews() {
       <div className="reviews__body">
         <div className="reviews__grid">
           {REVIEWS.map((r, i) => (
-            <article key={i} className="review-card">
+            <article key={i} className="review-card" data-reveal="">
               <Stars count={r.rating} />
               <p className="review-card__text">"{r.text}"</p>
               <footer className="review-card__footer">

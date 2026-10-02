@@ -5,7 +5,7 @@
   gap: 0.75rem;
   padding: 0.625rem clamp(1rem, 3vw, 2rem);
   background-color: var(--color-lime);
-  color: var(--color-forest);
+  color: var(--color-black);
   text-decoration: none;
   cursor: pointer;
   transition: background-color 0.2s;
@@ -13,7 +13,7 @@
 
 .promo-banner:hover {
   background-color: #b6f352;
-  color: var(--color-forest);
+  color: var(--color-black);
 }
 
 .promo-banner__icon {
@@ -37,7 +37,7 @@
   justify-content: center;
   background: none;
   border: none;
-  color: var(--color-forest);
+  color: var(--color-black);
   cursor: pointer;
   padding: 0.25rem;
   border-radius: 0.25rem;
@@ -46,7 +46,7 @@
 }
 
 .promo-banner__close:hover {
-  background-color: rgba(29, 43, 0, 0.15);
+  background-color: rgba(0, 0, 0, 0.15);
 }
 
 @media (max-width: 768px) {

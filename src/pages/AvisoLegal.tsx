@@ -1,4 +1,3 @@
-import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import PageTitle from "../components/PageTitle";
 import "./AvisoLegal.css";
@@ -99,8 +98,6 @@ const SECTIONS = [
 function AvisoLegal() {
   return (
     <div className="aviso-legal">
-      <Navbar />
-
       <main className="aviso-legal__main">
         <header className="aviso-legal__header">
           <PageTitle eyebrow="Legal" spacing="loose">Aviso legal</PageTitle>

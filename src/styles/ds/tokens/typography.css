@@ -1,0 +1,31 @@
+:root {
+  --font-heading: 'Poppins', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+
+  /* Escala única — un solo estilo de titular: frase, 700, tracking -0.02em */
+  --text-display: clamp(2.5rem, 5.5vw, 4.75rem);
+  --text-h1: clamp(2rem, 4.5vw, 3.25rem);
+  --text-h2: clamp(1.5rem, 3vw, 2.25rem);
+  --text-h3: clamp(1.05rem, 1.6vw, 1.25rem);
+  --text-lg: 1rem;
+  --text-body: 0.9rem;
+  --text-sm: 0.8rem;
+  --text-xs: 0.7rem;
+
+  --text-eyebrow: 0.75rem;
+  --text-label: 0.78rem;
+
+  --leading-tight: 0.98;
+  --leading-snug: 1.2;
+  --leading-body: 1.6;
+
+  --tracking-heading: -0.02em;
+  --tracking-eyebrow: 0.18em;
+  --tracking-label: 0.1em;
+  --tracking-side: 0.3em;
+}

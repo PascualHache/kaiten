@@ -1,21 +1,31 @@
+/* ============================================
+   Carrusel horizontal de experiencias
+   ============================================
+   Scroller horizontal nativo con scroll-snap a cualquier ancho. Sin pin:
+   anclar la sección secuestraba el scroll vertical de la página.
+   Al pulsar una tarjeta se despliega .experiences__detail debajo. */
+
 .experiences {
-  padding: clamp(3rem, 8vw, 6rem) clamp(1.5rem, 5vw, 5rem) clamp(1.5rem, 3vw, 2.5rem);
-  background-color: #f8f6f2;
+  padding: clamp(3rem, 8vw, 6rem) clamp(1.5rem, 5vw, 5rem)
+    clamp(1.5rem, 3vw, 2.5rem);
+  background-color: var(--color-cream);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.75rem, 4vw, 3rem);
 }
 
-/* Header */
 .experiences__header {
   display: flex;
-  flex-wrap: wrap;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 2rem;
-  margin-bottom: clamp(2rem, 5vw, 3.5rem);
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
 }
 
 .experiences__eyebrow {
-  margin: 0 0 0.75rem;
+  margin: 0 0 0.5rem;
+  font-family: var(--font-body);
   font-size: 0.75rem;
+  font-weight: 600;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--color-lavender-dark);
@@ -23,113 +33,172 @@
 
 .experiences__title {
   margin: 0;
-  font-size: clamp(1.75rem, 4vw, 3rem);
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
   font-weight: 700;
-  line-height: 1.02;
+  line-height: 1.05;
   letter-spacing: -0.02em;
   color: var(--color-black);
 }
 
-.experiences__aside {
-  display: flex;
-  align-items: center;
-  gap: clamp(1.5rem, 3vw, 2.5rem);
-  max-width: 30rem;
-}
-
 .experiences__lead {
   margin: 0;
+  max-width: 22rem;
   font-size: 0.9rem;
-  line-height: 1.5;
-  color: var(--color-forest);
+  line-height: 1.6;
+  color: var(--color-lavender-dark);
+  text-wrap: pretty;
 }
 
-.experiences__nav {
+/* ─── Track ─────────────────────────────────── */
+
+.experiences__track {
   display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  flex-shrink: 0;
+  gap: clamp(0.75rem, 1.5vw, 1.25rem);
+  /* Scroller nativo mientras no haya pin. En ≥1024px se desactiva para
+     dejar que GSAP conduzca el desplazamiento con transform. */
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  padding-bottom: 0.5rem;
+  margin-bottom: -0.5rem;
 }
 
-.experiences__nav-btn {
+.experiences__track::-webkit-scrollbar {
+  display: none;
+}
+
+.experiences__tile {
+  /* Es un <button>: fuera el aspecto nativo de control */
+  appearance: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  text-align: left;
+  position: relative;
+  flex: 0 0 min(78vw, 20rem);
+  height: clamp(20rem, 58vw, 26rem);
   display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 2.75rem;
-  height: 2.75rem;
-  border: 1px solid var(--color-black);
-  border-radius: 50%;
-  background: transparent;
-  color: var(--color-black);
-  cursor: pointer;
-  transition: background-color 0.2s, color 0.2s, opacity 0.2s;
-}
-
-.experiences__nav-btn:hover {
-  background-color: rgba(0, 0, 0, 0.08);
-}
-
-.experiences__nav-btn:disabled {
-  opacity: 0.35;
-  cursor: not-allowed;
-}
-
-.experiences__nav-btn:disabled:hover {
-  background-color: transparent;
-}
-
-.experiences__nav-btn--primary {
-  background-color: var(--color-black);
-  color: var(--color-cream);
-}
-
-.experiences__nav-btn--primary:hover {
-  background-color: var(--color-black);
-  color: var(--color-cream);
-  opacity: 0.88;
-}
-
-/* Card row (horizontal accordion) */
-.experiences__row-wrap {
+  align-items: flex-end;
   overflow: hidden;
+  border-radius: 1rem;
+  scroll-snap-align: start;
+  text-decoration: none;
+  color: var(--color-cream);
+  background-color: var(--color-black);
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.experiences__row {
+.experiences__tile:hover {
+  transform: translateY(-4px);
+}
+
+.experiences__tile-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(0.25) sepia(0.12);
+  /* El recorte lo pone .experiences__tile (overflow: hidden): el zoom se
+     queda dentro de la tarjeta. */
+  transform: scale(1);
+  transition: transform 0.6s cubic-bezier(0.22, 0.61, 0.36, 1),
+    filter 0.4s ease;
+  will-change: transform;
+}
+
+/* Solo en dispositivos con puntero: en táctil el :hover se queda pegado
+   después de tocar. */
+@media (hover: hover) {
+  .experiences__tile:hover .experiences__tile-img,
+  .experiences__tile:focus-visible .experiences__tile-img {
+    transform: scale(1.07);
+    filter: grayscale(0.1) sepia(0.06);
+  }
+}
+
+/* Velo oscuro para que el texto sobre foto mantenga contraste. */
+.experiences__tile::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.88) 0%,
+    rgba(0, 0, 0, 0.45) 45%,
+    rgba(0, 0, 0, 0.1) 100%
+  );
+}
+
+.experiences__tile-num {
+  position: absolute;
+  top: 1rem;
+  left: 1.25rem;
+  z-index: 1;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  opacity: 0.75;
+}
+
+.experiences__tile-body {
+  position: relative;
+  z-index: 1;
   display: flex;
-  gap: 0.75rem;
-  height: clamp(26rem, 55vh, 34rem);
-  scroll-margin-top: calc(var(--navbar-height) + 1.5rem);
-  transition: transform 0.45s ease-in-out;
-  transform: translateX(0);
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: clamp(1.1rem, 2.5vw, 1.5rem);
 }
 
-.experiences__row--no-transition {
-  transition: none;
+.experiences__tile-title {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1.15;
+  /* En caja alta el tracking negativo aprieta demasiado: lo abrimos un poco */
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  text-wrap: balance;
 }
 
-/* Minimalist carousel shift: a 6th (incoming/outgoing) card is rendered
-   alongside the usual 5 and pinned to a fixed 1/5-of-row width so it doesn't
-   get squeezed by flex-grow, then the whole row eases by exactly one card's
-   width — nothing ever fades out or disappears mid-shift. */
-.experiences__row--sliding .experience-card {
-  flex: 0 0 calc((100% - 4 * 0.75rem) / 5);
-  pointer-events: none;
+.experiences__tile-tagline {
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  opacity: 0.85;
+  text-wrap: pretty;
 }
 
-/* .experience-card normally transitions its `flex` value (for the
-   active-card expand/collapse). While the fixed slide width above is being
-   applied or released, that transition would fight the swap and produce a
-   momentary squeeze — so it's switched off for the handful of frames where
-   the value actually changes, and restored once things have settled. */
-.experiences__row--lock-card-transition .experience-card {
-  transition: none;
+.experiences__tile-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.35rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
 }
 
-.experiences__row--shifted {
-  transform: translateX(calc(-1 * (20% + 0.15rem)));
+.experiences__tile-more svg {
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Active card's detail, shown below the row */
+/* El chevron apunta hacia abajo: el guiño de hover baja, no avanza */
+.experiences__tile:hover .experiences__tile-more svg {
+  transform: translateY(2px);
+}
+
+/* Tarjeta abierta: se marca con el acento, y el chevron del pie gira. */
+.experiences__tile--active {
+  outline: 2px solid var(--color-lavender);
+  outline-offset: 3px;
+}
+
+.experiences__tile--active .experiences__tile-more svg {
+  transform: rotate(180deg);
+}
+
+/* ─── Ficha desplegada ──────────────────────── */
+
 .experiences__detail {
   animation: experiences-detail-in 0.4s ease;
 }
@@ -150,192 +219,61 @@
 }
 
 @keyframes experiences-detail-out {
-  from {
-    opacity: 1;
-    transform: none;
-  }
   to {
     opacity: 0;
     transform: translateY(8px);
   }
 }
 
-.experience-card {
-  position: relative;
-  flex: 1 1 0;
-  min-width: 0;
-  display: flex;
-  align-items: flex-end;
+@media (prefers-reduced-motion: reduce) {
+  .experiences__detail,
+  .experiences__detail--closing {
+    animation: none;
+  }
+}
+
+/* ─── Barra de progreso ─────────────────────── */
+
+.experiences__progress {
+  height: 2px;
+  background-color: rgba(0, 0, 0, 0.12);
   overflow: hidden;
-  border-radius: 1rem;
-  cursor: pointer;
-  transition: flex 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.experience-card--active {
-  flex: 2.6 1 0;
-  cursor: default;
-}
-
-.experience-card__img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
+.experiences__progress > span {
+  display: block;
   height: 100%;
-  object-fit: cover;
+  background-color: var(--color-lavender);
+  transform: scaleX(0);
+  transform-origin: left center;
 }
 
-/* Readability gradient */
-.experience-card::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to top,
-    rgba(29, 43, 0, 0.75) 0%,
-    rgba(29, 43, 0, 0.15) 45%,
-    rgba(29, 43, 0, 0) 75%
-  );
-  z-index: 2;
-}
+/* ─── Escritorio: la sección se ancla ───────── */
 
-.experience-card__number {
-  position: absolute;
-  top: 1rem;
-  left: 1.25rem;
-  z-index: 3;
-  font-size: 0.8rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  color: var(--color-cream);
-  opacity: 0.9;
-}
-
-.experience-card__body {
-  position: relative;
-  z-index: 3;
-  padding: 1.5rem;
-  color: var(--color-cream);
-  width: 100%;
-}
-
-.experience-card__title {
-  margin: 0;
-  font-size: clamp(1rem, 1.4vw, 1.25rem);
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
-}
-
-.experience-card__tagline {
-  margin: 0.5rem 0 0;
-  font-size: 0.8rem;
-  line-height: 1.4;
-  opacity: 0.85;
-}
-
-.experience-card--active .experience-card__tagline {
-  display: none;
-}
-
-/* Keep the title hidden while the card is widening, then fade it back in */
-.experience-card--active .experience-card__title {
-  animation: experience-title-in 0.7s ease;
-}
-
-@keyframes experience-title-in {
-  0%,
-  68% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-/* Revealed on active (grid-rows height animation) */
-.experience-card__reveal {
-  display: grid;
-  grid-template-rows: 0fr;
-  opacity: 0;
-  margin-top: 0;
-  /* Collapse quickly, with no delay, when the card is deselected */
-  transition: grid-template-rows 0.3s ease, opacity 0.2s ease,
-    margin-top 0.3s ease;
-}
-
-.experience-card--active .experience-card__reveal {
-  grid-template-rows: 1fr;
-  opacity: 1;
-  margin-top: 1rem;
-  /* Wait until the card has finished widening (0.5s) before opening */
-  transition: grid-template-rows 0.3s cubic-bezier(0.4, 0, 0.2, 1) 0.5s,
-    opacity 0.25s ease 0.5s, margin-top 0.3s ease 0.5s;
-}
-
-.experience-card__summary {
-  min-height: 0;
-  overflow: hidden;
-  margin: 0;
-  font-size: 0.85rem;
-  line-height: 1.5;
-  max-width: 26rem;
-  opacity: 0;
-  transform: translateY(6px);
-  transition: opacity 0.2s ease, transform 0.2s ease;
-}
-
-.experience-card--active .experience-card__summary {
-  opacity: 1;
-  transform: none;
-  /* Fade in once the reveal has opened */
-  transition: opacity 0.3s ease 0.75s, transform 0.3s ease 0.75s;
-}
-
-/* Responsive: switch to a vertical accordion (one card per row) once the
-   horizontal cards would get too thin (8 experiences). */
-@media (max-width: 1024px) {
+@media (min-width: 1024px) {
   .experiences__header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .experiences__aside {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .experiences__row {
-    flex-direction: column;
-    height: auto;
-  }
-
-  /* Cards already have a fixed height in this layout, so the shift is a
-     constant length (card height + gap) instead of the desktop's
-     percentage-based slot width. */
-  .experiences__row--shifted {
-    transform: translateY(-6.75rem);
-  }
-
-  .experiences__row--sliding .experience-card {
-    flex: none;
-    height: 6rem;
-  }
-
-  .experience-card {
-    flex: none;
-    height: 6rem;
-    align-items: center;
-    transition: height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .experience-card--active {
-    height: 22rem;
+    flex-direction: row;
     align-items: flex-end;
+    justify-content: space-between;
+    gap: 2rem;
   }
 
-  .experience-card__summary {
-    max-width: none;
+  .experiences__tile {
+    flex: 0 0 22rem;
+    height: 28rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .experiences__tile,
+  .experiences__tile-img,
+  .experiences__tile-more svg {
+    transition: none;
+  }
+
+  .experiences__tile:hover .experiences__tile-img,
+  .experiences__tile:focus-visible .experiences__tile-img {
+    transform: none;
   }
 }
 

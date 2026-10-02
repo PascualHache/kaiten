@@ -18,6 +18,7 @@ export default function PageTitle({
   return (
     <header
       className={`page-title${spacing === "loose" ? " page-title--loose" : ""}`}
+      data-reveal=""
     >
       {eyebrow && <p className="page-title__eyebrow">{eyebrow}</p>}
       <h1 className="page-title__heading">{children}</h1>

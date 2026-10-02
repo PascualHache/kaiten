@@ -7,8 +7,19 @@
   background: rgba(230, 229, 225, 0.88);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(29, 43, 0, 0.1);
-  transition: background-color 0.3s, backdrop-filter 0.3s, border-color 0.3s;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s, backdrop-filter 0.3s, border-color 0.3s,
+    box-shadow 0.3s;
+}
+
+/* Al separarse del inicio de la página, el crema se oscurece un punto y el
+   borde gana cuerpo: así la barra se despega del contenido que pasa por
+   debajo. Vale para todas las vistas, Home incluida (allí entra en cuanto
+   deja de ser transparente). */
+.navbar--scrolled {
+  background: rgba(212, 211, 207, 0.94);
+  border-bottom-color: rgba(0, 0, 0, 0.16);
+  box-shadow: 0 1px 12px rgba(0, 0, 0, 0.07);
 }
 
 /* Floats over the Home hero photo until the page scrolls */
@@ -50,7 +61,7 @@
   font-weight: 600;
   letter-spacing: 0.45em;
   margin-right: -0.45em;
-  color: var(--color-forest);
+  color: var(--color-black);
   text-decoration: none;
   flex-shrink: 0;
   transition: opacity 0.15s;
@@ -58,7 +69,7 @@
 
 .navbar__logo:hover {
   opacity: 0.7;
-  color: var(--color-forest);
+  color: var(--color-black);
 }
 
 .navbar__logo img {
@@ -89,7 +100,7 @@
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.06em;
-  color: rgba(29, 43, 0, 0.45);
+  color: rgba(0, 0, 0, 0.45);
   cursor: pointer;
   line-height: 1;
   border-bottom: 2px solid transparent;
@@ -97,11 +108,11 @@
 }
 
 .navbar__lang-btn:hover {
-  color: var(--color-forest);
+  color: var(--color-black);
 }
 
 .navbar__lang-btn--active {
-  color: var(--color-forest);
+  color: var(--color-black);
   font-weight: 700;
 }
 
@@ -110,27 +121,69 @@
   color: var(--color-sage);
 }
 
+/* Primary button — "Sombra suave" variant: no border in any state, depth
+   comes from the two green-tinted shadows */
 .navbar__reserve-btn {
   display: inline-flex;
   align-items: center;
-  padding: 11px 24px;
-  background: var(--color-lime-light);
-  color: var(--color-black);
-  font-family: inherit;
+  height: 40px;
+  padding: 0 22px;
+  border: none;
+  border-radius: var(--ks-radius-button);
+  background: var(--ks-primary);
+  color: var(--ks-on-primary);
+  font-family: var(--font-body);
   font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
+  font-weight: 700;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  border-radius: 6px;
   text-decoration: none;
-  border: 1px solid var(--color-black);
   cursor: pointer;
   white-space: nowrap;
-  transition: opacity 0.2s;
+  box-shadow: var(--ks-shadow-button);
+  transition:
+    transform 140ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 140ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    background-color 140ms ease;
 }
 
-.navbar__reserve-btn:hover {
-  opacity: 0.85;
+/* Pointer devices only — on touch, :hover sticks after a tap */
+@media (hover: hover) {
+  .navbar__reserve-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--ks-shadow-button-hover);
+  }
+}
+
+.navbar__reserve-btn:active {
+  transform: translateY(1px);
+  background: var(--ks-primary-pressed);
+  box-shadow: var(--ks-shadow-button-pressed);
+  transition-duration: 60ms;
+}
+
+.navbar__reserve-btn:focus-visible {
+  outline: 2px solid var(--ks-on-primary);
+  outline-offset: 3px;
+}
+
+.navbar__reserve-btn:disabled,
+.navbar__reserve-btn[aria-disabled="true"] {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .navbar__reserve-btn {
+    transition: background-color 140ms ease, box-shadow 140ms ease;
+  }
+
+  .navbar__reserve-btn:hover,
+  .navbar__reserve-btn:active {
+    transform: none;
+  }
 }
 
 .navbar__menu-toggle {
@@ -138,7 +191,7 @@
   align-items: center;
   background: none;
   border: none;
-  color: var(--color-forest);
+  color: var(--color-black);
   cursor: pointer;
   padding: 4px;
   transition: opacity 0.15s;
@@ -148,53 +201,26 @@
   opacity: 0.65;
 }
 
-/* ─── Menu dropdown ──────────────────────────────────── */
-/* Anchored under the hamburger toggle — a simple dropdown for now,
-   not a full design pass */
-
-.navbar__menu {
-  position: absolute;
-  top: calc(100% + 0.75rem);
-  left: 0;
-  z-index: 60;
-  min-width: 190px;
-  padding: 0.4rem;
-  display: flex;
-  flex-direction: column;
-  background: var(--color-cream);
-  border: 1px solid rgba(29, 43, 0, 0.08);
-  border-radius: 0.75rem;
-  box-shadow: 0 16px 32px rgba(29, 43, 0, 0.18);
-}
-
-.navbar__menu-item {
-  display: block;
-  padding: 0.7rem 0.9rem;
-  border-radius: 0.5rem;
-  color: var(--color-forest);
-  text-decoration: none;
-  font-size: 0.9rem;
-  font-weight: 500;
-  transition: background-color 0.15s;
-}
-
-.navbar__menu-item:hover {
-  background-color: rgba(29, 43, 0, 0.04);
-  color: var(--color-forest);
-}
-
-.navbar__menu-item--active {
-  font-weight: 700;
-}
-
 /* ─── Responsive ─────────────────────────────────────── */
 
 @media (max-width: 640px) {
   .navbar__inner {
     padding: 0 20px;
+    gap: 0.75rem;
   }
 
   .navbar__lang {
     display: none;
+  }
+
+  /* A 390px no caben logo (180px) + CTA a tamaño completo: el conjunto
+     desbordaba y recortaba "Reservar" contra el borde derecho. */
+  .navbar__logo img {
+    width: clamp(110px, 34vw, 150px);
+  }
+
+  .navbar__reserve-btn {
+    padding: 9px 14px;
+    font-size: 12px;
   }
 }

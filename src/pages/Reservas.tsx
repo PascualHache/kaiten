@@ -11,9 +11,9 @@ import { SERVICES } from '../data/services'
 import { findTariff } from '../data/tariffs'
 import ExperienceDetail from '../components/ExperienceDetail'
 import Tag from '../components/Tag'
-import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import PageTitle from '../components/PageTitle'
+import { refreshScrollTriggers } from '../hooks/useScrollAnimations'
 import './Reservas.css'
 
 const CAL_USERNAME = 'aitor-bellver-abenoza-ofg9rm'
@@ -108,6 +108,9 @@ export default function Reservas() {
     navigate(next ? `${location.pathname}#${next}` : location.pathname, {
       replace: true,
     })
+    // La fila cambia de alto: las posiciones de scroll calculadas antes
+    // dejan de valer. Esperamos a que termine la animación de apertura.
+    window.setTimeout(refreshScrollTriggers, 550)
   }
 
   /* Cal.com is initialised per activity, only once its button is pressed —
@@ -123,7 +126,6 @@ export default function Reservas() {
 
   return (
     <div className="reservas">
-      <Navbar />
       <main className="reservas__main">
         <PageTitle eyebrow="Baqueira Beret">Elige tu experiencia</PageTitle>
 
@@ -146,7 +148,7 @@ export default function Reservas() {
                 return (
                   <tr key={activity.id}>
                     {/* colspan trick: we wrap data + detail in a single column cell */}
-                    <td colSpan={6} className="reservas__outer-cell">
+                    <td colSpan={6} className="reservas__outer-cell" data-reveal="">
                       {/* Summary row */}
                       <div
                         ref={(el) => {
@@ -168,7 +170,16 @@ export default function Reservas() {
                           ))}
                         </span>
                         <span className="reservas__col-price">
-                          {price !== '—' ? `Desde ${price}` : '—'}
+                          {price !== '—' ? (
+                            <>
+                              Desde{' '}
+                              <span className="reservas__price-value">
+                                {price}
+                              </span>
+                            </>
+                          ) : (
+                            '—'
+                          )}
                         </span>
                         <div className="reservas__actions">
                           <button
