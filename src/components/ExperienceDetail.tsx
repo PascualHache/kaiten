@@ -1,8 +1,7 @@
 import type { Activity } from '../data/activities'
 import { formatFromPrice } from '../data/tariffs'
+import { bookingHref } from '../data/booking'
 import InfoIcon from './InfoIcon'
-
-const CAL_USERNAME = 'aitor-bellver-abenoza-ofg9rm'
 
 interface Props {
   activity: Activity
@@ -20,17 +19,13 @@ export default function ExperienceDetail({ activity }: Props) {
         </div>
         <div className="exp-detail__actions">
           <span className="exp-detail__price">
-            {formatFromPrice(activity.calSlug)}
+            {formatFromPrice(activity.slug)}
           </span>
-          <button
-            type="button"
-            className="exp-detail__reserve"
-            data-cal-namespace={activity.calSlug}
-            data-cal-link={`${CAL_USERNAME}/${activity.calSlug}`}
-            data-cal-config='{"theme":"light"}'
-          >
+          {/* <a> y no <Link>: el widget de Bookeo hornea el producto al cargar
+              su script, así que /reservas necesita una carga completa. */}
+          <a className="exp-detail__reserve" href={bookingHref(activity)}>
             {activity.cta.buttonText}
-          </button>
+          </a>
         </div>
       </header>
 

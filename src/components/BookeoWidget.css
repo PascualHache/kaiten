@@ -1,0 +1,51 @@
+/* Contenedor del widget de Bookeo.
+   El iframe lo inyecta widget.js dentro de #bookeo_position y se autoajusta
+   de alto por postMessage, así que aquí solo damos caja, fondo y un alto
+   mínimo para que el salto al aparecer no mueva la página entera. */
+
+.bookeo {
+  width: 100%;
+  border: 1px solid rgba(133, 127, 157, 0.2);
+  border-radius: 1rem;
+  background-color: #fff;
+  padding: clamp(0.75rem, 2vw, 1.5rem);
+}
+
+.bookeo__mount {
+  min-height: 28rem;
+}
+
+.bookeo__mount #bookeo_position {
+  width: 100%;
+}
+
+.bookeo__fallback {
+  margin: 0;
+  padding: 1rem 0 0;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--color-black);
+  text-align: center;
+}
+
+.bookeo__retry {
+  border: none;
+  background: none;
+  padding: 0;
+  font: inherit;
+  color: var(--color-lavender-dark);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .bookeo {
+    border-radius: 0.75rem;
+    padding: 0.5rem;
+  }
+
+  .bookeo__mount {
+    min-height: 32rem;
+  }
+}

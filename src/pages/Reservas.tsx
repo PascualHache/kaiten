@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
-import { getCalApi } from '@calcom/embed-react'
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom'
 import { IconChevronDown } from '@tabler/icons-react'
 import {
   ACTIVITIES,
@@ -9,6 +8,8 @@ import {
 } from '../data/activities'
 import { SERVICES } from '../data/services'
 import { findTariff } from '../data/tariffs'
+import { BOOKING_PARAM, bookeoProductIdFor, bookingHref } from '../data/booking'
+import BookeoWidget from '../components/BookeoWidget'
 import ExperienceDetail from '../components/ExperienceDetail'
 import Tag from '../components/Tag'
 import Footer from '../components/Footer'
@@ -16,10 +17,8 @@ import PageTitle from '../components/PageTitle'
 import { refreshScrollTriggers } from '../hooks/useScrollAnimations'
 import './Reservas.css'
 
-const CAL_USERNAME = 'aitor-bellver-abenoza-ofg9rm'
-
 function getActivityPrice(activity: (typeof ACTIVITIES)[number]) {
-  return findTariff(activity.calSlug)?.price ?? '—'
+  return findTariff(activity.slug)?.price ?? '—'
 }
 
 /* Same order as the Home carousel (SERVICES), laid out top-to-bottom.
@@ -27,8 +26,8 @@ function getActivityPrice(activity: (typeof ACTIVITIES)[number]) {
 const HOME_ORDER = SERVICES.map((s) => s.reservasPath.replace('/reservas/', ''))
 
 const ORDERED_ACTIVITIES = [...ACTIVITIES].sort((a, b) => {
-  const ia = HOME_ORDER.indexOf(a.calSlug)
-  const ib = HOME_ORDER.indexOf(b.calSlug)
+  const ia = HOME_ORDER.indexOf(a.slug)
+  const ib = HOME_ORDER.indexOf(b.slug)
   return (ia === -1 ? HOME_ORDER.length : ia) - (ib === -1 ? HOME_ORDER.length : ib)
 })
 
@@ -46,7 +45,7 @@ const slugifyTitle = (title: string) =>
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-+|-+$/g, '')
 
-/* The URL hash may name an activity by its Cal.com slug, its id, or its
+/* The URL hash may name an activity by its slug, its id, or its
    title ("/reservas#safari", "#clases-privadas"). Anything else is ignored
    so a stale link just lands on the page with every row closed. */
 function resolveHash(hash: string): string | null {
@@ -55,37 +54,36 @@ function resolveHash(hash: string): string | null {
   if (!wanted) return null
   const match = ACTIVITIES.find(
     (a) =>
-      slugifyTitle(a.calSlug) === wanted ||
+      slugifyTitle(a.slug) === wanted ||
       slugifyTitle(a.id) === wanted ||
       slugifyTitle(a.title) === wanted,
   )
-  return match?.calSlug ?? null
+  return match?.slug ?? null
 }
 
 export default function Reservas() {
   const location = useLocation()
   const navigate = useNavigate()
+  const [searchParams] = useSearchParams()
   const [openSlug, setOpenSlug] = useState<string | null>(() =>
     resolveHash(location.hash),
   )
+
+  /* ?actividad=<slug> preselecciona el producto en el widget de Bookeo.
+     Va en la query y no en el hash a propósito: los enlaces que lo usan
+     recargan el documento, porque el widget no sabe cambiar de producto. */
+  const requestedSlug = searchParams.get(BOOKING_PARAM)
+  const requestedActivity =
+    ACTIVITIES.find((a) => a.slug === requestedSlug) ?? null
+  const productId = bookeoProductIdFor(requestedActivity?.slug ?? null)
 
   useEffect(() => {
     const fromHash = resolveHash(location.hash)
     if (fromHash) setOpenSlug(fromHash)
   }, [location.hash])
 
-  const openActivity = ACTIVITIES.find((a) => a.calSlug === openSlug) ?? null
-
   const rowRefs = useRef<Record<string, HTMLTableRowElement | null>>({})
   const btnRefs = useRef<Record<string, HTMLButtonElement | null>>({})
-
-  useEffect(() => {
-    if (!openActivity) return
-    ;(async () => {
-      const cal = await getCalApi({ namespace: openActivity.calSlug })
-      cal('ui', { theme: 'light' })
-    })()
-  }, [openActivity])
 
   useEffect(() => {
     if (!openSlug) return
@@ -113,21 +111,27 @@ export default function Reservas() {
     window.setTimeout(refreshScrollTriggers, 550)
   }
 
-  /* Cal.com is initialised per activity, only once its button is pressed —
-     never for the whole table at page load. */
-  const openCal = async (slug: string) => {
-    const cal = await getCalApi({ namespace: slug })
-    cal('ui', { theme: 'light' })
-    cal('modal', {
-      calLink: `${CAL_USERNAME}/${slug}`,
-      config: { layout: 'month_view' },
-    })
-  }
-
   return (
     <div className="reservas">
       <main className="reservas__main">
         <PageTitle eyebrow="Baqueira Beret">Elige tu experiencia</PageTitle>
+
+        <section className="reservas__booking" aria-labelledby="reservas-widget">
+          <h2 className="reservas__section-title" id="reservas-widget">
+            {requestedActivity
+              ? `Reservar · ${requestedActivity.title}`
+              : 'Reserva tu plaza'}
+          </h2>
+          {requestedActivity && !productId && (
+            <p className="reservas__booking-note">
+              Elige <strong>{requestedActivity.title}</strong> en el calendario
+              para ver las fechas disponibles
+            </p>
+          )}
+          <BookeoWidget productId={productId} />
+        </section>
+
+        <h2 className="reservas__section-title">Todas las experiencias</h2>
 
         <div className="reservas__table-wrap">
           <table className="reservas__table" aria-label="Experiencias disponibles">
@@ -143,7 +147,7 @@ export default function Reservas() {
             </thead>
             <tbody>
               {ORDERED_ACTIVITIES.map((activity) => {
-                const isOpen = activity.calSlug === openSlug
+                const isOpen = activity.slug === openSlug
                 const price = getActivityPrice(activity)
                 return (
                   <tr key={activity.id}>
@@ -152,7 +156,7 @@ export default function Reservas() {
                       {/* Summary row */}
                       <div
                         ref={(el) => {
-                          rowRefs.current[activity.calSlug] = el as unknown as HTMLTableRowElement
+                          rowRefs.current[activity.slug] = el as unknown as HTMLTableRowElement
                         }}
                         className={`reservas__summary${isOpen ? ' reservas__summary--open' : ''}`}
                         style={{ scrollMarginTop: 'calc(var(--navbar-height) + 1rem)' }}
@@ -182,21 +186,20 @@ export default function Reservas() {
                           )}
                         </span>
                         <div className="reservas__actions">
-                          <button
-                            type="button"
+                          <a
                             className="reservas__book-btn"
-                            onClick={() => openCal(activity.calSlug)}
+                            href={bookingHref(activity)}
                           >
                             Reservar
-                          </button>
+                          </a>
                           <button
                             type="button"
                             ref={(el) => {
-                              btnRefs.current[activity.calSlug] = el
+                              btnRefs.current[activity.slug] = el
                             }}
                             className="reservas__expand-btn"
                             aria-expanded={isOpen}
-                            onClick={() => toggle(activity.calSlug)}
+                            onClick={() => toggle(activity.slug)}
                           >
                             <span className="reservas__expand-label">
                               {isOpen ? 'Cerrar' : 'Más info'}

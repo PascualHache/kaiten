@@ -328,6 +328,11 @@
 }
 
 .exp-detail__reserve {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  text-decoration: none;
   padding: 0.85rem 1.5rem;
   font-family: inherit;
   font-size: 0.75rem;

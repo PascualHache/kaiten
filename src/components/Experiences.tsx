@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react'
-import { getCalApi } from '@calcom/embed-react'
 import { IconChevronDown } from '@tabler/icons-react'
 import { SERVICES } from '../data/services'
 import { ACTIVITIES } from '../data/activities'
@@ -13,8 +12,8 @@ import './Experiences.css'
  * secuestraba el scroll vertical de la página al llegar aquí.
  *
  * Al pulsar una tarjeta se despliega debajo su ficha completa
- * (ExperienceDetail), la misma que usa /reservas. Cal.com se inicializa solo
- * para la actividad abierta, nunca para las ocho de golpe.
+ * (ExperienceDetail), la misma que usa /reservas. El CTA de la ficha lleva a
+ * /reservas con la actividad preseleccionada; aquí no se carga nada de Bookeo.
  */
 
 // Tiempo que la ficha sigue montada tras cerrarse, para que le dé tiempo a
@@ -33,7 +32,7 @@ function Experiences() {
   const activeActivity = activeService
     ? (ACTIVITIES.find(
         (a) =>
-          a.calSlug === activeService.reservasPath.replace('/reservas/', ''),
+          a.slug === activeService.reservasPath.replace('/reservas/', ''),
       ) ?? null)
     : null
 
@@ -59,19 +58,10 @@ function Experiences() {
     }
   }, [])
 
-  // Cal.com, solo para la actividad abierta.
-  useEffect(() => {
-    if (!activeActivity) return
-    ;(async () => {
-      const cal = await getCalApi({ namespace: activeActivity.calSlug })
-      cal('ui', { theme: 'light' })
-    })()
-  }, [activeActivity])
-
   // Mantiene la ficha montada mientras dura la animación de salida.
   useEffect(() => {
     if (activeActivity) {
-      setDetailSlug(activeActivity.calSlug)
+      setDetailSlug(activeActivity.slug)
       setDetailClosing(false)
       return
     }
@@ -85,7 +75,7 @@ function Experiences() {
   }, [activeActivity, detailSlug])
 
   const detailActivity = detailSlug
-    ? (ACTIVITIES.find((a) => a.calSlug === detailSlug) ?? null)
+    ? (ACTIVITIES.find((a) => a.slug === detailSlug) ?? null)
     : null
 
   function select(id: string) {
@@ -162,7 +152,7 @@ function Experiences() {
 
       {detailActivity && (
         <div
-          key={detailActivity.calSlug}
+          key={detailActivity.slug}
           ref={detailRef}
           className={`experiences__detail${
             detailClosing ? ' experiences__detail--closing' : ''

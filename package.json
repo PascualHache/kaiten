@@ -5,14 +5,13 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "prebuild": "node scripts/check-cal-slugs.mjs",
+    "prebuild": "node scripts/check-booking-ids.mjs",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "check:cal": "node scripts/check-cal-slugs.mjs"
+    "check:booking": "node scripts/check-booking-ids.mjs"
   },
   "dependencies": {
-    "@calcom/embed-react": "^1.5.3",
     "@tabler/icons-react": "^3.40.0",
     "gsap": "^3.15.0",
     "react": "^19.2.4",

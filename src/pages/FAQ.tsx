@@ -61,7 +61,7 @@ const FAQS: FAQItem[] = [
   {
     q: "¿Cómo se realiza el pago?",
     a: [
-      "El pago se realiza directamente a través de Cal.com en el momento de la reserva, mediante tarjeta de crédito o débito.",
+      "El pago se realiza en el momento de la reserva, mediante tarjeta de crédito o débito.",
       "Si prefieres otro método consúltanos por WhatsApp.",
     ],
   },
