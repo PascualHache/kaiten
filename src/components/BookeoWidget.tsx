@@ -13,7 +13,8 @@ import './BookeoWidget.css'
  * 2. Monta su iframe dentro de un div con un id fijo, `bookeo_position`. Si lo
  *    creamos nosotros, aparece ahí; si no, se cuela junto al <script>.
  * 3. Solo admite UNA instancia por documento: un segundo `bookeo_start()` sin
- *    limpiar antes lanza un alert("Multiple copies..."). De ahí el teardown.
+ *    limpiar antes lanza un alert("Multiple copies..."). De ahí el teardown y
+ *    el guard sobre `bookeo_start` — widget.js se arranca también a sí mismo.
  *
  * El `type=` (producto preseleccionado) se hornea en la URL del script, así que
  * cambiar de actividad exige recargar el documento — ver `bookingHref`.
@@ -21,7 +22,7 @@ import './BookeoWidget.css'
 
 declare global {
   interface Window {
-    bookeo_start?: () => void
+    bookeo_start?: GuardedStart
     bookeo_topOffsetDesktop?: number
     bookeo_topOffsetMobile?: number
     easyXDM?: unknown
@@ -32,6 +33,8 @@ declare global {
     axiomct_spinner?: unknown
   }
 }
+
+type GuardedStart = (() => void) & { __kaitenGuarded?: boolean }
 
 /** Id que widget.js busca para decidir dónde montar el iframe. */
 const POSITION_ID = 'bookeo_position'
@@ -54,6 +57,30 @@ function loadWidgetScript(productId: string | null): Promise<void> {
     document.body.appendChild(script)
   })
   return loadPromise
+}
+
+/* widget.js no se limita a esperar a que lo arranquemos: al ejecutarse se
+ * registra a sí mismo en DOMContentLoaded y en load (`$bookeo.documentReady`).
+ * Si lo inyectamos antes de que la página termine de cargar — lo habitual en
+ * /reservas, con el hero todavía bajando — ese listener dispara un SEGUNDO
+ * bookeo_start() después del nuestro y Bookeo saca el alert de "Multiple
+ * copies". Quién gana la carrera depende del peso de la página, así que no
+ * vale con ordenar nuestra llamada: envolvemos bookeo_start para que ignore
+ * cualquier arranque que no proceda, venga de donde venga.
+ */
+function guardStart() {
+  const native = window.bookeo_start
+  if (!native || native.__kaitenGuarded) return
+
+  const guarded: GuardedStart = () => {
+    // Ya hay un widget vivo, o nos han desmontado y no queda sitio donde
+    // montarlo (widget.js lo colgaría del <body> al final de la página).
+    if (window.axiomct_project) return
+    if (!document.getElementById(POSITION_ID)) return
+    native()
+  }
+  guarded.__kaitenGuarded = true
+  window.bookeo_start = guarded
 }
 
 /* La navbar es sticky y taparía la parte alta del iframe cuando Bookeo hace
@@ -132,6 +159,7 @@ export default function BookeoWidget({ productId }: Props) {
         if (typeof window.bookeo_start !== 'function') {
           throw new Error('bookeo_start no está definido')
         }
+        guardStart()
         teardownWidget()
         window.bookeo_start()
       })
