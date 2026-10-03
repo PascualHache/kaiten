@@ -36,5 +36,25 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+
+    <!--
+      Marcador para el validador de Bookeo. NO es el widget.
+
+      El widget real lo inyecta React en /reservas (src/components/BookeoWidget.tsx).
+      Su validador descarga el HTML sin ejecutar JavaScript, así que en una SPA no
+      encontraría nunca el código y rechaza la URL con "El código del widget no se
+      encuentra en la página".
+
+      El type="text/plain" es deliberado: con un tipo que no es JavaScript, el
+      navegador ni ejecuta el script ni descarga el src. Solo deja en el HTML la
+      cadena que el validador busca.
+
+      NO lo conviertas en un <script> real: se cargaría en TODAS las páginas, habría
+      dos instancias del widget y volvería el alert de "Multiple copies".
+
+      El account id debe coincidir con BOOKEO_ACCOUNT_ID de src/data/booking.ts;
+      scripts/check-booking-ids.mjs lo comprueba en cada build.
+    -->
+    <script type="text/plain" src="https://bookeo.com/widget.js?a=2234KCCH71A100914E4A"></script>
   </body>
 </html>

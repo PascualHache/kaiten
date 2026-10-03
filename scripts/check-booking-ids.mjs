@@ -6,6 +6,8 @@
  *      catálogo completo en lugar de su producto.
  *   2. Un `slug` de tarifa o de servicio que no existe en ACTIVITIES → la
  *      tarifa muestra "—" y la tarjeta del Home no abre ficha.
+ *   3. El marcador de index.html con un account id distinto al de booking.ts →
+ *      Bookeo deja de validar la URL del sitio sin que nadie se entere.
  *
  * Por defecto AVISA pero no rompe el build: una actividad pendiente de crear
  * en Bookeo no puede bloquear un deploy. Para que falle (CI de QA,
@@ -81,6 +83,27 @@ if (dangling.length > 0) {
       dangling.join('\n') +
       '\n',
   )
+}
+
+/* El marcador inerte de index.html existe solo para que el validador de Bookeo
+   encuentre el código en el HTML (la SPA lo inyecta por JS y él no ejecuta JS).
+   Si los dos account id se separan, deja de validar en silencio. */
+try {
+  const accountId = read('src/data/booking.ts').match(
+    /BOOKEO_ACCOUNT_ID\s*=\s*"([^"]+)"/,
+  )?.[1]
+  const marker = read('index.html').match(/bookeo\.com\/widget\.js\?a=([^"'\s]+)/)?.[1]
+
+  if (accountId && marker !== accountId) {
+    warnings.push(
+      `\n⚠️  El marcador de Bookeo en index.html no cuadra con booking.ts:\n` +
+        `   · index.html:       ${marker ?? '(no encontrado)'}\n` +
+        `   · BOOKEO_ACCOUNT_ID: ${accountId}\n\n` +
+        '   Sin marcador válido, Bookeo rechaza la URL del sitio al guardar los ajustes.\n',
+    )
+  }
+} catch (err) {
+  console.warn(`⚠️  No se pudo comprobar el marcador de index.html (${err.message})`)
 }
 
 if (report(warnings)) process.exit(0)
