@@ -11,6 +11,28 @@
   padding: clamp(2.5rem, 6vw, 4rem) clamp(1.5rem, 5vw, 5rem);
 }
 
+/* ─── Widget de reservas (Bookeo) ─────────────────────────── */
+
+.reservas__booking {
+  margin-bottom: clamp(2.5rem, 6vw, 4rem);
+}
+
+.reservas__section-title {
+  margin: 0 0 1rem;
+  font-family: var(--font-heading);
+  font-size: clamp(1.25rem, 3vw, 1.75rem);
+  font-weight: 600;
+  color: var(--color-black);
+}
+
+.reservas__booking-note {
+  margin: -0.5rem 0 1rem;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--color-lavender-dark);
+}
+
 /* ─── Table shell ─────────────────────────────────────────── */
 
 .reservas__table-wrap {
@@ -155,6 +177,11 @@ tbody tr:first-child .reservas__outer-cell {
 
 /* Filled lavender: the primary of the same family as the "Más info" pill */
 .reservas__book-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  text-decoration: none;
   padding: 0.5rem 0.9rem;
   background-color: var(--color-lavender);
   color: var(--color-cream);

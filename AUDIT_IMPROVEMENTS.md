@@ -1,5 +1,10 @@
 # Instrucciones de corrección — Web Kaiten
 
+> **Nota (octubre 2026)**: este documento se escribió cuando las reservas iban
+> por Cal.com. El proveedor es ahora **Bookeo** — ver `BOOKEO_INTEGRATION.md`.
+> Donde abajo se lee "Cal.com", entiéndase "el widget de reservas". El resto
+> del audit sigue aplicando tal cual.
+
 Contexto: la web aún no está publicada. Los precios "XX €" y "-€" NO son un
 problema (se completarán en desarrollo). La reserva se resuelve abriendo un
 widget/enlace de Cal.com (no hay que construir un flujo de reserva propio).

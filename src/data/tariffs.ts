@@ -2,7 +2,7 @@ export interface Tariff {
   id: string;
   /** Row number — repeated when one experience has several formats. */
   number: string;
-  /** calSlug of the matching activity (links tarifa → actividad). */
+  /** slug of the matching activity (links tarifa → actividad). */
   slug: string;
   title: string;
   /** "Tarifa por persona" column. */
@@ -15,7 +15,7 @@ export interface Tariff {
   maxPeople: string;
 }
 
-/** First tariff row matching an activity's calSlug (rows share a slug when
+/** First tariff row matching an activity's slug (rows share a slug when
     one activity has several formats — the cheapest/shortest comes first). */
 export function findTariff(slug: string): Tariff | undefined {
   return TARIFFS.find((t) => t.slug === slug);

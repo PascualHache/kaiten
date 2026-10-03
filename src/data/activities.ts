@@ -52,7 +52,17 @@ export const EXPERIENCE_TYPE_LABELS: Record<ExperienceType, string> = {
 
 export interface Activity {
   id: string;
-  calSlug: string;
+  /** Internal slug — joins activity ↔ tariff ↔ service ↔ /reservas deep link. */
+  slug: string;
+  /**
+   * Bookeo product id, the `type=` of the booking widget.
+   * Panel de Bookeo → el producto → "Integrate into your website" → el código
+   * del enlace directo (`...?type=XXXX`).
+   *
+   * Vacío = todavía no creado en Bookeo: el CTA abre el widget con el catálogo
+   * completo en lugar de preseleccionar la actividad. Ver scripts/check-booking-ids.mjs.
+   */
+  bookeoProductId?: string;
   title: string;
   subtitle?: string;
   color: Color;
@@ -75,7 +85,8 @@ export interface Activity {
 export const ACTIVITIES: Activity[] = [
   {
     id: "full-day",
-    calSlug: "full-day-half-day-en-baqueira",
+    slug: "full-day-half-day-en-baqueira",
+    bookeoProductId: "",
     title: "Full Day | Half Day",
     color: "verde",
     experienceType: "jornada",
@@ -155,7 +166,8 @@ export const ACTIVITIES: Activity[] = [
   },
   {
     id: "safari",
-    calSlug: "safari-en-baqueira",
+    slug: "safari-en-baqueira",
+    bookeoProductId: "",
     title: "Safari",
     color: "verde",
     experienceType: "guiado",
@@ -213,7 +225,8 @@ export const ACTIVITIES: Activity[] = [
   },
   {
     id: "clases-particulares",
-    calSlug: "clases-particulares-en-baqueira",
+    slug: "clases-particulares-en-baqueira",
+    bookeoProductId: "",
     title: "Clases Privadas",
     color: "verde",
     experienceType: "clase",
@@ -269,7 +282,8 @@ export const ACTIVITIES: Activity[] = [
   },
   {
     id: "freeride",
-    calSlug: "freeride-en-baqueira",
+    slug: "freeride-en-baqueira",
+    bookeoProductId: "",
     title: "Freeride",
     color: "naranja",
     experienceType: "fuera-pista",
@@ -333,7 +347,8 @@ export const ACTIVITIES: Activity[] = [
   },
   {
     id: "friends-family",
-    calSlug: "friends-family",
+    slug: "friends-family",
+    bookeoProductId: "",
     title: "Kids & Friends & Family",
     color: "verde",
     experienceType: "grupo",
@@ -406,7 +421,8 @@ export const ACTIVITIES: Activity[] = [
   },
   {
     id: "tardeo",
-    calSlug: "experiencia-de-tardeo-20",
+    slug: "experiencia-de-tardeo-20",
+    bookeoProductId: "",
     title: "Tardeo (-25%)",
     color: "verde",
     experienceType: "especial",
@@ -466,7 +482,8 @@ export const ACTIVITIES: Activity[] = [
   },
   {
     id: "kaiten-2-5",
-    calSlug: "experiencia-kaiten-2.5",
+    slug: "experiencia-kaiten-2.5",
+    bookeoProductId: "",
     title: "Kaiten Programs",
     subtitle: "Nuestros programas de mejora intensiva",
     color: "verde",
@@ -528,7 +545,8 @@ export const ACTIVITIES: Activity[] = [
   },
   {
     id: "equipment-consultancy",
-    calSlug: "asesoramiento-compra-material-ski",
+    slug: "asesoramiento-compra-material-ski",
+    bookeoProductId: "",
     title: "Asesoramiento de Material",
     color: "verde",
     experienceType: "online",
