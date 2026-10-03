@@ -13,8 +13,27 @@ saber para tocar el flujo de reservas sin romperlo.
 
 En el panel hay que rellenar además:
 
-- **Dirección de la página donde se incrusta el widget**: `https://<dominio>/reservas`.
-  Bookeo la usa para los enlaces de "volver a la web" de sus emails.
+- **Dirección de la página donde se incrusta el widget**: `https://<dominio>/reservas`
+  (no la portada: el widget solo vive ahí). Bookeo la usa para los enlaces de
+  "volver a la web" de sus emails.
+
+  Al guardar, su validador descarga esa URL y busca el código del widget **en el
+  HTML, sin ejecutar JavaScript**. Como esto es una SPA y el script lo inyecta
+  React, no lo encontraría nunca y rechaza la URL con *"El código del widget no se
+  encuentra en la página"*. Por eso `index.html` lleva un marcador inerte:
+
+  ```html
+  <script type="text/plain" src="https://bookeo.com/widget.js?a=..."></script>
+  ```
+
+  Con un `type` que no es JavaScript el navegador ni lo ejecuta ni descarga el
+  `src`: solo deja en el HTML la cadena que el validador busca. **No lo conviertas
+  en un `<script>` real**: se cargaría en todas las páginas y volvería el alert de
+  "Multiple copies". `check-booking-ids.mjs` avisa si su account id se separa del
+  de `booking.ts`.
+
+  Si aun así Bookeo lo rechaza, la vía que ellos indican es escribir a
+  help@bookeo.com explicando que es una SPA.
 - **Floating menu height**: puede quedarse en `0`. El código fija
   `bookeo_topOffsetDesktop` / `bookeo_topOffsetMobile` midiendo la navbar en
   vivo, y esos globals mandan sobre el valor del panel.
