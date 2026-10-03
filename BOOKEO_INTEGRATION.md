@@ -62,6 +62,15 @@ en `BookeoWidget.tsx`. Si algún día el widget deja de aparecer, empieza por aq
    `window.easyXDM` en `undefined`. Sin restaurarlo desde
    `axiomct_project.easyXDM`, el segundo arranque revienta.
 
+   Y con una trampa dentro de la trampa: **widget.js también se arranca a sí
+   mismo**. Al ejecutarse se registra en `DOMContentLoaded` y en `load`
+   (`$bookeo.documentReady`), así que puede llamar a `bookeo_start()` por
+   segunda vez después del nuestro. Quién gana la carrera depende de cuánto
+   tarde `load`, o sea de la red y la caché de cada visitante — por eso el
+   alert aparece de forma intermitente. No se arregla ordenando nuestra
+   llamada: `BookeoWidget` envuelve `bookeo_start` para que ignore todo
+   arranque que no proceda.
+
 Esos globals son internos y minificados: pueden cambiar sin aviso. Por eso el
 teardown va en `try/catch` y el componente tiene un estado de fallo visible en
 lugar de quedarse en blanco.
