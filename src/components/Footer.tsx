@@ -83,8 +83,8 @@ function Footer() {
             <a href="tel:+34699820954" className="footer__contact-item">
               +34 699 820 954
             </a>
-            <a href="mailto:hola@kaiten.es" className="footer__contact-item">
-              hola@kaiten.es
+            <a href="mailto:kaitenski@gmail.com" className="footer__contact-item">
+              kaitenski@gmail.com
             </a>
             <span className="footer__contact-item">
               Baqueira Beret · Val d'Aran

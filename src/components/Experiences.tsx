@@ -158,7 +158,7 @@ function Experiences() {
             detailClosing ? ' experiences__detail--closing' : ''
           }`}
         >
-          <ExperienceDetail activity={detailActivity} />
+          <ExperienceDetail activity={detailActivity} variant="compact" />
         </div>
       )}
     </section>

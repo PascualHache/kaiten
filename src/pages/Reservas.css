@@ -9,42 +9,166 @@
   flex: 1;
   width: 100%;
   padding: clamp(2.5rem, 6vw, 4rem) clamp(1.5rem, 5vw, 5rem);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(2.5rem, 5vw, 4rem);
+}
+
+/* ─── Cabecera: título a la izquierda, pasos a la derecha ──
+   Alineados por la línea base inferior (align-items: flex-end), así el
+   título y la lista de pasos comparten el mismo pie aunque el h1 parta
+   en dos líneas. */
+
+.reservas__header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem clamp(1.5rem, 4vw, 3rem);
+}
+
+/* El margen inferior del h1 sobra aquí: lo pone el gap del main */
+.reservas__header .page-title__heading {
+  margin-bottom: 0;
+}
+
+.reservas__steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.75rem;
+}
+
+.reservas__step {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: rgba(0, 0, 0, 0.65);
+}
+
+.reservas__step-num {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 1.6rem;
+  height: 1.6rem;
+  border: 1px solid rgba(133, 127, 157, 0.45);
+  border-radius: 50%;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--color-lavender-dark);
 }
 
 /* ─── Widget de reservas (Bookeo) ─────────────────────────── */
 
 .reservas__booking {
-  margin-bottom: clamp(2.5rem, 6vw, 4rem);
-}
-
-.reservas__section-title {
-  margin: 0 0 1rem;
-  font-family: var(--font-heading);
-  font-size: clamp(1.25rem, 3vw, 1.75rem);
-  font-weight: 600;
-  color: var(--color-black);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
 }
 
 .reservas__booking-note {
-  margin: -0.5rem 0 1rem;
+  margin: 0;
   font-family: var(--font-body);
   font-size: 0.9rem;
   line-height: 1.5;
   color: var(--color-lavender-dark);
 }
 
-/* ─── Table shell ─────────────────────────────────────────── */
+.reservas__booking-caption {
+  margin: 0;
+  text-align: center;
+  font-size: 0.72rem;
+  color: rgba(0, 0, 0, 0.55);
+}
+
+/* ─── Garantías de la reserva ─────────────────────────────── */
+
+.reservas__trust {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 2.25rem;
+}
+
+.reservas__trust-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: rgba(0, 0, 0, 0.65);
+}
+
+.reservas__trust-item svg {
+  flex-shrink: 0;
+  color: var(--color-lavender-dark);
+}
+
+/* ─── Cabecera de sección ─────────────────────────────────── */
+
+.reservas__compare {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.25rem, 3vw, 2rem);
+}
+
+.reservas__section-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem clamp(1.5rem, 4vw, 3rem);
+}
+
+.reservas__eyebrow {
+  margin: 0 0 0.5rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-lavender-dark);
+}
+
+.reservas__section-title {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: clamp(1.4rem, 3.5vw, 2.25rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  color: var(--color-black);
+  text-wrap: balance;
+}
+
+.reservas__section-lead {
+  margin: 0;
+  max-width: 24rem;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: rgba(0, 0, 0, 0.65);
+}
+
+.reservas__inline-link {
+  color: var(--color-black);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* ─── Tabla comparativa ───────────────────────────────────── */
 
 .reservas__table-wrap {
-  border: 1px solid rgba(133, 127, 157, 0.2);
-  border-radius: 1rem;
-  overflow: hidden;
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
 }
 
 .reservas__table {
   /* Shared column template: header row and body rows are independent grids,
      so they only align if both use exactly these tracks (no auto sizing) */
-  --reservas-cols: minmax(0, 1.9fr) minmax(0, 0.9fr) minmax(0, 0.6fr) minmax(0, 1.7fr) 9.5rem 9.5rem;
+  --reservas-cols: minmax(0, 2.2fr) minmax(0, 1.2fr) minmax(0, 0.7fr) minmax(0, 1.6fr) minmax(0, 1fr) 11rem;
   display: block;
   width: 100%;
   border-collapse: collapse;
@@ -61,14 +185,14 @@
   display: grid;
   grid-template-columns: var(--reservas-cols);
   align-items: center;
-  background-color: rgba(133, 127, 157, 0.06);
+  gap: 1rem;
 }
 
 .reservas__th {
-  padding: 0.75rem 1.25rem;
+  padding: 0.75rem 0;
   text-align: left;
   font-size: 0.68rem;
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--color-lavender-dark);
@@ -81,12 +205,7 @@
   display: block;
   padding: 0;
   /* separating line between activities */
-  border-top: 1px solid rgba(133, 127, 157, 0.15);
-}
-
-/* Remove the top border on the very first row */
-tbody tr:first-child .reservas__outer-cell {
-  border-top: none;
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
 }
 
 /* ─── Summary row (the visible grid) ─────────────────────── */
@@ -95,15 +214,13 @@ tbody tr:first-child .reservas__outer-cell {
   display: grid;
   grid-template-columns: var(--reservas-cols);
   align-items: center;
-  gap: 0;
-  padding: 0;
+  gap: 1rem;
+  padding: 0.85rem 0;
   transition: background-color 0.2s;
-  cursor: default;
 }
 
 .reservas__summary--open {
-  background-color: rgba(133, 127, 157, 0.06);
-  border-bottom: 1px solid rgba(133, 127, 157, 0.15);
+  background-color: rgba(0, 0, 0, 0.04);
 }
 
 /* Each column cell within the summary grid */
@@ -113,20 +230,14 @@ tbody tr:first-child .reservas__outer-cell {
 .reservas__col-level,
 .reservas__col-price {
   min-width: 0;
-  padding: 1.1rem 1.25rem;
   font-size: 0.875rem;
   color: var(--color-black);
   line-height: 1.4;
 }
 
 .reservas__col-name {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.4rem;
-  font-weight: 700;
-  font-size: 0.95rem;
-  min-width: 0;
+  font-weight: 600;
+  font-size: 0.92rem;
 }
 
 /* Long badge labels (e.g. "Fuera de pista") wrap instead of forcing the
@@ -137,42 +248,28 @@ tbody tr:first-child .reservas__outer-cell {
   text-align: left;
 }
 
-/* Nivel abre más calle por la izquierda para despegarse de "Personas": las
-   etiquetas de nivel quedaban pegadas a la cifra de la columna anterior. La
-   cabecera lleva la misma sangría para no desalinearse. */
-.reservas__col-level,
-.reservas__th--hide-md {
-  padding-left: 2.75rem;
+.reservas__col-dur,
+.reservas__col-pax {
+  color: rgba(0, 0, 0, 0.65);
 }
 
 .reservas__col-level {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  flex-wrap: wrap;
   gap: 0.3rem;
 }
 
-/* "Desde" en regular y el importe en negrita: el peso marca la cifra, no la
-   etiqueta que la introduce. */
 .reservas__col-price {
-  font-weight: 400;
-  color: var(--color-black);
+  font-weight: 600;
+  white-space: nowrap;
 }
 
-.reservas__price-value {
-  font-weight: 700;
-}
-
-/* "Reservar" button */
-/* Two stacked actions: book straight away, or open the detail */
+/* Two actions per row: book straight away, or open the detail */
 .reservas__actions {
   display: flex;
-  flex-direction: column;
-  align-items: stretch;
+  align-items: center;
   gap: 0.4rem;
   justify-self: end;
-  width: 100%;
-  padding: 0.75rem 1rem 0.75rem 0;
 }
 
 /* Filled lavender: the primary of the same family as the "Más info" pill */
@@ -183,22 +280,23 @@ tbody tr:first-child .reservas__outer-cell {
   text-align: center;
   text-decoration: none;
   padding: 0.5rem 0.9rem;
-  background-color: var(--color-lavender);
+  background-color: var(--color-lavender-dark);
   color: var(--color-cream);
-  border: 1px solid var(--color-lavender);
+  border: 1px solid var(--color-lavender-dark);
   border-radius: 2rem;
   font-family: inherit;
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+  white-space: nowrap;
   cursor: pointer;
   transition: background-color 0.2s, border-color 0.2s;
 }
 
 .reservas__book-btn:hover {
-  background-color: var(--color-lavender-dark);
-  border-color: var(--color-lavender-dark);
+  background-color: #3d3952;
+  border-color: #3d3952;
 }
 
 .reservas__expand-btn {
@@ -206,12 +304,12 @@ tbody tr:first-child .reservas__outer-cell {
   align-items: center;
   justify-content: center;
   gap: 0.4rem;
-  padding: 0.45rem 0.9rem;
+  padding: 0.45rem 0.8rem;
   background-color: transparent;
-  border: 1px solid rgba(133, 127, 157, 0.4);
+  border: 1px solid rgba(133, 127, 157, 0.45);
   border-radius: 2rem;
   color: var(--color-lavender-dark);
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   font-weight: 600;
   letter-spacing: 0.04em;
   cursor: pointer;
@@ -221,7 +319,7 @@ tbody tr:first-child .reservas__outer-cell {
 }
 
 .reservas__expand-btn:hover {
-  background-color: rgba(133, 127, 157, 0.1);
+  background-color: rgba(133, 127, 157, 0.16);
   border-color: var(--color-lavender);
 }
 
@@ -248,15 +346,13 @@ tbody tr:first-child .reservas__outer-cell {
 
 .reservas__detail-inner {
   overflow: hidden;
-  /* indent the ExperienceDetail content */
-  padding: 0 clamp(1rem, 2vw, 2rem);
 }
 
 /* Adjust ExperienceDetail styles when inside the table */
 .reservas__detail-inner .exp-detail {
   margin-top: 0;
   border-top: none;
-  padding-top: 1.5rem;
+  padding-top: 0.5rem;
   padding-bottom: 2.5rem;
 }
 
@@ -264,22 +360,141 @@ tbody tr:first-child .reservas__outer-cell {
   display: none; /* title already visible in the summary row */
 }
 
+/* ─── Antes de reservar ───────────────────────────────────── */
+
+.reservas__info {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+  gap: 1.75rem clamp(1.5rem, 4vw, 3rem);
+}
+
+.reservas__info-item {
+  display: grid;
+  grid-template-columns: 2.5rem minmax(0, 1fr);
+  gap: 1rem;
+  align-items: start;
+}
+
+.reservas__info-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background-color: rgba(133, 127, 157, 0.16);
+  color: var(--color-lavender-dark);
+}
+
+.reservas__info-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.reservas__info-label {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--color-black);
+}
+
+.reservas__info-text {
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: rgba(0, 0, 0, 0.65);
+  text-wrap: pretty;
+}
+
+/* ─── Grupos grandes / a medida ───────────────────────────── */
+
+.reservas__custom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: clamp(1.5rem, 4vw, 3rem);
+  border-radius: 1rem;
+  background-color: rgba(133, 127, 157, 0.16);
+}
+
+.reservas__custom-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-width: 34rem;
+}
+
+.reservas__custom-title {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: clamp(1.3rem, 3.2vw, 2rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  color: var(--color-black);
+  text-wrap: balance;
+}
+
+.reservas__custom-text {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: rgba(0, 0, 0, 0.65);
+}
+
+.reservas__custom-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.reservas__custom-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  height: 48px;
+  padding: 0 1.5rem;
+  border: 1px solid transparent;
+  border-radius: 2rem;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.reservas__custom-btn--primary {
+  background-color: var(--color-lavender-dark);
+  color: var(--color-cream);
+}
+
+.reservas__custom-btn--primary:hover {
+  background-color: #3d3952;
+}
+
+.reservas__custom-btn--secondary {
+  background-color: transparent;
+  color: var(--color-black);
+  border-color: var(--color-black);
+}
+
+.reservas__custom-btn--secondary:hover {
+  background-color: var(--color-black);
+  color: var(--color-cream);
+}
+
 /* ─── Responsive helpers ──────────────────────────────────── */
 
-.reservas__hide-sm,
-.reservas__th--hide-sm {
-  /* hidden on small screens */
-}
-
-.reservas__hide-md,
-.reservas__th--hide-md {
-  /* hidden on medium screens */
-}
-
-@media (max-width: 900px) {
+@media (max-width: 1100px) {
   .reservas__table {
-    /* Nivel column hidden: name, duración, personas, precio, botón */
-    --reservas-cols: minmax(0, 1.6fr) minmax(0, 1fr) minmax(0, 0.7fr) 8.5rem 9rem;
+    /* Nivel column hidden: name, duración, personas, precio, acciones */
+    --reservas-cols: minmax(0, 1.8fr) minmax(0, 1.1fr) minmax(0, 0.7fr) minmax(0, 1fr) 11rem;
   }
 
   .reservas__hide-md,
@@ -288,33 +503,63 @@ tbody tr:first-child .reservas__outer-cell {
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 860px) {
   .reservas__table {
-    /* Personas column also hidden: name, duración, precio, botón */
-    --reservas-cols: minmax(0, 1.4fr) minmax(0, 1fr) 6rem 5.5rem;
+    /* Personas también oculta: name, duración, precio, acciones */
+    --reservas-cols: minmax(0, 1.6fr) minmax(0, 1fr) minmax(0, 0.9fr) 9rem;
   }
 
   .reservas__hide-sm,
   .reservas__th--hide-sm {
     display: none;
   }
+}
 
-  .reservas__col-name {
-    font-size: 0.85rem;
+@media (max-width: 640px) {
+  .reservas__table {
+    /* Dos filas: datos a la izquierda, precio a la derecha; acciones debajo */
+    --reservas-cols: minmax(0, 1fr) auto;
   }
 
-  .reservas__expand-label {
+  .reservas__thead-row {
     display: none;
   }
 
-  .reservas__expand-btn {
-    padding: 0.45rem;
-    border-radius: 2rem;
+  .reservas__summary {
+    row-gap: 0.5rem;
+    padding: 1rem 0;
   }
 
-  .reservas__book-btn {
-    padding: 0.45rem 0.35rem;
-    font-size: 0.62rem;
-    letter-spacing: 0.04em;
+  /* Colocación explícita: con "Personas" y "Nivel" ocultos el autoflow
+     dejaría el precio bajo el nombre en vez de a su derecha. */
+  .reservas__col-name {
+    grid-column: 1;
+    grid-row: 1;
+    font-size: 0.9rem;
+  }
+
+  .reservas__col-price {
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: end;
+  }
+
+  .reservas__col-dur {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+
+  .reservas__actions {
+    grid-column: 1 / -1;
+    grid-row: 3;
+    justify-self: start;
+  }
+
+  .reservas__custom-actions {
+    width: 100%;
+  }
+
+  .reservas__custom-btn {
+    flex: 1;
   }
 }

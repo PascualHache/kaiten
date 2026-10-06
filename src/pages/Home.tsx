@@ -1,6 +1,7 @@
 import Hero from '../components/Hero'
 import Experiences from '../components/Experiences'
 import Reviews from '../components/Reviews'
+import BookingBand from '../components/BookingBand'
 import Footer from '../components/Footer'
 import './Home.css'
 
@@ -12,6 +13,7 @@ function Home() {
       </section>
       <Experiences />
       <Reviews />
+      <BookingBand />
       <Footer />
     </div>
   )
