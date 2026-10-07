@@ -181,6 +181,7 @@ function NavMenu({ links, onClose }: NavMenuProps) {
               >
                 WhatsApp
               </a>
+              <a href="mailto:kaitenski@gmail.com">kaitenski@gmail.com</a>
               <span className="nav-menu__address">
                 Baqueira 1800 · Val d'Aran
               </span>
