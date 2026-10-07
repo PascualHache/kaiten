@@ -16,9 +16,10 @@
 
 .experiences__header {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem clamp(1.5rem, 4vw, 3rem);
 }
 
 .experiences__eyebrow {
@@ -303,13 +304,14 @@
   font-size: clamp(1.5rem, 3vw, 2.25rem);
   font-weight: 700;
   line-height: 1.05;
-  letter-spacing: -0.01em;
-  text-transform: uppercase;
-  color: var(--color-lavender);
+  letter-spacing: -0.02em;
+  color: var(--color-black);
+  text-wrap: balance;
 }
 
 .exp-detail__subtitle {
-  margin: 0.35rem 0 0;
+  /* el gap de .exp-detail__heading abre el aire; sin margen propio */
+  margin: 0;
   font-size: 0.9rem;
   color: rgba(17, 17, 17, 0.6);
 }
@@ -553,5 +555,129 @@
 @media (max-width: 480px) {
   .exp-detail__formats-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+/* ═══ Ficha compacta (portada) ══════════════════════════════
+   La misma ficha que /reservas, recortada: etiqueta de tipo sobre el
+   titular, "Desde" como etiqueta aparte del importe, y una tira final con
+   duración, personas, nivel y el salto a la ficha completa. Sin información
+   rápida ni formatos: eso vive en /reservas. */
+
+.exp-detail__heading {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.6rem;
+}
+
+.exp-detail--compact .exp-detail__head {
+  padding-bottom: clamp(1.25rem, 2.5vw, 1.75rem);
+  margin-bottom: clamp(1.5rem, 3vw, 2.25rem);
+}
+
+.exp-detail__price-block {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.exp-detail__price-label {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-lavender-dark);
+}
+
+.exp-detail__price-value {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-black);
+  white-space: nowrap;
+}
+
+.exp-detail--compact .exp-detail__reserve {
+  gap: 0.5rem;
+  background-color: var(--color-lavender-dark);
+  border-radius: 2rem;
+}
+
+/* Sin "Información rápida" al lado, los rasgos ocupan todo el ancho */
+.exp-detail--compact .exp-detail__body {
+  display: block;
+}
+
+.exp-detail--compact .exp-detail__features {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+}
+
+/* ─── Tira de datos ───────────────────────────────────────── */
+/* El gap de 1px sobre fondo borde dibuja las separaciones verticales sin
+   bordes por celda: al envolver en móvil no quedan dobles líneas. */
+
+.exp-detail__meta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr));
+  gap: 1px;
+  margin-top: clamp(1.5rem, 3vw, 2.25rem);
+  background-color: rgba(0, 0, 0, 0.12);
+  border-block: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.exp-detail__meta-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem;
+  background-color: var(--color-cream);
+}
+
+.exp-detail__meta-cell:first-child {
+  padding-left: 0;
+}
+
+.exp-detail__meta-cell--link {
+  justify-content: center;
+}
+
+.exp-detail__meta-label {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-lavender-dark);
+}
+
+.exp-detail__meta-value {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-black);
+}
+
+.exp-detail__meta-levels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+}
+
+.exp-detail__meta-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-lavender-dark);
+}
+
+.exp-detail__meta-link:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+@media (max-width: 640px) {
+  .exp-detail__meta-cell:first-child {
+    padding-left: 1rem;
   }
 }

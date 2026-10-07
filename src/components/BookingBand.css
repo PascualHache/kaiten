@@ -1,0 +1,113 @@
+.booking-band {
+  padding: clamp(2.5rem, 5vw, 4rem) clamp(1.5rem, 5vw, 5rem)
+    clamp(3rem, 6vw, 5rem);
+  background-color: var(--color-cream);
+}
+
+.booking-band__card {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+  gap: 1.5rem clamp(1.5rem, 4vw, 3rem);
+  align-items: center;
+  padding: clamp(1.5rem, 3.5vw, 2.5rem);
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 1rem;
+  /* Superficie elevada sobre la crema, como la caja del widget en /reservas */
+  background-color: #fff;
+}
+
+.booking-band__copy {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.booking-band__eyebrow {
+  margin: 0;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-lavender-dark);
+}
+
+.booking-band__title {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: clamp(1.4rem, 3.5vw, 2.25rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.08;
+  color: var(--color-black);
+  text-wrap: balance;
+}
+
+.booking-band__text {
+  margin: 0;
+  max-width: 30rem;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: rgba(0, 0, 0, 0.65);
+  text-wrap: pretty;
+}
+
+.booking-band__side {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+
+.booking-band__steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.booking-band__step {
+  display: grid;
+  grid-template-columns: 2rem minmax(0, 1fr);
+  gap: 0.75rem;
+  align-items: center;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  font-size: 0.9rem;
+  line-height: 1.4;
+  color: var(--color-black);
+}
+
+.booking-band__step-num {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  color: var(--color-lavender-dark);
+}
+
+.booking-band__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  height: 48px;
+  padding: 0 1.5rem;
+  border-radius: 2rem;
+  background-color: var(--color-lavender-dark);
+  color: var(--color-cream);
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition: background-color 0.2s;
+}
+
+.booking-band__btn:hover {
+  background-color: #3d3952;
+}
+
+@media (max-width: 640px) {
+  .booking-band__btn {
+    width: 100%;
+  }
+}

@@ -21,11 +21,18 @@ export function findTariff(slug: string): Tariff | undefined {
   return TARIFFS.find((t) => t.slug === slug);
 }
 
-/** "Desde 64€ / hora" — the entry price shown next to an activity. */
-export function formatFromPrice(slug: string): string {
+/** "64€ / hora" — el importe pelado, para cuando el "Desde" ya es una
+    etiqueta aparte en la interfaz. */
+export function formatPrice(slug: string): string {
   const tariff = findTariff(slug);
   if (!tariff) return "—";
-  return `Desde ${tariff.price}${tariff.priceNote ? ` ${tariff.priceNote}` : ""}`;
+  return `${tariff.price}${tariff.priceNote ? ` ${tariff.priceNote}` : ""}`;
+}
+
+/** "Desde 64€ / hora" — the entry price shown next to an activity. */
+export function formatFromPrice(slug: string): string {
+  const price = formatPrice(slug);
+  return price === "—" ? price : `Desde ${price}`;
 }
 
 export const TARIFFS: Tariff[] = [
