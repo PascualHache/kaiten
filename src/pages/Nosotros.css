@@ -20,8 +20,27 @@
 .nos__media > img { position: absolute; left: 0; top: -8%; width: 100%; height: 116%; object-fit: cover; }
 .nos__media--tall { aspect-ratio: 4 / 5; max-height: 80vh; border-radius: var(--radius-card); }
 .nos__media--hero { border-radius: var(--radius-hero); max-height: 82vh; }
-.nos__media--band { height: clamp(18rem, 46vw, 34rem); border-radius: var(--radius-hero); margin: var(--space-4) 0 clamp(2rem, 4vw, 3rem); }
-.nos__media--band > img { object-position: center top; }
+/* Retrato del capítulo: vive dentro de .nos__chapter-head, bajo el h2. Ya no
+   es una banda recortada a lo ancho, así que la imagen vuelve al flujo (sin
+   el position:absolute ni el 116% de alto que pedía el recorte) y se ve
+   entera; el ancho se limita para que el 3:4 no estire la columna pegajosa. */
+/* Retrato del capítulo, bajo el h2 de .nos__chapter-head. Entra entero, así
+   que la img vuelve al flujo (sin el position:absolute ni el 116% de alto que
+   pedía el recorte) y el ancho se limita para no estirar la columna. El
+   margen izquierdo la desalinea del titular a propósito: sangrada hacia el
+   texto, la composición deja de leerse como dos bloques apilados. */
+/* El margen izquierdo es `auto`: la foto se alinea con el borde derecho de la
+   columna, pegada al canal que la separa del texto. Es el tope del sangrado
+   sin invadir la otra columna. */
+.nos__media--chapter { width: min(100% - 4rem, 22rem); margin: var(--space-2) 0 0 auto; border-radius: var(--radius-card); background: none; }
+.nos__media--chapter > img { position: static; width: 100%; height: auto; aspect-ratio: 3 / 4; object-fit: contain; }
+
+/* Capítulo con retrato: la foto pesa más que el titular y descompensaba la
+   composición — el texto arriba y un hueco muerto abajo a la derecha. Aquí
+   hace de contrapeso: el texto se centra contra ella y la cabecera deja de
+   ser pegajosa (una foto alta colgando de un sticky se arrastra mal). */
+.nos__chapter--portrait { align-items: center; }
+.nos__chapter--portrait .nos__chapter-head { position: static; }
 .nos__media-caption { position: absolute; left: 0; right: 0; bottom: 0; padding: clamp(1.5rem, 3.5vw, 2.5rem); display: flex; flex-direction: column; gap: var(--space-3); }
 .nos__media-caption .k-rule { background: #000; }
 .nos__media-caption h2 { font-size: clamp(1.5rem, 3vw, 2.25rem); line-height: 1.08; max-width: 14ch; color: #000; text-wrap: balance; }

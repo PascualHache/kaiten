@@ -186,6 +186,61 @@
   }
 }
 
+/* Atajo a WhatsApp, a la derecha del CTA. Mismos tokens --ks-* que
+   "Reservar" (relleno, radio, sombras y curva): leen como un par, no como dos
+   limas distintas. Solo cambia la caja, cuadrada en vez de con texto. */
+.navbar__whatsapp {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  /* Recorta el gap de 18px de .navbar__utils: van pegados, como un par */
+  margin-left: -8px;
+  border: none;
+  border-radius: var(--ks-radius-button);
+  background: var(--ks-primary);
+  color: var(--ks-on-primary);
+  text-decoration: none;
+  box-shadow: var(--ks-shadow-button);
+  transition:
+    transform 140ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 140ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    background-color 140ms ease;
+}
+
+@media (hover: hover) {
+  .navbar__whatsapp:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--ks-shadow-button-hover);
+    color: var(--ks-on-primary);
+  }
+}
+
+.navbar__whatsapp:active {
+  transform: translateY(1px);
+  background: var(--ks-primary-pressed);
+  box-shadow: var(--ks-shadow-button-pressed);
+  transition-duration: 60ms;
+}
+
+.navbar__whatsapp:focus-visible {
+  outline: 2px solid var(--ks-on-primary);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .navbar__whatsapp {
+    transition: background-color 140ms ease, box-shadow 140ms ease;
+  }
+
+  .navbar__whatsapp:hover,
+  .navbar__whatsapp:active {
+    transform: none;
+  }
+}
+
 .navbar__menu-toggle {
   display: flex;
   align-items: center;
@@ -222,5 +277,10 @@
   .navbar__reserve-btn {
     padding: 9px 14px;
     font-size: 12px;
+  }
+
+  .navbar__whatsapp {
+    width: 36px;
+    height: 36px;
   }
 }

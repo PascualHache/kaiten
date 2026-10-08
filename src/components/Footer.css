@@ -39,14 +39,6 @@
   color: var(--color-cream);
 }
 
-.footer__cta-sub {
-  margin: 0;
-  font-size: clamp(0.875rem, 1.4vw, 1rem);
-  line-height: 1.55;
-  color: rgba(230, 229, 225, 0.65);
-  max-width: 28rem;
-}
-
 .footer__cta-actions {
   display: flex;
   align-items: center;
@@ -258,6 +250,7 @@ a.footer__social-pill:hover {
 
 /* Live cams column */
 .footer__live {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -339,23 +332,36 @@ a.footer__social-pill:hover {
 
 /* ─── Watermark ──────────────────────────────────────── */
 
-/* Vive dentro de .footer__live, justo debajo del botón de las cámaras: ya no
-   es una marca de agua centrada a lo ancho del footer, sino un remate de esa
-   columna. */
+/* Marca de agua de la columna de cámaras: se sale del flujo y ocupa toda la
+   caja de .footer__live por detrás del texto y del botón. Al crecer baja la
+   opacidad, para que el contraste del contenido no se resienta. */
 .footer__watermark {
-  /* Sin centrar en la columna: un margen fijo la deja a ojo bajo el centro de
-     .footer__live-btn, que mide ~15rem de ancho. */
-  margin-top: 0.5rem;
-  margin-left: 4rem;
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   line-height: 0;
+  overflow: hidden;
   pointer-events: none;
   user-select: none;
 }
 
 .footer__watermark img {
-  width: clamp(4.5rem, 7vw, 6.5rem);
-  opacity: 0.12;
+  /* Casi cuadrado (560×540): se limita también por alto y con contain, para
+     que crezca hasta donde dé la columna sin recortarse. */
+  width: min(100%, 16rem);
+  max-height: 100%;
+  object-fit: contain;
+  opacity: 0.09;
   filter: brightness(0) invert(1);
+}
+
+/* El contenido real de la columna monta por encima de la marca */
+.footer__live > :not(.footer__watermark) {
+  position: relative;
+  z-index: 1;
 }
 
 /* ─── Responsive ─────────────────────────────────────── */

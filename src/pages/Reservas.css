@@ -5,62 +5,26 @@
   background-color: var(--color-cream);
 }
 
+/* Ritmo apretado (24px) a propósito: título, widget y garantías son un solo
+   bloque — el de reservar. Lo que viene después se separa con su propio
+   margen, para que se lea como material de apoyo y no como parte del flujo. */
 .reservas__main {
   flex: 1;
   width: 100%;
   padding: clamp(2.5rem, 6vw, 4rem) clamp(1.5rem, 5vw, 5rem);
   display: flex;
   flex-direction: column;
-  gap: clamp(2.5rem, 5vw, 4rem);
+  gap: 1.5rem;
 }
 
-/* ─── Cabecera: título a la izquierda, pasos a la derecha ──
-   Alineados por la línea base inferior (align-items: flex-end), así el
-   título y la lista de pasos comparten el mismo pie aunque el h1 parta
-   en dos líneas. */
-
-.reservas__header {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 1rem clamp(1.5rem, 4vw, 3rem);
-}
-
-/* El margen inferior del h1 sobra aquí: lo pone el gap del main */
-.reservas__header .page-title__heading {
+/* El gap del main ya separa: el margen propio del h1 sumaría de más */
+.reservas__main .page-title__heading {
   margin-bottom: 0;
 }
 
-.reservas__steps {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem 1.75rem;
-}
-
-.reservas__step {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.875rem;
-  color: rgba(0, 0, 0, 0.65);
-}
-
-.reservas__step-num {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  width: 1.6rem;
-  height: 1.6rem;
-  border: 1px solid rgba(133, 127, 157, 0.45);
-  border-radius: 50%;
-  font-size: 0.72rem;
-  font-weight: 600;
-  color: var(--color-lavender-dark);
+.reservas__info,
+.reservas__custom {
+  margin-top: clamp(1rem, 2.5vw, 1.75rem);
 }
 
 /* ─── Widget de reservas (Bookeo) ─────────────────────────── */
@@ -68,22 +32,81 @@
 .reservas__booking {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 1rem;
+  /* "Localizar" trae la vista hasta aquí: el destino tiene que quedar por
+     debajo de la navbar pegajosa, no detrás de ella. */
+  scroll-margin-top: calc(var(--navbar-height) + 1.5rem);
 }
 
-.reservas__booking-note {
+/* ─── Localizador: qué tarjeta pulsar dentro del iframe ───
+   Ningún producto tiene todavía `bookeoProductId`, así que el widget abre el
+   catálogo entero. Este aviso es el puente entre nuestra tabla y la rejilla
+   de Bookeo, que ni se puede estilar ni ordenar desde fuera. */
+
+.reservas__locator {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 0.875rem 1.125rem;
+  background-color: rgba(133, 127, 157, 0.16);
+  border: 1px solid rgba(133, 127, 157, 0.45);
+  border-radius: 1rem;
+}
+
+.reservas__locator:focus-visible {
+  outline: 2px solid var(--color-lavender-dark);
+  outline-offset: 2px;
+}
+
+/* Miniatura de la rejilla del catálogo: 4 columnas, 8 tarjetas */
+.reservas__minimap {
+  display: grid;
+  grid-template-columns: repeat(4, 18px);
+  gap: 3px;
+  flex: none;
+}
+
+.reservas__minimap-cell {
+  height: 14px;
+  border-radius: 2px;
+  background-color: rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.reservas__minimap-cell--on {
+  background-color: var(--color-lavender-dark);
+  border-color: var(--color-lavender-dark);
+}
+
+.reservas__locator-text {
+  flex: 1;
+  min-width: 0;
   margin: 0;
-  font-family: var(--font-body);
   font-size: 0.9rem;
   line-height: 1.5;
-  color: var(--color-lavender-dark);
+  text-wrap: pretty;
 }
 
-.reservas__booking-caption {
-  margin: 0;
-  text-align: center;
-  font-size: 0.72rem;
-  color: rgba(0, 0, 0, 0.55);
+.reservas__locator-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: none;
+  border-radius: 0.5rem;
+  background: none;
+  color: var(--color-black);
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+@media (hover: hover) {
+  .reservas__locator-close:hover {
+    background-color: rgba(0, 0, 0, 0.06);
+  }
 }
 
 /* ─── Garantías de la reserva ─────────────────────────────── */
@@ -113,6 +136,7 @@
 /* ─── Cabecera de sección ─────────────────────────────────── */
 
 .reservas__compare {
+  margin-top: clamp(1.5rem, 3vw, 2rem);
   display: flex;
   flex-direction: column;
   gap: clamp(1.25rem, 3vw, 2rem);
@@ -159,93 +183,87 @@
   text-underline-offset: 3px;
 }
 
-/* ─── Tabla comparativa ───────────────────────────────────── */
+/* ─── Tabla comparativa ─────────────────────────────────────
+   Ya no hay filas desplegables: cada fila es una <tr> real con sus celdas, y
+   la única acción es "Localizar". El <table> se pinta con grid (display:block
+   en thead/tbody/tr) para que la cabecera y el cuerpo compartan pistas sin
+   depender del autolayout de tabla. */
 
 .reservas__table-wrap {
-  border-top: 1px solid rgba(0, 0, 0, 0.12);
+  overflow-x: auto;
 }
 
 .reservas__table {
-  /* Shared column template: header row and body rows are independent grids,
-     so they only align if both use exactly these tracks (no auto sizing) */
-  --reservas-cols: minmax(0, 2.2fr) minmax(0, 1.2fr) minmax(0, 0.7fr) minmax(0, 1.6fr) minmax(0, 1fr) 11rem;
+  --reservas-cols: minmax(0, 1.8fr) minmax(0, 1fr) minmax(0, 0.7fr)
+    minmax(0, 1.5fr) minmax(0, 0.6fr) 140px;
   display: block;
   width: 100%;
+  min-width: 54rem;
   border-collapse: collapse;
 }
 
 .reservas__table thead,
-.reservas__table tbody,
-.reservas__table tbody tr {
+.reservas__table tbody {
   display: block;
 }
 
-/* Header row */
-.reservas__thead-row {
+.reservas__row {
   display: grid;
   grid-template-columns: var(--reservas-cols);
   align-items: center;
   gap: 1rem;
+  padding: 0.65rem 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  transition: background-color 0.2s;
+}
+
+.reservas__row--head {
+  padding: 0 0 0.625rem;
+}
+
+/* La fila marcada se tiñe igual que el aviso de arriba: son lo mismo visto
+   desde los dos extremos de la página. */
+.reservas__row--located {
+  background-color: rgba(133, 127, 157, 0.16);
 }
 
 .reservas__th {
-  padding: 0.75rem 0;
+  padding: 0;
   text-align: left;
-  font-size: 0.68rem;
+  font-size: 0.7rem;
   font-weight: 600;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--color-lavender-dark);
   white-space: nowrap;
 }
 
-/* ─── Outer cell (wraps summary + detail) ─────────────────── */
-
-.reservas__outer-cell {
-  display: block;
-  padding: 0;
-  /* separating line between activities */
-  border-top: 1px solid rgba(0, 0, 0, 0.12);
-}
-
-/* ─── Summary row (the visible grid) ─────────────────────── */
-
-.reservas__summary {
-  display: grid;
-  grid-template-columns: var(--reservas-cols);
-  align-items: center;
-  gap: 1rem;
-  padding: 0.85rem 0;
-  transition: background-color 0.2s;
-}
-
-.reservas__summary--open {
-  background-color: rgba(0, 0, 0, 0.04);
-}
-
-/* Each column cell within the summary grid */
 .reservas__col-name,
 .reservas__col-dur,
 .reservas__col-pax,
 .reservas__col-level,
-.reservas__col-price {
+.reservas__col-price,
+.reservas__col-action {
   min-width: 0;
-  font-size: 0.875rem;
-  color: var(--color-black);
+  padding: 0;
+  font-size: 0.85rem;
   line-height: 1.4;
+  color: var(--color-black);
 }
 
 .reservas__col-name {
-  font-weight: 600;
-  font-size: 0.92rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
 }
 
-/* Long badge labels (e.g. "Fuera de pista") wrap instead of forcing the
-   column — and the whole row — wider than its grid track */
-.reservas__col-name .tag {
-  max-width: 100%;
-  white-space: normal;
-  text-align: left;
+.reservas__name-text {
+  font-weight: 600;
+}
+
+.reservas__name-desc {
+  font-size: 0.78rem;
+  color: rgba(0, 0, 0, 0.65);
 }
 
 .reservas__col-dur,
@@ -256,108 +274,68 @@
 .reservas__col-level {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.3rem;
+  gap: 0.25rem;
 }
 
 .reservas__col-price {
-  font-weight: 600;
+  font-weight: 700;
   white-space: nowrap;
 }
 
-/* Two actions per row: book straight away, or open the detail */
-.reservas__actions {
+.reservas__col-action {
   display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  justify-self: end;
+  justify-content: flex-end;
 }
 
-/* Filled lavender: the primary of the same family as the "Más info" pill */
-.reservas__book-btn {
+/* Botón fantasma: la acción de la tabla es secundaria frente a reservar */
+.reservas__locate-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  text-align: center;
-  text-decoration: none;
-  padding: 0.5rem 0.9rem;
-  background-color: var(--color-lavender-dark);
-  color: var(--color-cream);
-  border: 1px solid var(--color-lavender-dark);
+  gap: 0.4rem;
+  height: 34px;
+  padding: 0 0.9rem;
+  background-color: transparent;
+  border: 1px solid rgba(133, 127, 157, 0.45);
   border-radius: 2rem;
   font-family: inherit;
-  font-size: 0.68rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--color-lavender-dark);
   white-space: nowrap;
   cursor: pointer;
   transition: background-color 0.2s, border-color 0.2s;
 }
 
-.reservas__book-btn:hover {
-  background-color: #3d3952;
-  border-color: #3d3952;
+@media (hover: hover) {
+  .reservas__locate-btn:hover {
+    background-color: rgba(133, 127, 157, 0.16);
+    border-color: var(--color-lavender);
+  }
 }
 
-.reservas__expand-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.4rem;
-  padding: 0.45rem 0.8rem;
-  background-color: transparent;
-  border: 1px solid rgba(133, 127, 157, 0.45);
-  border-radius: 2rem;
-  color: var(--color-lavender-dark);
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  cursor: pointer;
-  font-family: inherit;
-  white-space: nowrap;
-  transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+.reservas__locate-btn[aria-pressed='true'] {
+  background-color: var(--color-lavender-dark);
+  border-color: var(--color-lavender-dark);
+  color: var(--color-cream);
 }
 
-.reservas__expand-btn:hover {
-  background-color: rgba(133, 127, 157, 0.16);
-  border-color: var(--color-lavender);
-}
-
-.reservas__expand-chevron {
+.reservas__locate-btn svg {
   flex-shrink: 0;
-  transition: transform 0.3s ease;
 }
 
-.reservas__expand-chevron--open {
-  transform: rotate(180deg);
-}
-
-/* ─── Inline detail panel ─────────────────────────────────── */
-
-.reservas__detail {
-  display: grid;
-  grid-template-rows: 0fr;
-  transition: grid-template-rows 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.reservas__detail--open {
-  grid-template-rows: 1fr;
-}
-
-.reservas__detail-inner {
+/* Texto solo para lectores de pantalla: "Localizar" se repite ocho veces y
+   fuera de su fila no dice cuál. */
+.reservas__sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
   overflow: hidden;
-}
-
-/* Adjust ExperienceDetail styles when inside the table */
-.reservas__detail-inner .exp-detail {
-  margin-top: 0;
-  border-top: none;
-  padding-top: 0.5rem;
-  padding-bottom: 2.5rem;
-}
-
-.reservas__detail-inner .exp-detail__title {
-  display: none; /* title already visible in the summary row */
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
 
 /* ─── Antes de reservar ───────────────────────────────────── */
@@ -489,53 +467,31 @@
   color: var(--color-cream);
 }
 
-/* ─── Responsive helpers ──────────────────────────────────── */
+/* ─── Responsive ──────────────────────────────────────────── */
 
-@media (max-width: 1100px) {
-  .reservas__table {
-    /* Nivel column hidden: name, duración, personas, precio, acciones */
-    --reservas-cols: minmax(0, 1.8fr) minmax(0, 1.1fr) minmax(0, 0.7fr) minmax(0, 1fr) 11rem;
-  }
-
-  .reservas__hide-md,
-  .reservas__th--hide-md {
-    display: none;
-  }
-}
-
-@media (max-width: 860px) {
-  .reservas__table {
-    /* Personas también oculta: name, duración, precio, acciones */
-    --reservas-cols: minmax(0, 1.6fr) minmax(0, 1fr) minmax(0, 0.9fr) 9rem;
-  }
-
-  .reservas__hide-sm,
-  .reservas__th--hide-sm {
-    display: none;
-  }
-}
+/* La tabla tiene scroll horizontal propio (min-width en .reservas__table), así
+   que las columnas no se ocultan por ancho: se pierden menos datos
+   arrastrando que escondiéndolos. Por debajo de 640px sí se apila, porque ahí
+   el scroll lateral dentro de una página que ya hace scroll se pelea. */
 
 @media (max-width: 640px) {
   .reservas__table {
-    /* Dos filas: datos a la izquierda, precio a la derecha; acciones debajo */
     --reservas-cols: minmax(0, 1fr) auto;
+    min-width: 0;
   }
 
-  .reservas__thead-row {
+  .reservas__row--head {
     display: none;
   }
 
-  .reservas__summary {
+  .reservas__row {
     row-gap: 0.5rem;
     padding: 1rem 0;
   }
 
-  /* Colocación explícita: con "Personas" y "Nivel" ocultos el autoflow
-     dejaría el precio bajo el nombre en vez de a su derecha. */
   .reservas__col-name {
     grid-column: 1;
     grid-row: 1;
-    font-size: 0.9rem;
   }
 
   .reservas__col-price {
@@ -549,10 +505,33 @@
     grid-row: 2;
   }
 
-  .reservas__actions {
+  .reservas__col-pax {
+    display: none;
+  }
+
+  .reservas__col-level {
     grid-column: 1 / -1;
     grid-row: 3;
-    justify-self: start;
+  }
+
+  .reservas__col-action {
+    grid-column: 1 / -1;
+    grid-row: 4;
+    justify-content: flex-start;
+  }
+
+  .reservas__locator {
+    flex-wrap: wrap;
+    gap: 0.75rem 1rem;
+  }
+
+  .reservas__locator-text {
+    order: 3;
+    flex-basis: 100%;
+  }
+
+  .reservas__locator-close {
+    margin-left: auto;
   }
 
   .reservas__custom-actions {

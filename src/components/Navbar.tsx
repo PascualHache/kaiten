@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { IconMenu2 } from "@tabler/icons-react";
+import { IconBrandWhatsapp, IconMenu2 } from "@tabler/icons-react";
 import NavMenu, { type NavMenuLink } from "./NavMenu";
-import PromoBanner from "./PromoBanner";
 import logoKaiten from "../assets/logos/logo_text.png";
 import "./Navbar.css";
 
@@ -14,6 +13,8 @@ const NAV_LINKS: NavMenuLink[] = [
   { to: "/niveles", label: "Niveles" },
   { to: "/faq", label: "Preguntas frecuentes" },
 ];
+
+const WHATSAPP_URL = "https://wa.me/34699820954?text=DESCUENTOS%20EXCLUSIVOS";
 
 const SCROLL_THRESHOLD = 40;
 
@@ -43,7 +44,6 @@ function Navbar() {
       }`}
       data-nav=""
     >
-      <PromoBanner />
       <div className="navbar__inner">
         {/* Left: menu toggle */}
         <div className="navbar__left">
@@ -94,6 +94,15 @@ function Navbar() {
           <Link to="/reservas" className="navbar__reserve-btn">
             Reservar
           </Link>
+          <a
+            href={WHATSAPP_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="navbar__whatsapp"
+            aria-label="Contactar por WhatsApp para descuentos exclusivos"
+          >
+            <IconBrandWhatsapp size={22} stroke={1.5} aria-hidden="true" />
+          </a>
         </div>
       </div>
 
