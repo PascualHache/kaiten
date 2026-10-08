@@ -22,7 +22,6 @@ function Hero() {
     <section className="hero" data-hero="">
       <img
         className="hero__bg"
-        data-hero-bg=""
         src={heroPhoto}
         alt="Esquiador en Baqueira Beret"
         loading="eager"
@@ -75,7 +74,7 @@ function Hero() {
         {REST_COORDS}
       </span>
       <span className="hero__side hero__side--right" data-hero-side="">
-        Tu línea. Tu forma.
+        Your line. Your way.
       </span>
     </section>
   );

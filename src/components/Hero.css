@@ -8,10 +8,7 @@
    true viewport edges on top/left/right (reaching behind the navbar),
    while the bottom edge stays where .hero itself ends (unchanged).
    68px matches .navbar__inner's fixed height (Navbar.css) — --navbar-height
-   (3.25rem) undershoots it, so it isn't precise enough for this reach.
-   The PromoBanner's own height sits on top and isn't accounted for here:
-   its height is content-driven, so the photo lands a little short of true
-   y:0 while it's showing, and flush with it once dismissed. */
+   (3.25rem) undershoots it, so it isn't precise enough for this reach. */
 .hero__bg {
   position: absolute;
   bottom: 0;

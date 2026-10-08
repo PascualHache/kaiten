@@ -237,18 +237,11 @@ function Nosotros() {
       <section className="nos__wrap nos__story">
         {STORY.map((c) => (
           <div key={c.id}>
-            {c.image && (
-              <div className="nos__media nos__media--band" data-nos-reveal="">
-                <img
-                  data-nos-parallax=""
-                  src={c.image.src}
-                  alt={c.image.alt}
-                  loading="lazy"
-                  decoding="async"
-                />
-              </div>
-            )}
-            <article className="nos__chapter">
+            <article
+              className={`nos__chapter${
+                c.image ? " nos__chapter--portrait" : ""
+              }`}
+            >
               <div>
                 <div className="nos__chapter-head" data-nos-reveal="">
                   <span className="nos__chapter-meta">
@@ -258,6 +251,16 @@ function Nosotros() {
                     <span className="k-eyebrow">{c.meta}</span>
                   </span>
                   <h2>{c.heading}</h2>
+                  {c.image && (
+                    <div className="nos__media nos__media--chapter">
+                      <img
+                        src={c.image.src}
+                        alt={c.image.alt}
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </div>
+                  )}
                 </div>
               </div>
               <div className="nos__chapter-body">

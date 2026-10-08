@@ -37,9 +37,8 @@ const FAQS: FAQItem[] = [
     q: "¿Cuál es la política de cancelación y reembolso?",
     a: [
       "Cancelación con más de 7 días de antelación: reembolso completo.",
-      "Cancelación entre 24h y 48h: reembolso del 50%.",
       "Cancelación con menos de 24h: sin reembolso (salvo causa de fuerza mayor o mal tiempo declarado por la estación).",
-      "Cancelación por nuestra parte (mal tiempo, enfermedad): reembolso completo o reprogramación.",
+      "Cancelación por nuestra parte (fuerza mayor, enfermedad): reembolso completo o reprogramación.",
     ],
   },
   {

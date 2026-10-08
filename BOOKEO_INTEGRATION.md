@@ -94,6 +94,32 @@ Esos globals son internos y minificados: pueden cambiar sin aviso. Por eso el
 teardown va en `try/catch` y el componente tiene un estado de fallo visible en
 lugar de quedarse en blanco.
 
+## La espera
+
+Cada visita a `/reservas` levanta un socket y un iframe nuevos: al desmontar se
+destruyen, así que volver a entrar cuesta lo mismo que la primera vez. Sobre eso,
+`BookeoWidget` hace tres cosas:
+
+- **No pide nada hasta que el hueco se acerca al viewport** (`IntersectionObserver`,
+  400px de margen). Pasar por `/reservas` de camino a otra vista ya no gasta una
+  petición contra Bookeo.
+- **Esqueleto mientras monta**, superpuesto al hueco, para que la espera no se lea
+  como una caja rota. No empuja el layout: el widget aparece debajo.
+- **Watchdog de 12 s.** El bloqueo anti-bot no devuelve ningún error — el iframe se
+  queda girando — así que pasado ese tiempo se ofrece *Reintentar* y WhatsApp. No
+  se cancela nada: si el widget llega tarde, el aviso desaparece solo.
+
+La señal de "ya ha montado" es el alto del iframe (`READY_MIN_PX`), no su evento
+`load`: es cross-origin y no podemos mirar dentro. El spinner de Bookeo ocupa
+poco; el calendario, bastante más.
+
+`index.html` lleva además un `preconnect` a `bookeo.com`, que le quita el DNS +
+TLS a la primera petición.
+
+Lo que **no** está resuelto: mantener el widget vivo entre navegaciones. Haría
+falta sacar el host del árbol de rutas y posicionarlo como overlay sincronizado
+con un hueco, porque re-parentar un `<iframe>` lo recarga y anula la ganancia.
+
 ## Añadir el producto de una actividad
 
 1. Crea el producto en Bookeo.

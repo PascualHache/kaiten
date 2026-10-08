@@ -1,5 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
-import { IconChevronDown } from '@tabler/icons-react'
+import {
+  IconChevronDown,
+  IconChevronLeft,
+  IconChevronRight,
+} from '@tabler/icons-react'
 import { SERVICES } from '../data/services'
 import { ACTIVITIES } from '../data/activities'
 import ExperienceDetail from './ExperienceDetail'
@@ -10,6 +14,11 @@ import './Experiences.css'
  * El track es un scroller horizontal nativo con scroll-snap, a cualquier
  * ancho. No hay pin ni scrub: anclar la sección y conducir el track con GSAP
  * secuestraba el scroll vertical de la página al llegar aquí.
+ *
+ * Con solo ratón (sin trackpad) la rueda no genera delta horizontal y el
+ * track quedaba inmóvil: de ahí los botones de paso junto a la barra de
+ * progreso. No se mapea la rueda vertical a horizontal a propósito, porque eso
+ * sí secuestraría el scroll de la página.
  *
  * Al pulsar una tarjeta se despliega debajo su ficha completa
  * (ExperienceDetail), la misma que usa /reservas. El CTA de la ficha lleva a
@@ -27,6 +36,8 @@ function Experiences() {
   const [activeId, setActiveId] = useState<string | null>(null)
   const [detailSlug, setDetailSlug] = useState<string | null>(null)
   const [detailClosing, setDetailClosing] = useState(false)
+  const [canPrev, setCanPrev] = useState(false)
+  const [canNext, setCanNext] = useState(false)
 
   const activeService = SERVICES.find((s) => s.id === activeId) ?? null
   const activeActivity = activeService
@@ -47,6 +58,9 @@ function Experiences() {
       const max = track.scrollWidth - track.clientWidth
       const p = max > 0 ? track.scrollLeft / max : 0
       bar.style.transform = `scaleX(${p})`
+      // 1px de holgura: el scroll subpíxel nunca llega al extremo exacto
+      setCanPrev(track.scrollLeft > 1)
+      setCanNext(max > 1 && track.scrollLeft < max - 1)
     }
 
     update()
@@ -73,6 +87,22 @@ function Experiences() {
     }, DETAIL_EXIT_MS)
     return () => window.clearTimeout(t)
   }, [activeActivity, detailSlug])
+
+  // Un paso = una tarjeta. El gap sale del hueco real entre las dos primeras,
+  // así no hay que replicar el clamp() del CSS aquí.
+  function step(dir: 1 | -1) {
+    const track = trackRef.current
+    if (!track) return
+    const tiles = track.children
+    const first = tiles[0] as HTMLElement | undefined
+    if (!first) return
+    const second = tiles[1] as HTMLElement | undefined
+    const gap = second ? second.offsetLeft - (first.offsetLeft + first.offsetWidth) : 0
+    track.scrollBy({
+      left: dir * (first.offsetWidth + gap),
+      behavior: 'smooth',
+    })
+  }
 
   const detailActivity = detailSlug
     ? (ACTIVITIES.find((a) => a.slug === detailSlug) ?? null)
@@ -102,7 +132,12 @@ function Experiences() {
         </p>
       </header>
 
-      <div className="experiences__track" data-exp-track="" ref={trackRef}>
+      <div
+        className="experiences__track"
+        id="experiences-track"
+        data-exp-track=""
+        ref={trackRef}
+      >
         {SERVICES.map((service, i) => {
           const isActive = service.id === activeId
           return (
@@ -146,8 +181,32 @@ function Experiences() {
         })}
       </div>
 
-      <div className="experiences__progress" aria-hidden="true">
-        <span data-exp-progress="" ref={progressRef} />
+      <div className="experiences__controls">
+        <div className="experiences__progress" aria-hidden="true">
+          <span data-exp-progress="" ref={progressRef} />
+        </div>
+        <div className="experiences__nav">
+          <button
+            type="button"
+            className="experiences__nav-btn"
+            aria-label="Ver experiencias anteriores"
+            aria-controls="experiences-track"
+            disabled={!canPrev}
+            onClick={() => step(-1)}
+          >
+            <IconChevronLeft size={20} stroke={2} aria-hidden="true" />
+          </button>
+          <button
+            type="button"
+            className="experiences__nav-btn"
+            aria-label="Ver más experiencias"
+            aria-controls="experiences-track"
+            disabled={!canNext}
+            onClick={() => step(1)}
+          >
+            <IconChevronRight size={20} stroke={2} aria-hidden="true" />
+          </button>
+        </div>
       </div>
 
       {detailActivity && (

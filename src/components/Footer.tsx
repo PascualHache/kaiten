@@ -44,10 +44,6 @@ function Footer() {
         <div className="footer__cta-left">
           <p className="footer__cta-eyebrow">Temporada 2026 · 27</p>
           <h2 className="footer__cta-heading">¿Listo para empezar?</h2>
-          <p className="footer__cta-sub">
-            La primera escuela de Baqueira Beret donde eliges a tu profesor
-            antes de reservar
-          </p>
         </div>
         <div className="footer__cta-actions">
           <Link

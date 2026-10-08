@@ -94,16 +94,7 @@ export function useScrollAnimations({ intensity = "media" }: Options = {}) {
                 )
                 .from("[data-hero-side]", { autoAlpha: 0, duration: 0.6 }, "-=0.4");
 
-              gsap.to("[data-hero-bg]", {
-                yPercent: 10 * k,
-                ease: "none",
-                scrollTrigger: {
-                  trigger: "[data-hero]",
-                  start: "top top",
-                  end: "bottom top",
-                  scrub: true,
-                },
-              });
+              // La foto del hero no lleva parallax: se queda fija en su sitio.
 
               // Efecto tragaperras de las coordenadas, enganchado al timeline.
               q("[data-slot]").forEach((el) => {

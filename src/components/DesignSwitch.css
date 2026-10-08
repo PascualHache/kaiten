@@ -1,6 +1,5 @@
 /* Herramienta interna de comparación: flota abajo y centrada. Arriba chocaba
- * con el logo y con el botón de reservar de la navbar, y además la navbar baja
- * cuando el PromoBanner está visible. */
+ * con el logo y con el botón de reservar de la navbar. */
 .design-switch {
   position: fixed;
   z-index: 90;

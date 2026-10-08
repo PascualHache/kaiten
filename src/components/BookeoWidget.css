@@ -4,6 +4,7 @@
    mínimo para que el salto al aparecer no mueva la página entera. */
 
 .bookeo {
+  position: relative;
   width: 100%;
   border: 1px solid rgba(133, 127, 157, 0.2);
   border-radius: 1rem;
@@ -19,7 +20,60 @@
   width: 100%;
 }
 
-.bookeo__fallback {
+/* Esqueleto: ocupa el hueco del iframe mientras no hay nada que enseñar, para
+   que la espera no parezca una caja rota. Se superpone en vez de empujar, así
+   el widget aparece debajo sin mover la página. */
+.bookeo__skeleton {
+  position: absolute;
+  inset: clamp(0.75rem, 2vw, 1.5rem);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  pointer-events: none;
+}
+
+.bookeo__skeleton-bar,
+.bookeo__skeleton-grid > span {
+  border-radius: 0.5rem;
+  background: linear-gradient(
+    90deg,
+    rgba(133, 127, 157, 0.08) 25%,
+    rgba(133, 127, 157, 0.16) 37%,
+    rgba(133, 127, 157, 0.08) 63%
+  );
+  background-size: 400% 100%;
+  animation: bookeo-shimmer 1.4s ease-in-out infinite;
+}
+
+.bookeo__skeleton-bar {
+  height: 2.5rem;
+  width: min(100%, 18rem);
+}
+
+.bookeo__skeleton-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.75rem;
+  flex: 1;
+}
+
+@keyframes bookeo-shimmer {
+  from {
+    background-position: 100% 0;
+  }
+  to {
+    background-position: 0 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bookeo__skeleton-bar,
+  .bookeo__skeleton-grid > span {
+    animation: none;
+  }
+}
+
+.bookeo__notice {
   margin: 0;
   padding: 1rem 0 0;
   font-family: var(--font-body);
@@ -27,6 +81,19 @@
   line-height: 1.6;
   color: var(--color-black);
   text-align: center;
+}
+
+.bookeo__notice p {
+  margin: 0 0 0.5rem;
+}
+
+.bookeo__notice p:last-child {
+  margin-bottom: 0;
+}
+
+.bookeo__notice a {
+  color: var(--color-lavender-dark);
+  text-decoration: underline;
 }
 
 .bookeo__retry {

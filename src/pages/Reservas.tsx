@@ -1,50 +1,36 @@
 import { useState, useEffect, useRef } from 'react'
 import { Link, useLocation, useNavigate, useSearchParams } from 'react-router-dom'
 import {
+  IconArrowUp,
   IconBrandWhatsapp,
   IconCalendarCheck,
-  IconChevronDown,
   IconLock,
   IconMapPin,
-  IconRotate,
   IconStairsUp,
   IconTicket,
+  IconX,
 } from '@tabler/icons-react'
-import {
-  ACTIVITIES,
-  LEVEL_LABELS,
-  type Level,
-} from '../data/activities'
+import { ACTIVITIES, LEVEL_LABELS, type Level } from '../data/activities'
 import { SERVICES } from '../data/services'
 import { findTariff } from '../data/tariffs'
-import { BOOKING_PARAM, bookeoProductIdFor, bookingHref } from '../data/booking'
+import {
+  BOOKEO_CATALOG,
+  BOOKING_PARAM,
+  bookeoCardFor,
+  bookeoProductIdFor,
+} from '../data/booking'
 import BookeoWidget from '../components/BookeoWidget'
-import ExperienceDetail from '../components/ExperienceDetail'
 import Tag from '../components/Tag'
 import Footer from '../components/Footer'
 import PageTitle from '../components/PageTitle'
-import { refreshScrollTriggers } from '../hooks/useScrollAnimations'
 import './Reservas.css'
 
 const WHATSAPP_URL = 'https://wa.me/34699820954'
 const PHONE_URL = 'tel:+34699820954'
 
-/* Los tres pasos del flujo de Bookeo, anunciados antes de entrar al widget:
-   el iframe no se puede previsualizar desde fuera, así que el único sitio
-   donde contar lo que viene es la página que lo envuelve. */
-const STEPS = [
-  { n: '1', label: 'Elige experiencia' },
-  { n: '2', label: 'Fecha y hora' },
-  { n: '3', label: 'Datos y pago' },
-]
-
 const TRUST = [
   { Icon: IconLock, text: 'Pago seguro online' },
   { Icon: IconCalendarCheck, text: 'Confirmación inmediata por email' },
-  {
-    Icon: IconRotate,
-    text: 'Cancelación con reembolso completo hasta 48 h antes',
-  },
 ]
 
 const INFO = [
@@ -79,6 +65,12 @@ const ORDERED_ACTIVITIES = [...ACTIVITIES].sort((a, b) => {
   return (ia === -1 ? HOME_ORDER.length : ia) - (ib === -1 ? HOME_ORDER.length : ib)
 })
 
+/* La frase corta de cada fila es la misma que la de su tarjeta en Home: el
+   visitante llega desde allí y reconoce la experiencia por ella. */
+const TAGLINES = new Map(
+  SERVICES.map((s) => [s.reservasPath.replace('/reservas/', ''), s.tagline]),
+)
+
 const LEVEL_ORDER: Level[] = ['principiante', 'intermedio', 'avanzado']
 
 const sortLevels = (levels: Level[]) =>
@@ -95,7 +87,7 @@ const slugifyTitle = (title: string) =>
 
 /* The URL hash may name an activity by its slug, its id, or its
    title ("/reservas#safari", "#clases-privadas"). Anything else is ignored
-   so a stale link just lands on the page with every row closed. */
+   so a stale link just lands on the page with nothing marked. */
 function resolveHash(hash: string): string | null {
   if (!hash) return null
   const wanted = slugifyTitle(decodeURIComponent(hash.replace(/^#/, '')))
@@ -113,96 +105,117 @@ export default function Reservas() {
   const location = useLocation()
   const navigate = useNavigate()
   const [searchParams] = useSearchParams()
-  const [openSlug, setOpenSlug] = useState<string | null>(() =>
-    resolveHash(location.hash),
-  )
 
-  /* ?actividad=<slug> preselecciona el producto en el widget de Bookeo.
-     Va en la query y no en el hash a propósito: los enlaces que lo usan
-     recargan el documento, porque el widget no sabe cambiar de producto. */
+  const bookingRef = useRef<HTMLElement>(null)
+  const noticeRef = useRef<HTMLDivElement>(null)
+
+  /* ?actividad=<slug> es el enlace "Reservar" de una experiencia. Mientras
+     ninguna tenga `bookeoProductId`, el widget abre el catálogo completo: el
+     parámetro ya no preselecciona nada, así que lo tratamos como lo que de
+     hecho es — una petición de "enséñame cuál tengo que pulsar". */
   const requestedSlug = searchParams.get(BOOKING_PARAM)
   const requestedActivity =
     ACTIVITIES.find((a) => a.slug === requestedSlug) ?? null
   const productId = bookeoProductIdFor(requestedActivity?.slug ?? null)
 
+  const [locatedSlug, setLocatedSlug] = useState<string | null>(
+    () => requestedActivity?.slug ?? resolveHash(location.hash),
+  )
+
+  const located = ACTIVITIES.find((a) => a.slug === locatedSlug) ?? null
+  const locatedCard = bookeoCardFor(locatedSlug)
+
+  // Enlaces de fuera: /reservas#safari (Tarifas, Footer, ficha de experiencia).
   useEffect(() => {
     const fromHash = resolveHash(location.hash)
-    if (fromHash) setOpenSlug(fromHash)
+    if (fromHash) setLocatedSlug(fromHash)
   }, [location.hash])
 
-  const rowRefs = useRef<Record<string, HTMLDivElement | null>>({})
-  const btnRefs = useRef<Record<string, HTMLButtonElement | null>>({})
-
+  /* Marcada una actividad, lo que hay que mirar es el widget, no la fila:
+     llevamos ahí la vista y el foco. Con teclado o lector, el aviso dice qué
+     tarjeta buscar, y oírlo al pulsar "Localizar" es justo el punto. */
   useEffect(() => {
-    if (!openSlug) return
-    /* Focus first (without scrolling: the browser would jump), then run our
-       own smooth scroll. Keyboard and screen-reader users arriving from a
-       hash link land on the row's toggle, which carries aria-expanded. */
-    btnRefs.current[openSlug]?.focus({ preventScroll: true })
-    rowRefs.current[openSlug]?.scrollIntoView({
-      behavior: 'smooth',
-      block: 'start',
-    })
-  }, [openSlug])
+    if (!locatedSlug) return
+    noticeRef.current?.focus({ preventScroll: true })
+    bookingRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }, [locatedSlug])
 
-  /* The open row is reflected in the URL so the link can be copied and
-     shared. replace(), not push(): otherwise every toggle adds a history
-     entry and Back walks row by row instead of leaving the page. */
-  const toggle = (slug: string) => {
-    const next = openSlug === slug ? null : slug
-    setOpenSlug(next)
-    navigate(next ? `${location.pathname}#${next}` : location.pathname, {
-      replace: true,
-    })
-    // La fila cambia de alto: las posiciones de scroll calculadas antes
-    // dejan de valer. Esperamos a que termine la animación de apertura.
-    window.setTimeout(refreshScrollTriggers, 550)
+  /* La actividad marcada va en la URL para poder compartir el enlace.
+     replace(), no push(): si no, cada "Localizar" deja una entrada y Atrás
+     recorre la tabla fila a fila en vez de salir de la página. */
+  const locate = (slug: string) => {
+    setLocatedSlug(slug)
+    navigate(`${location.pathname}${location.search}#${slug}`, { replace: true })
+  }
+
+  const clearLocated = () => {
+    setLocatedSlug(null)
+    navigate(`${location.pathname}${location.search}`, { replace: true })
   }
 
   return (
     <div className="reservas">
       <main className="reservas__main">
-        {/* ─── Cabecera: título + los tres pasos del flujo ─── */}
-        <div className="reservas__header">
-          <PageTitle eyebrow="Reservas · Baqueira Beret">
-            Reserva tu experiencia
-          </PageTitle>
-          <ol className="reservas__steps" aria-label="Pasos de la reserva">
-            {STEPS.map((step) => (
-              <li className="reservas__step" key={step.n}>
-                <span className="reservas__step-num" aria-hidden="true">
-                  {step.n}
-                </span>
-                {step.label}
-              </li>
-            ))}
-          </ol>
-        </div>
+        <PageTitle eyebrow="Reservas · Baqueira Beret">
+          Reserva tu experiencia
+        </PageTitle>
 
-        {/* ─── Widget de Bookeo ───────────────────────────── */}
+        {/* ─── Widget de Bookeo, con el aviso de qué tarjeta pulsar ─── */}
         <section
           className="reservas__booking"
           id="reserva"
+          ref={bookingRef}
           aria-label="Calendario de reservas"
         >
-          {requestedActivity && (
-            <p className="reservas__booking-note">
-              {productId ? (
-                <>
-                  Reservando <strong>{requestedActivity.title}</strong>
-                </>
-              ) : (
-                <>
-                  Elige <strong>{requestedActivity.title}</strong> en el
-                  calendario para ver las fechas disponibles
-                </>
-              )}
-            </p>
+          {located && (
+            <div
+              className="reservas__locator"
+              role="status"
+              ref={noticeRef}
+              tabIndex={-1}
+            >
+              {/* Esquema de la rejilla del catálogo: ocho tarjetas con la
+                  buscada encendida. No reproduce el iframe al píxel; sitúa. */}
+              <div className="reservas__minimap" aria-hidden="true">
+                {BOOKEO_CATALOG.map((card) => (
+                  <span
+                    key={card.slug}
+                    className={`reservas__minimap-cell${
+                      card.slug === locatedSlug
+                        ? ' reservas__minimap-cell--on'
+                        : ''
+                    }`}
+                  />
+                ))}
+              </div>
+
+              <p className="reservas__locator-text">
+                {locatedCard ? (
+                  <>
+                    <strong>{located.title}</strong> aparece en la reserva como{' '}
+                    <strong>«{locatedCard.cardName}»</strong>. Pulsa
+                    &ldquo;Reservar&rdquo; en esa tarjeta.
+                  </>
+                ) : (
+                  <>
+                    Busca <strong>{located.title}</strong> en el calendario y
+                    pulsa &ldquo;Reservar&rdquo; en su tarjeta.
+                  </>
+                )}
+              </p>
+
+              <button
+                type="button"
+                className="reservas__locator-close"
+                aria-label="Cerrar el aviso"
+                onClick={clearLocated}
+              >
+                <IconX size={18} stroke={2} aria-hidden="true" />
+              </button>
+            </div>
           )}
+
           <BookeoWidget productId={productId} />
-          <p className="reservas__booking-caption">
-            Reserva gestionada por Bookeo
-          </p>
         </section>
 
         <ul className="reservas__trust">
@@ -224,10 +237,10 @@ export default function Reservas() {
               </h2>
             </div>
             <p className="reservas__section-lead">
-              Cuando lo tengas claro, reserva desde el bloque de arriba. Si no
-              sabes tu nivel, consulta la{' '}
+              &ldquo;Localizar&rdquo; te lleva a la reserva y te marca qué
+              tarjeta pulsar. ¿No sabes tu nivel?{' '}
               <Link className="reservas__inline-link" to="/niveles">
-                guía de niveles
+                Guía de niveles
               </Link>
               .
             </p>
@@ -236,84 +249,75 @@ export default function Reservas() {
           <div className="reservas__table-wrap">
             <table className="reservas__table" aria-label="Experiencias disponibles">
               <thead>
-                <tr className="reservas__thead-row">
+                <tr className="reservas__row reservas__row--head">
                   <th className="reservas__th reservas__th--name">Experiencia</th>
                   <th className="reservas__th">Duración</th>
-                  <th className="reservas__th reservas__th--hide-sm">Personas</th>
-                  <th className="reservas__th reservas__th--hide-md">Nivel</th>
+                  <th className="reservas__th">Personas</th>
+                  <th className="reservas__th">Nivel</th>
                   <th className="reservas__th">Desde</th>
-                  <th className="reservas__th" />
+                  <th className="reservas__th">
+                    <span className="reservas__sr-only">Acciones</span>
+                  </th>
                 </tr>
               </thead>
               <tbody>
                 {ORDERED_ACTIVITIES.map((activity) => {
-                  const isOpen = activity.slug === openSlug
+                  const isLocated = activity.slug === locatedSlug
                   const price = getActivityPrice(activity)
+                  const tagline =
+                    TAGLINES.get(activity.slug) ?? activity.subtitle ?? ''
                   return (
-                    <tr key={activity.id}>
-                      {/* colspan trick: we wrap data + detail in a single column cell */}
-                      <td colSpan={6} className="reservas__outer-cell" data-reveal="">
-                        {/* Summary row */}
-                        <div
-                          ref={(el) => {
-                            rowRefs.current[activity.slug] = el
-                          }}
-                          className={`reservas__summary${isOpen ? ' reservas__summary--open' : ''}`}
-                          style={{ scrollMarginTop: 'calc(var(--navbar-height) + 1rem)' }}
+                    <tr
+                      key={activity.id}
+                      className={`reservas__row${
+                        isLocated ? ' reservas__row--located' : ''
+                      }`}
+                      data-reveal=""
+                    >
+                      <td className="reservas__col-name">
+                        <span className="reservas__name-text">
+                          {activity.title}
+                        </span>
+                        {tagline && (
+                          <span className="reservas__name-desc">{tagline}</span>
+                        )}
+                      </td>
+                      <td className="reservas__col-dur">
+                        {activity.summary.duration}
+                      </td>
+                      <td className="reservas__col-pax">
+                        {activity.summary.people}
+                      </td>
+                      <td className="reservas__col-level">
+                        {sortLevels(activity.levels).map((level) => (
+                          <Tag
+                            key={level}
+                            variant={level}
+                            label={LEVEL_LABELS[level]}
+                          />
+                        ))}
+                      </td>
+                      <td className="reservas__col-price">
+                        {price !== '—' ? (
+                          <span className="reservas__price-value">{price}</span>
+                        ) : (
+                          '—'
+                        )}
+                      </td>
+                      <td className="reservas__col-action">
+                        <button
+                          type="button"
+                          className="reservas__locate-btn"
+                          aria-pressed={isLocated}
+                          onClick={() => locate(activity.slug)}
                         >
-                          <span className="reservas__col-name">
-                            <span className="reservas__name-text">{activity.title}</span>
+                          <IconArrowUp size={15} stroke={2} aria-hidden="true" />
+                          Localizar
+                          <span className="reservas__sr-only">
+                            {' '}
+                            {activity.title}
                           </span>
-                          <span className="reservas__col-dur">{activity.summary.duration}</span>
-                          <span className="reservas__col-pax reservas__hide-sm">
-                            {activity.summary.people}
-                          </span>
-                          <span className="reservas__col-level reservas__hide-md">
-                            {sortLevels(activity.levels).map((level) => (
-                              <Tag key={level} variant={level} label={LEVEL_LABELS[level]} />
-                            ))}
-                          </span>
-                          <span className="reservas__col-price">
-                            {price !== '—' ? (
-                              <span className="reservas__price-value">{price}</span>
-                            ) : (
-                              '—'
-                            )}
-                          </span>
-                          <div className="reservas__actions">
-                            <a
-                              className="reservas__book-btn"
-                              href={bookingHref(activity)}
-                            >
-                              Reservar
-                            </a>
-                            <button
-                              type="button"
-                              ref={(el) => {
-                                btnRefs.current[activity.slug] = el
-                              }}
-                              className="reservas__expand-btn"
-                              aria-expanded={isOpen}
-                              onClick={() => toggle(activity.slug)}
-                            >
-                              <span className="reservas__expand-label">
-                                {isOpen ? 'Cerrar' : 'Más info'}
-                              </span>
-                              <IconChevronDown
-                                className={`reservas__expand-chevron${isOpen ? ' reservas__expand-chevron--open' : ''}`}
-                                size={16}
-                                stroke={2}
-                              />
-                            </button>
-                          </div>
-                        </div>
-
-                        {/* Inline detail */}
-                        <div className={`reservas__detail${isOpen ? ' reservas__detail--open' : ''}`}>
-                          <div className="reservas__detail-inner">
-                            {isOpen && <ExperienceDetail activity={activity} />}
-                          </div>
-                        </div>
+                        </button>
                       </td>
                     </tr>
                   )

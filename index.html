@@ -8,6 +8,10 @@
     <meta name="theme-color" content="#E6E5E1" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- El widget de /reservas carga desde aquí y luego abre un iframe contra
+         el mismo origen: adelantar DNS + TLS le quita un viaje a la espera. -->
+    <link rel="preconnect" href="https://bookeo.com" />
+    <link rel="dns-prefetch" href="https://bookeo.com" />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap"
       rel="stylesheet"
