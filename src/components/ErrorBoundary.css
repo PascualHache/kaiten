@@ -1,0 +1,126 @@
+.error-boundary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: clamp(1.5rem, 6vw, 4rem);
+  background-color: var(--color-cream);
+}
+
+.error-boundary__content {
+  width: min(32rem, 100%);
+  text-align: center;
+}
+
+.error-boundary__logo {
+  width: clamp(3.5rem, 12vw, 4.5rem);
+  height: auto;
+  margin-bottom: clamp(1.5rem, 4vw, 2rem);
+}
+
+.error-boundary__title {
+  margin: 0 0 1rem;
+  font-size: clamp(1.75rem, 6vw, 2.5rem);
+  font-weight: 600;
+  line-height: 1.15;
+  color: var(--color-black);
+}
+
+.error-boundary__text {
+  margin: 0 0 clamp(1.75rem, 4vw, 2.25rem);
+  font-size: clamp(0.9375rem, 2.2vw, 1rem);
+  line-height: 1.6;
+  color: var(--color-lavender-dark);
+}
+
+.error-boundary__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(1rem, 3vw, 1.5rem);
+  margin-bottom: clamp(1.75rem, 4vw, 2.25rem);
+}
+
+/* Botón primario "Sombra suave" — sin borde, profundidad por sombra tintada */
+.error-boundary__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 48px;
+  padding: 0 36px;
+  border: none;
+  border-radius: var(--ks-radius-button);
+  background: var(--ks-primary);
+  color: var(--ks-on-primary);
+  box-shadow: var(--ks-shadow-button);
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: transform 140ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 140ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    background-color 140ms ease;
+}
+
+/* Solo con puntero — en táctil el :hover se queda pegado tras tocar */
+@media (hover: hover) {
+  .error-boundary__btn:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--ks-shadow-button-hover);
+  }
+}
+
+.error-boundary__btn:active {
+  transform: translateY(1px);
+  background: var(--ks-primary-pressed);
+  box-shadow: var(--ks-shadow-button-pressed);
+  transition-duration: 60ms;
+}
+
+.error-boundary__btn:focus-visible {
+  outline: 2px solid var(--ks-on-primary);
+  outline-offset: 3px;
+}
+
+.error-boundary__link {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--color-lavender-dark);
+  border-bottom: 1px solid transparent;
+}
+
+@media (hover: hover) {
+  .error-boundary__link:hover {
+    border-bottom-color: var(--color-lavender-dark);
+  }
+}
+
+.error-boundary__contact {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.625rem;
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--color-lavender-dark);
+}
+
+.error-boundary__contact a {
+  font-weight: 600;
+  border-bottom: 1px solid rgba(78, 73, 102, 0.4);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .error-boundary__btn {
+    transition: background-color 140ms ease, box-shadow 140ms ease;
+  }
+
+  .error-boundary__btn:hover,
+  .error-boundary__btn:active {
+    transform: none;
+  }
+}
