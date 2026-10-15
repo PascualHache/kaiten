@@ -3,7 +3,7 @@ import PageTitle from "../components/PageTitle";
 import { Link } from 'react-router-dom'
 import { IconInfoCircle } from '@tabler/icons-react'
 import { TEAM } from '../data/team'
-import memberImage from '../assets/images/kaiten_bg.png'
+import memberImage from '../assets/images/kaiten_bg.webp'
 import './Equipo.css'
 
 function Equipo() {

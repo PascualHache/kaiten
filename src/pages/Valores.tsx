@@ -1,7 +1,7 @@
 import Footer from "../components/Footer";
 import { Link } from "react-router-dom";
 import { IconArrowRight } from "@tabler/icons-react";
-import valuesImage from "../assets/images/valores.png";
+import valuesImage from "../assets/images/valores.webp";
 import "./Valores.css";
 
 interface ValueItem {

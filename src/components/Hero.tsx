@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { IconArrowDown, IconArrowRight } from "@tabler/icons-react";
-import heroPhoto from "../assets/images/kaiten_home.png";
+import heroPhoto from "../assets/images/kaiten_home.webp";
 import "./Hero.css";
 
 const REST_COORDS = "43 00 142 00";

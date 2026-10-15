@@ -1,11 +1,11 @@
-import clasesFullday from "../assets/images/clases_fullday.png";
-import clasesPrivadas from "../assets/images/clases_privadas.png";
-import clasesFriendsFamily from "../assets/images/clases_friends_family.png";
-import clasesKaiten25 from "../assets/images/clases_kaiten25.png";
-import clasesTardeo from "../assets/images/clases_tardeo.png";
-import clasesFreeride from "../assets/images/clases_freeride.png";
-import clasesEquipment from "../assets/images/clases_equipment.png";
-import clasesSafari from "../assets/images/clases_safari.png";
+import clasesFullday from "../assets/images/clases_fullday.webp";
+import clasesPrivadas from "../assets/images/clases_privadas.webp";
+import clasesFriendsFamily from "../assets/images/clases_friends_family.webp";
+import clasesKaiten25 from "../assets/images/clases_kaiten25.webp";
+import clasesTardeo from "../assets/images/clases_tardeo.webp";
+import clasesFreeride from "../assets/images/clases_freeride.webp";
+import clasesEquipment from "../assets/images/clases_equipment.webp";
+import clasesSafari from "../assets/images/clases_safari.webp";
 
 export interface Service {
   id: string;

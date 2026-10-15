@@ -10,10 +10,10 @@ import {
 } from "@tabler/icons-react";
 import Footer from "../components/Footer";
 import { useNosotrosMotion } from "../hooks/useNosotrosMotion";
-import historiaImage from "../assets/images/historia.jpg";
-import aitorImage from "../assets/images/aitor.jpg";
-import naiaraImage from "../assets/images/naiara.png";
-import valoresImage from "../assets/images/valores.png";
+import historiaImage from "../assets/images/historia.webp";
+import aitorImage from "../assets/images/aitor.webp";
+import naiaraImage from "../assets/images/naiara.webp";
+import valoresImage from "../assets/images/valores.webp";
 import logoSquared from "../assets/logos/logo_squared.png";
 import "./Nosotros.css";
 

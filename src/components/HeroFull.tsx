@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { IconArrowRight } from '@tabler/icons-react'
-import heroImage from '../assets/images/kaiten_bg.png'
+import heroImage from '../assets/images/kaiten_bg.webp'
 import './HeroFull.css'
 
 function HeroFull() {
