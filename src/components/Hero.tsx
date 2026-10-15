@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
 import { IconArrowDown, IconArrowRight } from "@tabler/icons-react";
 import heroPhoto from "../assets/images/kaiten_home.webp";
+import heroPhotoMobile from "../assets/images/kaiten_home_mobile.webp";
 import "./Hero.css";
 
-const REST_COORDS = "43 00 142 00";
+const REST_COORDS = "43 142 43 481";
 
 const TITLE_LINES = ["R-evoluciona", "tu forma", "de esquiar"];
 
@@ -20,13 +21,18 @@ function Hero() {
 
   return (
     <section className="hero" data-hero="">
-      <img
-        className="hero__bg"
-        src={heroPhoto}
-        alt="Esquiador en Baqueira Beret"
-        loading="eager"
-        decoding="async"
-      />
+      {/* Encuadre vertical propio en móvil: el recorte horizontal deja al
+          esquiador fuera de cuadro por debajo de 768px. */}
+      <picture className="hero__picture">
+        <source media="(max-width: 768px)" srcSet={heroPhotoMobile} />
+        <img
+          className="hero__bg"
+          src={heroPhoto}
+          alt="Esquiador en Baqueira Beret"
+          loading="eager"
+          decoding="async"
+        />
+      </picture>
       <div className="hero__scrim" aria-hidden="true" />
 
       <div className="hero__content">

@@ -1,5 +1,4 @@
-import { Link } from 'react-router-dom'
-import { IconArrowRight } from '@tabler/icons-react'
+import { IconArrowRight, IconChevronUp } from '@tabler/icons-react'
 import {
   EXPERIENCE_TYPE_LABELS,
   LEVEL_LABELS,
@@ -23,15 +22,18 @@ interface Props {
    * que se despliega en /reservas, donde la fila ya es la unidad de detalle.
    *
    * "compact" — la de la portada: rasgos y una tira con duración, personas,
-   * nivel y el enlace a la ficha completa. Deja fuera la información rápida
-   * y los formatos para no convertir la home en una segunda /reservas.
+   * nivel y el botón de cerrar. Deja fuera la información rápida y los
+   * formatos para no convertir la home en una segunda /reservas.
    */
   variant?: 'full' | 'compact'
+  /** Solo en "compact": colapsa la ficha y devuelve el foco al carrusel. */
+  onClose?: () => void
 }
 
 export default function ExperienceDetail({
   activity,
   variant = 'full',
+  onClose,
 }: Props) {
   const compact = variant === 'compact'
 
@@ -144,12 +146,18 @@ export default function ExperienceDetail({
               ))}
             </span>
           </div>
-          <div className="exp-detail__meta-cell exp-detail__meta-cell--link">
-            <Link className="exp-detail__meta-link" to={`/reservas#${activity.slug}`}>
-              Ver experiencia completa
-              <IconArrowRight size={16} stroke={2} aria-hidden="true" />
-            </Link>
-          </div>
+          {onClose && (
+            <div className="exp-detail__meta-cell exp-detail__meta-cell--link">
+              <button
+                type="button"
+                className="exp-detail__meta-link exp-detail__meta-close"
+                onClick={onClose}
+              >
+                Cerrar
+                <IconChevronUp size={16} stroke={2} aria-hidden="true" />
+              </button>
+            </div>
+          )}
         </div>
       )}
 

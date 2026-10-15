@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Home from './pages/Home'
-import NosotrosSwitch from './pages/NosotrosSwitch'
+import Nosotros from './pages/Nosotros'
 import Equipo from './pages/Equipo'
 import Reservas from './pages/Reservas'
 import Tarifas from './pages/Tarifas'
@@ -13,12 +13,9 @@ import Cookies from './pages/Cookies'
 import Navbar from './components/Navbar'
 import ScrollToTop from './components/ScrollToTop'
 import WhatsAppPill from './components/WhatsAppPill'
-import WorkInProgress from './pages/WorkInProgress'
 import NotFound from './pages/NotFound'
 import { useScrollAnimations } from './hooks/useScrollAnimations'
 import './App.css'
-
-const isDev = localStorage.getItem('dev') === 'true'
 
 /* La navbar vive fuera de [data-main] para que el fundido de entrada de cada
  * página no la arrastre: se queda fija mientras el contenido entra. */
@@ -32,7 +29,7 @@ function Shell() {
       <div data-main="">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/nosotros" element={<NosotrosSwitch />} />
+          <Route path="/nosotros" element={<Nosotros />} />
           <Route path="/equipo" element={<Equipo />} />
           <Route path="/reservas" element={<Reservas />} />
           <Route path="/tarifas" element={<Tarifas />} />
@@ -53,10 +50,6 @@ function Shell() {
 }
 
 function App() {
-  if (!isDev) {
-    return <WorkInProgress />
-  }
-
   return (
     <Router>
       <Shell />

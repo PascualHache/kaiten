@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate, useSearchParams } from 'react-router-do
 import {
   IconArrowUp,
   IconBrandWhatsapp,
+  IconCalendarPlus,
   IconCalendarCheck,
   IconLock,
   IconMapPin,
@@ -18,6 +19,7 @@ import {
   BOOKING_PARAM,
   bookeoCardFor,
   bookeoProductIdFor,
+  bookingHref,
 } from '../data/booking'
 import BookeoWidget from '../components/BookeoWidget'
 import Tag from '../components/Tag'
@@ -71,6 +73,13 @@ const TAGLINES = new Map(
   SERVICES.map((s) => [s.reservasPath.replace('/reservas/', ''), s.tagline]),
 )
 
+/* Mientras alguna actividad no tenga producto en Bookeo, la tabla mezcla
+   "Reservar" y "Localizar" y hay que explicar las dos. Cuando estén los ocho,
+   esto se apaga solo y el lead deja de hablar de tarjetas. */
+const SOME_WITHOUT_PRODUCT = ORDERED_ACTIVITIES.some(
+  (a) => !bookeoProductIdFor(a.slug),
+)
+
 const LEVEL_ORDER: Level[] = ['principiante', 'intermedio', 'avanzado']
 
 const sortLevels = (levels: Level[]) =>
@@ -109,17 +118,18 @@ export default function Reservas() {
   const bookingRef = useRef<HTMLElement>(null)
   const noticeRef = useRef<HTMLDivElement>(null)
 
-  /* ?actividad=<slug> es el enlace "Reservar" de una experiencia. Mientras
-     ninguna tenga `bookeoProductId`, el widget abre el catálogo completo: el
-     parámetro ya no preselecciona nada, así que lo tratamos como lo que de
-     hecho es — una petición de "enséñame cuál tengo que pulsar". */
+  /* ?actividad=<slug> es el enlace "Reservar" de una experiencia. Si esa
+     actividad ya tiene `bookeoProductId`, el widget abre directamente en su
+     producto y no hay nada que localizar. Si todavía no lo tiene, el widget
+     abre el catálogo completo y el parámetro pasa a significar lo único que
+     puede significar: "enséñame qué tarjeta tengo que pulsar". */
   const requestedSlug = searchParams.get(BOOKING_PARAM)
   const requestedActivity =
     ACTIVITIES.find((a) => a.slug === requestedSlug) ?? null
   const productId = bookeoProductIdFor(requestedActivity?.slug ?? null)
 
-  const [locatedSlug, setLocatedSlug] = useState<string | null>(
-    () => requestedActivity?.slug ?? resolveHash(location.hash),
+  const [locatedSlug, setLocatedSlug] = useState<string | null>(() =>
+    productId ? null : requestedActivity?.slug ?? resolveHash(location.hash),
   )
 
   const located = ACTIVITIES.find((a) => a.slug === locatedSlug) ?? null
@@ -237,8 +247,10 @@ export default function Reservas() {
               </h2>
             </div>
             <p className="reservas__section-lead">
-              &ldquo;Localizar&rdquo; te lleva a la reserva y te marca qué
-              tarjeta pulsar. ¿No sabes tu nivel?{' '}
+              {SOME_WITHOUT_PRODUCT
+                ? '“Reservar” abre el calendario de esa experiencia; “Localizar” te lleva a la reserva y te marca qué tarjeta pulsar. '
+                : '“Reservar” abre el calendario de esa experiencia, ya seleccionada. '}
+              ¿No sabes tu nivel?{' '}
               <Link className="reservas__inline-link" to="/niveles">
                 Guía de niveles
               </Link>
@@ -305,19 +317,43 @@ export default function Reservas() {
                         )}
                       </td>
                       <td className="reservas__col-action">
-                        <button
-                          type="button"
-                          className="reservas__locate-btn"
-                          aria-pressed={isLocated}
-                          onClick={() => locate(activity.slug)}
-                        >
-                          <IconArrowUp size={15} stroke={2} aria-hidden="true" />
-                          Localizar
-                          <span className="reservas__sr-only">
-                            {' '}
-                            {activity.title}
-                          </span>
-                        </button>
+                        {/* Con producto en Bookeo, la fila reserva esa
+                            actividad: <a href>, nunca <Link>, porque el
+                            widget hornea el `type=` al cargar su script y
+                            cambiarlo exige carga completa de documento.
+                            Sin producto todavía, lo único que podemos
+                            ofrecer es señalar su tarjeta en el catálogo. */}
+                        {bookeoProductIdFor(activity.slug) ? (
+                          <a
+                            className="reservas__locate-btn reservas__locate-btn--book"
+                            href={bookingHref(activity)}
+                          >
+                            <IconCalendarPlus
+                              size={15}
+                              stroke={2}
+                              aria-hidden="true"
+                            />
+                            Reservar
+                            <span className="reservas__sr-only">
+                              {' '}
+                              {activity.title}
+                            </span>
+                          </a>
+                        ) : (
+                          <button
+                            type="button"
+                            className="reservas__locate-btn"
+                            aria-pressed={isLocated}
+                            onClick={() => locate(activity.slug)}
+                          >
+                            <IconArrowUp size={15} stroke={2} aria-hidden="true" />
+                            Localizar
+                            <span className="reservas__sr-only">
+                              {' '}
+                              {activity.title}
+                            </span>
+                          </button>
+                        )}
                       </td>
                     </tr>
                   )

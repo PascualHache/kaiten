@@ -251,18 +251,25 @@ function Nosotros() {
                     <span className="k-eyebrow">{c.meta}</span>
                   </span>
                   <h2>{c.heading}</h2>
-                  {c.image && (
-                    <div className="nos__media nos__media--chapter">
-                      <img
-                        src={c.image.src}
-                        alt={c.image.alt}
-                        loading="lazy"
-                        decoding="async"
-                      />
-                    </div>
-                  )}
                 </div>
               </div>
+              {/* El retrato es un ítem más de la rejilla, no un hijo de la
+                  cabecera: solo así puede estirarse de la línea superior a la
+                  inferior del capítulo (arriba con el titular, abajo con el
+                  final del texto). */}
+              {c.image && (
+                <div
+                  className="nos__media nos__media--chapter"
+                  data-nos-reveal=""
+                >
+                  <img
+                    src={c.image.src}
+                    alt={c.image.alt}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+              )}
               <div className="nos__chapter-body">
                 {c.display && (
                   <p className="nos__chapter-display" data-nos-reveal="">

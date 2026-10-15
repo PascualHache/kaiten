@@ -542,3 +542,19 @@
     flex: 1;
   }
 }
+
+/* Variante "Reservar": la fila tiene producto en Bookeo y el enlace abre su
+   calendario, así que pesa más que el "Localizar" de las que aún no lo tienen. */
+.reservas__locate-btn--book {
+  background-color: var(--color-lavender-dark);
+  border-color: var(--color-lavender-dark);
+  color: var(--color-cream);
+  text-decoration: none;
+}
+
+@media (hover: hover) {
+  .reservas__locate-btn--book:hover {
+    background-color: var(--color-black);
+    border-color: var(--color-black);
+  }
+}

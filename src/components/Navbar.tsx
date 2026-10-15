@@ -71,26 +71,6 @@ function Navbar() {
 
         {/* Right: utilities */}
         <div className="navbar__utils">
-          <div className="navbar__lang" role="group" aria-label="Idioma">
-            <button
-              type="button"
-              className="navbar__lang-btn navbar__lang-btn--active"
-            >
-              ES
-            </button>
-            <span className="navbar__lang-sep" aria-hidden="true">
-              /
-            </span>
-            <button type="button" className="navbar__lang-btn">
-              EN
-            </button>
-            <span className="navbar__lang-sep" aria-hidden="true">
-              /
-            </span>
-            <button type="button" className="navbar__lang-btn">
-              CAT
-            </button>
-          </div>
           <Link to="/reservas" className="navbar__reserve-btn">
             Reservar
           </Link>

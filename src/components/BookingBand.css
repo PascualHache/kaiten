@@ -51,6 +51,13 @@
   text-wrap: pretty;
 }
 
+/* Los tres motivos para escribir van a tinta plena: sobre el 65% de negro del
+   párrafo, la negrita sola no se despega lo suficiente. */
+.booking-band__text strong {
+  font-weight: 600;
+  color: var(--color-black);
+}
+
 .booking-band__side {
   display: flex;
   flex-direction: column;

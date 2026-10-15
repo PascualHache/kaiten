@@ -70,7 +70,11 @@ function NavMenu({ links, onClose }: NavMenuProps) {
       gsap.fromTo(
         menu,
         { clipPath: CLOSED_CLIP },
-        { clipPath: "inset(0% 0% 0% 0%)", duration: 0.55, ease: "power3.inOut" },
+        {
+          clipPath: "inset(0% 0% 0% 0%)",
+          duration: 0.55,
+          ease: "power3.inOut",
+        },
       );
       gsap.from(menu.querySelectorAll("[data-menu-item]"), {
         y: 36,
@@ -173,7 +177,6 @@ function NavMenu({ links, onClose }: NavMenuProps) {
           <div className="nav-menu__contact-group">
             <p className="nav-menu__eyebrow">Contacto</p>
             <div className="nav-menu__contact">
-              <a href="tel:+34699820954">+34 699 820 954</a>
               <a
                 href="https://wa.me/34699820954"
                 target="_blank"
@@ -183,13 +186,16 @@ function NavMenu({ links, onClose }: NavMenuProps) {
               </a>
               <a href="mailto:kaitenski@gmail.com">kaitenski@gmail.com</a>
               <span className="nav-menu__address">
-                Baqueira 1800 · Val d'Aran
+                Baqueira Beret · Val d'Aran
               </span>
             </div>
           </div>
 
           <div className="nav-menu__lang" role="group" aria-label="Idioma">
-            <button type="button" className="nav-menu__lang-btn nav-menu__lang-btn--active">
+            <button
+              type="button"
+              className="nav-menu__lang-btn nav-menu__lang-btn--active"
+            >
               ES
             </button>
             <span className="nav-menu__lang-sep" aria-hidden="true">
