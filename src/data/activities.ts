@@ -86,7 +86,7 @@ export const ACTIVITIES: Activity[] = [
   {
     id: "full-day",
     slug: "full-day-half-day-en-baqueira",
-    bookeoProductId: "",
+    bookeoProductId: "223ANYY9C1A10D3A596C",
     title: "Full Day | Half Day",
     color: "verde",
     experienceType: "jornada",
@@ -167,7 +167,7 @@ export const ACTIVITIES: Activity[] = [
   {
     id: "safari",
     slug: "safari-en-baqueira",
-    bookeoProductId: "",
+    bookeoProductId: "223C6WT7A1A10D2E4599",
     title: "Safari",
     color: "verde",
     experienceType: "guiado",
@@ -226,7 +226,7 @@ export const ACTIVITIES: Activity[] = [
   {
     id: "clases-particulares",
     slug: "clases-particulares-en-baqueira",
-    bookeoProductId: "",
+    bookeoProductId: "223ARM37H1A101824644",
     title: "Clases Privadas",
     color: "verde",
     experienceType: "clase",
@@ -283,7 +283,7 @@ export const ACTIVITIES: Activity[] = [
   {
     id: "freeride",
     slug: "freeride-en-baqueira",
-    bookeoProductId: "",
+    bookeoProductId: "223WXRU741A10D3E31CE",
     title: "Freeride",
     color: "naranja",
     experienceType: "fuera-pista",
@@ -348,7 +348,7 @@ export const ACTIVITIES: Activity[] = [
   {
     id: "friends-family",
     slug: "friends-family",
-    bookeoProductId: "",
+    bookeoProductId: "223K9NT9X1A10D2A3266",
     title: "Kids & Friends & Family",
     color: "verde",
     experienceType: "grupo",
@@ -422,7 +422,7 @@ export const ACTIVITIES: Activity[] = [
   {
     id: "tardeo",
     slug: "experiencia-de-tardeo-20",
-    bookeoProductId: "",
+    bookeoProductId: "223RL96MU1A10DA3DE1A",
     title: "Tardeo (-25%)",
     color: "verde",
     experienceType: "especial",
@@ -483,7 +483,7 @@ export const ACTIVITIES: Activity[] = [
   {
     id: "kaiten-2-5",
     slug: "experiencia-kaiten-2.5",
-    bookeoProductId: "",
+    bookeoProductId: "223U4HLE41A10FF53921",
     title: "Kaiten Programs",
     subtitle: "Nuestros programas de mejora intensiva",
     color: "verde",
@@ -546,7 +546,7 @@ export const ACTIVITIES: Activity[] = [
   {
     id: "equipment-consultancy",
     slug: "asesoramiento-compra-material-ski",
-    bookeoProductId: "",
+    bookeoProductId: "223R6LF3M1A10FE12D7B",
     title: "Asesoramiento de Material",
     color: "verde",
     experienceType: "online",
