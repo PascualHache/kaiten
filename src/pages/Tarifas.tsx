@@ -1,32 +1,35 @@
 import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
 import PageTitle from "../components/PageTitle";
-import { TARIFFS } from "../data/tariffs";
+import { useTariffs } from "../i18n/content";
+import { useUi } from "../i18n";
 import "./Tarifas.css";
 
 function Tarifas() {
+  const ui = useUi();
+  const tariffs = useTariffs();
+
   return (
     <div className="tarifas">
       <main className="tarifas__sheet">
-        <PageTitle eyebrow="Baqueira Beret">Tarifas</PageTitle>
-        <p className="tarifas__includes">
-          Todas las experiencias incluyen: Instructor titulado · Atención
-          personalizada
-        </p>
+        <PageTitle eyebrow={ui.tarifas.eyebrow}>{ui.tarifas.title}</PageTitle>
+        <p className="tarifas__includes">{ui.tarifas.includes}</p>
 
         <section className="tarifas__table-section">
           <div className="tarifas-table">
             <div className="tarifas-table__row tarifas-table__row--head">
               <span />
-              <span className="tarifas-table__col-label">Experiencia</span>
               <span className="tarifas-table__col-label">
-                Tarifa por persona
+                {ui.tarifas.colExperience}
+              </span>
+              <span className="tarifas-table__col-label">
+                {ui.tarifas.colPrice}
               </span>
               <span className="tarifas-table__col-label tarifas-table__col-label--extra">
-                Extra / persona
+                {ui.tarifas.colExtra}
               </span>
             </div>
-            {TARIFFS.map((t) => (
+            {tariffs.map((t) => (
               <div key={t.id} className="tarifas-table__row" data-reveal="">
                 <span className="tarifas-table__number" aria-hidden="true">
                   {t.number}
@@ -55,9 +58,7 @@ function Tarifas() {
               </div>
             ))}
           </div>
-          <p className="tarifas__note">
-            *Consultar para grupos de más personas
-          </p>
+          <p className="tarifas__note">{ui.tarifas.note}</p>
         </section>
       </main>
       <Footer />

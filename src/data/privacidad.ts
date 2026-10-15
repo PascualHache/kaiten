@@ -1,4 +1,4 @@
-import type { Block, LegalSection } from "./terminos";
+import type { LegalSection } from "./terminos";
 
 export const PRIVACIDAD_SECTIONS: LegalSection[] = [
   {

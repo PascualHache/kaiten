@@ -1,6 +1,7 @@
 import { Component } from "react";
 import type { ErrorInfo, ReactNode } from "react";
 import logoSquared from "../assets/logos/logo_squared.png";
+import { useUi } from "../i18n";
 import "./ErrorBoundary.css";
 
 const WHATSAPP_URL = "https://wa.me/34699820954";
@@ -42,40 +43,45 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
       return this.props.children;
     }
 
-    return (
-      <div className="error-boundary">
-        <div className="error-boundary__content">
-          <img className="error-boundary__logo" src={logoSquared} alt="Kaiten" />
-          <h1 className="error-boundary__title">Algo se ha torcido</h1>
-          <p className="error-boundary__text">
-            No hemos podido cargar esta página. Puedes volver a intentarlo o
-            escribirnos directamente: te reservamos la experiencia a mano
-          </p>
-
-          <div className="error-boundary__actions">
-            <button
-              type="button"
-              className="error-boundary__btn"
-              onClick={() => window.location.reload()}
-            >
-              Reintentar
-            </button>
-            <a href="/" className="error-boundary__link">
-              Volver al inicio
-            </a>
-          </div>
-
-          <p className="error-boundary__contact">
-            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
-              WhatsApp
-            </a>
-            <span aria-hidden="true">·</span>
-            <a href={PHONE_URL}>+34 699 820 954</a>
-          </p>
-        </div>
-      </div>
-    );
+    return <ErrorScreen />;
   }
+}
+
+/* El fallback va aparte para poder leer el idioma con un hook: el
+   ErrorBoundary tiene que ser una clase (getDerivedStateFromError). */
+function ErrorScreen() {
+  const ui = useUi();
+
+  return (
+    <div className="error-boundary">
+      <div className="error-boundary__content">
+        <img className="error-boundary__logo" src={logoSquared} alt="Kaiten" />
+        <h1 className="error-boundary__title">{ui.error.title}</h1>
+        <p className="error-boundary__text">{ui.error.text}</p>
+
+        <div className="error-boundary__actions">
+          <button
+            type="button"
+            className="error-boundary__btn"
+            onClick={() => window.location.reload()}
+          >
+            {ui.error.retry}
+          </button>
+          <a href="/" className="error-boundary__link">
+            {ui.error.home}
+          </a>
+        </div>
+
+        <p className="error-boundary__contact">
+          <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
+            WhatsApp
+          </a>
+          <span aria-hidden="true">·</span>
+          <a href={PHONE_URL}>+34 699 820 954</a>
+        </p>
+      </div>
+    </div>
+  );
 }
 
 export default ErrorBoundary;

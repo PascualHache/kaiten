@@ -132,11 +132,11 @@ Mientras `bookeoProductId` esté vacío, el CTA sigue funcionando: abre el widge
 con el catálogo completo y `/reservas` muestra una nota pidiendo al visitante
 que elija esa actividad en el calendario.
 
-La tabla de `/reservas` se adapta sola a eso, fila a fila: con producto, la
-acción es **Reservar** (`<a href>` a `/reservas?actividad=<slug>`, carga
-completa de documento, el widget abre ya en ese producto); sin producto, sigue
-siendo **Localizar**, que solo marca qué tarjeta pulsar en el catálogo. Nada
-que tocar al rellenar un id: basta con pegarlo.
+Desde el rediseño de `/reservas` (dos pasos: catálogo → ficha), el widget solo
+se monta en la ficha, `?actividad=<slug>`, y siempre con producto. Si algún
+`bookeoProductId` volviera a quedarse vacío, esa ficha abriría el catálogo
+completo dentro del iframe: funciona, pero obliga al visitante a elegir dos
+veces.
 
 ## Comprobación en build
 

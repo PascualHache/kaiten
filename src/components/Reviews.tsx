@@ -1,35 +1,14 @@
 import { Link } from "react-router-dom";
 import { IconStar, IconBrandGoogle, IconArrowRight } from "@tabler/icons-react";
+import { fill, useUi } from "../i18n";
 import "./Reviews.css";
 
-interface Review {
-  author: string;
-  rating: number;
-  text: string;
-  date: string;
-  source: "google";
-}
+/** Estrellas fijas: las dos reseñas publicadas son de 5. */
+const RATING = 5;
 
-const REVIEWS: Review[] = [
-  {
-    author: "Laura M.",
-    rating: 5,
-    text: "Experiencia increíble. Aitor tiene una paciencia y una pedagogía excepcionales. En dos días mejoré más que en los últimos tres años de esquí.",
-    date: "Enero 2025",
-    source: "google",
-  },
-  {
-    author: "Carlos R.",
-    rating: 5,
-    text: "El Full Day fue perfecto. Recorrimos zonas de Baqueira que jamás hubiera encontrado solo. Completamente personalizado al nivel de cada uno.",
-    date: "Febrero 2025",
-    source: "google",
-  },
-];
-
-function Stars({ count }: { count: number }) {
+function Stars({ count, label }: { count: number; label: string }) {
   return (
-    <span className="review-card__stars" aria-label={`${count} de 5 estrellas`}>
+    <span className="review-card__stars" aria-label={label}>
       {Array.from({ length: 5 }).map((_, i) => (
         <IconStar
           key={i}
@@ -44,26 +23,31 @@ function Stars({ count }: { count: number }) {
 }
 
 function Reviews() {
+  const ui = useUi();
+
   return (
     <section className="reviews">
       <header className="reviews__header" data-reveal="">
         <div className="reviews__heading">
-          <p className="reviews__eyebrow">Reseñas verificadas</p>
-          <h2 className="reviews__title">Lo que dicen nuestros clientes</h2>
+          <p className="reviews__eyebrow">{ui.reviews.eyebrow}</p>
+          <h2 className="reviews__title">{ui.reviews.title}</h2>
         </div>
         <div className="reviews__badge">
           <IconBrandGoogle size={20} stroke={1.5} />
           <span className="reviews__badge-text">
-            <strong>5.0</strong> · Google Reviews
+            <strong>5.0</strong> · {ui.reviews.badge}
           </span>
         </div>
       </header>
 
       <div className="reviews__body">
         <div className="reviews__grid">
-          {REVIEWS.map((r, i) => (
+          {ui.reviews.items.map((r, i) => (
             <article key={i} className="review-card" data-reveal="">
-              <Stars count={r.rating} />
+              <Stars
+                count={RATING}
+                label={fill(ui.reviews.starsAria, { n: RATING })}
+              />
               <p className="review-card__text">"{r.text}"</p>
               <footer className="review-card__footer">
                 <span className="review-card__author">{r.author}</span>
@@ -74,15 +58,11 @@ function Reviews() {
         </div>
 
         <div className="reviews__phrases">
-          <p className="reviews__phrase-title">
-            Una buena clase no termina cuando te quitas los esquís.
-          </p>
+          <p className="reviews__phrase-title">{ui.reviews.phraseTitle}</p>
           <span className="reviews__phrase-rule" aria-hidden="true" />
-          <p className="reviews__phrase-text">
-            Empieza cuando quieres volver mañana.
-          </p>
+          <p className="reviews__phrase-text">{ui.reviews.phraseText}</p>
           <Link to="/reservas" className="reviews__phrase-link">
-            Reserva tu experiencia
+            {ui.reviews.phraseLink}
             <IconArrowRight size={16} stroke={2} />
           </Link>
         </div>

@@ -16,23 +16,19 @@ export interface Tariff {
 }
 
 /** First tariff row matching an activity's slug (rows share a slug when
-    one activity has several formats — the cheapest/shortest comes first). */
-export function findTariff(slug: string): Tariff | undefined {
-  return TARIFFS.find((t) => t.slug === slug);
+    one activity has several formats — the cheapest/shortest comes first).
+    La lista se pasa desde fuera: en castellano es TARIFFS y en el resto de
+    idiomas, su traducción (ver `src/i18n/content`). */
+export function findTariff(tariffs: Tariff[], slug: string): Tariff | undefined {
+  return tariffs.find((t) => t.slug === slug);
 }
 
 /** "64€ / hora" — el importe pelado, para cuando el "Desde" ya es una
     etiqueta aparte en la interfaz. */
-export function formatPrice(slug: string): string {
-  const tariff = findTariff(slug);
+export function formatPrice(tariffs: Tariff[], slug: string): string {
+  const tariff = findTariff(tariffs, slug);
   if (!tariff) return "—";
   return `${tariff.price}${tariff.priceNote ? ` ${tariff.priceNote}` : ""}`;
-}
-
-/** "Desde 64€ / hora" — the entry price shown next to an activity. */
-export function formatFromPrice(slug: string): string {
-  const price = formatPrice(slug);
-  return price === "—" ? price : `Desde ${price}`;
 }
 
 export const TARIFFS: Tariff[] = [

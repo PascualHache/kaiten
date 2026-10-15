@@ -7,6 +7,7 @@ import {
 } from "@tabler/icons-react";
 import logoText from "../assets/logos/logo_text.png";
 import logoK from "../assets/logos/logo_k.png";
+import { useUi } from "../i18n";
 import "./Footer.css";
 
 const LIVE_CAMS_URL = "https://www.baqueira.es/en/webcams";
@@ -16,41 +17,41 @@ const WHATSAPP_URL = "https://wa.me/34699820954";
 const SPOTIFY_URL =
   "https://open.spotify.com/playlist/07BMCGGFCarURRFnUIOlbx?si=BqZCksIdT6OFuF5yvjs42A";
 
-const EXPERIENCES = [
-  { label: "Clases Privadas", hash: "clases-particulares-en-baqueira" },
-  { label: "Kids & Friends & Family", hash: "friends-family" },
-  { label: "Kaiten Programs", hash: "experiencia-kaiten-2.5" },
-  { label: "Tardeo (-25%)", hash: "experiencia-de-tardeo-20" },
-  { label: "Full Day · Safari · Freeride", hash: "" },
-  {
-    label: "Asesoramiento de material",
-    hash: "asesoramiento-compra-material-ski",
-  },
-];
+/* Solo el ancla; la etiqueta sale del diccionario (ui.footer.experienceLinks). */
+const EXPERIENCE_HASHES = [
+  { key: "privadas", hash: "clases-particulares-en-baqueira" },
+  { key: "family", hash: "friends-family" },
+  { key: "programs", hash: "experiencia-kaiten-2.5" },
+  { key: "tardeo", hash: "experiencia-de-tardeo-20" },
+  { key: "otras", hash: "" },
+  { key: "material", hash: "asesoramiento-compra-material-ski" },
+] as const;
 
-const NAV_LINKS = [
-  { label: "Nosotros", to: "/nosotros" },
-  { label: "Tarifas", to: "/tarifas" },
-  { label: "Niveles", to: "/niveles" },
-  { label: "Preguntas frecuentes", to: "/faq" },
-  { label: "Reservas", to: "/reservas" },
-];
+const NAV_PATHS = [
+  { key: "nosotros", to: "/nosotros" },
+  { key: "tarifas", to: "/tarifas" },
+  { key: "niveles", to: "/niveles" },
+  { key: "faq", to: "/faq" },
+  { key: "reservas", to: "/reservas" },
+] as const;
 
 function Footer() {
+  const ui = useUi();
+
   return (
     <footer className="footer">
       {/* ─── CTA strip ─────────────────────────────────────── */}
       <div className="footer__cta" data-reveal="">
         <div className="footer__cta-left">
-          <p className="footer__cta-eyebrow">Temporada 2026 · 27</p>
-          <h2 className="footer__cta-heading">¿Listo para empezar?</h2>
+          <p className="footer__cta-eyebrow">{ui.footer.ctaEyebrow}</p>
+          <h2 className="footer__cta-heading">{ui.footer.ctaHeading}</h2>
         </div>
         <div className="footer__cta-actions">
           <Link
             to="/reservas"
             className="footer__cta-btn footer__cta-btn--primary"
           >
-            Reservar
+            {ui.common.reserve}
             <IconArrowRight size={16} stroke={2} />
           </Link>
           <a
@@ -85,9 +86,7 @@ function Footer() {
             >
               kaitenski@gmail.com
             </a>
-            <span className="footer__contact-item">
-              Baqueira Beret · Val d'Aran
-            </span>
+            <span className="footer__contact-item">{ui.nav.address}</span>
           </div>
           <div className="footer__socials">
             <a
@@ -110,7 +109,7 @@ function Footer() {
             </a>
             <span
               className="footer__social-pill"
-              aria-label="Valoración 5 de 5 en Google"
+              aria-label={ui.footer.ratingAria}
             >
               <IconBrandGoogle size={20} stroke={1.5} aria-hidden="true" />
               <span aria-hidden="true">★ 5.0</span>
@@ -119,15 +118,15 @@ function Footer() {
         </div>
 
         {/* Experiencias */}
-        <nav className="footer__col" aria-label="Experiencias">
-          <span className="footer__col-title">Experiencias</span>
-          {EXPERIENCES.map((e) => (
+        <nav className="footer__col" aria-label={ui.footer.experiences}>
+          <span className="footer__col-title">{ui.footer.experiences}</span>
+          {EXPERIENCE_HASHES.map((e) => (
             <Link
-              key={e.label}
+              key={e.key}
               to={e.hash ? `/reservas#${e.hash}` : "/reservas"}
               className="footer__link"
             >
-              {e.label}
+              {ui.footer.experienceLinks[e.key]}
             </Link>
           ))}
         </nav>
@@ -135,9 +134,9 @@ function Footer() {
         {/* Kaiten nav */}
         <nav className="footer__col" aria-label="Kaiten">
           <span className="footer__col-title">Kaiten</span>
-          {NAV_LINKS.map((l) => (
+          {NAV_PATHS.map((l) => (
             <Link key={l.to} to={l.to} className="footer__link">
-              {l.label}
+              {ui.nav.links[l.key]}
             </Link>
           ))}
           <a
@@ -146,16 +145,14 @@ function Footer() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Playlist Spotify
+            {ui.footer.spotify}
           </a>
         </nav>
 
         {/* Estado de las pistas */}
         <div className="footer__live">
-          <span className="footer__col-title">Estado de las pistas</span>
-          <p className="footer__live-text">
-            Consulta las cámaras de Baqueira Beret en directo antes de subir
-          </p>
+          <span className="footer__col-title">{ui.footer.slopes}</span>
+          <p className="footer__live-text">{ui.footer.slopesText}</p>
           <a
             href={LIVE_CAMS_URL}
             className="footer__live-btn"
@@ -163,7 +160,7 @@ function Footer() {
             rel="noopener noreferrer"
           >
             <span className="footer__live-dot" aria-hidden="true" />
-            Baqueira Live Cams
+            {ui.footer.slopesBtn}
           </a>
 
           <div className="footer__watermark" aria-hidden="true">
@@ -176,10 +173,10 @@ function Footer() {
       <div className="footer__bottom">
         <div className="footer__legal">
           <span>© {new Date().getFullYear()} Kaiten</span>
-          <Link to="/terminos">Términos y condiciones</Link>
-          <Link to="/privacidad">Política de privacidad</Link>
-          <Link to="/aviso-legal">Aviso legal</Link>
-          <Link to="/cookies">Cookies</Link>
+          <Link to="/terminos">{ui.footer.terms}</Link>
+          <Link to="/privacidad">{ui.footer.privacy}</Link>
+          <Link to="/aviso-legal">{ui.footer.legal}</Link>
+          <Link to="/cookies">{ui.footer.cookies}</Link>
         </div>
       </div>
     </footer>

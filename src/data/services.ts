@@ -13,6 +13,8 @@ export interface Service {
   tagline: string;
   description: string;
   image: string;
+  /** Distintivo sobre la foto, p. ej. "-25%". Solo donde el descuento es la oferta. */
+  promo?: string;
   /** object-position del recorte de la foto en la tarjeta (por defecto, centrado) */
   imagePosition?: string;
   backgroundColor: string;
@@ -62,6 +64,7 @@ export const SERVICES: Service[] = [
     description:
       "Disfruta de Baqueira Beret en horario de tarde, cuando la estación está más despejada y el ritmo es más relajado. Mejor luz, menos afluencia y una tarifa especial con un 25% de descuento.",
     image: clasesTardeo,
+    promo: "-25%",
     backgroundColor: "var(--color-cream)",
     textColor: "#333",
     reservasPath: "/reservas/experiencia-de-tardeo-20",
