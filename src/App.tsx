@@ -12,7 +12,9 @@ import Privacidad from './pages/Privacidad'
 import Cookies from './pages/Cookies'
 import Navbar from './components/Navbar'
 import ScrollToTop from './components/ScrollToTop'
+import WhatsAppPill from './components/WhatsAppPill'
 import WorkInProgress from './pages/WorkInProgress'
+import NotFound from './pages/NotFound'
 import { useScrollAnimations } from './hooks/useScrollAnimations'
 import './App.css'
 
@@ -40,8 +42,12 @@ function Shell() {
           <Route path="/terminos" element={<Terminos />} />
           <Route path="/privacidad" element={<Privacidad />} />
           <Route path="/cookies" element={<Cookies />} />
+          {/* Comodín: sin esto, el rewrite de Vercel deja cualquier URL
+              inventada en una página en blanco con estado 200 */}
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
+      <WhatsAppPill />
     </div>
   )
 }

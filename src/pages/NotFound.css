@@ -1,0 +1,165 @@
+.not-found {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: var(--color-cream);
+}
+
+.not-found__sheet {
+  flex: 1;
+  width: min(var(--content-max-width), 100% - clamp(2rem, 6vw, 5rem) * 2);
+  margin: clamp(1rem, 3vw, 2.5rem) auto;
+  padding: clamp(0.75rem, 2vw, 1.25rem) clamp(1.5rem, 4vw, 3rem)
+    clamp(2.5rem, 6vw, 5rem);
+}
+
+.not-found__lead {
+  max-width: 44ch;
+  margin: 0 0 clamp(2rem, 5vw, 3rem);
+  font-size: clamp(1rem, 2.2vw, 1.125rem);
+  line-height: 1.6;
+  color: var(--color-lavender-dark);
+}
+
+/* Sugerencias — una columna en móvil, dos a partir de tablet */
+.not-found__links {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(0.75rem, 2vw, 1rem);
+  margin-bottom: clamp(2rem, 5vw, 3rem);
+}
+
+.not-found__link {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: clamp(1rem, 2.5vw, 1.35rem);
+  border: 1px solid rgba(133, 127, 157, 0.35);
+  border-radius: 12px;
+  transition: border-color 140ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    background-color 140ms ease;
+}
+
+.not-found__link-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-heading);
+  font-size: 1.0625rem;
+  font-weight: 600;
+  color: var(--color-black);
+}
+
+.not-found__link-label svg {
+  flex-shrink: 0;
+  color: var(--color-lavender);
+  transition: transform 140ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.not-found__link-desc {
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: var(--color-lavender-dark);
+}
+
+@media (hover: hover) {
+  .not-found__link:hover {
+    border-color: var(--color-lavender);
+    background-color: rgba(133, 127, 157, 0.07);
+  }
+
+  .not-found__link:hover .not-found__link-label svg {
+    transform: translateX(3px);
+  }
+}
+
+/* Acciones */
+.not-found__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: clamp(1rem, 3vw, 1.75rem);
+}
+
+/* Botón primario "Sombra suave": sin borde en ningún estado, la profundidad
+   la dan las dos sombras tintadas de verde */
+.not-found__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 48px;
+  padding: 0 36px;
+  border: none;
+  border-radius: var(--ks-radius-button);
+  background: var(--ks-primary);
+  color: var(--ks-on-primary);
+  box-shadow: var(--ks-shadow-button);
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: transform 140ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 140ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    background-color 140ms ease;
+}
+
+/* Solo en dispositivos con puntero — en táctil el :hover se queda pegado */
+@media (hover: hover) {
+  .not-found__btn:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--ks-shadow-button-hover);
+  }
+}
+
+.not-found__btn:active {
+  transform: translateY(1px);
+  background: var(--ks-primary-pressed);
+  box-shadow: var(--ks-shadow-button-pressed);
+  transition-duration: 60ms;
+}
+
+.not-found__btn:focus-visible {
+  outline: 2px solid var(--ks-on-primary);
+  outline-offset: 3px;
+}
+
+.not-found__wa {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--color-lavender-dark);
+  border-bottom: 1px solid transparent;
+}
+
+@media (hover: hover) {
+  .not-found__wa:hover {
+    border-bottom-color: var(--color-lavender-dark);
+  }
+}
+
+@media (min-width: 768px) {
+  .not-found__links {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .not-found__btn {
+    transition: background-color 140ms ease, box-shadow 140ms ease;
+  }
+
+  .not-found__btn:hover,
+  .not-found__btn:active {
+    transform: none;
+  }
+
+  .not-found__link-label svg,
+  .not-found__link:hover .not-found__link-label svg {
+    transition: none;
+    transform: none;
+  }
+}

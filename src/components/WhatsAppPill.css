@@ -1,0 +1,94 @@
+/* Píldora flotante de WhatsApp.
+ * Deliberadamente NO usa el verde de WhatsApp: el icono ya identifica el canal
+ * y el verde rompería la paleta. Papel sobre crema + sombra suave. */
+.wa-pill {
+  position: fixed;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  z-index: 60;
+
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+
+  padding: 6px 6px 6px 1rem;
+  background-color: var(--color-paper);
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 999px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+
+  animation: wa-pill-in 0.32s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+@keyframes wa-pill-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.5rem);
+  }
+}
+
+.wa-pill__link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--color-black);
+}
+
+.wa-pill__icon {
+  flex-shrink: 0;
+}
+
+.wa-pill__text {
+  font-size: 0.85rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.wa-pill__close {
+  flex-shrink: 0;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background-color: transparent;
+  color: rgba(0, 0, 0, 0.55);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: background-color 0.14s cubic-bezier(0.2, 0.8, 0.2, 1),
+    color 0.14s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* En táctil el :hover se queda pegado tras tocar */
+@media (hover: hover) {
+  .wa-pill__close:hover {
+    background-color: rgba(0, 0, 0, 0.06);
+    color: var(--color-black);
+  }
+}
+
+/* Móvil: la píldora ocupa el ancho disponible y el texto deja de ser nowrap
+   para no desbordar en pantallas estrechas. */
+@media (max-width: 480px) {
+  .wa-pill {
+    right: 0.75rem;
+    left: 0.75rem;
+    bottom: 0.75rem;
+    justify-content: space-between;
+  }
+
+  .wa-pill__text {
+    white-space: normal;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wa-pill {
+    animation: none;
+  }
+
+  .wa-pill__close {
+    transition: none;
+  }
+}
