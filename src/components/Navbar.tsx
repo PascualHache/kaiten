@@ -3,18 +3,10 @@ import { Link, useLocation } from "react-router-dom";
 import { IconBrandWhatsapp, IconMenu2 } from "@tabler/icons-react";
 import NavMenu, { type NavMenuLink } from "./NavMenu";
 import logoKaiten from "../assets/logos/logo_text.png";
+import { useUi } from "../i18n";
 import "./Navbar.css";
 
-const NAV_LINKS: NavMenuLink[] = [
-  { to: "/", label: "Inicio" },
-  { to: "/nosotros", label: "Nosotros" },
-  { to: "/reservas", label: "Reservas" },
-  { to: "/tarifas", label: "Tarifas" },
-  { to: "/niveles", label: "Niveles" },
-  { to: "/faq", label: "Preguntas frecuentes" },
-];
-
-const WHATSAPP_URL = "https://wa.me/34699820954?text=DESCUENTOS%20EXCLUSIVOS";
+const WHATSAPP_BASE = "https://wa.me/34699820954";
 
 const SCROLL_THRESHOLD = 40;
 
@@ -22,6 +14,20 @@ function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { pathname } = useLocation();
+  const ui = useUi();
+
+  const navLinks: NavMenuLink[] = [
+    { to: "/", label: ui.nav.links.home },
+    { to: "/nosotros", label: ui.nav.links.nosotros },
+    { to: "/reservas", label: ui.nav.links.reservas },
+    { to: "/tarifas", label: ui.nav.links.tarifas },
+    { to: "/niveles", label: ui.nav.links.niveles },
+    { to: "/faq", label: ui.nav.links.faq },
+  ];
+
+  const whatsappUrl = `${WHATSAPP_BASE}?text=${encodeURIComponent(
+    ui.common.waDiscounts,
+  )}`;
 
   // Dos usos del mismo flag: en Home la navbar flota transparente sobre el Hero
   // hasta que se hace scroll, y en todas las vistas el fondo se oscurece un
@@ -50,7 +56,7 @@ function Navbar() {
           <button
             type="button"
             className="navbar__menu-toggle"
-            aria-label="Abrir menú"
+            aria-label={ui.nav.openMenu}
             aria-expanded={menuOpen}
             onClick={() => setMenuOpen(true)}
           >
@@ -71,35 +77,15 @@ function Navbar() {
 
         {/* Right: utilities */}
         <div className="navbar__utils">
-          <div className="navbar__lang" role="group" aria-label="Idioma">
-            <button
-              type="button"
-              className="navbar__lang-btn navbar__lang-btn--active"
-            >
-              ES
-            </button>
-            <span className="navbar__lang-sep" aria-hidden="true">
-              /
-            </span>
-            <button type="button" className="navbar__lang-btn">
-              EN
-            </button>
-            <span className="navbar__lang-sep" aria-hidden="true">
-              /
-            </span>
-            <button type="button" className="navbar__lang-btn">
-              CAT
-            </button>
-          </div>
           <Link to="/reservas" className="navbar__reserve-btn">
-            Reservar
+            {ui.common.reserve}
           </Link>
           <a
-            href={WHATSAPP_URL}
+            href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="navbar__whatsapp"
-            aria-label="Contactar por WhatsApp para descuentos exclusivos"
+            aria-label={ui.common.whatsappAria}
           >
             <IconBrandWhatsapp size={22} stroke={1.5} aria-hidden="true" />
           </a>
@@ -107,7 +93,7 @@ function Navbar() {
       </div>
 
       {menuOpen && (
-        <NavMenu links={NAV_LINKS} onClose={() => setMenuOpen(false)} />
+        <NavMenu links={navLinks} onClose={() => setMenuOpen(false)} />
       )}
     </header>
   );

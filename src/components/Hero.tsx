@@ -1,13 +1,14 @@
 import { Link } from "react-router-dom";
 import { IconArrowDown, IconArrowRight } from "@tabler/icons-react";
-import heroPhoto from "../assets/images/kaiten_home.png";
+import heroPhoto from "../assets/images/kaiten_home.webp";
+import heroPhotoMobile from "../assets/images/kaiten_home_mobile.webp";
+import { useUi } from "../i18n";
 import "./Hero.css";
 
-const REST_COORDS = "43 00 142 00";
-
-const TITLE_LINES = ["R-evoluciona", "tu forma", "de esquiar"];
+const REST_COORDS = "43 142 43 481";
 
 function Hero() {
+  const ui = useUi();
   // El desplazamiento suave lo decide el usuario vía prefers-reduced-motion:
   // scrollIntoView respeta la preferencia del sistema en los navegadores
   // actuales, así que no hace falta comprobarla aquí.
@@ -20,20 +21,25 @@ function Hero() {
 
   return (
     <section className="hero" data-hero="">
-      <img
-        className="hero__bg"
-        src={heroPhoto}
-        alt="Esquiador en Baqueira Beret"
-        loading="eager"
-        decoding="async"
-      />
+      {/* Encuadre vertical propio en móvil: el recorte horizontal deja al
+          esquiador fuera de cuadro por debajo de 768px. */}
+      <picture className="hero__picture">
+        <source media="(max-width: 768px)" srcSet={heroPhotoMobile} />
+        <img
+          className="hero__bg"
+          src={heroPhoto}
+          alt={ui.hero.photoAlt}
+          loading="eager"
+          decoding="async"
+        />
+      </picture>
       <div className="hero__scrim" aria-hidden="true" />
 
       <div className="hero__content">
         {/* Cada línea va en una máscara propia para que el texto pueda subir
             desde fuera del recorte. Sin JS se ve exactamente igual. */}
         <h1 className="hero__title">
-          {TITLE_LINES.map((line) => (
+          {ui.hero.titleLines.map((line) => (
             <span className="hero__line-mask" key={line}>
               <span className="hero__line" data-line="">
                 {line}
@@ -44,11 +50,11 @@ function Hero() {
 
         <span className="hero__rule" data-hero-rule="" />
         <p className="hero__text" data-hero-fade="">
-          Escuela de esquí en Baqueira Beret
+          {ui.hero.tagline}
         </p>
         <div className="hero__actions" data-hero-fade="">
           <Link to="/reservas" className="hero__btn hero__btn--primary">
-            Reservar
+            {ui.common.reserve}
             <IconArrowRight size={18} stroke={2} />
           </Link>
           <a
@@ -56,7 +62,7 @@ function Hero() {
             className="hero__btn hero__btn--secondary"
             onClick={scrollToExperiences}
           >
-            Ver experiencias
+            {ui.hero.seeExperiences}
             <IconArrowDown size={18} stroke={2} />
           </a>
         </div>

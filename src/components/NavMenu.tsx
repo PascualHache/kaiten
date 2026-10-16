@@ -1,8 +1,9 @@
-import { useEffect, useRef } from "react";
+import { Fragment, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import { Link, useLocation } from "react-router-dom";
 import { IconX } from "@tabler/icons-react";
 import logoKaiten from "../assets/logos/logo_text.png";
+import { LANGS, LANG_LABELS, useLang, useUi } from "../i18n";
 import "./NavMenu.css";
 
 export interface NavMenuLink {
@@ -33,6 +34,8 @@ const CLOSED_CLIP = "inset(0% 0% 100% 0%)";
  * transparente y ahí el filtro está desactivado.
  */
 function NavMenu({ links, onClose }: NavMenuProps) {
+  const ui = useUi();
+  const { lang, setLang } = useLang();
   const menuRef = useRef<HTMLDivElement>(null);
   const closeBtnRef = useRef<HTMLButtonElement>(null);
   const { pathname } = useLocation();
@@ -70,7 +73,11 @@ function NavMenu({ links, onClose }: NavMenuProps) {
       gsap.fromTo(
         menu,
         { clipPath: CLOSED_CLIP },
-        { clipPath: "inset(0% 0% 0% 0%)", duration: 0.55, ease: "power3.inOut" },
+        {
+          clipPath: "inset(0% 0% 0% 0%)",
+          duration: 0.55,
+          ease: "power3.inOut",
+        },
       );
       gsap.from(menu.querySelectorAll("[data-menu-item]"), {
         y: 36,
@@ -127,13 +134,13 @@ function NavMenu({ links, onClose }: NavMenuProps) {
       ref={menuRef}
       role="dialog"
       aria-modal="true"
-      aria-label="Menú"
+      aria-label={ui.nav.menuAria}
     >
       <div className="nav-menu__top">
         <button
           type="button"
           className="nav-menu__icon-btn"
-          aria-label="Cerrar menú"
+          aria-label={ui.nav.closeMenu}
           onClick={() => void close()}
           ref={closeBtnRef}
         >
@@ -145,7 +152,7 @@ function NavMenu({ links, onClose }: NavMenuProps) {
           className="nav-menu__reserve"
           onClick={() => void close()}
         >
-          Reservar
+          {ui.common.reserve}
         </Link>
       </div>
 
@@ -171,9 +178,8 @@ function NavMenu({ links, onClose }: NavMenuProps) {
 
         <div className="nav-menu__aside" data-menu-item="">
           <div className="nav-menu__contact-group">
-            <p className="nav-menu__eyebrow">Contacto</p>
+            <p className="nav-menu__eyebrow">{ui.nav.contact}</p>
             <div className="nav-menu__contact">
-              <a href="tel:+34699820954">+34 699 820 954</a>
               <a
                 href="https://wa.me/34699820954"
                 target="_blank"
@@ -182,28 +188,30 @@ function NavMenu({ links, onClose }: NavMenuProps) {
                 WhatsApp
               </a>
               <a href="mailto:kaitenski@gmail.com">kaitenski@gmail.com</a>
-              <span className="nav-menu__address">
-                Baqueira 1800 · Val d'Aran
-              </span>
+              <span className="nav-menu__address">{ui.nav.address}</span>
             </div>
           </div>
 
-          <div className="nav-menu__lang" role="group" aria-label="Idioma">
-            <button type="button" className="nav-menu__lang-btn nav-menu__lang-btn--active">
-              ES
-            </button>
-            <span className="nav-menu__lang-sep" aria-hidden="true">
-              /
-            </span>
-            <button type="button" className="nav-menu__lang-btn">
-              EN
-            </button>
-            <span className="nav-menu__lang-sep" aria-hidden="true">
-              /
-            </span>
-            <button type="button" className="nav-menu__lang-btn">
-              CAT
-            </button>
+          <div className="nav-menu__lang" role="group" aria-label={ui.nav.language}>
+            {LANGS.map((code, i) => (
+              <Fragment key={code}>
+                {i > 0 && (
+                  <span className="nav-menu__lang-sep" aria-hidden="true">
+                    /
+                  </span>
+                )}
+                <button
+                  type="button"
+                  className={`nav-menu__lang-btn${
+                    code === lang ? " nav-menu__lang-btn--active" : ""
+                  }`}
+                  aria-pressed={code === lang}
+                  onClick={() => setLang(code)}
+                >
+                  {LANG_LABELS[code]}
+                </button>
+              </Fragment>
+            ))}
           </div>
         </div>
       </div>

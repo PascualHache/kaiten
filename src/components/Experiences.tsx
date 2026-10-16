@@ -4,8 +4,8 @@ import {
   IconChevronLeft,
   IconChevronRight,
 } from '@tabler/icons-react'
-import { SERVICES } from '../data/services'
-import { ACTIVITIES } from '../data/activities'
+import { useActivities, useServices } from '../i18n/content'
+import { useUi } from '../i18n'
 import ExperienceDetail from './ExperienceDetail'
 import './Experiences.css'
 
@@ -30,18 +30,24 @@ import './Experiences.css'
 const DETAIL_EXIT_MS = 200
 
 function Experiences() {
+  const ui = useUi()
+  const services = useServices()
+  const activities = useActivities()
   const trackRef = useRef<HTMLDivElement>(null)
   const progressRef = useRef<HTMLSpanElement>(null)
   const detailRef = useRef<HTMLDivElement>(null)
+  // Un ref por tarjeta: al cerrar la ficha, el foco vuelve a la que la abrió.
+  const tileRefs = useRef(new Map<string, HTMLButtonElement>())
+  const pendingScrollRef = useRef(false)
   const [activeId, setActiveId] = useState<string | null>(null)
   const [detailSlug, setDetailSlug] = useState<string | null>(null)
   const [detailClosing, setDetailClosing] = useState(false)
   const [canPrev, setCanPrev] = useState(false)
   const [canNext, setCanNext] = useState(false)
 
-  const activeService = SERVICES.find((s) => s.id === activeId) ?? null
+  const activeService = services.find((s) => s.id === activeId) ?? null
   const activeActivity = activeService
-    ? (ACTIVITIES.find(
+    ? (activities.find(
         (a) =>
           a.slug === activeService.reservasPath.replace('/reservas/', ''),
       ) ?? null)
@@ -105,31 +111,52 @@ function Experiences() {
   }
 
   const detailActivity = detailSlug
-    ? (ACTIVITIES.find((a) => a.slug === detailSlug) ?? null)
+    ? (activities.find((a) => a.slug === detailSlug) ?? null)
     : null
+
+  // Desplaza a la ficha recién abierta. Como efecto, corre con el nodo ya
+  // montado, tanto en el primer clic como al cambiar de experiencia.
+  useEffect(() => {
+    if (!pendingScrollRef.current) return
+    const node = detailRef.current
+    if (!node || detailClosing) return
+    pendingScrollRef.current = false
+    node.scrollIntoView({ behavior: 'smooth', block: 'center' })
+  }, [detailSlug, detailClosing])
+
+  /* Cierre desde la propia ficha. Devolver el foco a la tarjeta de origen es
+     lo que evita que, al colapsar, el foco caiga al <body> y el siguiente Tab
+     empiece desde el principio del documento. El scroll vuelve al carrusel
+     porque la ficha que había debajo acaba de desaparecer: sin esto la página
+     se queda mirando el hueco. */
+  function closeDetail() {
+    const id = activeId
+    setActiveId(null)
+    if (!id) return
+    const tile = tileRefs.current.get(id)
+    if (!tile) return
+    tile.focus({ preventScroll: true })
+    trackRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+  }
 
   function select(id: string) {
     const opening = id !== activeId
+    // El desplazamiento no puede ocurrir aquí: en el primer clic la ficha aún
+    // no está en el DOM, y el rAF del handler se adelantaba al commit de React
+    // (en los siguientes clics colaba porque ya había una ficha montada). Se
+    // deja marcado y lo hace el efecto de abajo, tras el montaje.
+    pendingScrollRef.current = opening
     setActiveId(opening ? id : null)
-    if (!opening) return
-    // La ficha se monta en el mismo frame que el cambio de estado, así que
-    // el desplazamiento espera al siguiente para encontrarla ya en el DOM.
-    requestAnimationFrame(() => {
-      detailRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' })
-    })
   }
 
   return (
     <section className="experiences" id="experiencias">
       <header className="experiences__header" data-reveal="">
         <div className="experiences__heading">
-          <p className="experiences__eyebrow">Experiencias</p>
-          <h2 className="experiences__title">Elige tu experiencia</h2>
+          <p className="experiences__eyebrow">{ui.experiences.eyebrow}</p>
+          <h2 className="experiences__title">{ui.experiences.title}</h2>
         </div>
-        <p className="experiences__lead">
-          Ocho formas de vivir Baqueira, todas con instructor titulado y
-          atención personalizada
-        </p>
+        <p className="experiences__lead">{ui.experiences.lead}</p>
       </header>
 
       <div
@@ -138,7 +165,7 @@ function Experiences() {
         data-exp-track=""
         ref={trackRef}
       >
-        {SERVICES.map((service, i) => {
+        {services.map((service, i) => {
           const isActive = service.id === activeId
           return (
             <button
@@ -148,6 +175,10 @@ function Experiences() {
                 isActive ? ' experiences__tile--active' : ''
               }`}
               data-exp-tile=""
+              ref={(el) => {
+                if (el) tileRefs.current.set(service.id, el)
+                else tileRefs.current.delete(service.id)
+              }}
               aria-expanded={isActive}
               onClick={() => select(service.id)}
             >
@@ -172,7 +203,7 @@ function Experiences() {
                   {service.tagline}
                 </span>
                 <span className="experiences__tile-more">
-                  {isActive ? 'Cerrar' : 'Ver experiencia'}
+                  {isActive ? ui.common.close : ui.experiences.see}
                   <IconChevronDown size={16} stroke={2} aria-hidden="true" />
                 </span>
               </span>
@@ -189,7 +220,7 @@ function Experiences() {
           <button
             type="button"
             className="experiences__nav-btn"
-            aria-label="Ver experiencias anteriores"
+            aria-label={ui.experiences.prevAria}
             aria-controls="experiences-track"
             disabled={!canPrev}
             onClick={() => step(-1)}
@@ -199,7 +230,7 @@ function Experiences() {
           <button
             type="button"
             className="experiences__nav-btn"
-            aria-label="Ver más experiencias"
+            aria-label={ui.experiences.nextAria}
             aria-controls="experiences-track"
             disabled={!canNext}
             onClick={() => step(1)}
@@ -217,7 +248,11 @@ function Experiences() {
             detailClosing ? ' experiences__detail--closing' : ''
           }`}
         >
-          <ExperienceDetail activity={detailActivity} variant="compact" />
+          <ExperienceDetail
+            activity={detailActivity}
+            variant="compact"
+            onClose={closeDetail}
+          />
         </div>
       )}
     </section>

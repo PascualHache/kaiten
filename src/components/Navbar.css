@@ -86,41 +86,6 @@
   gap: 18px;
 }
 
-.navbar__lang {
-  display: flex;
-  align-items: baseline;
-  gap: 0.45rem;
-}
-
-.navbar__lang-btn {
-  background: none;
-  border: none;
-  padding: 0 0 3px;
-  font-family: inherit;
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  color: rgba(0, 0, 0, 0.45);
-  cursor: pointer;
-  line-height: 1;
-  border-bottom: 2px solid transparent;
-  transition: color 0.15s;
-}
-
-.navbar__lang-btn:hover {
-  color: var(--color-black);
-}
-
-.navbar__lang-btn--active {
-  color: var(--color-black);
-  font-weight: 700;
-}
-
-.navbar__lang-sep {
-  font-size: 12px;
-  color: var(--color-sage);
-}
-
 /* Primary button — "Sombra suave" variant: no border in any state, depth
    comes from the two green-tinted shadows */
 .navbar__reserve-btn {
@@ -262,10 +227,6 @@
   .navbar__inner {
     padding: 0 20px;
     gap: 0.75rem;
-  }
-
-  .navbar__lang {
-    display: none;
   }
 
   /* A 390px no caben logo (180px) + CTA a tamaño completo: el conjunto

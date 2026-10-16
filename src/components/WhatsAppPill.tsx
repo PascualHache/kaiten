@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { IconBrandWhatsapp, IconX } from "@tabler/icons-react";
+import { useUi } from "../i18n";
 import "./WhatsAppPill.css";
 
 const SESSION_KEY = "kaiten-wa-pill-dismissed";
@@ -12,11 +13,10 @@ const SCROLL_THRESHOLD = 0.4;
  * Fuera de aquí manda «Reservar» y la píldora no se monta. */
 const ENABLED_PATHS = ["/", "/tarifas"];
 
-const WHATSAPP_URL = `https://wa.me/34699820954?text=${encodeURIComponent(
-  "Hola, quiero información sobre vuestras experiencias",
-)}`;
+const WHATSAPP_BASE = "https://wa.me/34699820954";
 
 function WhatsAppPill() {
+  const ui = useUi();
   const { pathname } = useLocation();
   const enabled = ENABLED_PATHS.includes(pathname);
 
@@ -52,11 +52,15 @@ function WhatsAppPill() {
 
   if (!enabled || dismissed || !scrolledEnough) return null;
 
+  const whatsappUrl = `${WHATSAPP_BASE}?text=${encodeURIComponent(
+    ui.common.waInfo,
+  )}`;
+
   return (
     <div className="wa-pill">
       <a
         className="wa-pill__link"
-        href={WHATSAPP_URL}
+        href={whatsappUrl}
         target="_blank"
         rel="noopener noreferrer"
       >
@@ -66,13 +70,13 @@ function WhatsAppPill() {
           stroke={1.5}
           aria-hidden="true"
         />
-        <span className="wa-pill__text">¿Te ayudamos a elegir?</span>
+        <span className="wa-pill__text">{ui.waPill.text}</span>
       </a>
       <button
         type="button"
         className="wa-pill__close"
         onClick={dismiss}
-        aria-label="Cerrar"
+        aria-label={ui.common.close}
       >
         <IconX size={16} stroke={1.5} aria-hidden="true" />
       </button>

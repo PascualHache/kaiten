@@ -54,12 +54,10 @@ Todo lo demás del audit sigue aplicando.
    - Tardeo (-25%)
    - Asesoramiento de Material (Equipment Consultancy)
 
-7. **Página Equipo (nueva)**
-   - Crear sección/página con ficha por instructor: foto, titulación,
-     idiomas, niveles que enseña, especialidad.
-   - Enlazar desde el menú principal y desde el flujo de reserva (aunque el
-     flujo en sí sea Cal.com, se puede pasar el profesor elegido como nota
-     o parámetro del evento).
+7. **Página Equipo (nueva)** — ~~descartada~~
+   - Se llegó a construir (`/equipo`, oculta de la navegación) y se ha
+     eliminado: página, CSS y `data/team.ts`. No se publica ficha por
+     instructor.
 
 8. **Página Reservas → tabla comparativa**
    - Sustituir el acordeón puro por: tabla comparativa arriba (duración,

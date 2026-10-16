@@ -9,6 +9,12 @@
    while the bottom edge stays where .hero itself ends (unchanged).
    68px matches .navbar__inner's fixed height (Navbar.css) — --navbar-height
    (3.25rem) undershoots it, so it isn't precise enough for this reach. */
+/* El <picture> solo elige la fuente: que no genere caja en el flujo del hero
+   (el <img> va absoluto). */
+.hero__picture {
+  display: contents;
+}
+
 .hero__bg {
   position: absolute;
   bottom: 0;

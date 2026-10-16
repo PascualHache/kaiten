@@ -1,7 +1,8 @@
 import Footer from "../components/Footer";
 import PageTitle from "../components/PageTitle";
-import { COOKIES_SECTIONS } from "../data/cookies";
 import type { Block } from "../data/terminos";
+import { useLegal } from "../i18n/legal";
+import { useUi } from "../i18n";
 import "./Cookies.css";
 
 function renderBlocks(blocks: Block[]) {
@@ -26,17 +27,20 @@ function renderBlocks(blocks: Block[]) {
 }
 
 function Cookies() {
+  const ui = useUi();
+  const { cookies } = useLegal();
+
   return (
     <div className="cookies">
       <main className="cookies__main">
         <header className="cookies__header">
-          <PageTitle eyebrow="Legal · Última actualización: julio 2026" spacing="loose">
-            Política de cookies
+          <PageTitle eyebrow={ui.legalPages.updated} spacing="loose">
+            {ui.legalPages.cookiesTitle}
           </PageTitle>
         </header>
 
         <article className="cookies__content">
-          {COOKIES_SECTIONS.map((section) => (
+          {cookies.map((section) => (
             <section key={section.id} className="cookies__section">
               {section.title && (
                 <h2 className="cookies__section-title">{section.title}</h2>

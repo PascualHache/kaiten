@@ -340,10 +340,12 @@ a.footer__social-pill:hover {
   inset: 0;
   z-index: 0;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
   line-height: 0;
-  overflow: hidden;
+  /* Visible, no hidden: la marca se desplaza por debajo de la caja de la
+     columna y con overflow oculto se recortaría justo en ese borde. */
+  overflow: visible;
   pointer-events: none;
   user-select: none;
 }
@@ -354,6 +356,8 @@ a.footer__social-pill:hover {
   width: min(100%, 16rem);
   max-height: 100%;
   object-fit: contain;
+  /* Baja por debajo del pie de la columna; decorativa y detrás del texto. */
+  transform: translateY(5rem);
   opacity: 0.09;
   filter: brightness(0) invert(1);
 }
@@ -391,5 +395,17 @@ a.footer__social-pill:hover {
 
   .footer__body {
     grid-template-columns: 1fr;
+  }
+
+  /* A una columna la marca ya no compite con nada a su derecha: se arrima
+     a ese borde en lugar de quedar centrada detrás del texto. */
+  .footer__watermark {
+    justify-content: flex-end;
+  }
+
+  /* Se sale del gutter lateral del footer (1.5rem) y sangra contra el borde
+     derecho; .footer tiene overflow hidden, así que recorta ahí limpiamente. */
+  .footer__watermark img {
+    transform: translate(5rem, 3rem);
   }
 }

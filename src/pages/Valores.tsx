@@ -1,15 +1,14 @@
 import Footer from "../components/Footer";
 import { Link } from "react-router-dom";
 import { IconArrowRight } from "@tabler/icons-react";
-import valuesImage from "../assets/images/valores.png";
+import valuesImage from "../assets/images/valores.webp";
+import { useUi } from "../i18n";
 import "./Valores.css";
 
 interface ValueItem {
-  id: string;
+  /** Clave de ui.nosotros.values — el texto sale de ahí. */
+  id: "curiosidad" | "precision" | "respeto" | "estilo" | "comunidad";
   Icon: React.FC;
-  title: string;
-  tagline: string;
-  body: string;
   tint: string;
 }
 
@@ -160,128 +159,71 @@ const AsteriskIcon: React.FC = () => (
 );
 
 const VALUES: ValueItem[] = [
-  {
-    id: "curiosidad",
-    Icon: MountainIcon,
-    title: "Curiosidad",
-    tagline: "Nunca dejamos de explorar",
-    body: "Seguimos preguntando. Seguimos aprendiendo. La montaña siempre enseña.",
-    tint: "a",
-  },
-  {
-    id: "precision",
-    Icon: WavesIcon,
-    title: "Precisión",
-    tagline: "Nos importa cada detalle",
-    body: "Pequeños ajustes. Grandes diferencias. Mejor cada día.",
-    tint: "b",
-  },
-  {
-    id: "respeto",
-    Icon: SpiralIcon,
-    title: "Respeto",
-    tagline: "Por la montaña. Por las personas. Por el momento",
-    body: "Cuidamos lo que amamos para que las futuras generaciones también puedan disfrutarlo.",
-    tint: "c",
-  },
-  {
-    id: "estilo",
-    Icon: StyleIcon,
-    title: "Estilo",
-    tagline: "Menos ruido. Más intención",
-    body: "Valoramos la simplicidad, la función y el buen gusto en todo lo que hacemos.",
-    tint: "d",
-  },
-  {
-    id: "comunidad",
-    Icon: AsteriskIcon,
-    title: "Comunidad",
-    tagline: "Subimos juntos",
-    body: "No somos clientes. No somos profesores. Somos personas que comparten la misma pasión.",
-    tint: "c",
-  },
-];
-
-const DIFFERENCE = [
-  {
-    title: "Educación / Profesión",
-    desc: "Conoces a fondo el esquí y la montaña.",
-  },
-  {
-    title: "Transparencia",
-    desc: "Sin intermediarios. Sin sorpresas.",
-  },
-  {
-    title: "Personalización",
-    desc: "Cada persona aprende a su ritmo y a su forma.",
-  },
-  {
-    title: "Diferencia",
-    desc: "La mejor enseñanza de España. La mejor forma de descubrirlo.",
-  },
+  { id: "curiosidad", Icon: MountainIcon, tint: "a" },
+  { id: "precision", Icon: WavesIcon, tint: "b" },
+  { id: "respeto", Icon: SpiralIcon, tint: "c" },
+  { id: "estilo", Icon: StyleIcon, tint: "d" },
+  { id: "comunidad", Icon: AsteriskIcon, tint: "c" },
 ];
 
 function Valores() {
+  const ui = useUi();
+
   return (
     <div className="valores">
       {/* Values cards */}
       <section className="valores__section valores__intro">
         <div className="valores__intro-heading">
-          <p className="valores__eyebrow">Nuestros valores</p>
+          <p className="valores__eyebrow">{ui.valores.eyebrow}</p>
           <h1 className="valores__title">
-            Lo que
+            {ui.valores.titleLines[0]}
             <br />
-            nos guía
+            {ui.valores.titleLines[1]}
           </h1>
           <Link to="/nosotros" className="valores__more">
-            Nuestro manifiesto
+            {ui.valores.more}
             <IconArrowRight size={16} stroke={2} />
           </Link>
         </div>
         <div className="valores__cards">
-          {VALUES.map(({ id, Icon, title, tagline, body, tint }) => (
-            <article key={id} className={`value-card value-card--${tint}`}>
-              <div className="value-card__top">
-                <span className="value-card__icon">
-                  <Icon />
-                </span>
-                <h3 className="value-card__title">{title}</h3>
-                <p className="value-card__tagline">{tagline}</p>
-              </div>
-              <div className="value-card__bottom">
-                <span className="value-card__rule" aria-hidden="true" />
-                <p className="value-card__body">{body}</p>
-              </div>
-            </article>
-          ))}
+          {VALUES.map(({ id, Icon, tint }) => {
+            const value = ui.nosotros.values[id];
+            return (
+              <article key={id} className={`value-card value-card--${tint}`}>
+                <div className="value-card__top">
+                  <span className="value-card__icon">
+                    <Icon />
+                  </span>
+                  <h3 className="value-card__title">{value.title}</h3>
+                  <p className="value-card__tagline">{value.tagline}</p>
+                </div>
+                <div className="value-card__bottom">
+                  <span className="value-card__rule" aria-hidden="true" />
+                  <p className="value-card__body">{value.body}</p>
+                </div>
+              </article>
+            );
+          })}
         </div>
       </section>
 
       {/* More than skiing */}
       <section className="valores__section valores__more-section">
         <div className="valores__more-text">
-          <h2 className="valores__big-title">Más que aprender a esquiar</h2>
+          <h2 className="valores__big-title">{ui.valores.bigTitle}</h2>
           <div className="valores__more-body">
-            <p className="valores__paragraph">
-              En KAITEN enseñamos técnica. Pero también te ayudamos a superar
-              tus límites, a ganar seguridad y pasión por la montaña.
-            </p>
-            <p className="valores__paragraph">
-              Creemos que cada descenso es una oportunidad para mejorar,
-              disfrutar y conectar con el esquí.
-            </p>
-            <p className="valores__paragraph">
-              Porque al final, la mejor clase no es la que termina con las
-              piernas perfectas. Es la que hace que quieras volver a esquiar al
-              día siguiente.
-            </p>
+            {ui.valores.paragraphs.map((paragraph) => (
+              <p className="valores__paragraph" key={paragraph}>
+                {paragraph}
+              </p>
+            ))}
           </div>
         </div>
         <div className="valores__more-media">
           <img
             className="valores__media-img"
             src={valuesImage}
-            alt="Profesor de Kaiten acompañando a una esquiadora en Baqueira"
+            alt={ui.valores.mediaAlt}
             loading="lazy"
             decoding="async"
           />
@@ -291,7 +233,7 @@ function Valores() {
       {/* Differentiators */}
       <section className="valores__section valores__different-section">
         <div className="valores__different">
-          {DIFFERENCE.map((item) => (
+          {ui.valores.difference.map((item) => (
             <div key={item.title} className="valores__feature">
               <h3 className="valores__feature-title">
                 <span className="valores__marker" aria-hidden="true" />
@@ -328,8 +270,7 @@ function Valores() {
               />
             </svg>
           </span>
-          No creemos en vender clases. Creemos en cambiar la manera de vivir la
-          montaña.
+          {ui.valores.philosophy}
         </p>
       </section>
 

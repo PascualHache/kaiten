@@ -1,7 +1,8 @@
 import Footer from "../components/Footer";
 import PageTitle from "../components/PageTitle";
-import { PRIVACIDAD_SECTIONS } from "../data/privacidad";
 import type { Block } from "../data/terminos";
+import { useLegal } from "../i18n/legal";
+import { useUi } from "../i18n";
 import "./Privacidad.css";
 
 function renderBlocks(blocks: Block[]) {
@@ -26,17 +27,20 @@ function renderBlocks(blocks: Block[]) {
 }
 
 function Privacidad() {
+  const ui = useUi();
+  const { privacidad } = useLegal();
+
   return (
     <div className="privacidad">
       <main className="privacidad__main">
         <header className="privacidad__header">
-          <PageTitle eyebrow="Legal · Última actualización: julio 2026" spacing="loose">
-            Política de privacidad
+          <PageTitle eyebrow={ui.legalPages.updated} spacing="loose">
+            {ui.legalPages.privacidadTitle}
           </PageTitle>
         </header>
 
         <article className="privacidad__content">
-          {PRIVACIDAD_SECTIONS.map((section) => (
+          {privacidad.map((section) => (
             <section key={section.id} className="privacidad__section">
               {section.title && (
                 <h2 className="privacidad__section-title">{section.title}</h2>

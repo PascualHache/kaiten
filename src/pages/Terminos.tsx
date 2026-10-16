@@ -1,7 +1,8 @@
 import Footer from "../components/Footer";
 import PageTitle from "../components/PageTitle";
-import { MAIN_SECTIONS, ANNEX_SECTIONS, GUIDE_SECTION } from "../data/terminos";
 import type { Block, LegalSection } from "../data/terminos";
+import { useLegal } from "../i18n/legal";
+import { useUi } from "../i18n";
 import "./Terminos.css";
 
 function renderBlocks(blocks: Block[]) {
@@ -35,25 +36,28 @@ function Section({ section }: { section: LegalSection }) {
 }
 
 function Terminos() {
+  const ui = useUi();
+  const { terminos } = useLegal();
+
   return (
     <div className="terminos">
       <main className="terminos__main">
         <header className="terminos__header">
-          <PageTitle eyebrow="Legal" spacing="loose">
-            Condiciones generales de contratación
+          <PageTitle eyebrow={ui.legalPages.legal} spacing="loose">
+            {ui.legalPages.terminosTitle}
           </PageTitle>
         </header>
 
         <article className="terminos__content">
-          {MAIN_SECTIONS.map((s) => <Section key={s.id} section={s} />)}
+          {terminos.main.map((s) => <Section key={s.id} section={s} />)}
 
           <div className="terminos__divider" aria-hidden="true" />
 
-          {ANNEX_SECTIONS.map((s) => <Section key={s.id} section={s} />)}
+          {terminos.annex.map((s) => <Section key={s.id} section={s} />)}
 
           <div className="terminos__divider" aria-hidden="true" />
 
-          <Section section={GUIDE_SECTION} />
+          <Section section={terminos.guide} />
         </article>
       </main>
 

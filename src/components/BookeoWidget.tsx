@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { bookeoWidgetSrc } from '../data/booking'
+import { useUi } from '../i18n'
 import './BookeoWidget.css'
 
 /* Widget de reservas de Bookeo.
@@ -161,6 +162,7 @@ interface Props {
 }
 
 export default function BookeoWidget({ productId }: Props) {
+  const ui = useUi()
   const containerRef = useRef<HTMLDivElement>(null)
   const [status, setStatus] = useState<Status>('waiting')
 
@@ -282,22 +284,18 @@ export default function BookeoWidget({ productId }: Props) {
 
       {status === 'slow' && (
         <div className="bookeo__notice" role="status">
-          <p>
-            El calendario está tardando más de lo normal. Puedes seguir
-            esperando — aparecerá en cuanto responda — o escribirnos y lo
-            reservamos contigo.
-          </p>
+          <p>{ui.bookeo.slow}</p>
           <p>
             <button
               type="button"
               className="bookeo__retry"
               onClick={() => window.location.reload()}
             >
-              Reintentar
+              {ui.bookeo.retry}
             </button>{' '}
             ·{' '}
             <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
-              Reservar por WhatsApp
+              {ui.bookeo.bookWhatsapp}
             </a>
           </p>
         </div>
@@ -305,19 +303,19 @@ export default function BookeoWidget({ productId }: Props) {
 
       {status === 'failed' && (
         <p className="bookeo__notice" role="alert">
-          No hemos podido cargar el sistema de reservas.{' '}
+          {ui.bookeo.failedBefore}{' '}
           <button
             type="button"
             className="bookeo__retry"
             onClick={() => window.location.reload()}
           >
-            Reintentar
+            {ui.bookeo.retry}
           </button>{' '}
-          o{' '}
+          {ui.bookeo.failedOr}{' '}
           <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
-            escríbenos por WhatsApp
+            {ui.bookeo.failedLink}
           </a>{' '}
-          y lo gestionamos contigo.
+          {ui.bookeo.failedAfter}
         </p>
       )}
     </div>

@@ -20,27 +20,39 @@
 .nos__media > img { position: absolute; left: 0; top: -8%; width: 100%; height: 116%; object-fit: cover; }
 .nos__media--tall { aspect-ratio: 4 / 5; max-height: 80vh; border-radius: var(--radius-card); }
 .nos__media--hero { border-radius: var(--radius-hero); max-height: 82vh; }
-/* Retrato del capítulo: vive dentro de .nos__chapter-head, bajo el h2. Ya no
-   es una banda recortada a lo ancho, así que la imagen vuelve al flujo (sin
-   el position:absolute ni el 116% de alto que pedía el recorte) y se ve
-   entera; el ancho se limita para que el 3:4 no estire la columna pegajosa. */
-/* Retrato del capítulo, bajo el h2 de .nos__chapter-head. Entra entero, así
-   que la img vuelve al flujo (sin el position:absolute ni el 116% de alto que
-   pedía el recorte) y el ancho se limita para no estirar la columna. El
-   margen izquierdo la desalinea del titular a propósito: sangrada hacia el
-   texto, la composición deja de leerse como dos bloques apilados. */
-/* El margen izquierdo es `auto`: la foto se alinea con el borde derecho de la
-   columna, pegada al canal que la separa del texto. Es el tope del sangrado
-   sin invadir la otra columna. */
+/* La foto es 4:3 y el marco 4:5: cover recorta ~40% del ancho. Con el centro
+   por defecto el perro (a ~75% del original) quedaba pegado al borde derecho;
+   70% corre el recorte a la derecha y lo mete dentro del encuadre. */
+.nos__media--hero > img { object-position: 70% center; }
+/* Retrato del capítulo (Naiara). En columna única va en el flujo, entero y
+   alineado al borde derecho de la columna. A partir de 900px se convierte en
+   la columna central de la rejilla (ver más abajo) y pasa a recortarse. */
 .nos__media--chapter { width: min(100% - 4rem, 22rem); margin: var(--space-2) 0 0 auto; border-radius: var(--radius-card); background: none; }
 .nos__media--chapter > img { position: static; width: 100%; height: auto; aspect-ratio: 3 / 4; object-fit: contain; }
 
-/* Capítulo con retrato: la foto pesa más que el titular y descompensaba la
-   composición — el texto arriba y un hueco muerto abajo a la derecha. Aquí
-   hace de contrapeso: el texto se centra contra ella y la cabecera deja de
-   ser pegajosa (una foto alta colgando de un sticky se arrastra mal). */
-.nos__chapter--portrait { align-items: center; }
+/* Capítulo con retrato: por debajo del umbral de tres columnas se apila en una
+   sola (titular, foto, texto) — con el auto-fit heredado quedarían dos y la
+   foto colgaría junto al titular. La cabecera deja de ser pegajosa: una foto
+   alta arrastrada por un sticky se lee mal. */
+.nos__chapter--portrait { grid-template-columns: minmax(0, 1fr); align-items: start; }
 .nos__chapter--portrait .nos__chapter-head { position: static; }
+
+/* Tres columnas: titular · retrato · texto. El retrato se estira de la línea
+   superior a la inferior de la fila, así su borde de arriba coincide con el
+   del titular y el de abajo con el final del último párrafo. La altura la
+   marca la columna de texto, de modo que la foto se recorta (cover) en vez de
+   estirar la fila. */
+@media (min-width: 900px) {
+  .nos__chapter--portrait { grid-template-columns: minmax(0, 1fr) minmax(9rem, 0.8fr) minmax(0, 1.15fr); align-items: stretch; }
+  .nos__media--chapter { width: auto; margin: 0; align-self: stretch; min-height: 20rem; }
+  .nos__media--chapter > img { position: absolute; inset: 0; width: 100%; height: 100%; aspect-ratio: auto; object-fit: cover; object-position: center; }
+  /* El texto arranca algo por debajo del titular y de la foto: las tres
+     columnas alineadas a la misma línea superior leían como una tabla. El
+     retrato se estira hasta el final del párrafo, así que este aire solo
+     desplaza el inicio del texto, no desalinea el borde inferior. */
+  .nos__chapter--portrait .nos__chapter-body { padding-top: clamp(4rem, 9vw, 7rem); }
+}
+
 .nos__media-caption { position: absolute; left: 0; right: 0; bottom: 0; padding: clamp(1.5rem, 3.5vw, 2.5rem); display: flex; flex-direction: column; gap: var(--space-3); }
 .nos__media-caption .k-rule { background: #000; }
 .nos__media-caption h2 { font-size: clamp(1.5rem, 3vw, 2.25rem); line-height: 1.08; max-width: 14ch; color: #000; text-wrap: balance; }

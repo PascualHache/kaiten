@@ -1,47 +1,54 @@
-import { Link } from 'react-router-dom'
-import { IconArrowRight } from '@tabler/icons-react'
+import { IconBrandWhatsapp } from '@tabler/icons-react'
+import { useUi } from '../i18n'
+import { RichText } from '../i18n/RichText'
 import './BookingBand.css'
 
-/* Franja de reservas de la portada: explica de dónde sale la disponibilidad
- * antes de mandar a /reservas. El enlace es <Link> y no <a>: no preselecciona
- * actividad, así que no necesita recargar el documento para Bookeo. */
+/* Franja de reservas de la portada. El CTA no va a /reservas: aquí la reserva
+ * se cierra por WhatsApp, con el mensaje ya redactado. wa.me es el mismo
+ * enlace que usan el navbar, el footer y la píldora — en escritorio abre
+ * WhatsApp Web y en móvil la app, sin tener que mantener dos URLs. */
 
-const STEPS = [
-  { n: '01', label: 'Elige la experiencia' },
-  { n: '02', label: 'Consulta disponibilidad y elige fecha y hora' },
-  { n: '03', label: 'Completa tus datos y paga online' },
-]
+const WHATSAPP_BASE = 'https://wa.me/34699820954'
 
 export default function BookingBand() {
+  const ui = useUi()
+  const whatsappUrl = `${WHATSAPP_BASE}?text=${encodeURIComponent(
+    ui.common.waBooking,
+  )}`
+
   return (
     <section className="booking-band" aria-labelledby="booking-band-title">
       <div className="booking-band__card" data-reveal="">
         <div className="booking-band__copy">
-          <p className="booking-band__eyebrow">Reservas</p>
+          <p className="booking-band__eyebrow">{ui.bookingBand.eyebrow}</p>
           <h2 className="booking-band__title" id="booking-band-title">
-            Todas las experiencias, una sola reserva
+            {ui.bookingBand.title}
           </h2>
           <p className="booking-band__text">
-            Consulta la disponibilidad real de cada experiencia, elige fecha y
-            hora y paga online en el mismo sitio
+            <RichText text={ui.bookingBand.text} />
           </p>
         </div>
 
         <div className="booking-band__side">
           <ol className="booking-band__steps">
-            {STEPS.map((step) => (
-              <li className="booking-band__step" key={step.n}>
+            {ui.bookingBand.steps.map((label, i) => (
+              <li className="booking-band__step" key={label}>
                 <span className="booking-band__step-num" aria-hidden="true">
-                  {step.n}
+                  {String(i + 1).padStart(2, '0')}
                 </span>
-                {step.label}
+                {label}
               </li>
             ))}
           </ol>
-          <Link className="booking-band__btn" to="/reservas">
-            Ver disponibilidad
-            <IconArrowRight size={18} stroke={2} aria-hidden="true" />
-          </Link>
+          <a
+            className="booking-band__btn"
+            href={whatsappUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <IconBrandWhatsapp size={18} stroke={2} aria-hidden="true" />
+            {ui.bookingBand.button}
+          </a>
         </div>
       </div>
     </section>

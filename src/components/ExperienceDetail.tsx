@@ -1,13 +1,9 @@
-import { Link } from 'react-router-dom'
-import { IconArrowRight } from '@tabler/icons-react'
-import {
-  EXPERIENCE_TYPE_LABELS,
-  LEVEL_LABELS,
-  type Activity,
-  type Level,
-} from '../data/activities'
-import { formatFromPrice, formatPrice } from '../data/tariffs'
+import { IconArrowRight, IconChevronUp } from '@tabler/icons-react'
+import { type Activity, type Level } from '../data/activities'
+import { formatPrice } from '../data/tariffs'
 import { bookingHref } from '../data/booking'
+import { useTariffs } from '../i18n/content'
+import { fill, useUi } from '../i18n'
 import InfoIcon from './InfoIcon'
 import Tag from './Tag'
 
@@ -23,16 +19,21 @@ interface Props {
    * que se despliega en /reservas, donde la fila ya es la unidad de detalle.
    *
    * "compact" — la de la portada: rasgos y una tira con duración, personas,
-   * nivel y el enlace a la ficha completa. Deja fuera la información rápida
-   * y los formatos para no convertir la home en una segunda /reservas.
+   * nivel y el botón de cerrar. Deja fuera la información rápida y los
+   * formatos para no convertir la home en una segunda /reservas.
    */
   variant?: 'full' | 'compact'
+  /** Solo en "compact": colapsa la ficha y devuelve el foco al carrusel. */
+  onClose?: () => void
 }
 
 export default function ExperienceDetail({
   activity,
   variant = 'full',
+  onClose,
 }: Props) {
+  const ui = useUi()
+  const tariffs = useTariffs()
   const compact = variant === 'compact'
 
   return (
@@ -42,7 +43,7 @@ export default function ExperienceDetail({
           {compact && (
             <Tag
               variant={activity.experienceType}
-              label={EXPERIENCE_TYPE_LABELS[activity.experienceType]}
+              label={ui.common.experienceTypes[activity.experienceType]}
             />
           )}
           <h3 className="exp-detail__title">{activity.title}</h3>
@@ -53,14 +54,14 @@ export default function ExperienceDetail({
         <div className="exp-detail__actions">
           {compact ? (
             <span className="exp-detail__price-block">
-              <span className="exp-detail__price-label">Desde</span>
+              <span className="exp-detail__price-label">{ui.common.from}</span>
               <strong className="exp-detail__price-value">
-                {formatPrice(activity.slug)}
+                {formatPrice(tariffs, activity.slug)}
               </strong>
             </span>
           ) : (
             <span className="exp-detail__price">
-              {formatFromPrice(activity.slug)}
+              {`${ui.common.from} ${formatPrice(tariffs, activity.slug)}`}
             </span>
           )}
           {/* <a> y no <Link>: el widget de Bookeo hornea el producto al cargar
@@ -95,7 +96,7 @@ export default function ExperienceDetail({
 
         {!compact && (
           <div className="exp-detail__info">
-            <h4 className="exp-detail__info-title">Información rápida</h4>
+            <h4 className="exp-detail__info-title">{ui.expDetail.quickInfo}</h4>
             <ul className="exp-detail__info-list">
               {activity.info.map((item, i) => (
                 <li key={i} className="exp-detail__info-item">
@@ -125,38 +126,44 @@ export default function ExperienceDetail({
       {compact && (
         <div className="exp-detail__meta">
           <div className="exp-detail__meta-cell">
-            <span className="exp-detail__meta-label">Duración</span>
+            <span className="exp-detail__meta-label">{ui.common.duration}</span>
             <strong className="exp-detail__meta-value">
               {activity.summary.duration}
             </strong>
           </div>
           <div className="exp-detail__meta-cell">
-            <span className="exp-detail__meta-label">Personas</span>
+            <span className="exp-detail__meta-label">{ui.common.people}</span>
             <strong className="exp-detail__meta-value">
               {activity.summary.people}
             </strong>
           </div>
           <div className="exp-detail__meta-cell">
-            <span className="exp-detail__meta-label">Nivel</span>
+            <span className="exp-detail__meta-label">{ui.common.level}</span>
             <span className="exp-detail__meta-levels">
               {sortLevels(activity.levels).map((level) => (
-                <Tag key={level} variant={level} label={LEVEL_LABELS[level]} />
+                <Tag key={level} variant={level} label={ui.common.levels[level]} />
               ))}
             </span>
           </div>
-          <div className="exp-detail__meta-cell exp-detail__meta-cell--link">
-            <Link className="exp-detail__meta-link" to={`/reservas#${activity.slug}`}>
-              Ver experiencia completa
-              <IconArrowRight size={16} stroke={2} aria-hidden="true" />
-            </Link>
-          </div>
+          {onClose && (
+            <div className="exp-detail__meta-cell exp-detail__meta-cell--link">
+              <button
+                type="button"
+                className="exp-detail__meta-link exp-detail__meta-close"
+                onClick={onClose}
+              >
+                {ui.common.close}
+                <IconChevronUp size={16} stroke={2} aria-hidden="true" />
+              </button>
+            </div>
+          )}
         </div>
       )}
 
       {!compact && activity.formats && (
         <div className="exp-detail__formats">
           <h4 className="exp-detail__formats-title">
-            {activity.formats.length} formatos para ti
+            {fill(ui.expDetail.formatsTitle, { n: activity.formats.length })}
           </h4>
           <div className="exp-detail__formats-grid">
             {activity.formats.map((f, i) => (
@@ -165,7 +172,9 @@ export default function ExperienceDetail({
                 className={`exp-format${f.featured ? ' exp-format--featured' : ''}`}
               >
                 {f.featured && (
-                  <span className="exp-format__badge">Más elegido</span>
+                  <span className="exp-format__badge">
+                    {ui.expDetail.mostChosen}
+                  </span>
                 )}
                 <h5 className="exp-format__name">{f.name}</h5>
                 <p className="exp-format__schedule">{f.schedule}</p>
