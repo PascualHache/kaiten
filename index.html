@@ -6,15 +6,58 @@
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#E6E5E1" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <!-- El widget de /reservas carga desde aquí y luego abre un iframe contra
          el mismo origen: adelantar DNS + TLS le quita un viaje a la espera. -->
     <link rel="preconnect" href="https://bookeo.com" />
     <link rel="dns-prefetch" href="https://bookeo.com" />
+    <!-- Tipografías autoalojadas (scripts/fetch-fonts.mjs): los @font-face
+         viven en src/fonts.css, que index.css importa, así que viajan dentro
+         del CSS principal — ni petición a fonts.googleapis.com ni preconnect.
+         Estos dos preload adelantan solo las caras del primer pintado: Poppins
+         700 del <h1> del hero e Inter variable del cuerpo, subconjunto latin.
+         El resto (latin-ext, pesos 400/500/600 de Poppins, la cursiva) los pide
+         el navegador cuando los necesita, vía unicode-range.
+         `crossorigin` es obligatorio aunque sea mismo origen: las fuentes se
+         piden siempre en modo CORS y sin él se descargarían dos veces.
+         Vite reescribe estos href a la ruta con hash del build. -->
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap"
-      rel="stylesheet"
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      href="/src/assets/fonts/poppins-latin-700-normal.woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      href="/src/assets/fonts/inter-latin-400-700-normal.woff2"
+      crossorigin
+    />
+
+    <!-- El LCP de la portada es la foto del hero, y en una SPA el <img> no
+         existe hasta que React monta: el navegador no podía ni empezar a
+         pedirla durante el parseo del HTML ("LCP request discovery"). Estos dos
+         preload la descubren en el documento inicial y con prioridad alta.
+         El `media` replica exactamente el breakpoint del <picture> de Hero.tsx
+         (max-width: 768px) para que solo se descargue la variante que se usa;
+         si cambia uno, cambia el otro o se bajarán las dos fotos.
+         Vite reescribe estos href a la ruta con hash del build. -->
+    <link
+      rel="preload"
+      as="image"
+      href="/src/assets/images/kaiten_home.webp"
+      type="image/webp"
+      fetchpriority="high"
+      media="(min-width: 768.05px)"
+    />
+    <link
+      rel="preload"
+      as="image"
+      href="/src/assets/images/kaiten_home_mobile.webp"
+      type="image/webp"
+      fetchpriority="high"
+      media="(max-width: 768px)"
     />
     <title>Kaiten — Escuela de esquí en Baqueira Beret</title>
     <meta

@@ -14,8 +14,8 @@ export const servicesEn: ServiceTexts = {
       "A group ski experience designed for friends or family, combining learning, fun and the comfort of being with your own people. Everyone progresses at their own pace within a flexible format.",
   },
   "kaiten-2-5": {
-    title: "Kaiten Programs",
-    tagline: "Our intensive improvement programs",
+    title: "Kaiten 2.5",
+    tagline: "Our intensive improvement program",
     description:
       "The Kaiten signature in a two-and-a-half-hour format. An intensive session to get the most out of your time on the snow, with personal follow-up.",
   },
@@ -74,7 +74,7 @@ export const tariffsEn: TariffTexts = {
     maxPeople: "Maximum 4 people",
   },
   "kaiten-2-5": {
-    title: "Kaiten Programs",
+    title: "Kaiten 2.5",
     extra: EXTRA,
     maxPeople: "Maximum 4 people",
   },

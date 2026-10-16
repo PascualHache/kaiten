@@ -93,7 +93,7 @@ export const en: UiDict = {
 
   bookingBand: {
     eyebrow: "Booking",
-    title: "Sort it out on WhatsApp in two messages",
+    title: "Speed up your booking by contacting us directly",
     text: "If you want to **speed up your booking**, **ask us anything** or get **more personal attention**, drop us a message: you talk straight to us, we help you pick the experience that fits your level and we close it without forms",
     steps: [
       "Message us and tell us what you're after",
@@ -114,7 +114,7 @@ export const en: UiDict = {
     experienceLinks: {
       privadas: "Private Lessons",
       family: "Kids & Friends & Family",
-      programs: "Kaiten Programs",
+      programs: "Kaiten 2.5",
       tardeo: "Afternoon (-25%)",
       otras: "Full Day · Safari · Freeride",
       material: "Equipment advice",
@@ -158,7 +158,7 @@ export const en: UiDict = {
     title: "Book your experience",
     lead: "Pick one and we'll take you straight to dates and times.",
     viewAria: "View",
-    viewCards: "Cards",
+    viewCards: "Experiences",
     viewCompare: "Compare",
     tableAria: "Available experiences",
     colExperience: "Experience",
@@ -357,7 +357,7 @@ export const en: UiDict = {
       },
       naiara: {
         meta: "Naiara",
-        heading: "But none of this would exist without Naiara",
+        heading: "But none of this\nwould exist\nwithout Naiara",
         display: [],
         paragraphs: [
           "She is behind much of what you don't see.",

@@ -367,8 +367,8 @@ export const activitiesCa: ActivityTexts = {
   },
 
   "kaiten-2-5": {
-    title: "Kaiten Programs",
-    subtitle: "Els nostres programes de millora intensiva",
+    title: "Kaiten 2.5",
+    subtitle: "El nostre programa de millora intensiva",
     summary: { duration: "2 – 3 dies", people: "1 – 4" },
     features: [
       {

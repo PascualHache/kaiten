@@ -9,6 +9,7 @@ import './BookingBand.css'
  * WhatsApp Web y en móvil la app, sin tener que mantener dos URLs. */
 
 const WHATSAPP_BASE = 'https://wa.me/34699820954'
+const PHONE_URL = 'tel:+34699820954'
 
 export default function BookingBand() {
   const ui = useUi()
@@ -40,15 +41,25 @@ export default function BookingBand() {
               </li>
             ))}
           </ol>
-          <a
-            className="booking-band__btn"
-            href={whatsappUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <IconBrandWhatsapp size={18} stroke={2} aria-hidden="true" />
-            {ui.bookingBand.button}
-          </a>
+          <div className="booking-band__actions">
+            <a
+              className="booking-band__btn"
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <IconBrandWhatsapp size={18} stroke={2} aria-hidden="true" />
+              {ui.bookingBand.button}
+            </a>
+            {/* Mismo par de acciones que `.reservas__custom`: el teléfono es la
+                salida para quien no quiere escribir. */}
+            <a
+              className="booking-band__btn booking-band__btn--secondary"
+              href={PHONE_URL}
+            >
+              {ui.reservas.call}
+            </a>
+          </div>
         </div>
       </div>
     </section>

@@ -48,8 +48,8 @@ export const SERVICES: Service[] = [
   },
   {
     id: "kaiten-2-5",
-    title: "Kaiten Programs",
-    tagline: "Nuestros programas de mejora intensiva",
+    title: "Kaiten 2.5",
+    tagline: "Nuestro programa de mejora intensiva",
     description:
       "El sello Kaiten en un formato de 2 horas y media. Una sesión intensiva para sacar el máximo partido a tu tiempo en la nieve con seguimiento personalizado.",
     image: clasesKaiten25,

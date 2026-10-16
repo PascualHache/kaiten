@@ -1,3 +1,8 @@
+/* Las tipografías van autoalojadas: @font-face generados por
+   scripts/fetch-fonts.mjs. El @import tiene que ir antes que cualquier
+   regla, incluido :root — Vite lo inlinea en el CSS del build. */
+@import "./fonts.css";
+
 :root {
   --navbar-height: 3.25rem;
   --content-max-width: 1400px;

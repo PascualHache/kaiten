@@ -139,7 +139,11 @@ function Nosotros() {
                       </span>
                       <span className="k-eyebrow">{text.meta}</span>
                     </span>
-                    <h2>{text.heading}</h2>
+                    <h2>
+                      {/* Los saltos del diccionario mandan: el titular de
+                          Naiara se parte a propósito en tres filas. */}
+                      <RichText text={text.heading} />
+                    </h2>
                   </div>
                 </div>
                 {/* El retrato es un ítem más de la rejilla, no un hijo de la
