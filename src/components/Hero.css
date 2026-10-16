@@ -277,8 +277,19 @@
     display: none;
   }
 
-  .hero__frame {
+  /* Sin etiquetas laterales, el hueco central de la máscara ya no protege
+     nada: solo abría un agujero en el velo justo donde cae el titular, que
+     quedaba negro sobre la foto. Aquí el velo es continuo y de abajo arriba,
+     porque en móvil el bloque de texto está anclado al pie. */
+  .hero__scrim {
     mask-image: none;
     -webkit-mask-image: none;
+    background: linear-gradient(
+      to top,
+      rgba(230, 229, 225, 0.93) 0%,
+      rgba(230, 229, 225, 0.86) 42%,
+      rgba(230, 229, 225, 0.45) 72%,
+      rgba(230, 229, 225, 0) 100%
+    );
   }
 }

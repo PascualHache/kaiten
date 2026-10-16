@@ -384,13 +384,20 @@ a.footer__social-pill:hover {
     gap: 2rem;
   }
 
+  /* En columna los botones ocupan el ancho de la tira: con el `align-items:
+     center` de la regla base se quedaban a ancho de texto y centrados, dos
+     píldoras estrechas bajo un titular a sangre. */
   .footer__cta-actions {
     flex-direction: column;
+    align-items: stretch;
     width: 100%;
   }
 
   .footer__cta-btn {
     justify-content: center;
+    width: 100%;
+    height: 48px;
+    padding: 0 1rem;
   }
 
   .footer__body {

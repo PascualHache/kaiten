@@ -1,5 +1,6 @@
 import { Suspense, lazy } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import * as Sentry from '@sentry/react'
 import Home from './pages/Home'
 import Nosotros from './pages/Nosotros'
 import Reservas from './pages/Reservas'
@@ -12,6 +13,10 @@ import WhatsAppPill from './components/WhatsAppPill'
 import NotFound from './pages/NotFound'
 import { useScrollAnimations } from './hooks/useScrollAnimations'
 import './App.css'
+
+/* Envoltorio de Sentry sobre <SentryRoutes>: nombra cada transacción con el patrón
+   de ruta en vez de con la URL. Sin DSN es un paso a través inocuo. */
+const SentryRoutes = Sentry.withSentryReactRouterV7Routing(Routes)
 
 /* Las legales van aparte: su texto, multiplicado por los tres idiomas, pesa
    más que el resto de la web junta y casi nadie las abre. */
@@ -33,7 +38,7 @@ function Shell() {
         {/* Sin pantalla de carga: los trozos diferidos son solo las legales y
             llegan en un parpadeo; un spinner ahí molestaría más que ayudar. */}
         <Suspense fallback={null}>
-          <Routes>
+          <SentryRoutes>
             <Route path="/" element={<Home />} />
             <Route path="/nosotros" element={<Nosotros />} />
             <Route path="/reservas" element={<Reservas />} />
@@ -47,7 +52,7 @@ function Shell() {
             {/* Comodín: sin esto, el rewrite de Vercel deja cualquier URL
                 inventada en una página en blanco con estado 200 */}
             <Route path="*" element={<NotFound />} />
-          </Routes>
+          </SentryRoutes>
         </Suspense>
       </div>
       <WhatsAppPill />
