@@ -101,7 +101,7 @@ export const es = {
 
   bookingBand: {
     eyebrow: "Reservas",
-    title: "Resuélvelo por WhatsApp en dos mensajes",
+    title: "Agiliza tu reserva contactando directamente",
     text: "Si quieres **agilizar tu reserva**, **consultarnos cualquier duda** o recibir una **atención más personalizada**, escríbenos: hablas directamente con nosotros, te ayudamos a elegir la experiencia que encaja con tu nivel y lo dejamos cerrado sin formularios",
     steps: [
       "Escríbenos y cuéntanos qué buscas",
@@ -122,7 +122,7 @@ export const es = {
     experienceLinks: {
       privadas: "Clases Privadas",
       family: "Kids & Friends & Family",
-      programs: "Kaiten Programs",
+      programs: "Kaiten 2.5",
       tardeo: "Tardeo (-25%)",
       otras: "Full Day · Safari · Freeride",
       material: "Asesoramiento de material",
@@ -167,7 +167,7 @@ export const es = {
     title: "Reserva tu experiencia",
     lead: "Elige una y te llevamos directo a fechas y horas.",
     viewAria: "Vista",
-    viewCards: "Tarjetas",
+    viewCards: "Experiencias",
     viewCompare: "Comparar",
     tableAria: "Experiencias disponibles",
     colExperience: "Experiencia",
@@ -369,7 +369,7 @@ export const es = {
       },
       naiara: {
         meta: "Naiara",
-        heading: "Pero nada de esto existiría sin Naiara",
+        heading: "Pero nada de esto\nexistiría sin\nNaiara",
         display: [],
         paragraphs: [
           "Ella está detrás de gran parte de lo que no se ve.",

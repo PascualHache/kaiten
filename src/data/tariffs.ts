@@ -66,7 +66,7 @@ export const TARIFFS: Tariff[] = [
     id: "kaiten-2-5",
     number: "04",
     slug: "experiencia-kaiten-2.5",
-    title: "Kaiten Programs",
+    title: "Kaiten 2.5",
     price: "138€",
     extra: "5€ / persona y hora",
     maxPeople: "Máximo 4 personas",

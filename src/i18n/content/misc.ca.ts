@@ -14,8 +14,8 @@ export const servicesCa: ServiceTexts = {
       "Experiència d'esquí en grup pensada per a amics o família, on combines aprenentatge, diversió i la comoditat d'estar acompanyat pels teus. Cada persona progressa al seu ritme dins d'una dinàmica flexible.",
   },
   "kaiten-2-5": {
-    title: "Kaiten Programs",
-    tagline: "Els nostres programes de millora intensiva",
+    title: "Kaiten 2.5",
+    tagline: "El nostre programa de millora intensiva",
     description:
       "El segell Kaiten en un format de 2 hores i mitja. Una sessió intensiva per treure el màxim partit al teu temps a la neu amb seguiment personalitzat.",
   },
@@ -74,7 +74,7 @@ export const tariffsCa: TariffTexts = {
     maxPeople: "Màxim 4 persones",
   },
   "kaiten-2-5": {
-    title: "Kaiten Programs",
+    title: "Kaiten 2.5",
     extra: EXTRA,
     maxPeople: "Màxim 4 persones",
   },

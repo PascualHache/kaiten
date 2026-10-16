@@ -30,29 +30,6 @@
 .nos__media--chapter { width: min(100% - 4rem, 22rem); margin: var(--space-2) 0 0 auto; border-radius: var(--radius-card); background: none; }
 .nos__media--chapter > img { position: static; width: 100%; height: auto; aspect-ratio: 3 / 4; object-fit: contain; }
 
-/* Capítulo con retrato: por debajo del umbral de tres columnas se apila en una
-   sola (titular, foto, texto) — con el auto-fit heredado quedarían dos y la
-   foto colgaría junto al titular. La cabecera deja de ser pegajosa: una foto
-   alta arrastrada por un sticky se lee mal. */
-.nos__chapter--portrait { grid-template-columns: minmax(0, 1fr); align-items: start; }
-.nos__chapter--portrait .nos__chapter-head { position: static; }
-
-/* Tres columnas: titular · retrato · texto. El retrato se estira de la línea
-   superior a la inferior de la fila, así su borde de arriba coincide con el
-   del titular y el de abajo con el final del último párrafo. La altura la
-   marca la columna de texto, de modo que la foto se recorta (cover) en vez de
-   estirar la fila. */
-@media (min-width: 900px) {
-  .nos__chapter--portrait { grid-template-columns: minmax(0, 1fr) minmax(9rem, 0.8fr) minmax(0, 1.15fr); align-items: stretch; }
-  .nos__media--chapter { width: auto; margin: 0; align-self: stretch; min-height: 20rem; }
-  .nos__media--chapter > img { position: absolute; inset: 0; width: 100%; height: 100%; aspect-ratio: auto; object-fit: cover; object-position: center; }
-  /* El texto arranca algo por debajo del titular y de la foto: las tres
-     columnas alineadas a la misma línea superior leían como una tabla. El
-     retrato se estira hasta el final del párrafo, así que este aire solo
-     desplaza el inicio del texto, no desalinea el borde inferior. */
-  .nos__chapter--portrait .nos__chapter-body { padding-top: clamp(4rem, 9vw, 7rem); }
-}
-
 .nos__media-caption { position: absolute; left: 0; right: 0; bottom: 0; padding: clamp(1.5rem, 3.5vw, 2.5rem); display: flex; flex-direction: column; gap: var(--space-3); }
 .nos__media-caption .k-rule { background: #000; }
 .nos__media-caption h2 { font-size: clamp(1.5rem, 3vw, 2.25rem); line-height: 1.08; max-width: 14ch; color: #000; text-wrap: balance; }
@@ -73,7 +50,7 @@
 .nos__credential p { font-size: var(--text-sm); line-height: 1.5; color: var(--color-text-muted); }
 
 /* Historia */
-.nos__chapter { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr)); gap: var(--space-6) clamp(2rem, 5vw, 5rem); padding: clamp(2rem, 4vw, 3.5rem) 0; border-top: var(--border-hairline) solid var(--color-border); }
+.nos__chapter { --chapter-gap: clamp(2rem, 5vw, 5rem); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr)); gap: var(--space-6) var(--chapter-gap); padding: clamp(2rem, 4vw, 3.5rem) 0; border-top: var(--border-hairline) solid var(--color-border); }
 .nos__chapter-head { position: sticky; top: calc(var(--navbar-h) + 2rem); display: flex; flex-direction: column; gap: var(--space-3); }
 .nos__chapter-head h2 { font-size: var(--text-h2); line-height: 1.08; max-width: 16ch; text-wrap: balance; }
 .nos__chapter-meta { display: flex; gap: var(--space-3); align-items: baseline; }
@@ -82,6 +59,44 @@
 .nos__chapter-body > p { font-size: var(--text-lg); line-height: 1.7; text-wrap: pretty; }
 .nos__chapter-display { margin-bottom: var(--space-2); font-family: var(--font-heading); font-weight: var(--weight-bold); font-size: clamp(2rem, 4.5vw, 3.5rem) !important; line-height: 1 !important; letter-spacing: var(--tracking-heading); color: var(--color-text-accent); }
 .nos__chapter-display span { display: block; }
+
+/* Las reglas del capítulo con retrato van DESPUÉS de las de .nos__chapter:
+   misma especificidad (una clase), así que a mayor distancia en el archivo
+   gana la última. Puestas antes, el auto-fit de .nos__chapter se imponía y la
+   rejilla de tres columnas de aquí abajo no llegaba a aplicarse.
+
+   Capítulo con retrato: por debajo del umbral de tres columnas se apila en una
+   sola (titular, foto, texto) — con el auto-fit heredado quedarían dos y la
+   foto colgaría junto al titular. La cabecera deja de ser pegajosa: una foto
+   alta arrastrada por un sticky se lee mal. */
+.nos__chapter--portrait { grid-template-columns: minmax(0, 1fr); align-items: start; }
+.nos__chapter--portrait .nos__chapter-head { position: static; }
+
+/* El titular de este capítulo ya viene partido en tres filas desde el
+   diccionario: sin tope de ancho, los únicos saltos son esos (con 16ch, "Pero
+   nada de esto" se partía otra vez y salían cuatro líneas). */
+.nos__chapter--portrait .nos__chapter-head h2 { max-width: none; }
+
+/* Tres columnas: titular · retrato · texto. El retrato se estira de la línea
+   superior a la inferior de la fila, así su borde de arriba coincide con el
+   del titular y el de abajo con el final del último párrafo. La altura la
+   marca la columna de texto, de modo que la foto se recorta (cover) en vez de
+   estirar la fila. */
+@media (min-width: 900px) {
+  /* La tercera columna mide exactamente lo que una columna del capítulo sin
+     retrato — (100% - gap) / 2 —, así el texto arranca en la misma vertical
+     que el de los capítulos anteriores. Lo que sobra se reparte entre titular
+     y foto, con el titular más estrecho para que el retrato corra a la
+     izquierda. */
+  .nos__chapter--portrait { grid-template-columns: minmax(0, 0.62fr) minmax(9rem, 1fr) calc((100% - var(--chapter-gap)) / 2); align-items: stretch; }
+  /* El retrato manda la altura de la fila: se ve entero en su 3:4, sin
+     recortarse contra la altura del texto. */
+  .nos__media--chapter { width: auto; margin: 0; align-self: start; height: auto; aspect-ratio: 3 / 4; }
+  .nos__media--chapter > img { position: absolute; inset: 0; width: 100%; height: 100%; aspect-ratio: auto; object-fit: cover; object-position: center; }
+  /* El texto se ancla abajo: la fila la marca la foto (la más alta), así el
+     final del último párrafo cae en la misma línea que su borde inferior. */
+  .nos__chapter--portrait .nos__chapter-body { padding-top: 0; align-self: end; }
+}
 
 /* Valores */
 .nos__values { background: var(--color-surface-raised); padding: var(--section-y) var(--gutter); }

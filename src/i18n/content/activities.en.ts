@@ -367,8 +367,8 @@ export const activitiesEn: ActivityTexts = {
   },
 
   "kaiten-2-5": {
-    title: "Kaiten Programs",
-    subtitle: "Our intensive improvement programs",
+    title: "Kaiten 2.5",
+    subtitle: "Our intensive improvement program",
     summary: { duration: "2 – 3 days", people: "1 – 4" },
     features: [
       {

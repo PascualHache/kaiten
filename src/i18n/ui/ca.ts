@@ -93,7 +93,7 @@ export const ca: UiDict = {
 
   bookingBand: {
     eyebrow: "Reserves",
-    title: "Resol-ho per WhatsApp en dos missatges",
+    title: "Agilitza la teva reserva contactant directament",
     text: "Si vols **agilitzar la teva reserva**, **consultar-nos qualsevol dubte** o rebre una **atenció més personalitzada**, escriu-nos: parles directament amb nosaltres, t'ajudem a triar l'experiència que encaixa amb el teu nivell i ho deixem tancat sense formularis",
     steps: [
       "Escriu-nos i explica'ns què busques",
@@ -114,7 +114,7 @@ export const ca: UiDict = {
     experienceLinks: {
       privadas: "Classes Privades",
       family: "Kids & Friends & Family",
-      programs: "Kaiten Programs",
+      programs: "Kaiten 2.5",
       tardeo: "Tardeo (-25%)",
       otras: "Full Day · Safari · Freeride",
       material: "Assessorament de material",
@@ -159,7 +159,7 @@ export const ca: UiDict = {
     title: "Reserva la teva experiència",
     lead: "Tria'n una i et portem directe a dates i hores.",
     viewAria: "Vista",
-    viewCards: "Targetes",
+    viewCards: "Experiències",
     viewCompare: "Comparar",
     tableAria: "Experiències disponibles",
     colExperience: "Experiència",
@@ -361,7 +361,7 @@ export const ca: UiDict = {
       },
       naiara: {
         meta: "Naiara",
-        heading: "Però res d'això existiria sense la Naiara",
+        heading: "Però res d'això\nexistiria sense\nla Naiara",
         display: [],
         paragraphs: [
           "Ella és darrere de gran part del que no es veu.",

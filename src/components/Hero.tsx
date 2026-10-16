@@ -29,7 +29,7 @@ function Hero() {
           className="hero__bg"
           src={heroPhoto}
           alt={ui.hero.photoAlt}
-          loading="eager"
+          fetchPriority="high"
           decoding="async"
         />
       </picture>
