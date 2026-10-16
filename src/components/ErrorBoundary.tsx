@@ -22,9 +22,6 @@ interface ErrorBoundaryState {
  * el visitante no tiene forma de llegar a reservar. El fallback es HTML plano
  * (`<a href>`, no `<Link>`) a propósito: si lo que ha fallado es el Router, un
  * `<Link>` reventaría dentro del propio fallback.
- *
- * Pendiente: cuando se integre Sentry, `componentDidCatch` es el sitio donde va
- * `Sentry.captureException(error, { extra: info })`.
  */
 class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   state: ErrorBoundaryState = { hasError: false };
@@ -34,7 +31,9 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   }
 
   componentDidCatch(error: Error, info: ErrorInfo) {
-    // Hasta que entre Sentry, al menos queda rastro en la consola del navegador.
+    /* El reporte a Sentry no se hace aquí, sino con `onCaughtError` en
+       main.tsx: React 19 ya avisa por esa vía de todo lo que absorbe este
+       boundary, y duplicarlo crearía dos issues por cada fallo. */
     console.error("[Kaiten] Error no capturado:", error, info.componentStack);
   }
 

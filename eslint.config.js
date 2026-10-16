@@ -8,6 +8,11 @@ import { defineConfig, globalIgnores } from 'eslint/config'
 export default defineConfig([
   globalIgnores(['dist']),
   {
+    // Ficheros de configuración y scripts: corren en Node, no en el navegador.
+    files: ['*.config.js', 'scripts/**/*.mjs'],
+    languageOptions: { globals: globals.node },
+  },
+  {
     files: ['**/*.{ts,tsx}'],
     extends: [
       js.configs.recommended,

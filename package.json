@@ -12,6 +12,7 @@
     "check:booking": "node scripts/check-booking-ids.mjs"
   },
   "dependencies": {
+    "@sentry/react": "^11.8.0",
     "@tabler/icons-react": "^3.40.0",
     "gsap": "^3.15.0",
     "react": "^19.2.4",
@@ -20,6 +21,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.39.4",
+    "@sentry/vite-plugin": "^11.8.0",
     "@types/node": "^25.5.0",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
