@@ -58,7 +58,7 @@ export const cookiesCa: LegalSection[] = [
       ]},
       { kind: "p", text: "Aquestes galetes no requereixen consentiment." },
       { kind: "p", text: "Galetes de preferències: permeten recordar configuracions triades per l'usuari, com l'idioma o preferències de navegació." },
-      { kind: "p", text: "Galetes analítiques: ens permeten conèixer com utilitzen els usuaris la pàgina web amb l'objectiu de millorar contínuament els nostres continguts i serveis. Aquestes galetes només s'instal·laran quan l'usuari les accepti expressament." },
+      { kind: "p", text: "Galetes analítiques: ens permeten conèixer com utilitzen els usuaris la pàgina web amb l'objectiu de millorar contínuament els nostres continguts i serveis. Aquestes galetes només s'instal·laran quan l'usuari les accepti expressament. Actualment aquest lloc web no utilitza galetes analítiques: les estadístiques d'ús s'obtenen mitjançant una eina de mesurament sense galetes (Vercel Web Analytics), que no emmagatzema informació al dispositiu de l'usuari ni permet identificar-lo." },
       { kind: "p", text: "Galetes de màrqueting: es poden utilitzar per mesurar l'eficàcia de campanyes publicitàries o mostrar continguts més rellevants per a l'usuari. Aquestes galetes només s'instal·laran amb consentiment previ." },
     ],
   },
@@ -105,7 +105,7 @@ export const cookiesCa: LegalSection[] = [
     title: "8. Galetes de tercers",
     blocks: [
       { kind: "p", text: "Aquest lloc web pot integrar serveis proporcionats per tercers, entre ells:" },
-      { kind: "ul", items: ["Google Analytics 4", "Google Maps", "YouTube", "Google Fonts", "Instagram", "WhatsApp"] },
+      { kind: "ul", items: ["Google Maps", "YouTube", "Instagram", "WhatsApp"] },
       { kind: "p", text: "Cadascun d'aquests proveïdors disposa de la seva pròpia política de privacitat i de galetes, i és responsable del tractament de la informació obtinguda mitjançant els seus serveis. KAITEN no controla les galetes gestionades directament per aquests tercers." },
     ],
   },

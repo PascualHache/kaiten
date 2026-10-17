@@ -58,7 +58,7 @@ export const cookiesEn: LegalSection[] = [
       ]},
       { kind: "p", text: "These cookies do not require consent." },
       { kind: "p", text: "Preference cookies: allow settings chosen by the user to be remembered, such as language or browsing preferences." },
-      { kind: "p", text: "Analytics cookies: let us understand how users use the website so we can keep improving our content and services. These cookies are only installed when the user expressly accepts them." },
+      { kind: "p", text: "Analytics cookies: let us understand how users use the website so we can keep improving our content and services. These cookies are only installed when the user expressly accepts them. This website does not currently use analytics cookies: usage statistics are collected through a cookieless measurement tool (Vercel Web Analytics), which stores no information on the user's device and cannot identify them." },
       { kind: "p", text: "Marketing cookies: may be used to measure the effectiveness of advertising campaigns or to show more relevant content. These cookies are only installed with prior consent." },
     ],
   },
@@ -105,7 +105,7 @@ export const cookiesEn: LegalSection[] = [
     title: "8. Third-party cookies",
     blocks: [
       { kind: "p", text: "This website may embed services provided by third parties, including:" },
-      { kind: "ul", items: ["Google Analytics 4", "Google Maps", "YouTube", "Google Fonts", "Instagram", "WhatsApp"] },
+      { kind: "ul", items: ["Google Maps", "YouTube", "Instagram", "WhatsApp"] },
       { kind: "p", text: "Each of these providers has its own privacy and cookie policy and is responsible for processing the information obtained through its services. KAITEN does not control cookies managed directly by those third parties." },
     ],
   },
