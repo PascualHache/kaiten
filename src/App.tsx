@@ -1,6 +1,7 @@
 import { Suspense, lazy } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import * as Sentry from '@sentry/react'
+import { Analytics } from '@vercel/analytics/react'
 import Home from './pages/Home'
 import Nosotros from './pages/Nosotros'
 import Reservas from './pages/Reservas'
@@ -56,6 +57,10 @@ function Shell() {
         </Suspense>
       </div>
       <WhatsAppPill />
+      {/* Analítica de Vercel: sin cookies ni identificador de visitante, así que
+          no entra en el banner de consentimiento. Solo se carga en despliegues
+          de Vercel; en local es un no-op. */}
+      <Analytics />
     </div>
   )
 }

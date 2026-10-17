@@ -58,7 +58,7 @@ export const COOKIES_SECTIONS: LegalSection[] = [
       ]},
       { kind: "p", text: "Estas cookies no requieren consentimiento." },
       { kind: "p", text: "Cookies de preferencias: Permiten recordar configuraciones elegidas por el usuario, como idioma o preferencias de navegación." },
-      { kind: "p", text: "Cookies analíticas: Nos permiten conocer cómo utilizan los usuarios la página web con el objetivo de mejorar continuamente nuestros contenidos y servicios. Estas cookies únicamente se instalarán cuando el usuario las acepte expresamente." },
+      { kind: "p", text: "Cookies analíticas: Nos permiten conocer cómo utilizan los usuarios la página web con el objetivo de mejorar continuamente nuestros contenidos y servicios. Estas cookies únicamente se instalarán cuando el usuario las acepte expresamente. Actualmente este sitio web no utiliza cookies analíticas: las estadísticas de uso se obtienen mediante una herramienta de medición sin cookies (Vercel Web Analytics), que no almacena información en el dispositivo del usuario ni permite identificarlo." },
       { kind: "p", text: "Cookies de marketing: Pueden utilizarse para medir la eficacia de campañas publicitarias o mostrar contenidos más relevantes para el usuario. Estas cookies solo se instalarán previo consentimiento." },
     ],
   },
@@ -105,7 +105,7 @@ export const COOKIES_SECTIONS: LegalSection[] = [
     title: "8. Cookies de terceros",
     blocks: [
       { kind: "p", text: "Este sitio web puede integrar servicios proporcionados por terceros, entre ellos:" },
-      { kind: "ul", items: ["Google Analytics 4", "Google Maps", "YouTube", "Google Fonts", "Instagram", "WhatsApp"] },
+      { kind: "ul", items: ["Google Maps", "YouTube", "Instagram", "WhatsApp"] },
       { kind: "p", text: "Cada uno de estos proveedores dispone de su propia política de privacidad y de cookies, siendo responsable del tratamiento de la información obtenida mediante sus servicios. KAITEN no controla las cookies gestionadas directamente por dichos terceros." },
     ],
   },
