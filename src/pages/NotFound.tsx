@@ -1,15 +1,18 @@
-import { useEffect } from "react";
+import { Suspense, lazy, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { IconArrowRight, IconBrandWhatsapp } from "@tabler/icons-react";
-import Footer from "../components/Footer";
-import PageTitle from "../components/PageTitle";
 import { useUi } from "../i18n";
 import "./NotFound.css";
 
 const WHATSAPP_URL = "https://wa.me/34699820954";
 
-/* Solo las rutas: la etiqueta la pone ui.nav.links y la frase,
-   ui.notFound.suggestions. */
+/* El minijuego va en su propio trozo: es código que solo se ejecuta en una
+   URL inventada, y no tiene por qué viajar en el paquete principal. Mientras
+   llega, su hueco se reserva para que la página no dé un salto. */
+const SkiGame = lazy(() => import("../components/SkiGame"));
+
+/* Solo las rutas: la etiqueta la pone ui.nav.links, la etiqueta corta
+   ui.notFound.shortLinks y la frase ui.notFound.suggestions. */
 const SUGGESTIONS = [
   { key: "reservas", to: "/reservas" },
   { key: "tarifas", to: "/tarifas" },
@@ -25,6 +28,9 @@ const SUGGESTIONS = [
  * desde una SPA estática. Para que Google no indexe estas URLs como páginas
  * buenas (soft 404), se inyecta `robots: noindex` mientras la página está
  * montada y se retira al salir.
+ *
+ * La vista ocupa exactamente el alto libre bajo la navbar y no hace scroll:
+ * el minijuego necesita un alto conocido para dimensionar su lienzo.
  */
 function NotFound() {
   const ui = useUi();
@@ -44,44 +50,73 @@ function NotFound() {
     };
   }, [ui.notFound.documentTitle]);
 
+  const actions = (
+    <div className="not-found__actions">
+      <Link to="/" className="k-btn k-btn--cta not-found__cta">
+        {ui.notFound.home}
+        <IconArrowRight size={18} aria-hidden="true" />
+      </Link>
+      <a
+        className="k-btn k-btn--ghost not-found__ghost"
+        href={WHATSAPP_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <IconBrandWhatsapp size={18} aria-hidden="true" />
+        {ui.notFound.whatsapp}
+      </a>
+    </div>
+  );
+
   return (
-    <div className="not-found">
-      <main className="not-found__sheet">
-        <PageTitle eyebrow={ui.notFound.eyebrow}>{ui.notFound.title}</PageTitle>
+    <main className="not-found">
+      <div className="not-found__intro">
+        <div className="not-found__head">
+          <span className="not-found__eyebrow">{ui.notFound.eyebrow}</span>
+          <h1 className="not-found__title">{ui.notFound.title}</h1>
+          <span className="not-found__rule" aria-hidden="true" />
+          <p className="not-found__lead">{ui.notFound.lead}</p>
+        </div>
 
-        <p className="not-found__lead">{ui.notFound.lead}</p>
-
+        {/* Lista completa — a partir de 880px, donde hay una columna para ella */}
         <nav className="not-found__links" aria-label={ui.notFound.suggestionsAria}>
           {SUGGESTIONS.map((item) => (
             <Link key={item.to} to={item.to} className="not-found__link">
-              <span className="not-found__link-label">
-                {ui.nav.links[item.key]}
-                <IconArrowRight size={18} aria-hidden="true" />
+              <span className="not-found__link-text">
+                <span className="not-found__link-label">{ui.nav.links[item.key]}</span>
+                <span className="not-found__link-desc">
+                  {ui.notFound.suggestions[item.key]}
+                </span>
               </span>
-              <span className="not-found__link-desc">
-                {ui.notFound.suggestions[item.key]}
-              </span>
+              <IconArrowRight size={20} aria-hidden="true" />
             </Link>
           ))}
         </nav>
 
-        <div className="not-found__actions">
-          <Link to="/" className="not-found__btn">
-            {ui.notFound.home}
-          </Link>
-          <a
-            href={WHATSAPP_URL}
-            className="not-found__wa"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <IconBrandWhatsapp size={20} aria-hidden="true" />
-            {ui.notFound.whatsapp}
-          </a>
-        </div>
-      </main>
-      <Footer />
-    </div>
+        {actions}
+      </div>
+
+      <div className="not-found__game">
+        <Suspense fallback={<div className="not-found__game-skeleton" aria-hidden="true" />}>
+          <SkiGame />
+        </Suspense>
+      </div>
+
+      {/* Versión compacta de lo anterior, por debajo de 880px */}
+      <div className="not-found__compact">
+        <nav className="not-found__chips" aria-label={ui.notFound.suggestionsAria}>
+          {SUGGESTIONS.map((item) => (
+            <Link key={item.to} to={item.to} className="not-found__chip">
+              <span className="not-found__chip-label">
+                {ui.notFound.shortLinks[item.key]}
+              </span>
+              <IconArrowRight size={16} aria-hidden="true" />
+            </Link>
+          ))}
+        </nav>
+        {actions}
+      </div>
+    </main>
   );
 }
 

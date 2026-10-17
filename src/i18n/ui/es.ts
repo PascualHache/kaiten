@@ -149,7 +149,7 @@ export const es = {
   notFound: {
     documentTitle: "Página no encontrada — Kaiten",
     eyebrow: "Error 404",
-    title: "Esta pista no existe",
+    title: "Esta página no existe",
     lead: "La página que buscas se ha movido o nunca estuvo aquí. Te dejamos los caminos más transitados",
     suggestionsAria: "Páginas sugeridas",
     suggestions: {
@@ -158,8 +158,32 @@ export const es = {
       niveles: "Encuentra tu nivel y la experiencia que le encaja",
       faq: "Punto de encuentro, material, cancelaciones",
     },
+    shortLinks: {
+      reservas: "Reservas",
+      tarifas: "Tarifas",
+      niveles: "Niveles",
+      faq: "FAQ",
+    },
     home: "Volver al inicio",
-    whatsapp: "Escríbenos por WhatsApp",
+    whatsapp: "WhatsApp",
+    game: {
+      aria: "Minijuego",
+      title: "Mientras tanto, baja la pista",
+      hintKeyboard: "Flechas ← → · Enter para empezar o pausar",
+      hintTouch: "Toca para girar",
+      meters: "Metros",
+      record: "Récord {n} m",
+      idleTitle: "¿Una bajada?",
+      idleTextKeyboard: "Gira con las flechas del teclado",
+      idleTextTouch: "Mantén pulsado a izquierda o derecha para girar",
+      idleButton: "Salir",
+      pausedTitle: "En pausa",
+      pausedButton: "Seguir",
+      overTitle: "Árbol. Hasta aquí la bajada",
+      overRecord: "Nuevo récord: {n} m",
+      overScore: "{n} m esta vez",
+      overButton: "Otra bajada",
+    },
   },
 
   reservas: {

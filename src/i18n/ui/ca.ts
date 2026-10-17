@@ -141,7 +141,7 @@ export const ca: UiDict = {
   notFound: {
     documentTitle: "Pàgina no trobada — Kaiten",
     eyebrow: "Error 404",
-    title: "Aquesta pista no existeix",
+    title: "Aquesta pàgina no existeix",
     lead: "La pàgina que busques s'ha mogut o mai no va ser aquí. Et deixem els camins més transitats",
     suggestionsAria: "Pàgines suggerides",
     suggestions: {
@@ -150,8 +150,32 @@ export const ca: UiDict = {
       niveles: "Troba el teu nivell i l'experiència que hi encaixa",
       faq: "Punt de trobada, material, cancel·lacions",
     },
+    shortLinks: {
+      reservas: "Reserves",
+      tarifas: "Tarifes",
+      niveles: "Nivells",
+      faq: "FAQ",
+    },
     home: "Tornar a l'inici",
-    whatsapp: "Escriu-nos per WhatsApp",
+    whatsapp: "WhatsApp",
+    game: {
+      aria: "Minijoc",
+      title: "Mentrestant, baixa la pista",
+      hintKeyboard: "Fletxes ← → · Enter per començar o pausar",
+      hintTouch: "Toca per girar",
+      meters: "Metres",
+      record: "Rècord {n} m",
+      idleTitle: "Una baixada?",
+      idleTextKeyboard: "Gira amb les fletxes del teclat",
+      idleTextTouch: "Mantén premut a esquerra o dreta per girar",
+      idleButton: "Sortir",
+      pausedTitle: "En pausa",
+      pausedButton: "Seguir",
+      overTitle: "Arbre. Fins aquí la baixada",
+      overRecord: "Nou rècord: {n} m",
+      overScore: "{n} m aquesta vegada",
+      overButton: "Una altra baixada",
+    },
   },
 
   reservas: {
