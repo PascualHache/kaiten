@@ -4,6 +4,15 @@
   "trailingSlash": false,
   "redirects": [
     {
+      "_comment": "Enlaces antiguos a la ficha de una experiencia. Cada una tiene ahora su propia ruta (/reservas/<slug>) para ser indexable; el 301 traspasa lo que hubieran acumulado y evita que Google vea dos URL con el mismo contenido. Va antes que el rewrite: los redirects se resuelven primero.",
+      "source": "/reservas",
+      "has": [
+        { "type": "query", "key": "actividad", "value": "(?<slug>.+)" }
+      ],
+      "destination": "/reservas/:slug",
+      "permanent": true
+    },
+    {
       "source": "/(.*)",
       "has": [{ "type": "host", "value": "www.kaitenski.com" }],
       "destination": "https://kaitenski.com/$1",

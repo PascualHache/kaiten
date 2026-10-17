@@ -17,8 +17,10 @@
  */
 
 import { es } from "../i18n/ui/es";
+import { ACTIVITIES } from "../data/activities";
 import { TARIFFS } from "../data/tariffs";
-import { OG_IMAGE, SITE_URL, canonicalUrl } from "./routes";
+import { bookingHref } from "../data/booking";
+import { OG_IMAGE, SITE_URL, canonicalUrl, findRoute } from "./routes";
 
 /** Identificador estable de la escuela: el resto de nodos lo referencian. */
 const BUSINESS_ID = `${SITE_URL}/#escuela`;
@@ -160,7 +162,7 @@ function offerCatalog() {
           ? `${t.price} ${t.priceNote} · ${t.maxPeople}`
           : `${t.price} · ${t.maxPeople}`,
         availability: "https://schema.org/InStock",
-        url: `${canonicalUrl("/reservas")}?actividad=${encodeURIComponent(t.slug)}`,
+        url: canonicalUrl(bookingHref({ slug: t.slug })),
         seller: { "@id": BUSINESS_ID },
         itemOffered: {
           "@type": "Service",
@@ -191,19 +193,76 @@ function faqPage() {
   };
 }
 
-/** Migas para los resultados: "kaitenski.com › Tarifas" en vez de la URL cruda. */
-function breadcrumb(path: string, name: string) {
+/**
+ * Migas para los resultados: "kaitenski.com › Reservas › Freeride" en vez de
+ * la URL cruda. `trail` son los tramos después de Inicio, en orden.
+ */
+function breadcrumb(...trail: { name: string; path: string }[]) {
   return {
     "@type": "BreadcrumbList",
     itemListElement: [
-      {
+      { "@type": "ListItem", position: 1, name: "Inicio", item: `${SITE_URL}/` },
+      ...trail.map((step, i) => ({
         "@type": "ListItem",
-        position: 1,
-        name: "Inicio",
-        item: `${SITE_URL}/`,
-      },
-      { "@type": "ListItem", position: 2, name, item: canonicalUrl(path) },
+        position: i + 2,
+        name: step.name,
+        item: canonicalUrl(step.path),
+      })),
     ],
+  };
+}
+
+/**
+ * Una experiencia concreta: el `Service` que se vende, con una oferta por
+ * formato (las filas de `TARIFFS` que comparten slug — Safari tiene 3 h y 6 h,
+ * Full Day tiene medio día y día completo).
+ *
+ * Es lo que puede acabar mostrándose como resultado enriquecido para
+ * "clases de esquí particulares Baqueira", así que aquí es donde más rinde.
+ */
+function experience(slug: string) {
+  const activity = ACTIVITIES.find((a) => a.slug === slug);
+  if (!activity) return null;
+
+  const url = canonicalUrl(bookingHref(activity));
+  const rows = TARIFFS.filter((t) => t.slug === slug);
+
+  return {
+    "@type": "Service",
+    "@id": `${url}#servicio`,
+    name: activity.title,
+    serviceType: "Clase de esquí",
+    /* Safari no tiene `subline` ni `subtitle`: antes que dejar el servicio sin
+       descripción, cae en la de búsqueda, que sí está escrita para esta ficha. */
+    description:
+      activity.cta.subline ||
+      activity.subtitle ||
+      findRoute(bookingHref(activity))?.description,
+    url,
+    provider: { "@id": BUSINESS_ID },
+    areaServed: { "@type": "Place", name: "Baqueira Beret" },
+    audience: {
+      "@type": "Audience",
+      /* Los niveles de `activities.ts` son el público al que va dirigida:
+         es lo que distingue Freeride (intermedio/avanzado) de una clase
+         privada, que admite a cualquiera. */
+      audienceType: activity.levels.join(", "),
+    },
+    offers: rows.map((t) => {
+      const price = parsePrice(t.price);
+      return {
+        "@type": "Offer",
+        name: t.title,
+        price: price ?? undefined,
+        priceCurrency: "EUR",
+        description: t.priceNote
+          ? `${t.price} ${t.priceNote} · ${t.maxPeople}`
+          : `${t.price} · ${t.maxPeople}`,
+        availability: "https://schema.org/InStock",
+        url,
+        seller: { "@id": BUSINESS_ID },
+      };
+    }),
   };
 }
 
@@ -229,22 +288,33 @@ export function jsonLdFor(path: string): object | null {
       ];
       break;
     case "/tarifas":
-      graph = [offerCatalog(), breadcrumb(path, "Tarifas")];
+      graph = [offerCatalog(), breadcrumb({ name: "Tarifas", path })];
       break;
     case "/faq":
-      graph = [faqPage(), breadcrumb(path, "Preguntas frecuentes")];
+      graph = [faqPage(), breadcrumb({ name: "Preguntas frecuentes", path })];
       break;
     case "/reservas":
-      graph = [breadcrumb(path, "Reservas")];
+      graph = [breadcrumb({ name: "Reservas", path })];
       break;
     case "/niveles":
-      graph = [breadcrumb(path, "Niveles")];
+      graph = [breadcrumb({ name: "Niveles", path })];
       break;
     case "/nosotros":
-      graph = [breadcrumb(path, "Nosotros")];
+      graph = [breadcrumb({ name: "Nosotros", path })];
       break;
-    default:
-      return null;
+    default: {
+      // Ficha de experiencia: /reservas/<slug>
+      const slug = path.startsWith("/reservas/") ? path.slice(10) : null;
+      const service = slug ? experience(slug) : null;
+      if (!service || !slug) return null;
+      graph = [
+        service,
+        breadcrumb(
+          { name: "Reservas", path: "/reservas" },
+          { name: service.name, path },
+        ),
+      ];
+    }
   }
 
   return { "@context": "https://schema.org", "@graph": graph };

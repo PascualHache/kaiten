@@ -1,7 +1,7 @@
-import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
 import PageTitle from "../components/PageTitle";
 import { useTariffs } from "../i18n/content";
+import { bookingHref } from "../data/booking";
 import { useUi } from "../i18n";
 import "./Tarifas.css";
 
@@ -35,12 +35,14 @@ function Tarifas() {
                   {t.number}
                 </span>
                 <div className="tarifas-table__name">
-                  <Link
+                  {/* <a href>, no <Link>: la ficha monta el widget de Bookeo,
+                      que hornea el producto al cargar su script. */}
+                  <a
                     className="tarifas-table__link"
-                    to={`/reservas#${t.slug}`}
+                    href={bookingHref({ slug: t.slug })}
                   >
                     {t.title}
-                  </Link>
+                  </a>
                 </div>
                 <div className="tarifas-table__price">
                   {t.price}

@@ -1,6 +1,8 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 
+import { ACTIVITIES } from "../src/data/activities.ts";
+import { bookingHref } from "../src/data/booking.ts";
 import { ROUTES, SITE_URL, canonicalUrl } from "../src/seo/routes.ts";
 import { jsonLdFor } from "../src/seo/jsonld.ts";
 
@@ -118,8 +120,8 @@ function buildRobots() {
     `# https://kaitenski.com\n` +
     `User-agent: *\n` +
     `Allow: /\n\n` +
-    `# Nada bloqueado: /reservas?actividad=<slug> es contenido propio (la ficha\n` +
-    `# de cada experiencia) y queremos que se rastree.\n\n` +
+    `# Nada bloqueado: cada experiencia es una página propia en\n` +
+    `# /reservas/<slug> y queremos las ocho rastreadas e indexadas.\n\n` +
     `Sitemap: ${SITE_URL}/sitemap.xml\n`
   );
 }
@@ -154,6 +156,32 @@ export default function seo() {
             `[kaiten-seo] index.html ya no contiene ${tag}: el <head> por ruta no se puede generar`,
           );
         }
+      }
+
+      /* Las ocho fichas de experiencia llevan su texto a mano en
+         `EXPERIENCE_ROUTES`. Si alguien añade una actividad o le cambia el
+         slug, la página existiría sin <title> propio y fuera del sitemap, y
+         nadie se enteraría. Aquí sí. */
+      const declared = new Set(ROUTES.map((r) => r.path));
+      const orphans = ACTIVITIES.map((a) => bookingHref(a)).filter(
+        (path) => !declared.has(path),
+      );
+      if (orphans.length > 0) {
+        throw new Error(
+          `[kaiten-seo] actividad(es) sin entrada en EXPERIENCE_ROUTES ` +
+            `(src/seo/routes.ts):\n   · ${orphans.join("\n   · ")}`,
+        );
+      }
+
+      const slugs = new Set(ACTIVITIES.map((a) => a.slug));
+      const stale = ROUTES.map((r) => r.path)
+        .filter((path) => path.startsWith("/reservas/"))
+        .filter((path) => !slugs.has(path.slice("/reservas/".length)));
+      if (stale.length > 0) {
+        throw new Error(
+          `[kaiten-seo] ruta(s) de experiencia que ya no existen en ACTIVITIES:` +
+            `\n   · ${stale.join("\n   · ")}`,
+        );
       }
 
       const lastmod = new Date().toISOString().slice(0, 10);

@@ -46,6 +46,10 @@ function Shell() {
             <Route path="/" element={<Home />} />
             <Route path="/nosotros" element={<Nosotros />} />
             <Route path="/reservas" element={<Reservas />} />
+            {/* Ficha de una experiencia. Ruta propia, no `?actividad=`: así es
+                una página indexable con su canonical, su título y su JSON-LD.
+                Se llega siempre con <a href> (carga completa) por Bookeo. */}
+            <Route path="/reservas/:slug" element={<Reservas />} />
             <Route path="/tarifas" element={<Tarifas />} />
             <Route path="/niveles" element={<Niveles />} />
             <Route path="/faq" element={<FAQ />} />

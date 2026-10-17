@@ -1,7 +1,5 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { ACTIVITIES } from "../data/activities";
-import { BOOKING_PARAM } from "../data/booking";
 import { canonicalUrl, findRoute } from "./routes";
 
 /**
@@ -29,6 +27,24 @@ function upsertMeta(attr: "name" | "property", key: string, content: string) {
   el.content = content;
 }
 
+/**
+ * `robots: noindex` propio, con marca para no pisarse con el de <NotFound>
+ * (que gestiona el suyo por su cuenta).
+ */
+function setNoindex(on: boolean) {
+  const existing = document.head.querySelector("meta[data-seo-robots]");
+  if (!on) {
+    existing?.remove();
+    return;
+  }
+  if (existing) return;
+  const el = document.createElement("meta");
+  el.setAttribute("name", "robots");
+  el.setAttribute("content", "noindex, follow");
+  el.setAttribute("data-seo-robots", "");
+  document.head.appendChild(el);
+}
+
 function upsertCanonical(href: string) {
   let el = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
   if (!el) {
@@ -40,32 +56,29 @@ function upsertCanonical(href: string) {
 }
 
 export function useSeo() {
-  const { pathname, search } = useLocation();
+  const { pathname } = useLocation();
 
   useEffect(() => {
     const route = findRoute(pathname);
 
-    /* Ruta desconocida: la gestiona <NotFound>, que pone su propio título y un
-       `robots: noindex`. Si escribiéramos aquí lo pisaríamos — el efecto del
-       padre corre después del hijo. */
-    if (!route) return;
+    /* Una experiencia que no existe (/reservas/lo-que-sea) sí casa con la ruta
+       `:slug`, así que <Reservas> enseña el catálogo en vez de un 404 — para
+       quien venía a reservar es mejor respuesta que un error. Pero no tiene
+       fichero estático: Vercel le sirve el index.html de la portada, con su
+       título y su canonical. Le ponemos los del catálogo y `noindex`, o Google
+       vería infinitas URL con el mismo contenido. */
+    const fallback =
+      !route && pathname.startsWith("/reservas/") ? findRoute("/reservas") : null;
 
-    let { title, description } = route;
-    let canonical = canonicalUrl(route.path);
+    /* El resto de rutas desconocidas las gestiona <NotFound>, que pone su
+       propio título y su propio `noindex`. Si escribiéramos aquí lo
+       pisaríamos: el efecto del padre corre después del hijo. */
+    if (!route && !fallback) return;
 
-    /* La ficha de una experiencia es contenido propio dentro de /reservas, así
-       que merece su título y su canonical con el parámetro. El catálogo (sin
-       parámetro) se queda con los de la ruta. */
-    if (route.path === "/reservas") {
-      const slug = new URLSearchParams(search).get(BOOKING_PARAM);
-      const activity = slug && ACTIVITIES.find((a) => a.slug === slug);
-      if (activity) {
-        title = `${activity.title} en Baqueira | Kaiten`;
-        description = activity.cta.subline || description;
-        canonical = `${canonical}?${BOOKING_PARAM}=${encodeURIComponent(activity.slug)}`;
-      }
-    }
+    const { title, description } = (route ?? fallback)!;
+    const canonical = canonicalUrl((route ?? fallback)!.path);
 
+    setNoindex(!route);
     document.title = title;
     upsertMeta("name", "description", description);
     upsertCanonical(canonical);
@@ -76,5 +89,5 @@ export function useSeo() {
     upsertMeta("property", "og:url", canonical);
     upsertMeta("name", "twitter:title", title);
     upsertMeta("name", "twitter:description", description);
-  }, [pathname, search]);
+  }, [pathname]);
 }

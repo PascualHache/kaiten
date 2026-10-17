@@ -36,7 +36,7 @@ export interface RouteSeo {
   changefreq: "weekly" | "monthly" | "yearly";
 }
 
-export const ROUTES: RouteSeo[] = [
+const PAGE_ROUTES: RouteSeo[] = [
   {
     path: "/",
     title: "Kaiten — Escuela de esquí en Baqueira Beret",
@@ -118,6 +118,91 @@ export const ROUTES: RouteSeo[] = [
     changefreq: "yearly",
   },
 ];
+
+/**
+ * Las ocho experiencias, una página indexable cada una (`/reservas/<slug>`).
+ *
+ * Son las URL con más intención de compra del sitio: quien busca "clases de
+ * esquí particulares Baqueira" quiere aterrizar aquí, no en el catálogo.
+ *
+ * El texto va **escrito a mano**, no derivado de `ACTIVITIES`: la copia de
+ * producto está escrita para quien ya está en la página, y una descripción de
+ * búsqueda necesita el nombre, el sitio, la duración y el precio en los
+ * primeros 160 caracteres. Los datos que cita (duración, aforo, precio) salen
+ * de `activities.ts` y `tariffs.ts`; si cambian allí, hay que repasarlos aquí.
+ *
+ * `scripts/vite-plugin-seo.mjs` falla el build si una actividad se queda sin
+ * entrada o si una entrada apunta a un slug que ya no existe.
+ */
+export const EXPERIENCE_ROUTES: RouteSeo[] = [
+  {
+    path: "/reservas/clases-particulares-en-baqueira",
+    title: "Clases privadas de esquí en Baqueira | Kaiten",
+    description:
+      "Clases particulares de esquí en Baqueira Beret con instructor titulado, de 1 a 4 personas y horas a tu medida. Desde 64 € la hora, todos los niveles",
+    priority: 0.9,
+    changefreq: "monthly",
+  },
+  {
+    path: "/reservas/full-day-half-day-en-baqueira",
+    title: "Full Day y Half Day de esquí en Baqueira | Kaiten",
+    description:
+      "Medio día o día completo de esquí en Baqueira Beret con instructor para 1 a 4 personas. Half Day desde 250 € y Full Day desde 400 €, todos los niveles",
+    priority: 0.9,
+    changefreq: "monthly",
+  },
+  {
+    path: "/reservas/safari-en-baqueira",
+    title: "Safari de esquí en Baqueira: descubre la estación | Kaiten",
+    description:
+      "Recorre Baqueira Beret con un guía local: 3 o 6 horas, de 1 a 6 personas, nivel intermedio o avanzado. Desde 180 € por el safari de media jornada",
+    priority: 0.9,
+    changefreq: "monthly",
+  },
+  {
+    path: "/reservas/freeride-en-baqueira",
+    title: "Freeride y esquí fuera de pista en Baqueira | Kaiten",
+    description:
+      "Esquí fuera de pista en Baqueira Beret con instructor titulado: 4 horas o día completo, de 1 a 4 personas, nivel intermedio o avanzado. Desde 250 €",
+    priority: 0.9,
+    changefreq: "monthly",
+  },
+  {
+    path: "/reservas/friends-family",
+    title: "Clases de esquí para niños y familias en Baqueira | Kaiten",
+    description:
+      "Esquí en grupo para familias y amigos en Baqueira Beret, de 1 a 6 personas y a partir de 4 años. Cada uno progresa a su ritmo, desde 64 € la hora",
+    priority: 0.9,
+    changefreq: "monthly",
+  },
+  {
+    path: "/reservas/experiencia-de-tardeo-20",
+    title: "Tardeo: clases de esquí por la tarde en Baqueira | Kaiten",
+    description:
+      "Clases de esquí en Baqueira Beret a partir de las 14:00, con un 25 % de descuento: menos colas y pistas más tranquilas. Desde 48 € la hora",
+    priority: 0.9,
+    changefreq: "monthly",
+  },
+  {
+    path: "/reservas/experiencia-kaiten-2.5",
+    title: "Kaiten 2.5: programa de mejora intensiva de esquí | Kaiten",
+    description:
+      "Programa de 2 o 3 días en Baqueira Beret para dar un salto real de nivel, de 1 a 4 personas. Nuestro método de mejora intensiva, desde 138 €",
+    priority: 0.8,
+    changefreq: "monthly",
+  },
+  {
+    path: "/reservas/asesoramiento-compra-material-ski",
+    title: "Asesoramiento para comprar material de esquí | Kaiten",
+    description:
+      "Sesión online con un técnico para elegir esquís, botas y fijaciones según tu nivel y tu forma de esquiar, sin pagar de más. 30 € la sesión",
+    priority: 0.6,
+    changefreq: "yearly",
+  },
+];
+
+/** Todo lo que se prerenderiza y entra en el sitemap. */
+export const ROUTES: RouteSeo[] = [...PAGE_ROUTES, ...EXPERIENCE_ROUTES];
 
 /** URL absoluta y canónica de una ruta. La raíz conserva su barra; el resto, no. */
 export function canonicalUrl(path: string): string {
