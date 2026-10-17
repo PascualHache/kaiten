@@ -20,6 +20,20 @@
   width: 100%;
 }
 
+/* El alto mínimo de arriba solo cubre la espera: en cuanto el iframe tiene
+   contenido se ajusta él solo por postMessage, y mantenerlo dejaba una banda
+   blanca bajo los pasos cortos (el selector de horas, por ejemplo). Más
+   específico que la regla de móvil, así que manda en los dos tamaños. */
+.bookeo--ready .bookeo__mount {
+  min-height: 0;
+}
+
+/* El iframe es inline por defecto: su línea base deja unos píxeles muertos
+   justo debajo, que con el fondo blanco de la caja se ven como un escalón. */
+.bookeo__mount iframe {
+  display: block;
+}
+
 /* Esqueleto: ocupa el hueco del iframe mientras no hay nada que enseñar, para
    que la espera no parezca una caja rota. Se superpone en vez de empujar, así
    el widget aparece debajo sin mover la página. */

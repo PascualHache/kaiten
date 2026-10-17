@@ -268,7 +268,9 @@ export default function BookeoWidget({ productId }: Props) {
   const pending = status === 'waiting' || status === 'starting'
 
   return (
-    <div className="bookeo">
+    /* `--ready` libera el alto mínimo del hueco: a partir de ahí el iframe se
+       mide solo y un paso corto no arrastra una banda blanca debajo. */
+    <div className={`bookeo${status === 'ready' ? ' bookeo--ready' : ''}`}>
       <div className="bookeo__mount" ref={containerRef} />
 
       {pending && (

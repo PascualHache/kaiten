@@ -584,6 +584,58 @@
 }
 
 @media (max-width: 768px) {
+  /* En móvil el widget sube justo debajo del titular: con la pila completa
+     por delante, la reserva quedaba a varias pantallas de scroll.
+     `display: contents` disuelve .reservas__detail-main e -intro, así que sus
+     hijos pasan a ser ítems de la misma pila y `order` puede intercalar el
+     aside entre el titular y la descripción. No se mueve nada en el DOM a
+     propósito: el widget de Bookeo no sobrevive a un remontaje. */
+  .reservas__detail {
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+  }
+
+  .reservas__detail-main,
+  .reservas__detail-intro {
+    display: contents;
+  }
+
+  .reservas__detail-photo {
+    order: 1;
+  }
+
+  .reservas__detail-intro .page-title {
+    order: 2;
+    /* Recorta el gap de la pila: la regla va pegada al titular, como cuando
+       los dos vivían dentro de .reservas__detail-intro (0.625rem). */
+    margin-bottom: -1.125rem;
+  }
+
+  .reservas__rule {
+    order: 3;
+  }
+
+  .reservas__aside {
+    order: 4;
+  }
+
+  .reservas__detail-desc {
+    order: 5;
+  }
+
+  .reservas__specs {
+    order: 6;
+  }
+
+  .reservas__info {
+    order: 7;
+  }
+
+  .reservas__switch {
+    order: 8;
+  }
+
   .reservas__head {
     align-items: flex-start;
   }
