@@ -5,6 +5,10 @@ import BookingBand from '../components/BookingBand'
 import Footer from '../components/Footer'
 import './Home.css'
 
+/* Las reseñas se publican más adelante: hasta entonces la sección no se
+   monta en ninguna resolución. Poner a true para devolverla a la Home. */
+const SHOW_REVIEWS: boolean = false
+
 function Home() {
   return (
     <div className="home">
@@ -12,7 +16,7 @@ function Home() {
         <Hero />
       </section>
       <Experiences />
-      <Reviews />
+      {SHOW_REVIEWS && <Reviews />}
       <BookingBand />
       <Footer />
     </div>

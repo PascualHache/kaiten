@@ -101,12 +101,12 @@ export const es = {
 
   bookingBand: {
     eyebrow: "Reservas",
-    title: "Agiliza tu reserva contactando directamente",
-    text: "Si quieres **agilizar tu reserva**, **consultarnos cualquier duda** o recibir una **atención más personalizada**, escríbenos: hablas directamente con nosotros, te ayudamos a elegir la experiencia que encaja con tu nivel y lo dejamos cerrado sin formularios",
+    title: "Reserva hablando con nosotros",
+    text: "**Sin formularios**: te ayudamos a elegir y lo cerramos al momento",
     steps: [
-      "Escríbenos y cuéntanos qué buscas",
-      "Te proponemos experiencia, fecha y horario",
-      "Cerramos la reserva y te damos el punto de encuentro",
+      "Cuéntanos qué buscas",
+      "Te proponemos experiencia y horario",
+      "Cerramos la reserva",
     ],
     button: "Reservar por WhatsApp",
   },

@@ -265,7 +265,11 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    padding: 1.5rem 1.5rem 1.5rem 2rem;
+    /* La caja acaba 2rem por encima del pie de la foto: al estar el bloque
+       anclado abajo, titular y botones suben ese mismo tanto y dejan de ir
+       pegados al borde inferior redondeado. */
+    inset: 0 0 2rem;
+    padding: 1.5rem 1.5rem 1.25rem 2rem;
     border-radius: 0 0 1.25rem 1.25rem;
   }
 

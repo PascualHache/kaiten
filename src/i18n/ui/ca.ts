@@ -93,12 +93,12 @@ export const ca: UiDict = {
 
   bookingBand: {
     eyebrow: "Reserves",
-    title: "Agilitza la teva reserva contactant directament",
-    text: "Si vols **agilitzar la teva reserva**, **consultar-nos qualsevol dubte** o rebre una **atenció més personalitzada**, escriu-nos: parles directament amb nosaltres, t'ajudem a triar l'experiència que encaixa amb el teu nivell i ho deixem tancat sense formularis",
+    title: "Reserva parlant amb nosaltres",
+    text: "**Sense formularis**: t'ajudem a triar i ho tanquem al moment",
     steps: [
-      "Escriu-nos i explica'ns què busques",
-      "Et proposem experiència, data i horari",
-      "Tanquem la reserva i et donem el punt de trobada",
+      "Explica'ns què busques",
+      "Et proposem experiència i horari",
+      "Tanquem la reserva",
     ],
     button: "Reservar per WhatsApp",
   },

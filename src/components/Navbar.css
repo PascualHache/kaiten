@@ -223,50 +223,36 @@
 
 /* ─── Responsive ─────────────────────────────────────── */
 
-@media (max-width: 640px) {
+/* En móvil el CTA "Reservar" desaparece de la barra: la reserva sigue a un
+   toque desde el menú y desde el hero, y sin él la marca puede ir centrada
+   de verdad. Con los dos costados a `flex: 1` el logo queda en el eje del
+   viewport, flanqueado por el menú y WhatsApp. */
+@media (max-width: 768px) {
   .navbar__inner {
     padding: 0 1rem;
     gap: 0.5rem;
   }
 
-  /* A este ancho el logo deja de ir centrado. Con `flex: 1` en los dos
-     costados el reparto es a partes iguales, pero .navbar__utils no puede
-     encoger por debajo de su contenido (CTA + WhatsApp ≈ 130px): se quedaba
-     el ancho que necesita, el costado izquierdo cedía el suyo y el logo
-     acababa pegado a "Reservar". Aquí cada bloque ocupa lo suyo y el aire
-     sobrante se acumula a la derecha del logo. */
   .navbar__left,
   .navbar__utils {
-    flex: 0 0 auto;
-  }
-
-  .navbar__logo {
-    margin-right: auto;
-    margin-left: 0.25rem;
-  }
-
-  /* A 390px no caben logo (180px) + CTA a tamaño completo: el conjunto
-     desbordaba y recortaba "Reservar" contra el borde derecho. El logo cede
-     el ancho que necesitan el CTA y WhatsApp para respirar. */
-  .navbar__logo img {
-    width: clamp(96px, 28vw, 132px);
-  }
-
-  /* El par CTA + WhatsApp deja de ir pegado: a esta escala el margen
-     negativo de la regla base los convertía en un solo bulto lima. */
-  .navbar__utils {
-    gap: 0.625rem;
+    flex: 1 1 0;
+    min-width: 0;
   }
 
   .navbar__reserve-btn {
-    padding: 0 13px;
-    font-size: 11px;
-    letter-spacing: 0.06em;
+    display: none;
   }
 
+  /* Sin el CTA al lado, el margen negativo del par ya no tiene pareja */
   .navbar__whatsapp {
     width: 36px;
     height: 36px;
     margin-left: 0;
+  }
+
+  /* A 360px el logo a tamaño completo (180px) dejaría a los costados menos
+     aire del que ocupan sus botones y el centrado se rompería. */
+  .navbar__logo img {
+    width: clamp(120px, 38vw, 180px);
   }
 }
