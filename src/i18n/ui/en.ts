@@ -93,12 +93,12 @@ export const en: UiDict = {
 
   bookingBand: {
     eyebrow: "Booking",
-    title: "Speed up your booking by contacting us directly",
-    text: "If you want to **speed up your booking**, **ask us anything** or get **more personal attention**, drop us a message: you talk straight to us, we help you pick the experience that fits your level and we close it without forms",
+    title: "Book by talking to us",
+    text: "**No forms**: we help you pick and confirm it right away",
     steps: [
-      "Message us and tell us what you're after",
-      "We suggest an experience, a date and a time",
-      "We confirm the booking and send you the meeting point",
+      "Tell us what you're after",
+      "We suggest an experience and a time",
+      "We confirm the booking",
     ],
     button: "Book on WhatsApp",
   },

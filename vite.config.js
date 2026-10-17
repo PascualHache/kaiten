@@ -1,12 +1,23 @@
+import { createRequire } from 'node:module'
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { sentryVitePlugin } from '@sentry/vite-plugin'
 
-/* Vercel expone estas dos en el build, pero sin prefijo VITE_, así que Vite no
-   las inyectaría solo. `VERCEL_ENV` separa producción de los despliegues de
-   vista previa: sin esto, cada rama suelta sus errores en el mismo cajón que
-   kaitenski.com. En local caen a undefined y manda `import.meta.env.MODE`. */
-const release = process.env.VITE_SENTRY_RELEASE || process.env.VERCEL_GIT_COMMIT_SHA
+/* El nombre del release es la versión de package.json, no el SHA del commit:
+   en Sentry se lee `kaiten@1.0.0` en vez de un hash recortado a 12 caracteres.
+   El formato `paquete@versión` es el que Sentry entiende como semver, así que
+   ordena los releases por versión y no por fecha. Contrapartida: la versión
+   solo cambia cuando se cambia a mano (`npm version patch|minor|major`), así
+   que hasta entonces todos los despliegues comparten release — para separar
+   un build concreto, exportar `VITE_SENTRY_RELEASE`, que sigue mandando. */
+const require = createRequire(import.meta.url)
+const { name, version } = require('./package.json')
+const release = process.env.VITE_SENTRY_RELEASE || `${name}@${version}`
+
+/* Vercel la expone en el build, pero sin prefijo VITE_, así que Vite no la
+   inyectaría sola. `VERCEL_ENV` separa producción de los despliegues de vista
+   previa: sin esto, cada rama suelta sus errores en el mismo cajón que
+   kaitenski.com. En local cae a undefined y manda `import.meta.env.MODE`. */
 const environment = process.env.VERCEL_ENV
 
 /* Los source maps solo se generan (y se suben) cuando hay token: sin él, el
