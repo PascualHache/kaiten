@@ -1,0 +1,145 @@
+/* Minijuego de esquí (página 404). El lienzo se estira al hueco que le deja
+   la rejilla de la página: la altura la manda el contenedor, nunca el juego. */
+.ski-game {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  min-height: 0;
+  padding: clamp(0.5rem, 2vh, 1.25rem) 0;
+}
+
+.ski-game__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.25rem 1rem;
+}
+
+.ski-game__title {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 1.125rem;
+  letter-spacing: -0.01em;
+  color: var(--color-text);
+}
+
+.ski-game__hint {
+  margin: 0;
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+}
+
+.ski-game__box {
+  position: relative;
+  flex: 1;
+  min-height: 260px;
+  border: 1px solid var(--color-border);
+  border-radius: 1rem;
+  overflow: hidden;
+  background: var(--color-surface-raised);
+  touch-action: none;
+  user-select: none;
+  cursor: pointer;
+}
+
+.ski-game__canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 1rem;
+}
+
+/* Marcador sobre el lienzo */
+.ski-game__hud {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.875rem;
+  right: 0.875rem;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin: 0;
+  pointer-events: none;
+  font-variant-numeric: tabular-nums;
+}
+
+.ski-game__meters {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.ski-game__meters-label {
+  font-size: 0.6875rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-text-accent);
+}
+
+.ski-game__meters-value {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: var(--color-text);
+}
+
+.ski-game__record {
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+}
+
+/* Capa de inicio / pausa / choque */
+.ski-game__overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  pointer-events: none;
+}
+
+.ski-game__card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.875rem;
+  max-width: 18rem;
+  padding: 1.25rem 1.5rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.5rem;
+  background: var(--color-surface);
+  text-align: center;
+  pointer-events: auto;
+}
+
+.ski-game__card-title {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 1.0625rem;
+  line-height: 1.3;
+  color: var(--color-text);
+}
+
+.ski-game__card-text {
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--color-text-muted);
+}
+
+/* En pantallas bajas el lienzo se queda sin sitio: la cabecera se encoge */
+@media (max-height: 700px) {
+  .ski-game {
+    gap: 0.5rem;
+  }
+
+  .ski-game__box {
+    min-height: 200px;
+  }
+}
