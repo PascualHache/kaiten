@@ -1,5 +1,7 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
+  "cleanUrls": true,
+  "trailingSlash": false,
   "redirects": [
     {
       "source": "/(.*)",
@@ -45,7 +47,13 @@
       ]
     },
     {
-      "source": "/index.html",
+      "source": "/(sitemap.xml|robots.txt)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=3600" }
+      ]
+    },
+    {
+      "source": "/(index.html|nosotros|reservas|tarifas|niveles|faq|aviso-legal|terminos|privacidad|cookies)",
       "headers": [
         {
           "key": "Cache-Control",

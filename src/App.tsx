@@ -13,6 +13,7 @@ import ScrollToTop from './components/ScrollToTop'
 import WhatsAppPill from './components/WhatsAppPill'
 import NotFound from './pages/NotFound'
 import { useScrollAnimations } from './hooks/useScrollAnimations'
+import { useSeo } from './seo/useSeo'
 import './App.css'
 
 /* Envoltorio de Sentry sobre <SentryRoutes>: nombra cada transacción con el patrón
@@ -30,6 +31,8 @@ const Cookies = lazy(() => import('./pages/Cookies'))
  * página no la arrastre: se queda fija mientras el contenido entra. */
 function Shell() {
   const rootRef = useScrollAnimations()
+  // El <head> de cada ruta ya viene servido; esto lo mantiene al navegar.
+  useSeo()
 
   return (
     <div ref={rootRef}>

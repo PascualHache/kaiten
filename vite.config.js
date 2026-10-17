@@ -2,6 +2,7 @@ import { createRequire } from 'node:module'
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { sentryVitePlugin } from '@sentry/vite-plugin'
+import seo from './scripts/vite-plugin-seo.mjs'
 
 /* El nombre del release es la versión de package.json, no el SHA del commit:
    en Sentry se lee `kaiten@1.0.0` en vez de un hash recortado a 12 caracteres.
@@ -49,6 +50,10 @@ export default defineConfig({
     },
   },
   plugins: [
+    /* Un HTML por ruta con su <title>, su canonical, su tarjeta social y su
+       JSON-LD, más sitemap.xml y robots.txt. Va el primero por orden de
+       lectura: se ejecuta en closeBundle, después de que Vite escriba dist. */
+    seo(),
     react({
       babel: {
         plugins: [['babel-plugin-react-compiler']],
