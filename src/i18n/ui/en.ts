@@ -140,7 +140,7 @@ export const en: UiDict = {
   notFound: {
     documentTitle: "Page not found — Kaiten",
     eyebrow: "Error 404",
-    title: "This run doesn't exist",
+    title: "This page doesn't exist",
     lead: "The page you're looking for has moved or was never here. Here are the busiest routes",
     suggestionsAria: "Suggested pages",
     suggestions: {
@@ -149,8 +149,32 @@ export const en: UiDict = {
       niveles: "Find your level and the experience that fits it",
       faq: "Meeting point, equipment, cancellations",
     },
+    shortLinks: {
+      reservas: "Booking",
+      tarifas: "Prices",
+      niveles: "Levels",
+      faq: "FAQ",
+    },
     home: "Back to home",
-    whatsapp: "Message us on WhatsApp",
+    whatsapp: "WhatsApp",
+    game: {
+      aria: "Mini game",
+      title: "In the meantime, take a run",
+      hintKeyboard: "← → arrows · Enter to start or pause",
+      hintTouch: "Tap to turn",
+      meters: "Metres",
+      record: "Best {n} m",
+      idleTitle: "Fancy a run?",
+      idleTextKeyboard: "Turn with the arrow keys",
+      idleTextTouch: "Press and hold left or right to turn",
+      idleButton: "Drop in",
+      pausedTitle: "Paused",
+      pausedButton: "Resume",
+      overTitle: "Tree. That's the end of the run",
+      overRecord: "New best: {n} m",
+      overScore: "{n} m this time",
+      overButton: "Another run",
+    },
   },
 
   reservas: {
