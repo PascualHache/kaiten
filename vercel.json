@@ -1,6 +1,17 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
+  "cleanUrls": true,
+  "trailingSlash": false,
   "redirects": [
+    {
+      "_comment": "Enlaces antiguos a la ficha de una experiencia. Cada una tiene ahora su propia ruta (/reservas/<slug>) para ser indexable; el 301 traspasa lo que hubieran acumulado y evita que Google vea dos URL con el mismo contenido. Va antes que el rewrite: los redirects se resuelven primero.",
+      "source": "/reservas",
+      "has": [
+        { "type": "query", "key": "actividad", "value": "(?<slug>.+)" }
+      ],
+      "destination": "/reservas/:slug",
+      "permanent": true
+    },
     {
       "source": "/(.*)",
       "has": [{ "type": "host", "value": "www.kaitenski.com" }],
@@ -39,13 +50,26 @@
       ]
     },
     {
+      "_comment": "Tarjetas sociales por experiencia. Nombre estable (no llevan hash de Vite) porque las redes cachean la imagen por URL: una URL que cambiara en cada despliegue rompería lo ya compartido.",
+      "source": "/og/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=604800" }
+      ]
+    },
+    {
       "source": "/(favicon.png|apple-touch-icon.png|og-image.png)",
       "headers": [
         { "key": "Cache-Control", "value": "public, max-age=86400" }
       ]
     },
     {
-      "source": "/index.html",
+      "source": "/(sitemap.xml|robots.txt)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=3600" }
+      ]
+    },
+    {
+      "source": "/(index.html|nosotros|reservas|tarifas|niveles|faq|aviso-legal|terminos|privacidad|cookies)",
       "headers": [
         {
           "key": "Cache-Control",

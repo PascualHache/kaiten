@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link, useLocation, useSearchParams } from 'react-router-dom'
+import { Link, useLocation, useParams, useSearchParams } from 'react-router-dom'
 import {
   IconArrowLeft,
   IconArrowRight,
@@ -16,7 +16,7 @@ import { ACTIVITIES, type Level } from '../data/activities'
 import { findTariff } from '../data/tariffs'
 import { BOOKING_PARAM, bookeoProductIdFor, bookingHref } from '../data/booking'
 import { getActivities, getServices, getTariffs } from '../i18n/content'
-import { useLang, useUi, type Lang, type UiDict } from '../i18n'
+import { fill, useLang, useUi, type Lang, type UiDict } from '../i18n'
 import BookeoWidget from '../components/BookeoWidget'
 import Tag from '../components/Tag'
 import Footer from '../components/Footer'
@@ -99,9 +99,10 @@ const slugifyTitle = (title: string) =>
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-+|-+$/g, '')
 
-/* Enlaces antiguos: /reservas#safari, #clases-privadas. Siguen abriendo la
-   ficha de esa experiencia; cualquier otra cosa se ignora y se queda en la
-   lista. Los enlaces nuevos usan ?actividad=<slug>. */
+/* Enlaces antiguos con ancla: /reservas#safari, #clases-privadas. Siguen
+   abriendo la ficha de esa experiencia; cualquier otra cosa se ignora y se
+   queda en la lista. El ancla no viaja al servidor, así que esto no lo puede
+   recoger un redirect: tiene que resolverse aquí. */
 function resolveHash(hash: string): string | null {
   if (!hash) return null
   const wanted = slugifyTitle(decodeURIComponent(hash.replace(/^#/, '')))
@@ -117,13 +118,19 @@ function resolveHash(hash: string): string | null {
 
 export default function Reservas() {
   const location = useLocation()
+  const { slug } = useParams()
   const [searchParams] = useSearchParams()
   const { lang } = useLang()
   const ui = useUi()
   const experiences = buildExperiences(lang)
 
+  /* Por orden de modernidad: la ruta es la forma actual; `?actividad=` lo
+     recoge un 301 del borde en producción y solo llega aquí en `npm run dev`;
+     el ancla no viaja al servidor y siempre se resuelve en cliente.
+     Un slug que no existe cae en el catálogo, no en un 404: la lista completa
+     es mejor respuesta que un error para quien venía a reservar. */
   const selectedSlug =
-    searchParams.get(BOOKING_PARAM) ?? resolveHash(location.hash)
+    slug ?? searchParams.get(BOOKING_PARAM) ?? resolveHash(location.hash)
   const selected = experiences.find((e) => e.slug === selectedSlug) ?? null
 
   return (
@@ -365,7 +372,7 @@ function Detail({
           <div className="reservas__detail-photo">
             <img
               src={e.image}
-              alt=""
+              alt={fill(ui.reservas.photoAlt, { name: e.name })}
               style={e.imagePosition ? { objectPosition: e.imagePosition } : undefined}
             />
           </div>

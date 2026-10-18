@@ -202,6 +202,10 @@ export const es = {
     call: "Llámanos",
     back: "Todas las experiencias",
     detailEyebrow: "Reservar · Baqueira Beret",
+    /* La foto de la ficha ya no es decorativa: desde que cada experiencia tiene
+       su propia página, es la imagen *de* esa actividad y es lo que indexa
+       Google Imágenes. Una sola plantilla con {name} en vez de ocho textos. */
+    photoAlt: "{name} con Kaiten en Baqueira Beret",
     meetingTitle: "Punto de encuentro",
     meetingText:
       "Baqueira 1800, a la salida del telecabina. Te enviamos la ubicación con la confirmación.",
@@ -247,6 +251,10 @@ export const es = {
     colDescription: "Descripción",
     colReference: "Referencia en Baqueira",
     colLevel: "Nivel",
+    matchTitle: "¿Y ahora qué experiencia elijo?",
+    matchLead:
+      "Todas se adaptan a tu nivel. Estos son los niveles con los que trabaja cada una",
+    matchLevelsAria: "Niveles",
   },
 
   faq: {

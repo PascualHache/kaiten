@@ -9,7 +9,8 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "check:booking": "node scripts/check-booking-ids.mjs"
+    "check:booking": "node scripts/check-booking-ids.mjs",
+    "og:images": "node scripts/make-og-images.mjs"
   },
   "dependencies": {
     "@sentry/react": "^11.8.0",

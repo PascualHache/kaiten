@@ -7,6 +7,7 @@ import {
 } from "@tabler/icons-react";
 import logoText from "../assets/logos/logo_text.png";
 import logoK from "../assets/logos/logo_k.png";
+import { bookingHref } from "../data/booking";
 import { useUi } from "../i18n";
 import "./Footer.css";
 
@@ -17,14 +18,15 @@ const WHATSAPP_URL = "https://wa.me/34699820954";
 const SPOTIFY_URL =
   "https://open.spotify.com/playlist/07BMCGGFCarURRFnUIOlbx?si=BqZCksIdT6OFuF5yvjs42A";
 
-/* Solo el ancla; la etiqueta sale del diccionario (ui.footer.experienceLinks). */
-const EXPERIENCE_HASHES = [
-  { key: "privadas", hash: "clases-particulares-en-baqueira" },
-  { key: "family", hash: "friends-family" },
-  { key: "programs", hash: "experiencia-kaiten-2.5" },
-  { key: "tardeo", hash: "experiencia-de-tardeo-20" },
-  { key: "otras", hash: "" },
-  { key: "material", hash: "asesoramiento-compra-material-ski" },
+/* Solo el slug; la etiqueta sale del diccionario (ui.footer.experienceLinks).
+   Sin slug ("otras") el enlace va al catálogo completo. */
+const EXPERIENCE_SLUGS = [
+  { key: "privadas", slug: "clases-particulares-en-baqueira" },
+  { key: "family", slug: "friends-family" },
+  { key: "programs", slug: "experiencia-kaiten-2.5" },
+  { key: "tardeo", slug: "experiencia-de-tardeo-20" },
+  { key: "otras", slug: "" },
+  { key: "material", slug: "asesoramiento-compra-material-ski" },
 ] as const;
 
 const NAV_PATHS = [
@@ -120,15 +122,24 @@ function Footer() {
         {/* Experiencias */}
         <nav className="footer__col" aria-label={ui.footer.experiences}>
           <span className="footer__col-title">{ui.footer.experiences}</span>
-          {EXPERIENCE_HASHES.map((e) => (
-            <Link
-              key={e.key}
-              to={e.hash ? `/reservas#${e.hash}` : "/reservas"}
-              className="footer__link"
-            >
-              {ui.footer.experienceLinks[e.key]}
-            </Link>
-          ))}
+          {EXPERIENCE_SLUGS.map((e) =>
+            /* La ficha monta el widget de Bookeo, que hornea el producto al
+               cargar su script: hace falta carga completa de documento, de ahí
+               el <a href>. El catálogo no monta widget y sí puede ser <Link>. */
+            e.slug ? (
+              <a
+                key={e.key}
+                href={bookingHref({ slug: e.slug })}
+                className="footer__link"
+              >
+                {ui.footer.experienceLinks[e.key]}
+              </a>
+            ) : (
+              <Link key={e.key} to="/reservas" className="footer__link">
+                {ui.footer.experienceLinks[e.key]}
+              </Link>
+            ),
+          )}
         </nav>
 
         {/* Kaiten nav */}

@@ -1,0 +1,127 @@
+/* Bloque de salida de /niveles.
+ *
+ * La tabla de niveles era un callejón sin salida: el visitante identificaba su
+ * código (B1, D, F...) y ahí se acababa la página, sin un solo enlace. Esto le
+ * da el paso siguiente — qué experiencia trabaja su nivel — y, de paso, enlaza
+ * las ocho fichas desde una página que antes no apuntaba a ninguna.
+ *
+ * La tabla vive en Tarifas.css, que esta página comparte; aquí solo va lo
+ * propio de esta sección. */
+
+.niveles-match {
+  margin-top: clamp(2.5rem, 6vw, 4rem);
+}
+
+.niveles-match__title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.4rem, 3.5vw, 2rem);
+  font-weight: 600;
+  color: var(--color-black);
+}
+
+.niveles-match__lead {
+  margin-top: 0.5rem;
+  max-width: 48ch;
+  color: var(--color-lavender-dark);
+}
+
+.niveles-match__list {
+  list-style: none;
+  margin: clamp(1.25rem, 3vw, 2rem) 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0.6rem;
+}
+
+.niveles-match__item {
+  display: grid;
+  /* Nombre · niveles · precio · flecha. En móvil se reordena abajo.
+     Las dos columnas del medio van a ancho fijo y alineadas a la derecha a
+     propósito: con `auto` cada tarjeta es su propia rejilla, así que el grupo
+     de etiquetas empezaba en una x distinta según llevara dos niveles o tres
+     y la lista se veía descuadrada. `minmax(0, …)` deja que encojan antes de
+     desbordar si una traducción se alarga. */
+  grid-template-columns: 1fr minmax(0, 21rem) minmax(0, 6rem) 1.25rem;
+  align-items: center;
+  gap: clamp(0.75rem, 2vw, 1.5rem);
+  padding: 0.9rem 1.1rem;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  text-decoration: none;
+  color: inherit;
+  background: rgba(0, 0, 0, 0.015);
+  transition:
+    border-color 140ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    background-color 140ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+@media (hover: hover) {
+  /* Dentro de hover:hover a propósito: en táctil el estado se queda pegado
+     tras el toque, igual que en el CTA de marca. */
+  .niveles-match__item:hover {
+    border-color: var(--color-lavender);
+    background: rgba(0, 0, 0, 0.04);
+  }
+
+  .niveles-match__item:hover .niveles-match__arrow {
+    transform: translateX(3px);
+  }
+}
+
+.niveles-match__name {
+  font-weight: 600;
+  color: var(--color-black);
+}
+
+.niveles-match__levels {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.35rem;
+}
+
+.niveles-match__price {
+  font-size: 0.85rem;
+  text-align: right;
+  color: var(--color-lavender-dark);
+  white-space: nowrap;
+}
+
+.niveles-match__arrow {
+  color: var(--color-lavender);
+  transition: transform 140ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .niveles-match__item,
+  .niveles-match__arrow {
+    transition: none;
+  }
+
+  @media (hover: hover) {
+    .niveles-match__item:hover .niveles-match__arrow {
+      transform: none;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  /* Sin sitio para cuatro columnas: el nombre y la flecha comparten la primera
+     fila y los niveles y el precio caen debajo. */
+  .niveles-match__item {
+    grid-template-columns: 1fr 1.25rem;
+    row-gap: 0.6rem;
+  }
+
+  .niveles-match__levels {
+    grid-column: 1 / -1;
+    order: 3;
+    justify-content: flex-start;
+  }
+
+  .niveles-match__price {
+    grid-column: 1 / -1;
+    order: 4;
+    text-align: left;
+  }
+}
