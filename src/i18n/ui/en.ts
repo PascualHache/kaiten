@@ -193,6 +193,7 @@ export const en: UiDict = {
     call: "Call us",
     back: "All experiences",
     detailEyebrow: "Book · Baqueira Beret",
+    photoAlt: "{name} with Kaiten in Baqueira Beret",
     meetingTitle: "Meeting point",
     meetingText:
       "Baqueira 1800, at the gondola exit. We send you the location with your confirmation.",
@@ -238,6 +239,10 @@ export const en: UiDict = {
     colDescription: "Description",
     colReference: "Reference in Baqueira",
     colLevel: "Level",
+    matchTitle: "So which experience should you pick?",
+    matchLead:
+      "Every one adapts to your level. These are the levels each of them works with",
+    matchLevelsAria: "Levels",
   },
 
   faq: {

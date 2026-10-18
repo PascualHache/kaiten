@@ -226,6 +226,7 @@ function experience(slug: string) {
 
   const url = canonicalUrl(bookingHref(activity));
   const rows = TARIFFS.filter((t) => t.slug === slug);
+  const route = findRoute(bookingHref(activity));
 
   return {
     "@type": "Service",
@@ -235,10 +236,10 @@ function experience(slug: string) {
     /* Safari no tiene `subline` ni `subtitle`: antes que dejar el servicio sin
        descripción, cae en la de búsqueda, que sí está escrita para esta ficha. */
     description:
-      activity.cta.subline ||
-      activity.subtitle ||
-      findRoute(bookingHref(activity))?.description,
+      activity.cta.subline || activity.subtitle || route?.description,
     url,
+    // La tarjeta social de la ficha; es 1200×630, la proporción que pide Google.
+    image: route?.image ? `${SITE_URL}${route.image}` : OG_IMAGE,
     provider: { "@id": BUSINESS_ID },
     areaServed: { "@type": "Place", name: "Baqueira Beret" },
     audience: {

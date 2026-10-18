@@ -194,6 +194,7 @@ export const ca: UiDict = {
     call: "Truca'ns",
     back: "Totes les experiències",
     detailEyebrow: "Reservar · Baqueira Beret",
+    photoAlt: "{name} amb Kaiten a Baqueira Beret",
     meetingTitle: "Punt de trobada",
     meetingText:
       "Baqueira 1800, a la sortida del telecabina. T'enviem la ubicació amb la confirmació.",
@@ -239,6 +240,10 @@ export const ca: UiDict = {
     colDescription: "Descripció",
     colReference: "Referència a Baqueira",
     colLevel: "Nivell",
+    matchTitle: "I ara quina experiència trio?",
+    matchLead:
+      "Totes s'adapten al teu nivell. Aquests són els nivells amb què treballa cadascuna",
+    matchLevelsAria: "Nivells",
   },
 
   faq: {

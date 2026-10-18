@@ -30,6 +30,14 @@ export interface RouteSeo {
   description: string;
   /** Fuera del sitemap y con `robots: noindex`. */
   noindex?: boolean;
+  /**
+   * Tarjeta social propia, como ruta absoluta desde la raíz
+   * (`/og/<slug>.jpg`, generada por `scripts/make-og-images.mjs`).
+   * Sin esto se usa la genérica de la escuela, `OG_IMAGE`.
+   */
+  image?: string;
+  /** Texto alternativo de esa tarjeta. Obligatorio si hay `image`. */
+  imageAlt?: string;
   /** Peso relativo dentro del sitemap. */
   priority: number;
   /** `changefreq` del sitemap. */
@@ -137,6 +145,9 @@ const PAGE_ROUTES: RouteSeo[] = [
 export const EXPERIENCE_ROUTES: RouteSeo[] = [
   {
     path: "/reservas/clases-particulares-en-baqueira",
+    image: "/og/clases-particulares-en-baqueira.jpg",
+    imageAlt:
+      "Dos esquiadores a contraluz durante una clase privada en Baqueira Beret",
     title: "Clases privadas de esquí en Baqueira | Kaiten",
     description:
       "Clases particulares de esquí en Baqueira Beret con instructor titulado, de 1 a 4 personas y horas a tu medida. Desde 64 € la hora, todos los niveles",
@@ -145,6 +156,9 @@ export const EXPERIENCE_ROUTES: RouteSeo[] = [
   },
   {
     path: "/reservas/full-day-half-day-en-baqueira",
+    image: "/og/full-day-half-day-en-baqueira.jpg",
+    imageAlt:
+      "Esquiador levantando nieve polvo en una jornada completa en Baqueira",
     title: "Full Day y Half Day de esquí en Baqueira | Kaiten",
     description:
       "Medio día o día completo de esquí en Baqueira Beret con instructor para 1 a 4 personas. Half Day desde 250 € y Full Day desde 400 €, todos los niveles",
@@ -153,6 +167,9 @@ export const EXPERIENCE_ROUTES: RouteSeo[] = [
   },
   {
     path: "/reservas/safari-en-baqueira",
+    image: "/og/safari-en-baqueira.jpg",
+    imageAlt:
+      "Dos esquiadores consultando el mapa de pistas sobre el valle de Baqueira Beret",
     title: "Safari de esquí en Baqueira: descubre la estación | Kaiten",
     description:
       "Recorre Baqueira Beret con un guía local: 3 o 6 horas, de 1 a 6 personas, nivel intermedio o avanzado. Desde 180 € por el safari de media jornada",
@@ -161,6 +178,9 @@ export const EXPERIENCE_ROUTES: RouteSeo[] = [
   },
   {
     path: "/reservas/freeride-en-baqueira",
+    image: "/og/freeride-en-baqueira.jpg",
+    imageAlt:
+      "Esquiador trazando una línea fuera de pista en nieve polvo en Baqueira",
     title: "Freeride y esquí fuera de pista en Baqueira | Kaiten",
     description:
       "Esquí fuera de pista en Baqueira Beret con instructor titulado: 4 horas o día completo, de 1 a 4 personas, nivel intermedio o avanzado. Desde 250 €",
@@ -169,6 +189,9 @@ export const EXPERIENCE_ROUTES: RouteSeo[] = [
   },
   {
     path: "/reservas/friends-family",
+    image: "/og/friends-family.jpg",
+    imageAlt:
+      "Un grupo de esquiadores con casco subiendo juntos en el telecabina de Baqueira",
     title: "Clases de esquí para niños y familias en Baqueira | Kaiten",
     description:
       "Esquí en grupo para familias y amigos en Baqueira Beret, de 1 a 6 personas y a partir de 4 años. Cada uno progresa a su ritmo, desde 64 € la hora",
@@ -177,6 +200,9 @@ export const EXPERIENCE_ROUTES: RouteSeo[] = [
   },
   {
     path: "/reservas/experiencia-de-tardeo-20",
+    image: "/og/experiencia-de-tardeo-20.jpg",
+    imageAlt:
+      "Telesilla de Baqueira Beret a contraluz al atardecer",
     title: "Tardeo: clases de esquí por la tarde en Baqueira | Kaiten",
     description:
       "Clases de esquí en Baqueira Beret a partir de las 14:00, con un 25 % de descuento: menos colas y pistas más tranquilas. Desde 48 € la hora",
@@ -185,6 +211,9 @@ export const EXPERIENCE_ROUTES: RouteSeo[] = [
   },
   {
     path: "/reservas/experiencia-kaiten-2.5",
+    image: "/og/experiencia-kaiten-2.5.jpg",
+    imageAlt:
+      "Disco grabado con Kaiten 2.5 sobre la nieve",
     title: "Kaiten 2.5: programa de mejora intensiva de esquí | Kaiten",
     description:
       "Programa de 2 o 3 días en Baqueira Beret para dar un salto real de nivel, de 1 a 4 personas. Nuestro método de mejora intensiva, desde 138 €",
@@ -193,6 +222,9 @@ export const EXPERIENCE_ROUTES: RouteSeo[] = [
   },
   {
     path: "/reservas/asesoramiento-compra-material-ski",
+    image: "/og/asesoramiento-compra-material-ski.jpg",
+    imageAlt:
+      "Sesión online de asesoramiento de material de esquí frente a las montañas",
     title: "Asesoramiento para comprar material de esquí | Kaiten",
     description:
       "Sesión online con un técnico para elegir esquís, botas y fijaciones según tu nivel y tu forma de esquiar, sin pagar de más. 30 € la sesión",

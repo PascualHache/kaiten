@@ -50,6 +50,13 @@
       ]
     },
     {
+      "_comment": "Tarjetas sociales por experiencia. Nombre estable (no llevan hash de Vite) porque las redes cachean la imagen por URL: una URL que cambiara en cada despliegue rompería lo ya compartido.",
+      "source": "/og/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=604800" }
+      ]
+    },
+    {
       "source": "/(favicon.png|apple-touch-icon.png|og-image.png)",
       "headers": [
         { "key": "Cache-Control", "value": "public, max-age=86400" }

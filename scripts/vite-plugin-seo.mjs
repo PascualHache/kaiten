@@ -65,6 +65,19 @@ function buildHead(html, route) {
   out = setMeta(out, "name", "twitter:title", route.title);
   out = setMeta(out, "name", "twitter:description", route.description);
 
+  /* Tarjeta propia de la ruta. Sin esto las dieciocho páginas compartían la
+     genérica y compartir la ficha de Freeride enseñaba la foto de la escuela.
+     Las de `public/og/` son .jpg, de ahí que haya que corregir también el
+     `og:image:type` que index.html declara como png. */
+  if (route.image) {
+    const image = `${SITE_URL}${route.image}`;
+    out = setMeta(out, "property", "og:image", image);
+    out = setMeta(out, "property", "og:image:alt", route.imageAlt);
+    out = setMeta(out, "name", "twitter:image", image);
+    out = setMeta(out, "name", "twitter:image:alt", route.imageAlt);
+    out = setMeta(out, "property", "og:image:type", "image/jpeg");
+  }
+
   if (route.noindex) {
     out = out.replace(
       "</head>",

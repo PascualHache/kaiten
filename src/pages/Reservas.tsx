@@ -16,7 +16,7 @@ import { ACTIVITIES, type Level } from '../data/activities'
 import { findTariff } from '../data/tariffs'
 import { BOOKING_PARAM, bookeoProductIdFor, bookingHref } from '../data/booking'
 import { getActivities, getServices, getTariffs } from '../i18n/content'
-import { useLang, useUi, type Lang, type UiDict } from '../i18n'
+import { fill, useLang, useUi, type Lang, type UiDict } from '../i18n'
 import BookeoWidget from '../components/BookeoWidget'
 import Tag from '../components/Tag'
 import Footer from '../components/Footer'
@@ -372,7 +372,7 @@ function Detail({
           <div className="reservas__detail-photo">
             <img
               src={e.image}
-              alt=""
+              alt={fill(ui.reservas.photoAlt, { name: e.name })}
               style={e.imagePosition ? { objectPosition: e.imagePosition } : undefined}
             />
           </div>
