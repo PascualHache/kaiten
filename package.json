@@ -5,12 +5,13 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "prebuild": "node scripts/check-booking-ids.mjs",
+    "prebuild": "node scripts/check-booking-ids.mjs && node scripts/check-vercel-json.mjs",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
     "check:booking": "node scripts/check-booking-ids.mjs",
-    "og:images": "node scripts/make-og-images.mjs"
+    "og:images": "node scripts/make-og-images.mjs",
+    "check:vercel": "node scripts/check-vercel-json.mjs"
   },
   "dependencies": {
     "@sentry/react": "^11.8.0",
